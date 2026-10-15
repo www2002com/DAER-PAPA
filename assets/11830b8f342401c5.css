@@ -393,3 +393,52 @@ html.dp-intro .dp-hw { animation: dp-hw-in 560ms var(--dp-ease-out) both; animat
   .dp-process-list.dp-armed > li > * { color: inherit !important; transform: none !important; }
   .dp-logo-p { transform: none !important; }
 }
+
+/* Typeset pass: one face per role, a consistent title step, readable breaks, and the reader's font size respected */
+:root { --dp-hand: "Nanum Pen Script", "Noto Sans KR", cursive; --dp-title: clamp(21px, 1.9vw, 24px); }
+body { font-size: 1.0625rem; overflow-wrap: break-word; }
+.dp-status { font-family: var(--dp-sans); letter-spacing: normal; }
+.dp-hero-h1 { font: 500 clamp(19px, 1.8vw, 24px)/1.4 var(--dp-sans); text-wrap: balance; }
+.dp-lead, .dp-hero-lead { line-height: 1.7; }
+.dp-fact dt, .dp-nudge-q { font-size: var(--dp-title); line-height: 1.4; letter-spacing: -.015em; }
+.dp-menu-label { line-height: 1.4; letter-spacing: -.015em; }
+.dp-hint, .dp-card-caption { line-height: 1.6; }
+.dp-footer-legal { font-size: 14px; }
+.dp-body, .dp-faq-answer, .dp-fact dd { font-size: 1rem; }
+.dp-box-text { overflow-wrap: anywhere; }
+.dp-box-meta { font-variant-numeric: tabular-nums; }
+p, dd, .dp-hint, .dp-rem-sub, .dp-faq-answer, .dp-hero-lead { text-wrap: pretty; }
+
+/* Motion: state continuity. One reveal grammar (fade + 6px rise, ease-out) for anything that opens in place; exits stay instant. */
+@keyframes dp-reveal { from { opacity: 0; transform: translateY(6px); } }
+@keyframes dp-reveal-a { from { opacity: 0; transform: translateY(6px); } }
+@keyframes dp-reveal-b { from { opacity: 0; transform: translateY(6px); } }
+.dp-letter-panel.is-swap-a > * { animation: dp-reveal-a 260ms var(--dp-ease-out) both; }
+.dp-letter-panel.is-swap-b > * { animation: dp-reveal-b 260ms var(--dp-ease-out) both; }
+.dp-gift-panel, .dp-rem-fields, #letter-warn { animation: dp-reveal 240ms var(--dp-ease-out) both; }
+.dp-menu { animation: dp-menu-in 220ms var(--dp-ease-out) both; }
+@keyframes dp-menu-in { from { opacity: 0; } }
+.dp-menu-list li { animation: dp-reveal 320ms var(--dp-ease-out) both; }
+.dp-menu-list li:nth-child(1) { animation-delay: 40ms; } .dp-menu-list li:nth-child(2) { animation-delay: 70ms; }
+.dp-menu-list li:nth-child(3) { animation-delay: 100ms; } .dp-menu-list li:nth-child(4) { animation-delay: 130ms; }
+.dp-menu-list li:nth-child(5) { animation-delay: 160ms; } .dp-menu-list li:nth-child(6) { animation-delay: 190ms; }
+.dp-menu-list li:nth-child(7) { animation-delay: 220ms; } .dp-menu-list li:nth-child(n+8) { animation-delay: 250ms; }
+.dp-faq-item[open] .dp-faq-answer { animation: dp-reveal 260ms var(--dp-ease-out) both; }
+@supports (interpolate-size: allow-keywords) {
+  .dp-faq-item { interpolate-size: allow-keywords; }
+  .dp-faq-item::details-content { block-size: 0; overflow-y: clip; transition: block-size 280ms var(--dp-ease-out), content-visibility 280ms allow-discrete; }
+  .dp-faq-item[open]::details-content { block-size: auto; }
+}
+.dp-opt { transition: border-color var(--dp-dur) var(--dp-ease), background-color var(--dp-dur) var(--dp-ease), color var(--dp-dur) var(--dp-ease), transform 100ms var(--dp-ease); }
+.dp-opt:active { transform: scale(.97); }
+.dp-count { transition: color 200ms var(--dp-ease); }
+@keyframes dp-fade-a { from { opacity: 0; } }
+@keyframes dp-fade-b { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .dp-letter-panel.is-swap-a > * { animation: dp-fade-a 160ms ease-out both; }
+  .dp-letter-panel.is-swap-b > * { animation: dp-fade-b 160ms ease-out both; }
+  .dp-gift-panel, .dp-rem-fields, #letter-warn, .dp-menu-list li, .dp-faq-item[open] .dp-faq-answer { animation: dp-menu-in 160ms ease-out both; }
+  .dp-faq-item::details-content { transition: none; }
+  .dp-opt, .dp-count { transition: none; }
+  .dp-opt:active { transform: none; }
+}

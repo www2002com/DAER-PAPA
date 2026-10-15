@@ -87,3 +87,13 @@ h1{font-size:clamp(38px,5.4vw,72px);line-height:1.15;letter-spacing:-.035em}
 }
 @media(max-width:360px){.site-header{flex-wrap:wrap;gap:0;padding-block:18px 8px}.site-header nav{flex-basis:100%;gap:24px}}
 @media print{.site-header,.site-footer,.article-end,.skip-link{display:none}.wrap{width:100%}.article-header{padding-top:0}.reading{padding-top:0}.article-body section{break-inside:avoid}html{background:white;color:black;font-size:11pt}}
+
+/* Typeset pass */
+html{font-size:100%}
+p{text-wrap:pretty}
+.journal-intro p,.summary{font-size:clamp(1.0625rem,1.5vw,1.25rem)}
+.summary{line-height:1.7}
+.article-body p,.article-body li{font-size:1.0625rem;line-height:1.8}
+.journal-note p,.facts{line-height:1.8}
+.article-meta{font-variant-numeric:tabular-nums}
+@media(max-width:700px){.journal-intro p,.summary{font-size:1.0625rem}.article-body p,.article-body li{font-size:1rem}}

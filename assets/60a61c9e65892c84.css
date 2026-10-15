@@ -442,3 +442,32 @@ p, dd, .dp-hint, .dp-rem-sub, .dp-faq-answer, .dp-hero-lead { text-wrap: pretty;
   .dp-opt, .dp-count { transition: none; }
   .dp-opt:active { transform: none; }
 }
+
+/* Micro-motion: once-only reveals for card groups and section heads, quick eased hovers, press feedback */
+:root { --dp-ease-ui: cubic-bezier(.23,1,.32,1); }
+.dp-rv-armed:not(.dp-in) > * { opacity: 0; transform: translateY(14px); }
+.dp-rv-armed.dp-in > * { animation: dp-rise 640ms var(--dp-ease-out) both; animation-delay: calc(var(--dp-rv-i, 0) * 70ms); }
+@keyframes dp-rise { from { opacity: 0; transform: translateY(14px); } }
+@media (prefers-reduced-motion: reduce) { .dp-rv-armed > * { opacity: 1 !important; transform: none !important; animation: none !important; } }
+@media print { .dp-rv-armed > * { opacity: 1 !important; transform: none !important; } }
+.dp-btn { transition: background-color 160ms var(--dp-ease-ui), color 160ms var(--dp-ease-ui), border-color 160ms var(--dp-ease-ui), transform 120ms var(--dp-ease-ui); }
+.dp-btn:active, .dp-menu-btn:active, .dp-tab:active { transform: scale(.97); }
+.dp-menu-btn, .dp-tab { transition: color 160ms var(--dp-ease-ui), border-color 160ms var(--dp-ease-ui), transform 120ms var(--dp-ease-ui); }
+.dp-arrow { transition: transform 220ms var(--dp-ease-ui); }
+.dp-nav-link, .dp-footer-nav a, .dp-footer-legal a { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: .4em; transition: color 160ms var(--dp-ease-ui), text-decoration-color 200ms var(--dp-ease-ui), text-underline-offset 200ms var(--dp-ease-ui); }
+.dp-link { transition: color 160ms var(--dp-ease-ui), text-underline-offset 200ms var(--dp-ease-ui); }
+.dp-faq-icon { transition: border-color 200ms var(--dp-ease-ui), background-color 200ms var(--dp-ease-ui); }
+.dp-routine-item .dp-panel > img, .dp-gift-row .dp-panel > img { transition: transform 420ms var(--dp-ease-out); }
+.dp-card--gift { transition: transform 520ms var(--dp-ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .dp-nav-link:hover, .dp-footer-nav a:hover, .dp-footer-legal a:hover { text-decoration-color: currentColor; text-underline-offset: .28em; }
+  .dp-link:hover { text-underline-offset: .2em; }
+  .dp-faq-item summary:hover .dp-faq-icon { border-color: var(--dp-ink); background-color: var(--dp-surface); }
+  .dp-routine-item:hover .dp-panel > img, .dp-gift-row:hover .dp-panel > img { transform: translateY(-4px); }
+  .dp-gift-feature:hover .dp-card--gift { transform: rotate(-1.5deg) translateY(-4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dp-btn:active, .dp-menu-btn:active, .dp-tab:active { transform: none; }
+  .dp-routine-item:hover .dp-panel > img, .dp-gift-row:hover .dp-panel > img { transform: none; }
+  .dp-gift-feature:hover .dp-card--gift { transform: rotate(-3deg); }
+}

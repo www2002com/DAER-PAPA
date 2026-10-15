@@ -1,0 +1,76 @@
+/* DEAR PAPA motion layer: hero words, saved-card writing, process rules, d→p logo turn, ruled letter paper. */
+:root { --dp-ease-out: cubic-bezier(.16,1,.3,1); }
+
+/* Emphasis: the lead-in clause sits in quiet brown, the key phrase stays in ink. */
+.dp-soft { color: var(--dp-muted); }
+
+/* Hero: on a first visit the four words settle from rule color into ink. Text is never hidden. */
+.dp-hw { display: inline-block; }
+html.dp-intro .dp-hw { animation: dp-hw-in 560ms var(--dp-ease-out) both; animation-delay: calc(var(--dp-hw-d, 0ms) - var(--dp-intro-elapsed, 0ms)); }
+.dp-hw-1 { --dp-hw-d: 60ms; }
+.dp-hw-2 { --dp-hw-d: 150ms; }
+.dp-hw-3 { --dp-hw-d: 300ms; }
+.dp-hw-4 { --dp-hw-d: 390ms; }
+@keyframes dp-hw-in { from { color: var(--dp-line); transform: translateY(.14em); } }
+
+/* Letter paper: ruled lines under each line of the letter field, scrolling with the text. */
+.dp-compose-main textarea#letter-text {
+  background-image: repeating-linear-gradient(to bottom, transparent 0 calc(1.7em - 1px), var(--dp-line) calc(1.7em - 1px) 1.7em) !important;
+  background-position: 0 14px !important;
+  background-attachment: local !important;
+  background-clip: padding-box !important;
+}
+
+/* Saved card: the letter rewrites itself word by word, the card lifts out of its frame. */
+.dp-inkw { display: inline-block; }
+.dp-card.is-writing-a .dp-inkw { animation: dp-ink-a 420ms var(--dp-ease-out) both; }
+.dp-card.is-writing-b .dp-inkw { animation: dp-ink-b 420ms var(--dp-ease-out) both; }
+@keyframes dp-ink-a { from { color: var(--dp-line); transform: translateY(.22em); } }
+@keyframes dp-ink-b { from { color: var(--dp-line); transform: translateY(.22em); } }
+.dp-compose-preview .dp-card { transition: box-shadow 560ms var(--dp-ease-out), outline-color 560ms var(--dp-ease-out); }
+.dp-compose-preview .dp-card.is-kept { outline-color: transparent; box-shadow: 0 24px 44px -26px rgba(58,45,33,.55), 0 3px 8px -4px rgba(58,45,33,.22); }
+
+/* After saving: one quiet question and, where the device can share, the way to send it. */
+.dp-nudge { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding-top: 20px; border-top: 1px solid var(--dp-line); animation: dp-nudge-in 520ms var(--dp-ease-out) 640ms both; }
+.dp-nudge-q { margin: 0; font-family: var(--dp-serif); font-size: clamp(20px, 2.2vw, 24px); line-height: 1.4; letter-spacing: -.01em; color: var(--dp-ink); }
+@keyframes dp-nudge-in { from { opacity: 0; transform: translateY(8px); } }
+
+/* Gift process: rules draw left to right (solid now, dashed after launch), then each step settles in. */
+.dp-process-list > li:nth-child(1) { --dp-step: 0ms; }
+.dp-process-list > li:nth-child(2) { --dp-step: 110ms; }
+.dp-process-list > li:nth-child(3) { --dp-step: 220ms; }
+.dp-process-list > li:nth-child(4) { --dp-step: 330ms; }
+.dp-process-list.dp-armed > li { position: relative; border-top-color: transparent !important; }
+.dp-process-list.dp-armed > li::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; border-top: 1px solid var(--dp-line); pointer-events: none; }
+.dp-process-list.dp-armed > li:nth-child(n+3)::before { border-top-style: dashed; }
+.dp-process-list.dp-armed:not(.dp-in) > li::before { clip-path: inset(0 100% 0 0); }
+.dp-process-list.dp-armed:not(.dp-in) > li > * { color: var(--dp-line); transform: translateY(8px); }
+.dp-process-list.dp-in > li::before { animation: dp-rule 720ms var(--dp-ease-out) both; animation-delay: var(--dp-step); }
+.dp-process-list.dp-in > li > * { animation: dp-settle 560ms var(--dp-ease-out) both; animation-delay: calc(var(--dp-step) + 140ms); }
+@keyframes dp-rule { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes dp-settle { from { color: var(--dp-line); transform: translateY(8px); } }
+
+/* Footer logo: the d turns 180° around the shared circle and becomes the p. */
+.dp-logo { position: relative; display: block; align-self: flex-start; width: auto; height: clamp(52px, 6.4vw, 88px); aspect-ratio: 942.69 / 238; max-width: 100%; }
+.dp-logo img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.dp-logo-p { transform-origin: 7.4625% 50%; }
+.dp-logo.dp-armed:not(.dp-in) .dp-logo-p { transform: rotate(180deg); }
+.dp-logo.dp-in .dp-logo-p { animation: dp-turn 1200ms var(--dp-ease-out) 120ms both; }
+@keyframes dp-turn { from { transform: rotate(180deg); } }
+.dp-logo-meaning { margin: 0; max-width: 34em; font-size: 14px; line-height: 1.6; color: var(--dp-muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  html.dp-intro .dp-hw { animation: none; }
+  .dp-card.is-writing-a .dp-inkw { animation: dp-ink-fade-a 240ms ease-out both; }
+  .dp-card.is-writing-b .dp-inkw { animation: dp-ink-fade-b 240ms ease-out both; }
+  .dp-compose-preview .dp-card { transition: none; }
+  .dp-nudge { animation: none; }
+}
+@keyframes dp-ink-fade-a { from { color: var(--dp-line); } }
+@keyframes dp-ink-fade-b { from { color: var(--dp-line); } }
+
+@media print {
+  .dp-process-list.dp-armed > li::before { clip-path: none !important; }
+  .dp-process-list.dp-armed > li > * { color: inherit !important; transform: none !important; }
+  .dp-logo-p { transform: none !important; }
+}

@@ -179,8 +179,8 @@ a:hover > .dp-arrow, a:hover .dp-isWide-only .dp-arrow, .dp-menu-link:hover .dp-
 @media (max-width: 959px) {
   .dp-compose-preview { position: sticky; top: var(--dp-header-h); z-index: 5; align-items: center; margin-inline: calc(var(--dp-gutter) * -1); padding: 12px var(--dp-gutter); background: var(--dp-oat); }
   .dp-compose-preview .dp-card { width: min(100%, 400px); }
-  .dp-compose:has(#letter-text:focus, #letter-from:focus) .dp-card { width: min(100%, 240px); }
-  .dp-compose:has(#letter-text:focus, #letter-from:focus) .dp-card-caption { display: none; }
+  .dp-compose:has(#letter-text:focus, #letter-from:focus, .dp-chips :focus) .dp-card { width: min(100%, 240px); }
+  .dp-compose:has(#letter-text:focus, #letter-from:focus, .dp-chips :focus) .dp-card-caption { display: none; }
   #letter-text { scroll-margin-top: calc(var(--dp-header-h) + 300px); }
 }
 @media (max-width: 767px) { .dp-compose-preview .dp-card { width: min(100%, 300px); } }

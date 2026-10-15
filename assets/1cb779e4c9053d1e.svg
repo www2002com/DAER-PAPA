@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 942.69 238" width="943" height="238">
   <title>DEAR PAPA logo</title>
-  <g fill="#3A2D21">
+  <g fill="#141413">
   <path transform="translate(-75.19 -26.54) scale(1.105769)" fill-rule="evenodd" d="M68 128a60 60 0 1 0 120 0a60 60 0 1 0 -120 0zM88 128a40 42 0 1 0 80 0a40 42 0 1 0 -80 0z"/>
-  <path transform="translate(-75.19 -26.54) scale(1.105769)" d="M168 24h20v162h-20z"/>
+  <path transform="translate(-75.19 -26.54) scale(1.105769)" d="M168 24h20v162h-20zM68 70h20v162h-20z"/>
   <path transform="translate(188.69 65)" fill-rule="evenodd" d="M0 0H24A50 50 0 0 1 24 100H0Z M9.5 8.74V91.26H24A39.84 41.26 0 0 0 24 8.74Z"/>
   <path transform="translate(290.69 65)" d="M0 0h9.5v100h-9.5zM0 0h56v8.74h-56zM0 44.63h50v8.74h-50zM0 91.26h56v8.74h-56z"/>
   <path transform="translate(368.69 65)" d="M0 100L32.99 0L43.01 0L10.02 100zM65.98 100L32.99 0L43.01 0L76 100zM15.45 64h45.11v8.74h-45.11z"/>

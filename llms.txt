@@ -37,6 +37,14 @@ DEAR PAPA is not affiliated with dearpapa.com.tw, Papa Recipe, Beard Papa, dearp
 - [매일 쓰는 제품을 준비하는 기준](https://dearpapa.kr/journal/development-principles): 올인원 스킨케어 개발 방향과 아직 확정되지 않은 제품 정보 구분
 - [아빠 선물 스킨케어, 일상에 맞게 고르는 법](https://dearpapa.kr/journal/fathers-gift-guide): 아빠에게 스킨케어를 선물하기 전 살펴볼 취향, 생활 습관, 함께 전할 짧은 편지
 
+## AI-readable package
+
+- [LLM Markdown](https://dearpapa.kr/llm.md): 공식 정보 마크다운
+- [Facts JSON](https://dearpapa.kr/facts.json): 공식 정보 JSON
+- [Answer JSON](https://dearpapa.kr/answer.json): 질문별 답변 JSON
+- [Citation TXT](https://dearpapa.kr/citation.txt): 인용용 텍스트
+- [Schema JSON-LD](https://dearpapa.kr/schema.jsonld): 구조화 데이터
+
 ## Optional
 
 - [브랜드 자료실](https://dearpapa.kr/journal): 저널 글 목록

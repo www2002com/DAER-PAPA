@@ -110,7 +110,8 @@ section[tabindex], main[tabindex] { outline: none; }
 .dp-header { position: sticky; top: 0; z-index: 50; background: var(--dp-paper); border-bottom: 1px solid var(--dp-line); }
 .dp-header-in { max-width: var(--dp-max); margin: 0 auto; padding: 0 var(--dp-gutter); height: var(--dp-header-h); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .dp-brand { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; color: var(--dp-ink); text-decoration: none; white-space: nowrap; }
-.dp-brand-logo { display: block; height: clamp(20px, 5.6vw, 24px); width: auto; }
+.dp-brand-logo { position: relative; display: block; flex: none; height: clamp(20px, 5.6vw, 24px); width: auto; aspect-ratio: 943 / 238; }
+.dp-brand-logo img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
 .dp-brand-ko { font-size: 14px; color: var(--dp-muted); }
 .dp-header-actions { display: flex; align-items: center; gap: clamp(10px, 2vw, 24px); }
 .dp-nav { list-style: none; margin: 0; padding: 0; display: flex; gap: clamp(16px, 2vw, 28px); }
@@ -348,6 +349,23 @@ html.dp-intro .dp-hw { animation: dp-hw-in 560ms var(--dp-ease-out) both; animat
 .dp-hw-1 { --dp-hw-d: 60ms; } .dp-hw-2 { --dp-hw-d: 150ms; } .dp-hw-3 { --dp-hw-d: 300ms; } .dp-hw-4 { --dp-hw-d: 390ms; }
 @keyframes dp-hw-in { from { color: var(--dp-line-2); transform: translateY(.14em); } }
 
+/* Motion: on a first visit the header logo makes its entrance on the nodes the runtime swaps in (dp-brand-in, set
+   by the motion layer); one started on the prerendered nodes would be cut off by the swap. Until then it waits
+   unseen, for 3s at most. The mark settles in, then DEAR PAPA unrolls out of it from under a paper veil, then
+   디어파파. Opacity and transform only, so it runs on the compositor while the page finishes booting. */
+html.dp-intro:not(.dp-brand-in):not(.dp-brand-done) .dp-brand .dp-brand-logo,
+html.dp-intro:not(.dp-brand-in):not(.dp-brand-done) .dp-brand-ko { animation: dp-brand-wait 3s step-end; }
+html.dp-brand-in .dp-brand .dp-brand-logo { overflow: hidden; }
+html.dp-brand-in .dp-brand .dp-brand-logo::after { content: ""; position: absolute; top: 0; bottom: 0; left: -8%; width: 108%; background: linear-gradient(90deg, transparent, var(--dp-paper) 22%); pointer-events: none; animation: dp-veil-out 760ms cubic-bezier(.33,1,.68,1) 200ms both; }
+html.dp-brand-in .dp-brand-mark { z-index: 1; transform-origin: 7.4625% 50%; animation: dp-mark-in 620ms var(--dp-ease-out) both; }
+html.dp-brand-in .dp-brand-word { animation: dp-word-in 760ms cubic-bezier(.33,1,.68,1) 200ms both; }
+html.dp-brand-in .dp-brand-ko { animation: dp-brand-ko-in 480ms var(--dp-ease-out) 640ms both; }
+@keyframes dp-brand-wait { from { opacity: 0; } }
+@keyframes dp-mark-in { from { opacity: 0; transform: rotate(24deg) scale(.86); } }
+@keyframes dp-word-in { from { transform: translateX(-4%); } }
+@keyframes dp-veil-out { to { transform: translateX(100%); } }
+@keyframes dp-brand-ko-in { from { opacity: 0; } }
+
 /* Motion: a saved letter rewrites itself word by word and the card lifts out of its frame */
 .dp-inkw { display: inline-block; }
 .dp-card.is-writing-a .dp-inkw { animation: dp-ink-a 420ms var(--dp-ease-out) both; }
@@ -378,6 +396,8 @@ html.dp-intro .dp-hw { animation: dp-hw-in 560ms var(--dp-ease-out) both; animat
   .dp-btn, .dp-opt, .dp-switch, .dp-switch::before, .dp-faq-icon::after, .dp-arrow { transition: none; }
   .dp-btn:active { transform: none; }
   html.dp-intro .dp-hw { animation: none; }
+  html.dp-intro .dp-brand .dp-brand-logo, html.dp-intro .dp-brand-logo img, html.dp-intro .dp-brand-ko { animation: none !important; }
+  html.dp-intro .dp-brand .dp-brand-logo::after { content: none; }
   .dp-card.is-writing-a .dp-inkw { animation: dp-ink-fade-a 240ms ease-out both; }
   .dp-card.is-writing-b .dp-inkw { animation: dp-ink-fade-b 240ms ease-out both; }
   .dp-compose-preview .dp-card { transition: none; }

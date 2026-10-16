@@ -49,6 +49,11 @@
       // The runtime swaps in fresh nodes; offset their delays so the intro carries on instead of restarting.
       html.style.setProperty('--dp-intro-elapsed', Math.round(performance.now() - window.__dpIntroT0) + 'ms');
     }
+    if (html.classList.contains('dp-intro')) {
+      // The header logo makes its entrance now, on the fresh nodes, unless its 3s wait has already run out.
+      var fcp = performance.getEntriesByName ? performance.getEntriesByName('first-contentful-paint')[0] : null;
+      html.classList.add(fcp && performance.now() - fcp.startTime > 2700 ? 'dp-brand-done' : 'dp-brand-in');
+    }
     bind();
   }
 

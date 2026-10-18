@@ -38,6 +38,7 @@ DEAR PAPA is not affiliated with dearpapa.com.tw, Papa Recipe, Beard Papa, dearp
 - [매일 쓰는 제품을 준비하는 기준](https://dearpapa.kr/journal/development-principles): 올인원 스킨케어 개발 방향과 아직 확정되지 않은 제품 정보 구분
 - [아빠 선물 스킨케어, 일상에 맞게 고르는 법](https://dearpapa.kr/journal/fathers-gift-guide): 아빠에게 스킨케어를 선물하기 전 살펴볼 취향, 생활 습관, 함께 전할 짧은 편지
 - [아빠 선물 추천, 편지와 함께 건네는 스킨케어](https://dearpapa.kr/journal/dad-gift-guide): 편지와 함께 건네는 아빠 선물, 출시 전 공식 정보 요약
+- [DEAR PAPA(디어파파) 소개 기사](https://dearpapa.kr/press): DEAR PAPA(디어파파) 소개 기사 모음
 
 ## AI-readable package
 

@@ -16,17 +16,37 @@
       "sameAs": [
         "https://www.instagram.com/dearpapa.kr/",
         "https://www.facebook.com/profile.php?id=61594835806301",
+        "https://blog.naver.com/dearpapa_kr",
+        "https://www.youtube.com/channel/UCUPHFagfIAnbp1QK6DZfDmg",
+        "https://www.youtube.com/@dearpapa_kr",
         "https://authonnews.com/entity/dear-papa"
       ],
       "disambiguatingDescription": "DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 같은 이름의 의류 브랜드, 영화·영화제 작품, 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다. 제과 브랜드 비어드파파, 해외 사이트 dearpapa.in·dearpapa.de, Dear Papa Premium Decor, 소설 《Dear Papa》, 뮤지컬 〈디어 파파, 마이 파이어맨〉과도 관련이 없습니다. 국내 브랜드 디어도어, 디퍼앤디퍼, 아이디어스의 젠틀파파와도 관련이 없습니다."
     },
     {
       "@type": "Brand",
+      "@id": "https://dearpapa.kr/#brand",
       "name": "DEAR PAPA",
       "alternateName": "디어파파",
       "url": "https://dearpapa.kr/",
       "slogan": "아빠의 매일에, 딸의 마음을.",
       "description": "제품명: DEAR PAPA 레터 올인원(디어파파 레터 올인원), 영문 DEAR PAPA Letter All-in-One (출시 준비 중)"
+    },
+    {
+      "@type": "Product",
+      "@id": "https://dearpapa.kr/#product",
+      "name": "DEAR PAPA 레터 올인원",
+      "alternateName": [
+        "디어파파 레터 올인원",
+        "DEAR PAPA Letter All-in-One",
+        "레터 올인원"
+      ],
+      "brand": {
+        "@id": "https://dearpapa.kr/#brand"
+      },
+      "category": "남성 올인원 스킨케어",
+      "description": "세안 후 하나로 마무리하는 남성 올인원 스킨케어. DEAR PAPA 레터 올인원은 아빠들이 매일 겪는 피부 고민인 번들거림과 건조함이 함께 오는 피부와 주름을 생각하며, 면도 후 바르는 올인원으로 기획하고 만들고 있습니다. 세안 후 하나로 마무리하는 올인원 안에 빠른 흡수의 워터리 제형, 무에탄올을 목표로 담고, 주름 개선 기능성화장품 인증을 준비하고 있습니다. 효능과 사용감, 인증 결과는 확인되면 공식 정보 페이지에 가장 먼저 올립니다. 현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다. 가격, 용량, 전성분, 출시일은 미정입니다.",
+      "url": "https://dearpapa.kr/letter-all-in-one"
     },
     {
       "@type": "WebSite",
@@ -40,7 +60,7 @@
       "@id": "https://dearpapa.kr/about/facts",
       "url": "https://dearpapa.kr/about/facts",
       "name": "DEAR PAPA(디어파파) 공식 정보",
-      "dateModified": "2026-10-17",
+      "dateModified": "2026-10-19",
       "description": "현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다. 가격, 용량, 전성분, 출시일은 미정입니다."
     }
   ]

@@ -13,6 +13,15 @@
       "logo": "https://dearpapa.kr/icon-512.png",
       "image": "https://dearpapa.kr/assets/522ad60892e08d80.png",
       "slogan": "아빠의 매일에, 딸의 마음을.",
+      "email": "contact@dearpapa.kr",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "contact@dearpapa.kr",
+        "availableLanguage": [
+          "ko"
+        ]
+      },
       "sameAs": [
         "https://www.instagram.com/dearpapa.kr/",
         "https://www.facebook.com/profile.php?id=61594835806301",

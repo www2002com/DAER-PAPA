@@ -57,7 +57,7 @@ export default function DadGiftGuidePage() {
 
         <h2>아직 정해지지 않은 정보</h2>
         <p>사이트에 나온 용기·상자·카드 그림은 개발 중인 디자인 시안이며, 최종 판매 구성과 다를 수 있습니다.</p>
-        <p>가격, 용량, 전성분, 출시일은 미정입니다.</p>
+        <p>DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 가격, 전성분, 출시일은 아직 확정되지 않았습니다.</p>
         <p>현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.</p>
 
         <RelatedLinks
@@ -75,7 +75,7 @@ export default function DadGiftGuidePage() {
             ['기준일', <time dateTime="2026-10-17">2026년 10월 17일</time>],
             ['공식 사이트', <Link href="/about/facts">https://dearpapa.kr</Link>],
             ['출시 상태', '현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.'],
-            ['미정 항목', '가격, 용량, 전성분, 출시일은 미정입니다.'],
+            ['미정 항목', 'DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 가격, 전성분, 출시일은 아직 확정되지 않았습니다.'],
           ]}
         />
       </ArticleLayout>

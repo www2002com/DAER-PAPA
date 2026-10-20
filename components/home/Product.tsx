@@ -23,15 +23,15 @@ export function Product() {
         </header>
         <div className={styles.split}>
           <ProductViewer />
-          <div className={styles.info}>
+          <div className={styles.info} data-reveal="from-right" data-reveal-delay="60">
             <span className="tag" data-tone="soft">출시 준비 중</span>
-            <h3 className={styles.name} data-reveal>{PRODUCT.name}</h3>
+            <h3 className={styles.name}>{PRODUCT.name}</h3>
             <p className={styles.nameEn}>Letter All-in-One</p>
-            <p className={styles.description} data-reveal data-reveal-delay="50">40~60대 아빠의 매일을 생각한<br />올인원 스킨케어와 한 줄 편지.</p>
+            <p className={styles.description}>40~60대 아빠의 매일을 생각한<br />올인원 스킨케어와 한 줄 편지.</p>
             <dl className={styles.highlights}>
-              <div data-reveal><dt>세안 후, 하나로</dt><dd>면도 후에도 간편하게 쓰는 올인원을 기획합니다.</dd></div>
-              <div data-reveal data-reveal-delay="40"><dt>가볍게 스미는 사용감</dt><dd>빠른 흡수의 워터리 제형을 개발 방향으로 삼고 있습니다.</dd></div>
-              <div data-reveal data-reveal-delay="80"><dt>매일 쓸 것을 생각하며</dt><dd>{PRODUCT.noAdded}</dd></div>
+              <div><dt>세안 후, 하나로</dt><dd>면도 후에도 간편하게 쓰는 올인원을 기획합니다.</dd></div>
+              <div><dt>가볍게 스미는 사용감</dt><dd>빠른 흡수의 워터리 제형을 개발 방향으로 삼고 있습니다.</dd></div>
+              <div><dt>매일 쓸 것을 생각하며</dt><dd>{PRODUCT.noAdded}</dd></div>
             </dl>
             <p className={styles.direction}>현재 개발 방향입니다. 효능·사용감과 최종 사양은 확인 후 공개합니다.</p>
             <details className={styles.details}>
@@ -44,7 +44,7 @@ export function Product() {
               <p className={styles.notice}>{PRODUCT.unboxing} {PRODUCT.drafts}</p>
               <UnboxSteps />
             </details>
-            <Link href="/letter-all-in-one" className={`link-arrow ${styles.more}`} data-reveal="cue">
+            <Link href="/letter-all-in-one" className={`link-arrow ${styles.more}`}>
               레터 올인원 만나보기
               <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
                 <path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.2" />

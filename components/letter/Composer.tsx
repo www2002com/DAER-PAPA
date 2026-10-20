@@ -455,7 +455,7 @@ export function Composer() {
 
   return (
     <>
-    <div className={styles.entry} data-reveal="cue" data-reveal-delay="100">
+    <div className={styles.entry} data-reveal="soft-cue" data-reveal-delay="150">
       <button type="button" className="btn" onClick={startWriting} aria-controls={`${uid}-p-write`}>
         아빠에게 편지 쓰기
       </button>

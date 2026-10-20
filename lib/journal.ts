@@ -53,7 +53,20 @@ export const JOURNAL: readonly JournalEntry[] = [
     published: '2026-10-17',
     modified: '2026-10-17',
   },
+  {
+    slug: 'gift-without-routine',
+    href: '/journal/gift-without-routine',
+    category: '선물 이야기',
+    title: '아빠가 뭘 쓰시는지 몰라도 괜찮아요: 스킨케어 선물 고르는 기준',
+    summary: '아빠의 스킨케어 루틴을 몰라도 고를 수 있는 선물 기준. 단계는 하나로, 향료는 빼는 쪽으로, 면도 후 바로 쓰기 편한지 살펴보세요.',
+    published: '2026-10-21',
+    modified: '2026-10-21',
+  },
 ];
+
+/** guide-04 meta/og description and lead (longer than the list summary). */
+export const GIFT_WITHOUT_ROUTINE_DESCRIPTION =
+  '아빠의 스킨케어 루틴을 몰라도 고를 수 있는 선물 기준. 단계는 하나로, 향료는 빼는 쪽으로, 면도 후 바로 쓰기 편한지 살펴보세요. 디어파파는 출시 준비 중이며 가격·전성분·출시일은 아직 확정되지 않았습니다.';
 
 export const JOURNAL_SITE_SUFFIX = ' | DEAR PAPA 디어파파';
 

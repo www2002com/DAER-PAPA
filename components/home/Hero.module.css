@@ -8,7 +8,6 @@
 .visual { --product-baseline: 10.55%; position: relative; height: clamp(500px, 44vw, 640px); overflow: hidden; border-radius: var(--radius-m); background: var(--sage); isolation: isolate; }
 .visualTitle { position: absolute; left: 30px; top: 28px; display: grid; gap: 3px; line-height: 1.6; z-index: 1; }
 .visualLogo { display: block; width: auto; height: 23px; color: var(--logo); }
-.visualTitle span { color: var(--ink-2); font-size: 12px; letter-spacing: 0; }
 /* Align the visible bases, compensating for each source image's bottom margin.
    Natural image ratios keep the carton about 8% taller than the bottle.
    X offsets center the combined visible silhouettes, accounting for source

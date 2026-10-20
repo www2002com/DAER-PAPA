@@ -18,7 +18,6 @@ export function Hero() {
         <figure className={styles.visual} data-reveal="visual" data-reveal-delay="80">
           <div className={styles.visualTitle}>
             <HeroLogo className={styles.visualLogo} />
-            <span>Letter All-in-One</span>
           </div>
           <Image className={styles.bottle} src="/images/letter-all-in-one-deep-green-logo-v4.webp"
             alt="디어파파 로고가 담긴 레터 올인원 연한 딥그린 용기 디자인 시안" width={700} height={1425}

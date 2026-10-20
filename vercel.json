@@ -1,6 +1,18 @@
 {
   "framework": "nextjs",
   "buildCommand": "npm run build",
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*.html",
+      "destination": "/:path*",
+      "statusCode": 301
+    }
+  ],
   "headers": [
     {
       "source": "/llm.md",

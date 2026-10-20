@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-21",
+  "repo": "imports/renewal-20261020",
+  "files": [
+    {
+      "file": "components/Logo.tsx",
+      "sha256": "96eb0c94c2d426e026a1177854acd8ffe1f031a18a23fcd5c1622a01ef7fbf9b"
+    },
+    {
+      "file": "public/logo-horizontal.svg",
+      "sha256": "1823085877fe4e322d65229977a7a5c926d2c190b49763a3a6852016de9d6f3b"
+    },
+    {
+      "file": "app/globals.css",
+      "sha256": "5a9fbbff3a8f328c0000778ded372a549e84e3b39af459ebad7c6cef79055a52"
+    },
+    {
+      "file": "components/SiteHeader.module.css",
+      "sha256": "7c1a7993912cf80aeff67b3ec2c477398d6a41c57dd5ff8589b91be0598ada53"
+    },
+    {
+      "file": "components/home/Hero.module.css",
+      "sha256": "9bbbafe5b70ee6cfa15f6ea3925b2c70199fdea2ef0e64ae37b55b271a239185"
+    },
+    {
+      "file": "components/home/Product.module.css",
+      "sha256": "3e3a60aedcc84dc08d2e9fc2bbeda9e1a38661b30d5b4b5840f174023f1b1ff5"
+    },
+    {
+      "file": "components/home/HeroLogo.module.css",
+      "sha256": "4d363ffc1c7a5cd84158b5db91dbacc36e0a3ca099c851e249f5b2c6ebc64bd0"
+    },
+    {
+      "file": "components/FooterLogo.module.css",
+      "sha256": "e3d1eb6683e0b6fbd738c976fe838f474518656cdbffc2e794573cd93d8d6dd2"
+    },
+    {
+      "file": "components/RevealObserver.tsx",
+      "sha256": "888d6e7251df93ec8837d4793f0efd4c528b3cb34743c8022726a3b5aa2f36cd"
+    },
+    {
+      "file": "components/letter/LetterCard.module.css",
+      "sha256": "55d50720a30466a7997548b5eddb89cd35bd5ed40af7b415b04e3b21d73c20ab"
+    },
+    {
+      "file": "components/letter/card.ts",
+      "sha256": "47983ea9b231dd20316afc85b73781673e8c90fe9a486d03d54dba371c0a35ff"
+    },
+    {
+      "file": "lib/facts.ts",
+      "sha256": "843d6ab471a10d36d2be9cb2265efe4fd82fe4d060694b2292cffd795ad7025b"
+    },
+    {
+      "file": "PRESERVATION.md",
+      "sha256": "d75c615b04a8f7bd29cace53fac73b30261cc62060625e46cd79a20852b7e483"
+    }
+  ]
+}

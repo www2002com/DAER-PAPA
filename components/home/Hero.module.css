@@ -1,0 +1,43 @@
+.hero { padding-top: 28px; }
+.layout { display: grid; grid-template-columns: 1fr 1.05fr; gap: 5%; align-items: center; }
+.copy { padding: 38px 0 54px; }
+.status { display: flex; gap: 9px; align-items: center; font-size: 13px; color: var(--ink-2); margin-bottom: 34px; }
+.status span { width: 6px; height: 6px; border-radius: 50%; background: var(--forest); }
+.title { font-size: clamp(40px, 4.5vw, 66px); font-weight: 400; line-height: 1.27; letter-spacing: -.055em; }
+.description { margin-top: 27px; font-size: 17px; line-height: 1.9; color: var(--ink-2); }
+.visual { --product-baseline: 10.55%; position: relative; height: clamp(500px, 44vw, 640px); overflow: hidden; border-radius: var(--radius-m); background: var(--sage); isolation: isolate; }
+.visualTitle { position: absolute; left: 30px; top: 28px; display: grid; gap: 3px; line-height: 1.6; z-index: 1; }
+.visualLogo { display: block; width: auto; height: 23px; color: var(--logo); }
+.visualTitle span { color: var(--ink-2); font-size: 12px; letter-spacing: 0; }
+/* Align the visible bases, compensating for each source image's bottom margin.
+   Natural image ratios keep the carton about 8% taller than the bottle.
+   X offsets center the combined visible silhouettes, accounting for source
+   side margins (bottle x=217..486, carton x=208..500, both 700px wide). */
+.bottle { position: absolute; left: 31%; bottom: calc(var(--product-baseline) - 6.55%); width: auto; max-width: none; height: 88%; transform: translateX(-55.04%); object-fit: contain; mix-blend-mode: multiply; z-index: 2; }
+.carton { position: absolute; left: 69%; bottom: calc(var(--product-baseline) - 3.44%); width: auto; max-width: none; height: 88%; transform: translateX(-53.714%); object-fit: contain; }
+.caption { position: absolute; bottom: 20px; left: 24px; right: 24px; font-size: 11px; color: #555f57; text-align: right; }
+.intro { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 40px; padding-top: 55px; padding-bottom: 58px; }
+.intro > p { font-size: 23px; line-height: 1.55; letter-spacing: -.04em; font-weight: 300; }
+.intro strong { font-weight: 500; }
+.intro h2 { font-size: 16px; font-weight: 500; margin-bottom: 10px; }
+.intro div p { font-size: 14px; line-height: 1.8; color: var(--ink-2); }
+@media (max-width: 1000px) {
+  .layout { gap: 28px; }
+  .visual { height: 500px; }
+}
+@media (max-width: 700px) {
+  .hero { padding-top: 10px; }
+  .layout { grid-template-columns: 1fr; gap: 8px; }
+  .copy { padding: 28px 0 30px; }
+  .status { margin-bottom: 22px; font-size: 12px; }
+  .title { font-size: clamp(38px, 8.3vw, 54px); }
+  .description { font-size: 15px; margin-top: 22px; }
+  .visual { height: auto; aspect-ratio: 1 / 1.06; }
+  .visualTitle { left: 22px; top: 20px; }
+  .caption { left: 15px; right: 15px; bottom: 14px; font-size: 10px; }
+  .intro { grid-template-columns: 1fr 1fr; gap: 24px 20px; padding-top: 36px; padding-bottom: 42px; }
+  .intro > p { grid-column: 1 / -1; font-size: 22px; }
+  .intro > p br { display: none; }
+  .intro h2 { font-size: 14px; }
+  .intro div p { font-size: 12px; }
+}

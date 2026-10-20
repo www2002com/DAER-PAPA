@@ -1,0 +1,26 @@
+// User-provided on 2026-10-20, explicitly confirmed as an animation reference.
+// This is NOT the formula of DEAR PAPA. Do not reuse in product facts or JSON-LD.
+export const INGREDIENT_DEMO = [
+  'BG',
+  '스쿠알란(식물유래)',
+  '에틸헥산산세틸',
+  'DPG',
+  '폴리소르베이트80',
+  '글리세린',
+  '세틸 PEG/PPG-10/1 디메치콘',
+  '이노시톨',
+  '차잎 추출물',
+  '유럽너도밤나무 추출물(위스키 통재 추출물)',
+  '아세틸헥사펩타이드-8',
+  '에탄올',
+  '황산마그네슘',
+  '마이크로크리스탈린 왁스',
+  'TEA',
+  '(아크릴산Na/아크릴로일디메틸타우린Na) 코폴리머',
+  '(아크릴레이트/아크릴산알킬(C10-30)) 크로스폴리머',
+  '헥사(하이드록시스테아린산/스테아린산/로진산) 디펜타에리스리틸',
+  '이소헥사데칸',
+  '올레인산소르비탄',
+  '카프릴릴글리콜',
+  '토코페롤',
+] as const;

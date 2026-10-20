@@ -1,0 +1,777 @@
+'use client';
+
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
+import { LetterCard } from './LetterCard';
+import {
+  MAX_CHARS,
+  MAX_FROM,
+  SAMPLE_TEXT,
+  ensureGlyphs,
+  layoutLetter,
+  penLoadFont,
+  renderCard,
+  toBlob,
+  todayStamp,
+} from './card';
+import {
+  MAX_LETTERS,
+  cleanFrom,
+  cleanText,
+  loadDraft,
+  loadLetters,
+  saveDraft,
+  saveLetters,
+  type Letter,
+} from './storage';
+import { STARTERS } from './starters';
+import styles from './Composer.module.css';
+
+type View = 'write' | 'box';
+type Toast = { id: number; msg: string; action?: { label: string; run: () => void } };
+type Busy = 'idle' | 'busy' | 'done';
+
+const prefersReduced = () =>
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/** Stable per-character keys: only characters that are actually new get a new key (and ink in). */
+function useCharKeys(composing: React.RefObject<boolean>) {
+  const ref = useRef({ text: '', keys: [] as string[], seq: 0 });
+  const keysFor = useCallback(
+    (text: string) => {
+      const k = ref.current;
+      if (k.text === text) return k.keys;
+      const prev = k.text;
+      let p = 0;
+      while (p < prev.length && p < text.length && prev[p] === text[p]) p++;
+      let s = 0;
+      while (s < prev.length - p && s < text.length - p && prev[prev.length - 1 - s] === text[text.length - 1 - s]) s++;
+      const mid = text.length - p - s;
+      const keys = k.keys.slice(0, p);
+      if (mid === 1 && prev.length - p - s === 1 && composing.current) {
+        keys.push(k.keys[p]); // a syllable being composed keeps its ink
+      } else {
+        for (let i = 0; i < mid; i++) keys.push(`k${++k.seq}`);
+      }
+      keys.push(...k.keys.slice(prev.length - s));
+      k.text = text;
+      k.keys = keys;
+      return keys;
+    },
+    [composing],
+  );
+  const reset = useCallback((text: string, prefix: string) => {
+    ref.current = { text, keys: Array.from(text, (_, i) => `${prefix}${i}`), seq: ref.current.seq };
+  }, []);
+  return { keysFor, reset };
+}
+
+export function Composer() {
+  const uid = useId();
+  const [mounted, setMounted] = useState(false);
+  const [fontVersion, setFontVersion] = useState(0);
+  const [view, setView] = useState<View>('write');
+  const [text, setText] = useState('');
+  const [from, setFrom] = useState('');
+  const [editingId, setEditingId] = useState<number | null>(null);
+  const [letters, setLetters] = useState<Letter[]>([]);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [focused, setFocused] = useState(false);
+  const [saved, setSaved] = useState<'none' | 'pending' | 'saved' | 'error'>('none');
+  const [warn, setWarn] = useState<'empty' | 'over' | 'storage' | null>(null);
+  const [flip, setFlip] = useState(false);
+  const [download, setDownload] = useState<Busy>('idle');
+  const [canShare, setCanShare] = useState(false);
+  const [toast, setToast] = useState<Toast | null>(null);
+  const [tab, setTab] = useState<(typeof STARTERS)[number]['id']>('thanks');
+  const [inserting, setInserting] = useState(false);
+  const [stagger, setStagger] = useState(false);
+  const [bump, setBump] = useState(0);
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const composing = useRef(false);
+  const ready = useRef(false); // draft restored; autosave may run
+  const stageRef = useRef<HTMLDivElement>(null);
+  const timers = useRef<number[]>([]);
+  const { keysFor, reset } = useCharKeys(composing);
+
+  const later = useCallback((fn: () => void, ms: number) => {
+    timers.current.push(window.setTimeout(fn, ms));
+  }, []);
+
+  // ── Restore draft and archive ───────────────────────────────
+  useEffect(() => {
+    const draft = loadDraft();
+    const list = loadLetters();
+    setLetters(list);
+    if (draft && (draft.text || draft.from)) {
+      setText(draft.text);
+      setFrom(draft.from);
+      setEditingId(draft.editingId && list.some((l) => l.id === draft.editingId) ? draft.editingId : null);
+      reset(draft.text, 'd');
+      setStagger(true);
+      later(() => setStagger(false), 2000);
+      if (draft.text) showToast('쓰던 편지를 이어서 쓸 수 있어요.');
+    }
+    try {
+      const probe = new File([new Blob(['x'], { type: 'image/png' })], 'p.png', { type: 'image/png' });
+      setCanShare(!!navigator.canShare?.({ files: [probe] }));
+    } catch {
+      setCanShare(false);
+    }
+    ready.current = true;
+    setMounted(true);
+    const t = timers.current;
+    return () => t.forEach(clearTimeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // ── Autosave (debounced) ────────────────────────────────────
+  useEffect(() => {
+    if (!ready.current) return;
+    setSaved('pending');
+    const id = window.setTimeout(() => {
+      setSaved(saveDraft({ text, from, editingId }) ? 'saved' : 'error');
+    }, 450);
+    return () => clearTimeout(id);
+  }, [text, from, editingId]);
+
+  // ── Load the handwriting glyphs this letter needs, then re-measure ──
+  useEffect(() => {
+    if (!mounted || !document.fonts) return;
+    const font = penLoadFont();
+    const sample = `Dear Papa, ${text || SAMPLE_TEXT} ${from} ${letters.map((l) => l.text).join('')}`;
+    let loaded = false;
+    try {
+      loaded = document.fonts.check(font, sample);
+    } catch {
+      /* treat as not loaded */
+    }
+    if (loaded) return;
+    let alive = true;
+    ensureGlyphs(sample, font).then(() => alive && setFontVersion((v) => v + 1));
+    return () => {
+      alive = false;
+    };
+  }, [mounted, text, from, letters]);
+
+  // ── Textarea grows with the letter ──────────────────────────
+  useEffect(() => {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = `${el.scrollHeight}px`;
+  }, [text, view, mounted]);
+
+  // ── Derived card content ────────────────────────────────────
+  const selected = letters.find((l) => l.id === selectedId) ?? letters[0] ?? null;
+  const showingSaved = view === 'box' && !!selected;
+  const isSample = !showingSaved && !text.trim();
+  const cardText = showingSaved ? selected!.text : isSample ? SAMPLE_TEXT : text;
+  const cardFrom = showingSaved ? selected!.from : from;
+  // Today's date only after mount: the static HTML is built on a different day than it is read.
+  const cardDate = showingSaved ? selected!.date : mounted ? todayStamp() : '';
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const layout = useMemo(() => (mounted ? layoutLetter(cardText) : null), [cardText, mounted, fontVersion]);
+  const draftLayout = useMemo(
+    () => (mounted && text.trim() ? layoutLetter(text) : null),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [text, mounted, fontVersion],
+  );
+  const over = !!draftLayout?.over;
+  const charKeys = showingSaved
+    ? Array.from(cardText, (_, i) => `a${selected!.id}-${i}`)
+    : isSample
+      ? Array.from(cardText, (_, i) => `s${i}`)
+      : keysFor(text);
+
+  useEffect(() => {
+    if (warn === 'over' && !over) setWarn(null);
+    if (warn === 'empty' && text.trim()) setWarn(null);
+  }, [over, text, warn]);
+
+  // ── Helpers ─────────────────────────────────────────────────
+  function showToast(msg: string, action?: Toast['action']) {
+    const id = Date.now() + Math.random();
+    setToast({ id, msg, action });
+    later(() => setToast((t) => (t && t.id === id ? null : t)), action ? 6500 : 3200);
+  }
+
+  const focusText = (end = true) => {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.focus({ preventScroll: true });
+    if (end) el.setSelectionRange(el.value.length, el.value.length);
+  };
+
+  function startWriting() {
+    setView('write');
+    window.requestAnimationFrame(() => {
+      textareaRef.current?.scrollIntoView({
+        behavior: prefersReduced() ? 'instant' : 'smooth',
+        block: 'center',
+      });
+      focusText();
+    });
+  }
+
+  function guard(): boolean {
+    if (!text.trim()) {
+      setWarn('empty');
+      focusText();
+      return false;
+    }
+    if (over) {
+      setWarn('over');
+      focusText();
+      return false;
+    }
+    return true;
+  }
+
+  // ── Editing ─────────────────────────────────────────────────
+  function onText(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    const v = e.target.value;
+    setText(composing.current ? v.replace(/\r/g, '') : cleanText(v));
+  }
+
+  function insertLine(line: string) {
+    if (inserting) return;
+    const before = text;
+    const base = text.replace(/\s+$/, '');
+    const prefix = base ? `${base}\n` : '';
+    const target = cleanText(prefix + line);
+    const done = () => {
+      setInserting(false);
+      focusText();
+      showToast('문장을 넣었어요.', { label: '되돌리기', run: () => setText(before) });
+    };
+    if (prefersReduced()) {
+      setText(target);
+      done();
+      return;
+    }
+    setInserting(true);
+    let i = prefix.length;
+    const step = () => {
+      i = Math.min(target.length, i + 1);
+      setText(target.slice(0, i));
+      if (i < target.length) later(step, 26);
+      else later(done, 120);
+    };
+    step();
+  }
+
+  function clearLetter() {
+    if (!text && !from) return;
+    const snap = { text, from, editingId };
+    setText('');
+    setFrom('');
+    setEditingId(null);
+    setWarn(null);
+    showToast('편지를 지웠어요.', {
+      label: '되돌리기',
+      run: () => {
+        setText(snap.text);
+        setFrom(snap.from);
+        setEditingId(snap.editingId);
+      },
+    });
+  }
+
+  function startNew() {
+    setEditingId(null);
+    setText('');
+    setFrom('');
+    setView('write');
+    later(() => focusText(), 50);
+  }
+
+  // ── Archive ─────────────────────────────────────────────────
+  function keep() {
+    if (!guard()) return;
+    const date = todayStamp();
+    const t = text.trim();
+    const f = from.trim();
+    let next: Letter[];
+    let note = '보관함에 담았어요.';
+    if (editingId && letters.some((l) => l.id === editingId)) {
+      next = [{ id: editingId, date, text: t, from: f }, ...letters.filter((l) => l.id !== editingId)];
+      note = '보관함의 편지를 고쳐 담았어요.';
+    } else {
+      const id = Math.max(Date.now(), ...letters.map((l) => l.id + 1));
+      next = [{ id, date, text: t, from: f }, ...letters];
+      if (next.length > MAX_LETTERS) note = `보관함에 담았어요. ${MAX_LETTERS}통이 넘어 가장 오래된 편지는 정리했어요.`;
+      setEditingId(id);
+    }
+    next = next.slice(0, MAX_LETTERS);
+    if (!saveLetters(next)) {
+      setWarn('storage');
+      return;
+    }
+    setLetters(next);
+    setBump((b) => b + 1);
+    setFlip(true);
+    later(() => setFlip(false), 1700);
+    showToast(note);
+  }
+
+  function continueLetter(l: Letter) {
+    setText(l.text);
+    setFrom(l.from);
+    setEditingId(l.id);
+    reset(l.text, `e${l.id}-`);
+    setStagger(true);
+    later(() => setStagger(false), 2000);
+    setView('write');
+    later(() => focusText(), 60);
+    showToast('보관함에서 불러왔어요.');
+  }
+
+  function removeLetter(l: Letter) {
+    const idx = letters.findIndex((x) => x.id === l.id);
+    const next = letters.filter((x) => x.id !== l.id);
+    if (!saveLetters(next)) {
+      setWarn('storage');
+      return;
+    }
+    setLetters(next);
+    if (editingId === l.id) setEditingId(null);
+    showToast('편지를 지웠어요.', {
+      label: '되돌리기',
+      run: () => {
+        setLetters((cur) => {
+          const restored = [...cur];
+          restored.splice(Math.min(idx, restored.length), 0, l);
+          saveLetters(restored);
+          return restored;
+        });
+      },
+    });
+  }
+
+  function selectLetter(l: Letter) {
+    setSelectedId(l.id);
+    setStagger(true);
+    later(() => setStagger(false), 1800);
+  }
+
+  // ── Image ───────────────────────────────────────────────────
+  async function makeBlob(l: { text: string; from: string; date: string }) {
+    const canvas = await renderCard(l);
+    if (!canvas) return null;
+    return toBlob(canvas);
+  }
+
+  function saveBlob(blob: Blob, date: string) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `dear-papa-letter-${date.replace(/\./g, '')}.png`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    later(() => URL.revokeObjectURL(url), 4000);
+  }
+
+  async function downloadImage(l?: Letter) {
+    if (!l && !guard()) return;
+    const data = l ?? { text: text.trim(), from: from.trim(), date: todayStamp() };
+    setDownload('busy');
+    try {
+      const blob = await makeBlob(data);
+      if (!blob) {
+        setDownload('idle');
+        setWarn('over');
+        return;
+      }
+      saveBlob(blob, data.date);
+      setDownload('done');
+      showToast('카드 이미지를 내 기기에 저장했어요.');
+      later(() => setDownload('idle'), 2200);
+    } catch {
+      setDownload('idle');
+      showToast('이미지를 만들 수 없었어요. 잠시 후 다시 시도해 주세요.');
+    }
+  }
+
+  async function share() {
+    if (!guard()) return;
+    const data = { text: text.trim(), from: from.trim(), date: todayStamp() };
+    try {
+      const blob = await makeBlob(data);
+      if (!blob) return setWarn('over');
+      const file = new File([blob], 'dear-papa-letter.png', { type: 'image/png' });
+      await navigator.share({ files: [file], title: 'Dear Papa' });
+    } catch (e) {
+      if ((e as DOMException)?.name !== 'AbortError') showToast('공유창을 열 수 없었어요. 이미지로 저장해 주세요.');
+    }
+  }
+
+  // ── Gentle tilt on fine pointers ────────────────────────────
+  function onTilt(e: React.PointerEvent<HTMLDivElement>) {
+    if (e.pointerType !== 'mouse' || prefersReduced()) return;
+    const el = stageRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    el.style.setProperty('--ry', `${(x * 5).toFixed(2)}deg`);
+    el.style.setProperty('--rx', `${(-y * 4).toFixed(2)}deg`);
+  }
+  function endTilt() {
+    stageRef.current?.style.setProperty('--ry', '0deg');
+    stageRef.current?.style.setProperty('--rx', '0deg');
+  }
+
+  // ── Render ──────────────────────────────────────────────────
+  const tabId = (id: string) => `${uid}-tab-${id}`;
+  const panelId = `${uid}-starters`;
+  const countId = `${uid}-count`;
+  const warnId = `${uid}-warn`;
+  const activeStarters = STARTERS.find((s) => s.id === tab)!;
+  const near = text.length >= MAX_CHARS * 0.9;
+  const full = text.length >= MAX_CHARS;
+
+  const warnText =
+    warn === 'empty'
+      ? '아빠에게 전할 말을 한 줄 써 주세요.'
+      : warn === 'over'
+        ? '카드에 다 담기지 않아요. 문장이나 줄바꿈을 조금 줄여 주세요.'
+        : warn === 'storage'
+          ? '이 브라우저에 저장하지 못했어요. 저장 공간이나 브라우저 설정을 확인해 주세요.'
+          : over
+            ? '카드에 다 담기지 않아요. 조금만 줄여 주세요.'
+            : '';
+
+  const savedLabel =
+    saved === 'pending'
+      ? '저장 중…'
+      : saved === 'saved'
+        ? '이 기기에 자동 저장됨'
+        : saved === 'error'
+          ? '자동 저장을 할 수 없어요'
+          : '쓰는 동안 이 기기에 자동 저장돼요';
+
+  return (
+    <>
+    <div className={styles.entry} data-reveal="cue" data-reveal-delay="100">
+      <button type="button" className="btn" onClick={startWriting} aria-controls={`${uid}-p-write`}>
+        아빠에게 편지 쓰기
+      </button>
+      <p>편지는 지금 쓸 수 있어요. 가입 없이, 이 기기에만.</p>
+    </div>
+    <div className={styles.composer} data-view={view}>
+      {/* Card stage */}
+      <div className={styles.stageCol} data-reveal="visual">
+        <div className={styles.stageSticky}>
+          <div
+            ref={stageRef}
+            className={styles.stage}
+            onPointerMove={onTilt}
+            onPointerLeave={endTilt}
+            data-done={download === 'done' || undefined}
+          >
+            <LetterCard
+              className={styles.card}
+              text={cardText}
+              from={cardFrom}
+              date={cardDate}
+              layout={layout}
+              charKeys={charKeys}
+              stagger={stagger}
+              caret={focused && view === 'write' && !isSample}
+              placeholder={isSample}
+              flipped={flip}
+              backNote="보관했어요"
+              label={
+                isSample
+                  ? `예시 카드: Dear Papa, ${SAMPLE_TEXT}`
+                  : `편지 카드 미리보기: Dear Papa, ${cardText}${cardFrom.trim() ? ` — ${cardFrom.trim()}` : ''}`
+              }
+            />
+            <span className={styles.sheen} aria-hidden="true" />
+          </div>
+          <p className={styles.stageNote} aria-live="polite">
+            {showingSaved
+              ? `${selected!.date}에 보관한 편지`
+              : isSample
+                ? '예시 문장이에요. 직접 써 보세요.'
+                : '쓰는 대로 카드에 손글씨 스타일로 담겨요.'}
+          </p>
+        </div>
+      </div>
+
+      {/* Controls */}
+      <div className={styles.panel} data-reveal>
+        <div className={styles.switch} role="tablist" aria-label="편지 쓰기와 보관함">
+          <button
+            type="button"
+            role="tab"
+            id={`${uid}-v-write`}
+            aria-selected={view === 'write'}
+            aria-controls={`${uid}-p-write`}
+            onClick={() => setView('write')}
+          >
+            편지 쓰기
+          </button>
+          <button
+            type="button"
+            role="tab"
+            id={`${uid}-v-box`}
+            aria-selected={view === 'box'}
+            aria-controls={`${uid}-p-box`}
+            onClick={() => setView('box')}
+          >
+            보관함
+            <span key={bump} className={styles.badge} data-bump={bump > 0 || undefined}>
+              {letters.length}
+            </span>
+          </button>
+          <span className={styles.switchThumb} aria-hidden="true" />
+        </div>
+
+        {/* Write view */}
+        <div
+          id={`${uid}-p-write`}
+          role="tabpanel"
+          aria-labelledby={`${uid}-v-write`}
+          hidden={view !== 'write'}
+          className={styles.write}
+        >
+          {editingId && (
+            <p className={styles.editing}>
+              보관함의 편지를 고치고 있어요.
+              <button type="button" onClick={startNew}>
+                새 편지 쓰기
+              </button>
+            </p>
+          )}
+
+          <div className={styles.starters}>
+            <div className={styles.startersHead}>
+              <span className={styles.label}>시작 문장</span>
+              <div role="tablist" aria-label="시작 문장 종류" className={styles.cats}>
+                {STARTERS.map((s) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    role="tab"
+                    id={tabId(s.id)}
+                    aria-selected={tab === s.id}
+                    aria-controls={panelId}
+                    tabIndex={tab === s.id ? 0 : -1}
+                    onClick={() => setTab(s.id)}
+                    onKeyDown={(e) => {
+                      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+                      const i = STARTERS.findIndex((x) => x.id === tab);
+                      const n = STARTERS[(i + (e.key === 'ArrowRight' ? 1 : STARTERS.length - 1)) % STARTERS.length];
+                      setTab(n.id);
+                      document.getElementById(tabId(n.id))?.focus();
+                    }}
+                  >
+                    {s.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div id={panelId} role="tabpanel" aria-labelledby={tabId(tab)} className={styles.chips} key={tab}>
+              {activeStarters.lines.map((line, i) => (
+                <button
+                  key={line}
+                  type="button"
+                  className={styles.chip}
+                  style={{ animationDelay: `${i * 45}ms` }}
+                  onClick={() => insertLine(line)}
+                  disabled={inserting}
+                >
+                  {line}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.field}>
+            <label htmlFor={`${uid}-text`} className={styles.label}>
+              편지 내용
+            </label>
+            <textarea
+              id={`${uid}-text`}
+              ref={textareaRef}
+              className={`pen ${styles.textarea}`}
+              value={text}
+              rows={3}
+              placeholder={SAMPLE_TEXT}
+              readOnly={inserting}
+              onChange={onText}
+              onCompositionStart={() => (composing.current = true)}
+              onCompositionEnd={(e) => {
+                composing.current = false;
+                setText(cleanText(e.currentTarget.value));
+              }}
+              onFocus={() => setFocused(true)}
+              onBlur={() => setFocused(false)}
+              aria-describedby={`${countId} ${warnId}`}
+              aria-invalid={over || warn === 'empty' || undefined}
+              spellCheck={false}
+            />
+            <div className={styles.meta}>
+              <span className={styles.saved} data-state={saved}>
+                <span className={styles.savedDot} aria-hidden="true" />
+                {savedLabel}
+              </span>
+              <span
+                id={countId}
+                className={styles.count}
+                data-near={near || undefined}
+                data-full={full || undefined}
+                aria-label={`${text.length}자, 최대 ${MAX_CHARS}자`}
+              >
+                {text.length} / {MAX_CHARS}
+              </span>
+            </div>
+            <p id={warnId} className={styles.warn} aria-live="polite">
+              {warnText}
+            </p>
+          </div>
+
+          <div className={styles.field}>
+            <label htmlFor={`${uid}-from`} className={styles.label}>
+              보내는 사람 <span className={styles.optional}>선택</span>
+            </label>
+            <input
+              id={`${uid}-from`}
+              className={`pen ${styles.input}`}
+              value={from}
+              placeholder="이름이나 애칭"
+              autoComplete="off"
+              onChange={(e) => setFrom(cleanFrom(e.target.value))}
+              maxLength={MAX_FROM}
+            />
+          </div>
+
+          <div className={styles.actions}>
+            <button
+              type="button"
+              className={`btn ${styles.primary}`}
+              onClick={() => downloadImage()}
+              aria-busy={download === 'busy'}
+              data-state={download}
+            >
+              <span className={styles.btnIcon} aria-hidden="true">
+                {download === 'done' ? (
+                  <svg viewBox="0 0 16 16" width="16" height="16">
+                    <path d="M3 8.5l3.2 3L13 4.8" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                  </svg>
+                ) : download === 'busy' ? (
+                  <span className={styles.spinner} />
+                ) : (
+                  <svg viewBox="0 0 16 16" width="16" height="16">
+                    <path
+                      d="M8 2.5v8M4.5 7.5L8 11l3.5-3.5M3 13.5h10"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.4"
+                    />
+                  </svg>
+                )}
+              </span>
+              {download === 'busy' ? '카드를 만드는 중…' : download === 'done' ? '저장했어요' : '카드 이미지 저장'}
+            </button>
+            <button type="button" className={`btn btn--ghost ${styles.secondary}`} onClick={keep}>
+              {editingId ? '보관함에 다시 담기' : '보관함에 담기'}
+            </button>
+            <div className={styles.textBtns}>
+              {canShare && (
+                <button type="button" className={styles.textBtn} onClick={share}>
+                  공유하기
+                </button>
+              )}
+              <button type="button" className={styles.textBtn} onClick={clearLetter} disabled={!text && !from}>
+                지우기
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Archive view */}
+        <div
+          id={`${uid}-p-box`}
+          role="tabpanel"
+          aria-labelledby={`${uid}-v-box`}
+          hidden={view !== 'box'}
+          className={styles.box}
+        >
+          {letters.length === 0 ? (
+            <div className={styles.empty}>
+              <p className={`pen ${styles.emptyPen}`}>아직 보관한 편지가 없어요.</p>
+              <p>쓴 편지를 보관함에 담아 두면, 이 기기에서 언제든 다시 꺼내 볼 수 있어요.</p>
+              <button type="button" className="btn" onClick={startNew}>
+                첫 편지 쓰기
+              </button>
+            </div>
+          ) : (
+            <>
+              <ul className={styles.list}>
+                {letters.map((l) => (
+                  <li key={l.id} className={styles.item} data-active={selected?.id === l.id || undefined}>
+                    <button
+                      type="button"
+                      className={styles.itemMain}
+                      onClick={() => selectLetter(l)}
+                      aria-pressed={selected?.id === l.id}
+                    >
+                      <span className={`pen ${styles.itemText}`}>{l.text}</span>
+                      <span className={styles.itemMeta}>
+                        <time>{l.date}</time>
+                        {l.from && <span>— {l.from}</span>}
+                      </span>
+                    </button>
+                    <div className={styles.itemActions}>
+                      <button type="button" onClick={() => continueLetter(l)}>
+                        이어 쓰기
+                      </button>
+                      <button type="button" onClick={() => downloadImage(l)}>
+                        이미지 저장
+                      </button>
+                      <button type="button" onClick={() => removeLetter(l)} aria-label={`${l.date} 편지 지우기`}>
+                        지우기
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <button type="button" className={styles.newBtn} onClick={startNew}>
+                <span aria-hidden="true">+</span> 새 편지 쓰기
+              </button>
+            </>
+          )}
+          <p className={styles.boxNote}>
+            보관함은 이 기기의 브라우저에만 저장돼요. 브라우저 기록을 지우면 함께 사라지니, 소중한 편지는 이미지로도
+            저장해 두세요. (최대 {MAX_LETTERS}통)
+          </p>
+        </div>
+      </div>
+
+      <div className={styles.toastWrap} role="status" aria-live="polite">
+        {toast && (
+          <div key={toast.id} className={styles.toast}>
+            <span>{toast.msg}</span>
+            {toast.action && (
+              <button
+                type="button"
+                onClick={() => {
+                  toast.action!.run();
+                  setToast(null);
+                }}
+              >
+                {toast.action.label}
+              </button>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+    </>
+  );
+}

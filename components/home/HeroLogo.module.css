@@ -1,0 +1,30 @@
+.wrapper { display: block; width: fit-content; line-height: 0; }
+.wrapper > svg { overflow: visible; }
+.turn { transform-box: view-box; transform-origin: 128px 128px; }
+.restoreDear { opacity: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Let the product composition settle before the single, quiet brand gesture. */
+  .wrapper[data-logo-motion='playing'] .turn {
+    animation: dearToPapa 3.8s cubic-bezier(.65, 0, .35, 1) .5s both;
+  }
+  .wrapper[data-logo-motion='playing'] .papa {
+    animation: revealDear 3.8s ease .5s both;
+  }
+  .wrapper[data-logo-motion='playing'] .restoreDear {
+    animation: reunite 3.8s ease .5s both;
+  }
+}
+
+@keyframes dearToPapa {
+  0%, 26% { transform: rotate(0deg); }
+  68%, 100% { transform: rotate(180deg); }
+}
+@keyframes revealDear {
+  0%, 8% { opacity: 1; }
+  22%, 100% { opacity: 0; }
+}
+@keyframes reunite {
+  0%, 78% { opacity: 0; }
+  94%, 100% { opacity: 1; }
+}

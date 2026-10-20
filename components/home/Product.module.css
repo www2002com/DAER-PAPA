@@ -1,0 +1,238 @@
+.section { padding: var(--section-y) 0 64px; background: var(--paper); }
+.head { display: flex; justify-content: space-between; align-items: end; gap: 28px; margin-bottom: 48px; }
+.head h2 { font-size: var(--fs-h2); line-height: 1.35; }
+.head > p { max-width: 26rem; color: var(--ink-2); font-size: 14px; line-height: 1.9; }
+.split { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 6vw, 88px); align-items: start; }
+.info { padding: 12px 0; }
+.name { margin-top: 19px; font-size: clamp(25px, 2.4vw, 34px); font-weight: 500; }
+.nameEn { margin-top: 8px; font-size: 14px; color: var(--ink-3); }
+.description { margin-top: 24px; font-size: 19px; line-height: 1.7; letter-spacing: -.025em; }
+.highlights { display: grid; margin-top: 27px; }
+.highlights > div { padding: 16px 0; border-bottom: 1px solid var(--line); }
+.highlights dt { font-size: 15px; font-weight: 500; }
+.highlights dd { font-size: 13px; line-height: 1.8; color: var(--ink-2); margin-top: 5px; }
+.direction { margin: 15px 0 24px; font-size: 12px; line-height: 1.8; color: var(--ink-3); }
+.more { margin-top: 24px; font-size: 13px; }
+.details { border-top: 1px solid var(--line); }
+.details:last-of-type { border-bottom: 1px solid var(--line); }
+.details summary { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 56px; font-size: 14px; cursor: pointer; list-style: none; }
+.details summary::-webkit-details-marker { display: none; }
+.details summary > span { position: relative; width: 14px; height: 14px; flex-shrink: 0; }
+.details summary > span::before, .details summary > span::after { content: ''; position: absolute; background: var(--ink); }
+.details summary > span::before { top: 6px; left: 0; width: 14px; height: 1px; }
+.details summary > span::after { top: 0; left: 6px; height: 14px; width: 1px; }
+.details[open] summary > span::after { display: none; }
+.specs { padding-bottom: 10px; font-size: 13px; }
+.specs > div { display: grid; grid-template-columns: 105px 1fr; gap: 14px; padding: 8px 0; }
+.specs dt { font-weight: 500; }
+.specs dd { color: var(--ink-2); }
+.notice { font-size: 12px; color: var(--ink-3); line-height: 1.85; margin-bottom: 20px; }
+.viewer { min-width: 0; }
+.stage { position: relative; aspect-ratio: 1 / 1.06; background: var(--sage); border-radius: var(--radius-m); overflow: hidden; }
+/* Keep the bottle's multiply blend on the same sage backdrop throughout the fade. */
+.stageItem { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); place-items: center; background: var(--sage); isolation: isolate; opacity: 0; visibility: hidden; transition: opacity 250ms ease; }
+.stageItem[data-active] { opacity: 1; visibility: visible; }
+.vBottle { width: 70%; height: 89%; object-fit: contain; mix-blend-mode: multiply; }
+.vBox { width: 70%; height: 89%; object-fit: contain; }
+.draftTag { position: absolute; right: 20px; top: 20px; background: var(--paper); border: none; color: var(--ink-2); }
+.thumbs { display: flex; gap: 12px; margin-top: 14px; }
+.thumb { flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 66px; border: 1px solid var(--line); font-size: 12px; background: var(--card); }
+.thumb[aria-selected='true'] { border-color: var(--forest); background: var(--surface-soft); }
+.thumb { transition: border-color 180ms ease, background-color 180ms ease, transform 160ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .thumb:hover { border-color: var(--forest); }
+}
+.thumb:active { transform: scale(.985); }
+:global([data-keyboard-motion='off']) .stageItem,
+:global([data-keyboard-motion='off']) .thumb,
+:global([data-keyboard-motion='off']) .layer { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .thumb:active { transform: none; }
+}
+.thumbArt { width: 32px; height: 45px; display: grid; place-items: center; overflow: hidden; }
+.thumbArt .vBottle { width: 100%; height: 100%; }
+.thumbArt .vBox { width: 100%; height: 100%; }
+.viewCaption { font-size: 12px; color: var(--ink-3); margin-top: 16px; line-height: 1.8; }
+.viewCaption strong { display: block; color: var(--ink-2); font-weight: 500; margin-bottom: 2px; }
+.fallbackCaptions { display: grid; gap: 12px; margin-top: 12px; color: var(--ink-3); font-size: 12px; line-height: 1.8; }
+.fallbackCaptions dt { color: var(--ink-2); font-weight: 500; }
+.ritual { display: flex; align-items: center; justify-content: space-between; gap: 40px; margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--line); }
+.ritual > p { font-size: 23px; line-height: 1.55; font-weight: 300; }
+.ritual > p strong { font-weight: 400; }
+.ritual > p small { display: block; font-size: 12px; font-weight: 400; margin-top: 12px; color: var(--ink-3); }
+.ritual ol { display: grid; grid-template-columns: repeat(3, 1fr); width: min(60%, 620px); gap: 32px; }
+.ritual li { display: flex; align-items: center; gap: 16px; }
+.ritual li span { font-size: 18px; white-space: nowrap; }
+.ritual li small { display: block; font-size: 11px; margin-bottom: 4px; color: var(--ink-3); }
+.ritualIcon { width: 64px; height: 64px; }
+.unbox {
+  display: grid;
+  gap: 20px;
+}
+
+.iso {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 0.82;
+  overflow: hidden;
+  border-radius: var(--radius-m);
+  background: var(--sage);
+  perspective: 1100px;
+}
+
+.plane {
+  position: relative;
+  width: 24%;
+  aspect-ratio: 1 / 3.8;
+  transform: rotateX(58deg) rotateZ(-32deg);
+  transform-style: preserve-3d;
+}
+
+.tray {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  background: #f8f7f0;
+  box-shadow:
+    inset 0 0 0 8px #a5b39e,
+    0 40px 40px -20px rgb(42 61 43 / 0.25);
+}
+
+.layer {
+  position: absolute;
+  inset: 9%;
+  border-radius: 4px;
+  opacity: 0.45;
+  transition:
+    transform 480ms var(--ease-out),
+    opacity 240ms var(--ease-out);
+}
+
+.lGuide {
+  transform: translateZ(14px);
+  background: #fbf8f2;
+  padding: 18% 14%;
+  display: grid;
+  align-content: start;
+  gap: 8%;
+}
+
+.lGuide i {
+  display: block;
+  height: 3px;
+  border-radius: 2px;
+  background: #b6c5ac;
+}
+
+.lGuide i:nth-child(2) {
+  width: 70%;
+}
+
+.lBottle {
+  inset: 10% 18%;
+  transform: translateZ(34px);
+  border-radius: 999px;
+  background: linear-gradient(90deg, #70866e, #c7d5bd 35%, #80977d 70%, #566e55);
+}
+
+.lBottle i {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: -2%;
+  height: 20%;
+  border: 1px solid rgb(70 93 68 / 0.4);
+  border-radius: 5px;
+  background: linear-gradient(90deg, #afc2aa, #e0e9da 45%, #8fa38a);
+}
+
+.lCard {
+  inset: 12% 10%;
+  transform: translateZ(56px);
+  background: #fcfaf6;
+  padding: 12% 12%;
+  display: grid;
+  align-content: start;
+  gap: 10%;
+}
+
+.lCard b {
+  font-weight: 400;
+  font-size: clamp(12px, 2.6vw, 20px);
+  color: #566b56;
+}
+
+.lCard i {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: #b6c5ac;
+}
+
+.lCard i + i {
+  width: 60%;
+}
+
+.layer[data-on] {
+  opacity: 1;
+  box-shadow: 0 30px 30px -14px rgb(42 61 43 / 0.25);
+}
+
+.lGuide[data-on] {
+  transform: translateZ(54px);
+}
+
+.lBottle[data-on] {
+  transform: translateZ(80px);
+}
+
+.lCard[data-on] {
+  transform: translateZ(104px);
+}
+
+.unboxSteps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.unboxSteps button {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  min-height: 64px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  font-size: 0.875rem;
+  color: var(--ink-3);
+  transition:
+    color var(--dur-2),
+    border-color var(--dur-2);
+}
+
+.unboxSteps button[aria-pressed='true'] {
+  border-top-color: var(--ink);
+  color: var(--ink);
+}
+
+.unboxNum {
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  font-variant-numeric: tabular-nums;
+}
+
+
+@media (max-width: 800px) {
+  .head { display: block; margin-bottom: 30px; }
+  .head > p { margin-top: 20px; }
+  .split { grid-template-columns: 1fr; gap: 28px; }
+  .stage { aspect-ratio: 1 / .95; }
+  .viewer { max-width: 600px; width: 100%; margin-inline: auto; }
+  .name { font-size: 28px; }
+  .ritual { display: block; margin-top: 42px; padding-top: 28px; }
+  .ritual ol { width: 100%; margin-top: 28px; gap: 12px; }
+  .ritual li { flex-direction: column; gap: 8px; text-align: center; }
+  .ritual li small { display: inline; margin-right: 8px; }
+  .ritual li span { font-size: 15px; }
+}

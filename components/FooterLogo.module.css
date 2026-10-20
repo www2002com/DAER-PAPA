@@ -1,0 +1,53 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 44px;
+  margin-bottom: 6px;
+  color: var(--logo);
+}
+
+.logo {
+  display: block;
+  width: auto;
+  height: 28px;
+  overflow: visible;
+}
+
+.turn {
+  transform-box: view-box;
+  transform-origin: 128px 128px;
+}
+
+.restoreDear {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .button[data-playing] .turn {
+    animation: dearToPapa 3.8s cubic-bezier(.65, 0, .35, 1) both;
+  }
+
+  .button[data-playing] .papa {
+    animation: revealDear 3.8s ease both;
+  }
+
+  .button[data-playing] .restoreDear {
+    animation: reunite 3.8s ease both;
+  }
+}
+
+@keyframes dearToPapa {
+  0%, 26% { transform: rotate(0deg); }
+  68%, 100% { transform: rotate(180deg); }
+}
+
+@keyframes revealDear {
+  0%, 8% { opacity: 1; }
+  22%, 100% { opacity: 0; }
+}
+
+@keyframes reunite {
+  0%, 78% { opacity: 0; }
+  94%, 100% { opacity: 1; }
+}

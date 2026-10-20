@@ -1,0 +1,6 @@
+.section { background: var(--sage); border-radius: var(--radius-m); padding: 56px 0; }
+.inner { display: flex; justify-content: space-between; align-items: center; gap: 30px; }
+.inner h2 { font-size: clamp(27px, 3vw, 38px); }
+.inner p { margin-top: 14px; color: var(--ink-2); font-size: 14px; }
+.button { flex-shrink: 0; }
+@media (max-width: 700px) { .inner { align-items: flex-start; flex-direction: column; gap: 22px; } .section { padding: 40px 0; } }

@@ -1,0 +1,18 @@
+.logo {
+  display: block;
+  width: auto;
+  height: 23px;
+  color: var(--logo);
+}
+
+.heading {
+  margin-bottom: 28px;
+}
+
+.overlay {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+  pointer-events: none;
+}

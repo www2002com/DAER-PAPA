@@ -1,280 +1,43 @@
-.hero {
-  position: relative;
-  padding-top: clamp(40px, 7vw, 104px);
-  padding-bottom: clamp(88px, 11vw, 160px);
+.hero { padding-top: 28px; }
+.layout { display: grid; grid-template-columns: 1fr 1.05fr; gap: 5%; align-items: center; }
+.copy { padding: 38px 0 54px; }
+.status { display: flex; gap: 9px; align-items: center; font-size: 13px; color: var(--ink-2); margin-bottom: 34px; }
+.status span { width: 6px; height: 6px; border-radius: 50%; background: var(--forest); }
+.title { font-size: clamp(40px, 4.5vw, 66px); font-weight: 400; line-height: 1.27; letter-spacing: -.055em; }
+.description { margin-top: 27px; font-size: 17px; line-height: 1.9; color: var(--ink-2); }
+.visual { --product-baseline: 10.55%; position: relative; height: clamp(500px, 44vw, 640px); overflow: hidden; border-radius: var(--radius-m); background: var(--sage); isolation: isolate; }
+.visualTitle { position: absolute; left: 30px; top: 28px; display: grid; gap: 3px; line-height: 1.6; z-index: 1; }
+.visualLogo { display: block; width: auto; height: 23px; color: var(--logo); }
+.visualTitle span { color: var(--ink-2); font-size: 12px; letter-spacing: 0; }
+/* Align the visible bases, compensating for each source image's bottom margin.
+   Natural image ratios keep the carton about 8% taller than the bottle.
+   X offsets center the combined visible silhouettes, accounting for source
+   side margins (bottle x=217..486, carton x=208..500, both 700px wide). */
+.bottle { position: absolute; left: 31%; bottom: calc(var(--product-baseline) - 6.55%); width: auto; max-width: none; height: 88%; transform: translateX(-55.04%); object-fit: contain; mix-blend-mode: multiply; z-index: 2; }
+.carton { position: absolute; left: 69%; bottom: calc(var(--product-baseline) - 3.44%); width: auto; max-width: none; height: 88%; transform: translateX(-53.714%); object-fit: contain; }
+.caption { position: absolute; bottom: 20px; left: 24px; right: 24px; font-size: 11px; color: #555f57; text-align: right; }
+.intro { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 40px; padding-top: 55px; padding-bottom: 58px; }
+.intro > p { font-size: 23px; line-height: 1.55; letter-spacing: -.04em; font-weight: 300; }
+.intro strong { font-weight: 500; }
+.intro h2 { font-size: 16px; font-weight: 500; margin-bottom: 10px; }
+.intro div p { font-size: 14px; line-height: 1.8; color: var(--ink-2); }
+@media (max-width: 1000px) {
+  .layout { gap: 28px; }
+  .visual { height: 500px; }
 }
-
-.top {
-  display: grid;
-  gap: 32px;
-  align-items: end;
-}
-
-.kicker {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 14px;
-  margin-bottom: clamp(24px, 4vw, 40px);
-  animation: fade 1200ms var(--ease-soft) 100ms both;
-}
-
-.title {
-  font-size: var(--fs-display);
-  font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: -0.05em;
-  color: var(--ink);
-}
-
-/* Each line rises out of its own mask */
-.line {
-  display: block;
-  overflow: hidden;
-  padding-bottom: 0.06em;
-  margin-bottom: -0.06em;
-}
-
-.line > span {
-  display: inline-block;
-  animation: rise 1300ms var(--ease-soft) both;
-}
-
-.line + .line > span {
-  animation-delay: 140ms;
-}
-
-.indent {
-  padding-left: 0.9em;
-}
-
-.sub {
-  display: block;
-  max-width: 30rem;
-  margin-top: clamp(24px, 3vw, 36px);
-  font-size: var(--fs-body);
-  font-weight: 400;
-  line-height: 1.7;
-  letter-spacing: -0.01em;
-  color: var(--ink-2);
-  animation: fade 1200ms var(--ease-soft) 520ms both;
-}
-
-.aside {
-  display: grid;
-  gap: 24px;
-  max-width: 24rem;
-  color: var(--ink-2);
-  animation: fade 1200ms var(--ease-soft) 680ms both;
-}
-
-.ctas {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px 24px;
-}
-
-/* ── Art ───────────────────────────────────────────────────── */
-.artWrap {
-  margin-top: clamp(48px, 8vw, 104px);
-}
-
-.frame {
-  position: relative;
-  aspect-ratio: 4 / 4.6;
-  border-radius: var(--radius-l);
-  background:
-    radial-gradient(90% 70% at 70% 30%, #f6efe4 0%, transparent 70%), linear-gradient(160deg, #ece2d3 0%, #e2d4c1 100%);
-  animation: frameIn 1600ms var(--ease-soft) 200ms both;
-}
-
-/* Morning light falling through a window, drifting slowly */
-.light {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  border-radius: inherit;
-  pointer-events: none;
-}
-
-.light::before {
-  content: '';
-  position: absolute;
-  inset: -30% -40%;
-  background: repeating-linear-gradient(
-    112deg,
-    rgb(255 255 255 / 0) 0 70px,
-    rgb(255 253 248 / 0.38) 70px 150px,
-    rgb(255 255 255 / 0) 150px 190px
-  );
-  -webkit-mask-image: radial-gradient(60% 55% at 62% 40%, #000, transparent 75%);
-  mask-image: radial-gradient(60% 55% at 62% 40%, #000, transparent 75%);
-  filter: blur(6px);
-  animation: sway 16s ease-in-out infinite alternate;
-}
-
-.bottleWrap {
-  position: absolute;
-  right: 12%;
-  bottom: 9%;
-  height: 74%;
-  aspect-ratio: 240 / 560;
-}
-
-.bottle {
-  width: 100%;
-  height: 100%;
-  animation: bottleIn 1500ms var(--ease-soft) 520ms both;
-}
-
-.cardWrap {
-  position: absolute;
-  left: 7%;
-  bottom: -9%;
-  width: clamp(150px, 46%, 330px);
-}
-
-.card {
-  transform: rotate(-5deg);
-  transform-origin: 30% 80%;
-  animation: cardIn 1500ms var(--ease-soft) 760ms both;
-}
-
-.caption {
-  position: absolute;
-  right: 18px;
-  top: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  max-width: 60%;
-  font-size: 0.75rem;
-  line-height: 1.4;
-  color: var(--ink-2);
-  text-align: right;
-  animation: fade 1200ms var(--ease-soft) 1400ms both;
-}
-
-.caption span {
-  background: rgb(252 250 246 / 0.6);
-}
-
-.scrollCue {
-  position: absolute;
-  left: 50%;
-  bottom: 24px;
-  display: none;
-  width: 44px;
-  height: 56px;
-  transform: translateX(-50%);
-}
-
-.scrollCue span {
-  position: absolute;
-  left: 50%;
-  top: 8px;
-  width: 1px;
-  height: 40px;
-  overflow: hidden;
-  background: var(--line);
-}
-
-.scrollCue span::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--ink);
-  animation: cue 2.4s var(--ease-soft) infinite;
-}
-
-@keyframes rise {
-  from {
-    transform: translateY(105%);
-  }
-}
-
-@keyframes fade {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-}
-
-@keyframes frameIn {
-  from {
-    opacity: 0;
-    transform: scale(1.03);
-  }
-}
-
-@keyframes bottleIn {
-  from {
-    opacity: 0;
-    transform: translateY(36px);
-  }
-}
-
-@keyframes cardIn {
-  from {
-    opacity: 0;
-    transform: translate(-24px, 48px) rotate(-14deg);
-  }
-}
-
-@keyframes sway {
-  to {
-    transform: translateX(6%) rotate(1.5deg);
-  }
-}
-
-@keyframes cue {
-  0% {
-    transform: translateY(-100%);
-  }
-  60%,
-  100% {
-    transform: translateY(100%);
-  }
-}
-
-@media (min-width: 720px) {
-  .frame {
-    aspect-ratio: 16 / 10;
-  }
-
-  .bottleWrap {
-    right: 18%;
-    height: 80%;
-  }
-
-  .cardWrap {
-    left: 8%;
-    width: clamp(180px, 27%, 330px);
-    bottom: -12%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .top {
-    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
-    gap: 48px;
-  }
-
-  .indent {
-    padding-left: 1.6em;
-  }
-
-  .aside {
-    justify-self: end;
-    padding-bottom: 12px;
-  }
-
-  .frame {
-    aspect-ratio: 21 / 10;
-  }
-
-  .scrollCue {
-    display: block;
-  }
+@media (max-width: 700px) {
+  .hero { padding-top: 10px; }
+  .layout { grid-template-columns: 1fr; gap: 8px; }
+  .copy { padding: 28px 0 30px; }
+  .status { margin-bottom: 22px; font-size: 12px; }
+  .title { font-size: clamp(38px, 8.3vw, 54px); }
+  .description { font-size: 15px; margin-top: 22px; }
+  .visual { height: auto; aspect-ratio: 1 / 1.06; }
+  .visualTitle { left: 22px; top: 20px; }
+  .caption { left: 15px; right: 15px; bottom: 14px; font-size: 10px; }
+  .intro { grid-template-columns: 1fr 1fr; gap: 24px 20px; padding-top: 36px; padding-bottom: 42px; }
+  .intro > p { grid-column: 1 / -1; font-size: 22px; }
+  .intro > p br { display: none; }
+  .intro h2 { font-size: 14px; }
+  .intro div p { font-size: 12px; }
 }

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Logo } from './Logo';
+import { FooterLogo } from './FooterLogo';
 import { BRAND, CHANNELS, CONTACT_EMAIL, FACTS_UPDATED, FACTS_UPDATED_KO, UNDECIDED } from '@/lib/facts';
 import styles from './SiteFooter.module.css';
 
@@ -18,24 +18,31 @@ const ARCHIVE = [
   { href: '/press', label: '소개 기사' },
 ];
 
+const CHANNEL_LOGOS = {
+  instagram: '/icons/social/instagram.svg',
+  blog: '/icons/social/naver-blog.ico',
+  youtube: '/icons/social/youtube.svg',
+  facebook: '/icons/social/facebook.svg',
+} as const;
+
 export function SiteFooter() {
   return (
     <footer className={styles.footer}>
       <div className="container">
-        <p className={`pen ${styles.sign}`} data-reveal>
+        <p className={styles.sign} data-reveal>
           {BRAND.slogan}
         </p>
 
         <div className={styles.grid}>
           <div className={styles.about}>
-            <Logo className={styles.logo} />
+            <FooterLogo />
             <p>{BRAND.definitionShort}</p>
             <p className={styles.muted}>
               로고 · d(Dear)를 180° 돌리면 p(Papa)가 됩니다. 딸과 아빠가 가운데의 원 하나를 함께 쥔 모양입니다.
             </p>
           </div>
 
-          <nav className={styles.col} aria-label="사이트 둘러보기">
+          <nav className={styles.col} aria-label="사이트 둘러보기" data-reveal>
             <h2 className={styles.colTitle}>둘러보기</h2>
             <ul>
               {EXPLORE.map((l) => (
@@ -46,7 +53,7 @@ export function SiteFooter() {
             </ul>
           </nav>
 
-          <nav className={styles.col} aria-label="자료">
+          <nav className={styles.col} aria-label="자료" data-reveal data-reveal-delay="50">
             <h2 className={styles.colTitle}>자료</h2>
             <ul>
               {ARCHIVE.map((l) => (
@@ -57,13 +64,27 @@ export function SiteFooter() {
             </ul>
           </nav>
 
-          <div className={styles.col}>
+          <div className={styles.col} data-reveal data-reveal-delay="100">
             <h2 className={styles.colTitle}>공식 채널</h2>
-            <ul>
+            <ul className={styles.socialLinks} aria-label="디어파파 공식 소셜 채널">
               {CHANNELS.map((c) => (
                 <li key={c.key}>
-                  <a href={c.href} target="_blank" rel="noopener noreferrer">
-                    {c.label} <span className={styles.handle}>{c.handle}</span>
+                  <a
+                    className={styles.socialLink}
+                    href={c.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={`${c.label} ${c.handle} · 새 탭에서 열기`}
+                  >
+                    <span
+                      className={styles.socialIcon}
+                      aria-hidden="true"
+                      style={{
+                        maskImage: `url(${CHANNEL_LOGOS[c.key]})`,
+                        WebkitMaskImage: `url(${CHANNEL_LOGOS[c.key]})`,
+                      }}
+                    />
+                    <span className="sr-only">{c.label} {c.handle} — 디어파파 공식 채널 (새 탭에서 열기)</span>
                   </a>
                 </li>
               ))}

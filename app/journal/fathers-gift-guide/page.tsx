@@ -1,76 +1,18 @@
 import Link from 'next/link';
 import { ArticleLayout, RelatedLinks } from '@/components/article/ArticleLayout';
-import { JsonLd } from '@/components/JsonLd';
-import { pageMetadata } from '@/lib/seo';
+import { preservedMetadata } from '@/lib/preserved-metadata';
 import { JOURNAL_SITE_SUFFIX, dotDate, getJournalEntry } from '@/lib/journal';
 
 // Copied verbatim from the previous /journal/fathers-gift-guide page.
 
 const entry = getJournalEntry('fathers-gift-guide');
 
-export const metadata = pageMetadata({
-  title: entry.title + JOURNAL_SITE_SUFFIX,
-  description: entry.summary,
-  path: entry.href,
-  ogType: 'article',
-  ogTitle: entry.title,
-});
+export const metadata = preservedMetadata('/journal/fathers-gift-guide');
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Article',
-      headline: '아빠 선물 스킨케어, 일상에 맞게 고르는 법',
-      mainEntityOfPage: 'https://dearpapa.kr/journal/fathers-gift-guide',
-      datePublished: '2026-10-11',
-      dateModified: '2026-10-17',
-      author: {
-        '@type': 'Organization',
-        name: 'DEAR PAPA',
-        url: 'https://dearpapa.kr/',
-      },
-      publisher: {
-        '@type': 'Organization',
-        name: 'DEAR PAPA',
-        url: 'https://dearpapa.kr/',
-      },
-      '@id': 'https://dearpapa.kr/journal/fathers-gift-guide',
-      url: 'https://dearpapa.kr/journal/fathers-gift-guide',
-      inLanguage: 'ko-KR',
-      description:
-        '아빠에게 스킨케어를 선물하기 전 살펴볼 취향과 생활 습관, 함께 전할 짧은 편지에 관한 디어파파의 제안입니다.',
-    },
-    {
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: '디어파파',
-          item: 'https://dearpapa.kr/',
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: '브랜드 자료실',
-          item: 'https://dearpapa.kr/journal',
-        },
-        {
-          '@type': 'ListItem',
-          position: 3,
-          name: '아빠 선물 스킨케어, 일상에 맞게 고르는 법',
-          item: 'https://dearpapa.kr/journal/fathers-gift-guide',
-        },
-      ],
-    },
-  ],
-};
 
 export default function FathersGiftGuidePage() {
   return (
     <>
-      <JsonLd data={jsonLd} />
       <ArticleLayout
         crumbs={[{ href: '/journal', label: '브랜드 자료실' }]}
         eyebrow={entry.category}

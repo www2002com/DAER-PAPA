@@ -1,64 +1,45 @@
-import { Bottle } from '@/components/art/Art';
-import { WritingCard } from '@/components/letter/WritingCard';
-import { SAMPLE_TEXT } from '@/components/letter/card';
+import Image from 'next/image';
+import { HeroLogo } from './HeroLogo';
 import styles from './Hero.module.css';
 
 export function Hero() {
   return (
     <section className={styles.hero} aria-labelledby="hero-title">
-      <div className={`container ${styles.top}`}>
+      <div className={`container ${styles.layout}`}>
         <div className={styles.copy}>
-          <p className={styles.kicker}>
-            <span className="eyebrow">Dear Papa · Letter All-in-One</span>
-            <span className="tag" data-tone="soft">
-              출시 준비 중
-            </span>
-          </p>
-          <h1 id="hero-title" className={styles.title}>
-            <span className={styles.line}>
-              <span>아빠의 매일에,</span>
-            </span>
-            <span className={`${styles.line} ${styles.indent}`}>
-              <span>딸의 마음을.</span>
-            </span>
-            <span className={styles.sub}>편지와 함께 건네는 아빠 선물, DEAR&nbsp;PAPA(디어파파).</span>
-          </h1>
-        </div>
-        <div className={styles.aside}>
-          <p>아빠를 위한 올인원 스킨케어와 마음을 전하는 편지 경험을 준비하고 있습니다.</p>
-          <div className={styles.ctas}>
-            <a href="#letter" className="btn">
-              아빠에게 한 줄 쓰기
-            </a>
-            <a href="#product" className="link-arrow">
-              제품 이야기
-              <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.3" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div className={`container ${styles.artWrap}`}>
-        <div className={styles.frame}>
-          <span className={styles.light} aria-hidden="true" />
-          <div className={styles.bottleWrap} data-parallax="-0.05">
-            <Bottle id="hero-bottle" className={styles.bottle} />
-          </div>
-          <div className={styles.cardWrap} data-parallax="0.04">
-            <WritingCard className={styles.card} text={SAMPLE_TEXT} delay={900} />
-          </div>
-          <p className={styles.caption}>
-            <span className="tag">디자인 시안</span>
-            용기·카드 그림은 개발 중인 시안이에요
+          <p className={styles.status} data-reveal><span aria-hidden="true" />아빠를 위한 스킨케어, 출시 준비 중</p>
+          <h1 id="hero-title" className={styles.title} data-reveal data-reveal-delay="50">아빠의 매일에,<br />딸의 마음을.</h1>
+          <p className={styles.description} data-reveal data-reveal-delay="100">
+            매일 쓰는 스킨케어 하나.<br />
+            평소에 하지 못했던 말 한 줄.<br />
+            마음까지 전하는 아빠 선물을 준비합니다.
           </p>
         </div>
+        <figure className={styles.visual} data-reveal="visual" data-reveal-delay="80">
+          <div className={styles.visualTitle}>
+            <HeroLogo className={styles.visualLogo} />
+            <span>Letter All-in-One</span>
+          </div>
+          <Image className={styles.bottle} src="/images/letter-all-in-one-deep-green-logo-v4.webp"
+            alt="디어파파 로고가 담긴 레터 올인원 연한 딥그린 용기 디자인 시안" width={700} height={1425}
+            loading="eager" fetchPriority="high" />
+          <Image className={styles.carton} src="/images/letter-all-in-one-carton-sage-v1.webp"
+            alt="레터 올인원 용기와 한 세트로 구성한 딥그린 슬림 단상자 디자인 시안" width={700} height={1050}
+            loading="eager" />
+          <figcaption className={styles.caption}>용기와 단상자는 개발 중인 디자인 시안입니다.</figcaption>
+        </figure>
       </div>
-
-      <a href="#letter" className={styles.scrollCue} aria-label="편지 쓰기로 내려가기">
-        <span aria-hidden="true" />
-      </a>
+      <div className={`container ${styles.intro}`}>
+        <p data-reveal>좋은 선물은,<br /><strong>매일의 안부가 되니까.</strong></p>
+        <div data-reveal data-reveal-delay="50">
+          <h2>아빠의 일상에 놓일 하나</h2>
+          <p>세안 후 하나로 마무리하는<br />남성 올인원 스킨케어를 만듭니다.</p>
+        </div>
+        <div data-reveal data-reveal-delay="100">
+          <h2>마음을 담은 한 줄</h2>
+          <p>길지 않아도 괜찮아요.<br />아빠에게 전할 말부터 적어 보세요.</p>
+        </div>
+      </div>
     </section>
   );
 }

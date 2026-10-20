@@ -2,7 +2,7 @@
 // The on-screen card (LetterCard) and the exported PNG read the same numbers,
 // so what the visitor sees is what they download.
 
-import { LOGO_CANVAS_PATHS } from '@/components/Logo';
+import { LOGO_CANVAS_PATHS, LOGO_SIZE } from '@/components/Logo';
 
 /** Card size in export pixels (4:5, fits phone galleries and messengers). */
 export const CARD = {
@@ -28,10 +28,12 @@ export const MAX_CHARS = 150;
 export const MAX_FROM = 12;
 export const SAMPLE_TEXT = '아빠, 늘 고마워요. 오늘도 편안한 하루 보내세요.';
 
-export const INK = '#2b221c';
-export const INK_SOFT = '#6b5a4d';
+export const INK = '#2e4536';
+export const INK_SOFT = '#566b56';
 export const PAPER = '#fcfaf6';
-export const FRAME = '#e5d6c9';
+export const FRAME = '#b6c5ac';
+export const LOGO_INK = '#304b3c';
+export const BACK_PAPER = '#a5b39e';
 
 export type Line = { start: number; end: number };
 export type Layout = { lines: Line[]; tier: number; fs: number; lh: number; over: boolean };
@@ -217,17 +219,24 @@ export async function renderCard({ text, from, date }: LetterInput): Promise<HTM
   // Footer: wordmark (drawn geometry) and date.
   const footTop = CARD.foot.top * H;
   const lw = CARD.foot.logoW * W;
-  const scale = lw / 942.69;
-  const logoH = 238 * scale;
+  const scale = lw / LOGO_SIZE.width;
+  const logoH = LOGO_SIZE.height * scale;
   ctx.save();
   ctx.translate(x + 4 * scale, footTop - logoH / 2 + 4 * scale);
   ctx.scale(scale, scale);
-  ctx.fillStyle = '#3a2d21';
+  ctx.fillStyle = LOGO_INK;
+  ctx.strokeStyle = LOGO_INK;
   for (const p of LOGO_CANVAS_PATHS) {
     ctx.save();
     ctx.translate(p.t[0], p.t[1]);
     ctx.scale(p.t[2], p.t[2]);
-    ctx.fill(new Path2D(p.d), p.evenodd ? 'evenodd' : 'nonzero');
+    const path = new Path2D(p.d);
+    ctx.fill(path, p.evenodd ? 'evenodd' : 'nonzero');
+    if (p.strokeWidth) {
+      ctx.lineWidth = p.strokeWidth;
+      ctx.lineJoin = 'round';
+      ctx.stroke(path);
+    }
     ctx.restore();
   }
   ctx.restore();

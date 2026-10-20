@@ -3,77 +3,102 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
-// Page-wide motion, so sections can stay server components and only add attributes:
-//   [data-reveal]          fades up once it enters the viewport (delay via --reveal-delay)
-//   [data-parallax="0.06"] drifts with scroll by that factor while visible
+// Motion enhances already-visible server HTML. No hidden/pending CSS state,
+// scroll handler, parallax, or animation library is needed.
 export function RevealObserver() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const reveal = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]:not(.is-in)'));
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!('IntersectionObserver' in window)) {
-      reveal.forEach((el) => el.classList.add('is-in'));
-      return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // Enhance the existing Story DOM without changing its protected source.
+    document.querySelectorAll<HTMLElement>(
+      '#story .container > div:first-child > *, #story .container > div:last-child > div > p, #story .container a',
+    ).forEach((element, index) => {
+      element.dataset.reveal = element.tagName === 'A' ? 'cue' : 'text';
+      element.dataset.revealDelay = String((index % 3) * 50);
+    });
+
+    const elements = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+    const active = new Set<HTMLElement>();
+    let keyboard = false;
+    let observer: IntersectionObserver | undefined;
+
+    function finish(element: HTMLElement) {
+      element.dataset.motionState = 'done';
+      element.style.removeProperty('--motion-delay');
+      active.delete(element);
+      observer?.unobserve(element);
     }
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-in');
-            io.unobserve(entry.target);
-          }
-        }
-      },
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
-    );
-    reveal.forEach((el) => io.observe(el));
+    function enter(element: HTMLElement) {
+      if (element.dataset.motionState === 'done') return;
+      observer?.unobserve(element);
+      if (reduced.matches || keyboard || element.contains(document.activeElement)) {
+        finish(element);
+        return;
+      }
+      const delay = Number(element.dataset.revealDelay ?? 0);
+      element.style.setProperty('--motion-delay', `${Math.min(150, Math.max(0, delay || 0))}ms`);
+      element.dataset.motionState = 'entering';
+      active.add(element);
+    }
 
-    if (reduced) return () => io.disconnect();
+    if (!reduced.matches && 'IntersectionObserver' in window) {
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) enter(entry.target as HTMLElement);
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -24px 0px' });
+      elements.forEach((element) => {
+        if (element.dataset.motionState !== 'done') observer!.observe(element);
+      });
+    } else {
+      elements.forEach(finish);
+    }
 
-    // Parallax: only elements currently on screen are updated, once per frame.
-    const drifting = new Set<HTMLElement>();
-    const pio = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          const el = e.target as HTMLElement;
-          if (e.isIntersecting) drifting.add(el);
-          else drifting.delete(el);
-        }
-        schedule();
-      },
-      { rootMargin: '20% 0px' },
-    );
-    document.querySelectorAll<HTMLElement>('[data-parallax]').forEach((el) => pio.observe(el));
-
-    let frame = 0;
-    const applied = new WeakMap<HTMLElement, number>();
-    const update = () => {
-      frame = 0;
-      const vh = window.innerHeight;
-      drifting.forEach((el) => {
-        const factor = Number(el.dataset.parallax) || 0;
-        const r = el.getBoundingClientRect();
-        // Measure from the untransformed position so the drift never feeds back on itself.
-        const center = r.top - (applied.get(el) ?? 0) + r.height / 2;
-        const offset = (center - vh / 2) * factor;
-        applied.set(el, offset);
-        el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
+    const onEnd = (event: AnimationEvent) => {
+      if (event.animationName === 'page-enter' && event.target instanceof HTMLElement) finish(event.target);
+    };
+    const onFocus = (event: FocusEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      elements.forEach((element) => {
+        if (element.contains(target)) finish(element);
       });
     };
-    function schedule() {
-      if (!frame) frame = requestAnimationFrame(update);
-    }
-    window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule);
+    const onKey = (event: KeyboardEvent) => {
+      if (!['Tab', 'Enter', ' ', 'ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'PageDown', 'PageUp', 'Home', 'End'].includes(event.key)) return;
+      keyboard = true;
+      document.documentElement.dataset.keyboardMotion = 'off';
+      active.forEach(finish);
+    };
+    const onPointer = () => {
+      keyboard = false;
+      delete document.documentElement.dataset.keyboardMotion;
+    };
+    const onPreference = () => {
+      if (reduced.matches) {
+        observer?.disconnect();
+        elements.forEach(finish);
+      }
+    };
 
+    document.addEventListener('animationend', onEnd);
+    document.addEventListener('focusin', onFocus);
+    window.addEventListener('keydown', onKey);
+    window.addEventListener('pointerdown', onPointer, { passive: true });
+    window.addEventListener('wheel', onPointer, { passive: true });
+    reduced.addEventListener('change', onPreference);
     return () => {
-      io.disconnect();
-      pio.disconnect();
-      window.removeEventListener('scroll', schedule);
-      window.removeEventListener('resize', schedule);
-      cancelAnimationFrame(frame);
+      observer?.disconnect();
+      active.forEach(finish);
+      document.removeEventListener('animationend', onEnd);
+      document.removeEventListener('focusin', onFocus);
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('pointerdown', onPointer);
+      window.removeEventListener('wheel', onPointer);
+      reduced.removeEventListener('change', onPreference);
+      delete document.documentElement.dataset.keyboardMotion;
     };
   }, [pathname]);
 

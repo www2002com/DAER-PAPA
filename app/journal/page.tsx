@@ -1,83 +1,17 @@
 import Link from 'next/link';
 import { ArticleLayout } from '@/components/article/ArticleLayout';
-import { JsonLd } from '@/components/JsonLd';
-import { pageMetadata } from '@/lib/seo';
+import { preservedMetadata } from '@/lib/preserved-metadata';
 import { JOURNAL, dotDate } from '@/lib/journal';
 import styles from './journal.module.css';
 
 // Copied verbatim from the previous /journal page.
 
-export const metadata = pageMetadata({
-  title: '브랜드 자료실 | DEAR PAPA 디어파파',
-  description: '디어파파의 브랜드 이야기, 제품 개발 방향과 아빠를 위한 선물 가이드를 모았습니다.',
-  path: '/journal',
-  ogTitle: '브랜드 자료실',
-});
+export const metadata = preservedMetadata('/journal');
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'CollectionPage',
-      name: '브랜드 자료실',
-      mainEntity: {
-        '@type': 'ItemList',
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: '디어파파가 전하고 싶은 마음',
-            url: 'https://dearpapa.kr/journal/brand-identity',
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: '매일 쓰는 제품을 준비하는 기준',
-            url: 'https://dearpapa.kr/journal/development-principles',
-          },
-          {
-            '@type': 'ListItem',
-            position: 3,
-            name: '아빠 선물 스킨케어, 일상에 맞게 고르는 법',
-            url: 'https://dearpapa.kr/journal/fathers-gift-guide',
-          },
-          {
-            '@type': 'ListItem',
-            position: 4,
-            name: '아빠 선물 추천, 편지와 함께 건네는 스킨케어',
-            url: 'https://dearpapa.kr/journal/dad-gift-guide',
-          },
-        ],
-      },
-      '@id': 'https://dearpapa.kr/journal',
-      url: 'https://dearpapa.kr/journal',
-      inLanguage: 'ko-KR',
-      description: '디어파파의 브랜드 이야기, 제품 개발 방향과 아빠를 위한 선물 가이드를 모았습니다.',
-    },
-    {
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: '디어파파',
-          item: 'https://dearpapa.kr/',
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: '브랜드 자료실',
-          item: 'https://dearpapa.kr/journal',
-        },
-      ],
-    },
-  ],
-};
 
 export default function JournalPage() {
   return (
     <>
-      <JsonLd data={jsonLd} />
       <ArticleLayout
         eyebrow="JOURNAL"
         title="브랜드 자료실"

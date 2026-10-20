@@ -52,31 +52,42 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#F8F4EE',
+  themeColor: '#FAF9F6',
   width: 'device-width',
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children, structuredData }: {
+  children: React.ReactNode;
+  structuredData: React.ReactNode;
+}) {
   return (
-    <html lang="ko" className={pen.variable}>
+    <html lang="ko" className={pen.variable} data-scroll-behavior="smooth">
       <head>
+        {structuredData}
         <link rel="describedby" href="/llms.txt" type="text/plain" />
         <link rel="alternate" type="text/markdown" title="LLM Markdown" href="/llm.md" />
         <link rel="alternate" type="application/json" title="Facts JSON" href="/facts.json" />
         <link rel="alternate" type="application/rss+xml" title="DEAR PAPA 디어파파 저널" href="/rss.xml" />
       </head>
       <body>
-        {/* Marks JS as available before first paint so reveal styles never hide content without JS. */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <a className="skip-link" href="#main">
           본문 바로가기
         </a>
         <SiteHeader />
+        <noscript>
+          <nav className="no-script-nav container" aria-label="자바스크립트 없이 사용하는 메뉴">
+            <a href="/#product">레터 올인원</a>
+            <a href="/#story">브랜드 이야기</a>
+            <a href="/#faq">궁금한 이야기</a>
+            <a href="/journal">저널</a>
+            <a href="/#letter">편지 쓰기</a>
+          </nav>
+        </noscript>
         <main id="main">{children}</main>
         <SiteFooter />
         <RevealObserver />
-        <Script src="/_vercel/insights/script.js" strategy="afterInteractive" />
+        {process.env.NODE_ENV === 'production' && <Script src="/_vercel/insights/script.js" strategy="afterInteractive" />}
       </body>
     </html>
   );

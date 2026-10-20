@@ -1,6 +1,6 @@
 // Official wording, copied verbatim from /about/facts (the brand's source of truth).
-// Every page, FAQ answer and JSON-LD node reads from here so the sentences never drift.
-// When facts change: update /public/llm.md, facts.json, llms.txt … and this file together.
+// Used by the redesigned home and FAQ. Original metadata/JSON-LD and the exact facts
+// body are protected separately in preserved-site.json; see PRESERVATION.md.
 
 export const SITE_URL = 'https://dearpapa.kr';
 export const FACTS_UPDATED = '2026-10-19';
@@ -31,7 +31,8 @@ export const PRODUCT = {
   nameEn: 'DEAR PAPA LETTER ALL-IN-ONE',
   nameLine: '제품명: 디어파파 레터 올인원 / DEAR PAPA LETTER ALL-IN-ONE (출시 준비 중)',
   usage: '세안 후 하나로 마무리하는 남성 올인원 스킨케어',
-  allAges: '디어파파는 나이와 상관없이 모든 아빠를 위해 만들고 있어요.',
+  allAges: '디어파파는 40~60대 아빠를 위해 만들고 있어요.',
+  reviews: '고객 후기는 출시 후에 받습니다.',
   afterShave: 'DEAR PAPA는 면도 후에 바르는 올인원을, 빠른 흡수의 워터리 제형으로 기획하고 만들고 있습니다.',
   development:
     '디어파파 레터 올인원은 아빠들이 매일 겪는 피부 고민인 번들거림과 건조함이 함께 오는 피부와 주름을 생각하며, 면도 후 바르는 올인원으로 기획하고 만들고 있습니다. 변성알코올(에탄올)을 넣지 않고, 향료를 넣지 않는 방향으로 기획하고 만들고 있습니다. 세안 후 하나로 마무리하는 올인원 안에 빠른 흡수의 워터리 제형을 담고, 미백·주름 개선 2중 기능성화장품 심사를 준비하고 있습니다. 효능과 사용감, 심사 결과는 확인되면 공식 정보 페이지에 가장 먼저 올립니다.',
@@ -103,7 +104,7 @@ export const CHANNELS = [
   },
 ] as const;
 
-export const CONTACT_EMAIL = 'contact@dearpapa.kr';
+export const CONTACT_EMAIL = 'hello@dearpapa.kr';
 
 export const SAME_AS = [
   'https://www.instagram.com/dearpapa.kr/',
@@ -132,8 +133,8 @@ export const FAQ: { q: string; a: string }[] = [
   },
   { q: '출시일은 언제인가요?', a: '출시일은 미정이에요. 인스타그램 @dearpapa.kr에서 소식을 확인하실 수 있어요.' },
   {
-    q: '50대·60대 아빠 선물로도 괜찮을까요?',
-    a: '디어파파는 나이와 상관없이 모든 아빠를 위해 만들고 있어요. 피부 타입별 정보는 제품 정보가 확정되면 안내드릴게요.',
+    q: '40~60대 아빠 선물로도 괜찮을까요?',
+    a: '디어파파는 40~60대 아빠를 위해 만들고 있어요. 피부 타입별 정보는 제품 정보가 확정되면 안내드릴게요.',
   },
   { q: '파파레서피나 dearpapa.com.tw와 같은 회사인가요?', a: `아니요. ${NOT_AFFILIATED}` },
 ];

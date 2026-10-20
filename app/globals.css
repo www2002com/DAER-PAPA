@@ -1,41 +1,53 @@
 /* ─────────────────────────────────────────────────────────────
    DEAR PAPA — design tokens & base
-   Warm paper base, deep-brown ink, one quiet rose accent.
+   Warm cream paper, soft sage surfaces and deep forest accents.
    ───────────────────────────────────────────────────────────── */
+
+/* Use a familiar hooked comma without changing the underlying Korean copy. */
+@font-face {
+  font-family: 'Dear Papa Comma';
+  src: local('Arial'), local('Helvetica'), local('Liberation Sans');
+  font-style: normal;
+  font-weight: 100 900;
+  unicode-range: U+002C;
+}
 
 :root {
   color-scheme: light;
 
   /* Surfaces */
-  --paper: #f8f4ee;
-  --ivory: #f1eadf;
-  --sand: #e6dac8;
-  --card: #fcfaf6;
-  --night: #2a221c;
+  --paper: #f7f7f2;
+  --ivory: #eef0e7;
+  --sand: #dce3d5;
+  --card: #fcfbf7;
+  --night: #30382f;
+  --sage: #e8ede2;
+  --surface-soft: #f0f3eb;
+  --forest: #48594d;
 
   /* Ink */
-  --ink: #2b221c;
-  --ink-2: #594b40;
-  --ink-3: #75675b;
+  --ink: #303a32;
+  --ink-2: #566052;
+  --ink-3: #626d5d;
   --ink-inverse: #f4ede3;
-  --logo: #3a2d21;
+  --logo: #344b3c;
 
   /* Lines & accent */
-  --line: #dfd4c5;
-  --line-strong: #c9baa7;
-  --rose: #b08474;
-  --rose-soft: #eddcd2;
-  --rose-ink: #8e5f50; /* rose for small text (4.9:1 on paper) */
-  --placeholder: #958272; /* large handwriting placeholders (3.3:1) */
+  --line: #d7ddd0;
+  --line-strong: #b8c4b1;
+  --rose: #657b68;
+  --rose-soft: #e1e7dc;
+  --rose-ink: #48594d;
+  --placeholder: #798674; /* muted sage for large handwriting placeholders */
 
   /* Type */
   --font-sans:
-    'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo',
+    'Dear Papa Comma', 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo',
     'Noto Sans KR', 'Malgun Gothic', sans-serif;
   --font-pen: var(--font-nanum-pen), 'Nanum Pen Script', cursive;
 
   --fs-display: clamp(2.6rem, 1.55rem + 4.9vw, 6.25rem);
-  --fs-h2: clamp(1.85rem, 1.35rem + 2.3vw, 3.4rem);
+  --fs-h2: clamp(1.9rem, 1.3rem + 2.3vw, 3rem);
   --fs-h3: clamp(1.2rem, 1.08rem + 0.55vw, 1.55rem);
   --fs-lead: clamp(1.05rem, 0.99rem + 0.3vw, 1.25rem);
   --fs-body: clamp(1rem, 0.97rem + 0.12vw, 1.0625rem);
@@ -43,17 +55,17 @@
   --fs-micro: 0.75rem;
 
   /* Space */
-  --gutter: clamp(20px, 5vw, 64px);
+  --gutter: clamp(22px, 5vw, 72px);
   --container: 1240px;
   --measure: 38rem;
-  --section-y: clamp(104px, 13vw, 200px);
+  --section-y: clamp(64px, 8vw, 112px);
 
   /* Shape & depth */
   --radius-s: 6px;
-  --radius-m: 14px;
-  --radius-l: 28px;
+  --radius-m: 8px;
+  --radius-l: 12px;
   --shadow-card:
-    0 1px 1px rgb(58 45 33 / 0.04), 0 8px 24px -8px rgb(58 45 33 / 0.12), 0 30px 60px -30px rgb(58 45 33 / 0.18);
+    0 1px 1px rgb(48 68 47 / 0.04), 0 8px 24px -8px rgb(48 68 47 / 0.12), 0 30px 60px -30px rgb(48 68 47 / 0.18);
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -62,7 +74,7 @@
   --dur-2: 600ms;
   --dur-3: 1100ms;
 
-  --header-h: 68px;
+  --header-h: 78px;
 }
 
 /* ── Reset ─────────────────────────────────────────────────── */
@@ -153,7 +165,7 @@ a {
 h1,
 h2,
 h3 {
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: -0.035em;
   line-height: 1.22;
   text-wrap: balance;
@@ -215,24 +227,15 @@ dd {
   transform: none;
 }
 
-/* Small uppercase label above section titles */
+/* Context labels for supporting article pages */
 .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   font-size: var(--fs-micro);
   font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  letter-spacing: 0.03em;
   color: var(--ink-3);
-}
-
-.eyebrow::before {
-  content: '';
-  width: 18px;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.6;
 }
 
 /* Korean labels read better without wide Latin tracking */
@@ -284,7 +287,7 @@ dd {
 
 /* Buttons */
 .btn {
-  --btn-bg: var(--ink);
+  --btn-bg: var(--forest);
   --btn-fg: var(--ink-inverse);
   position: relative;
   display: inline-flex;
@@ -293,7 +296,7 @@ dd {
   gap: 10px;
   min-height: 52px;
   padding: 0 26px;
-  border-radius: 999px;
+  border-radius: 4px;
   background: var(--btn-bg);
   color: var(--btn-fg);
   font-size: 0.9375rem;
@@ -309,10 +312,16 @@ dd {
 }
 
 .btn:hover {
-  box-shadow: 0 10px 24px -12px rgb(43 34 28 / 0.55);
+  --btn-bg: #344b3c;
 }
 
-.btn:active {
+@media (hover: hover) and (pointer: fine) {
+  .btn:not(:disabled):hover {
+    transform: translateY(-1px);
+  }
+}
+
+.btn:not(:disabled):active {
   transform: scale(0.98);
 }
 
@@ -344,7 +353,7 @@ dd {
   font-weight: 500;
   text-decoration: none;
   background: linear-gradient(currentColor, currentColor) 0 calc(100% - 10px) / 100% 1px no-repeat;
-  transition: background-size var(--dur-2) var(--ease-out);
+  transition: background-size 180ms var(--ease-out);
 }
 
 .link-arrow:hover {
@@ -360,22 +369,49 @@ dd {
   transform: translateX(3px);
 }
 
-/* ── Reveal on scroll (progressive: only hidden once JS is running) ── */
-.js [data-reveal] {
-  opacity: 0;
-  transform: translate3d(0, 18px, 0);
-  transition:
-    opacity var(--dur-3) var(--ease-soft),
-    transform var(--dur-3) var(--ease-soft);
-  transition-delay: calc(var(--reveal-delay, 0) * 1ms);
+.no-script-nav { display: flex; flex-wrap: wrap; gap: 12px 24px; padding-block: 16px; font-size: 14px; border-bottom: 1px solid var(--line); }
+.no-script-nav a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Enter once, without hiding any server-rendered content beforehand. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion-state='entering'] {
+    animation: page-enter 560ms cubic-bezier(.22, 1, .36, 1) both;
+    animation-delay: var(--motion-delay, 0ms);
+  }
+
+  [data-reveal='visual'][data-motion-state='entering'] {
+    --enter-y: 14px;
+    --enter-opacity: .8;
+    animation-duration: 680ms;
+  }
+
+  [data-reveal='cue'][data-motion-state='entering'] {
+    --enter-y: 6px;
+    --enter-opacity: .9;
+    animation-duration: 420ms;
+  }
 }
 
-.js [data-reveal='fade'] {
-  transform: none;
+@keyframes page-enter {
+  from {
+    opacity: var(--enter-opacity, .72);
+    transform: translate3d(0, var(--enter-y, 10px), 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
-.js [data-reveal].is-in {
-  opacity: 1;
+/* Keyboard navigation never waits for decorative transitions. */
+[data-keyboard-motion='off'] :is(.btn, .link-arrow, .link-arrow svg),
+[data-keyboard-motion='off'] #site-menu,
+[data-keyboard-motion='off'] #site-menu a {
+  animation: none !important;
+  transition: none !important;
+}
+
+.btn:focus-visible {
   transform: none;
 }
 
@@ -390,8 +426,13 @@ dd {
     scroll-behavior: auto !important;
   }
 
-  .js [data-reveal] {
-    opacity: 1;
+  [data-motion-state='entering'] {
+    animation: none !important;
+  }
+
+  .btn:not(:disabled):hover,
+  .btn:not(:disabled):active,
+  .link-arrow:hover svg {
     transform: none;
   }
 }

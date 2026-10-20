@@ -8,29 +8,25 @@ import { CHANNELS } from '@/lib/facts';
 import styles from './SiteHeader.module.css';
 
 const NAV = [
-  { href: '/#story', label: '이야기' },
-  { href: '/#product', label: '제품' },
-  { href: '/#faq', label: '공식 정보' },
-  { href: '/journal', label: '자료실' },
+  { href: '/#product', label: '레터 올인원' },
+  { href: '/#story', label: '브랜드 이야기' },
+  { href: '/#faq', label: '궁금한 이야기' },
+  { href: '/journal', label: '저널' },
 ];
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const menuBtn = useRef<HTMLButtonElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const sheetRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let lastY = window.scrollY;
     let ticking = false;
     const update = () => {
       const y = window.scrollY;
       setScrolled(y > 8);
-      // Step aside while reading downward; come back on any upward scroll.
-      setHidden(y > 480 && y > lastY + 2);
-      if (y < lastY - 2 || y < 480) setHidden(false);
-      lastY = y;
       ticking = false;
     };
     const onScroll = () => {
@@ -50,15 +46,37 @@ export function SiteHeader() {
     if (!open) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    const background = Array.from(document.querySelectorAll<HTMLElement>('main, footer'));
+    const previousInert = background.map((element) => element.inert);
+    background.forEach((element) => { element.inert = true; });
+    const desktop = window.matchMedia('(min-width: 900px)');
+    const onResize = () => { if (desktop.matches) setOpen(false); };
+    desktop.addEventListener('change', onResize);
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setOpen(false);
         menuBtn.current?.focus();
       }
+      if (e.key === 'Tab') {
+        const links = [headerRef.current, sheetRef.current].flatMap((root) =>
+          Array.from(root?.querySelectorAll<HTMLElement>('a[href], button') ?? [])
+        ).filter((element) => element.getClientRects().length > 0);
+        const first = links[0];
+        const last = links[links.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = prev;
+      background.forEach((element, index) => { element.inert = previousInert[index]; });
+      desktop.removeEventListener('change', onResize);
       window.removeEventListener('keydown', onKey);
     };
   }, [open]);
@@ -68,12 +86,12 @@ export function SiteHeader() {
   return (
     <>
       <header
+        ref={headerRef}
         className={styles.header}
         data-scrolled={scrolled || open || undefined}
-        data-hidden={(hidden && !open) || undefined}
       >
         <div className={`container ${styles.bar}`}>
-          <Link href="/" className={styles.brand} aria-label="DEAR PAPA 디어파파 홈">
+          <Link href="/#main" className={styles.brand} aria-label="DEAR PAPA 디어파파 홈" onClick={close}>
             <Logo className={styles.logo} />
           </Link>
 
@@ -85,30 +103,25 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          <div className={styles.actions}>
-            <a href="/#letter" className={styles.cta}>
-              편지 쓰기
-            </a>
-            <button
-              ref={menuBtn}
-              type="button"
-              className={styles.menuBtn}
-              aria-expanded={open}
-              aria-controls="site-menu"
-              onClick={() => setOpen((v) => !v)}
-            >
-              <span className="sr-only">{open ? '메뉴 닫기' : '메뉴 열기'}</span>
-              <span className={styles.burger} data-open={open || undefined} aria-hidden="true">
-                <span />
-                <span />
-              </span>
-            </button>
-          </div>
+          <button
+            ref={menuBtn}
+            type="button"
+            className={styles.menuBtn}
+            aria-expanded={open}
+            aria-controls="site-menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span className="sr-only">{open ? '메뉴 닫기' : '메뉴 열기'}</span>
+            <span className={styles.burger} data-open={open || undefined} aria-hidden="true">
+              <span />
+              <span />
+            </span>
+          </button>
         </div>
       </header>
 
       {/* Outside <header>: its backdrop-filter/transform would otherwise trap this fixed sheet. */}
-      <div id="site-menu" className={styles.sheet} data-open={open || undefined} hidden={!open}>
+      <div ref={sheetRef} id="site-menu" className={styles.sheet} data-open={open || undefined} hidden={!open}>
         <nav className={`container ${styles.sheetNav}`} aria-label="전체 메뉴">
           <a href="/#letter" onClick={close} style={{ ['--i' as string]: 0 }}>
             편지 쓰기

@@ -5,9 +5,10 @@
   "description": "DEAR PAPA(디어파파) 공식 사이트 — 아빠의 매일에, 딸의 마음을.",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && npm run verify:preservation",
     "start": "npx serve out",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "verify:preservation": "node scripts/verify-preservation.mjs"
   },
   "engines": {
     "node": ">=20.9"

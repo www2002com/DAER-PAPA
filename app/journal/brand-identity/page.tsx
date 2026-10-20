@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/ArticleLayout';
-import { JsonLd } from '@/components/JsonLd';
 import { Logo } from '@/components/Logo';
-import { pageMetadata } from '@/lib/seo';
+import { preservedMetadata } from '@/lib/preserved-metadata';
 import { JOURNAL_SITE_SUFFIX, dotDate, getJournalEntry } from '@/lib/journal';
 import styles from '../journal.module.css';
 
@@ -10,69 +9,12 @@ import styles from '../journal.module.css';
 
 const entry = getJournalEntry('brand-identity');
 
-export const metadata = pageMetadata({
-  title: entry.title + JOURNAL_SITE_SUFFIX,
-  description: entry.summary,
-  path: entry.href,
-  ogType: 'article',
-  ogTitle: entry.title,
-});
+export const metadata = preservedMetadata('/journal/brand-identity');
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Article',
-      headline: '디어파파가 전하고 싶은 마음',
-      mainEntityOfPage: 'https://dearpapa.kr/journal/brand-identity',
-      datePublished: '2026-10-11',
-      dateModified: '2026-10-19',
-      author: {
-        '@type': 'Organization',
-        name: 'DEAR PAPA',
-        url: 'https://dearpapa.kr/',
-      },
-      publisher: {
-        '@type': 'Organization',
-        name: 'DEAR PAPA',
-        url: 'https://dearpapa.kr/',
-      },
-      '@id': 'https://dearpapa.kr/journal/brand-identity',
-      url: 'https://dearpapa.kr/journal/brand-identity',
-      inLanguage: 'ko-KR',
-      description:
-        'DEAR PAPA의 공식 표기와 브랜드 방향, 현재 준비 상황을 소개합니다. 아빠의 매일에 딸의 마음이 남는 선물을 준비합니다.',
-    },
-    {
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: '디어파파',
-          item: 'https://dearpapa.kr/',
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: '브랜드 자료실',
-          item: 'https://dearpapa.kr/journal',
-        },
-        {
-          '@type': 'ListItem',
-          position: 3,
-          name: '디어파파가 전하고 싶은 마음',
-          item: 'https://dearpapa.kr/journal/brand-identity',
-        },
-      ],
-    },
-  ],
-};
 
 export default function BrandIdentityPage() {
   return (
     <>
-      <JsonLd data={jsonLd} />
       <ArticleLayout
         crumbs={[{ href: '/journal', label: '브랜드 자료실' }]}
         eyebrow={entry.category}

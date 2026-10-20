@@ -23,12 +23,12 @@
   container-type: inline-size;
   margin: 0;
   overflow: hidden;
-  border-radius: 0.8cqw;
-  background-color: #fcfaf6;
+  border-radius: 0.35cqw;
+  background-color: var(--card-paper);
   /* Fine paper grain */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .28 0 0 0 0 .2 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   box-shadow: var(--shadow-card);
-  color: #2b221c;
+  color: var(--card-ink);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   font-feature-settings: normal;
@@ -38,7 +38,7 @@
 .frame {
   position: absolute;
   inset: var(--frame);
-  border: max(1px, 0.19cqw) solid #e5d6c9;
+  border: max(1px, 0.19cqw) solid var(--card-frame);
   pointer-events: none;
 }
 
@@ -48,7 +48,7 @@
   top: var(--head-top);
   font-size: var(--head-fs);
   line-height: 1;
-  color: #6b5a4d;
+  color: var(--card-soft);
   white-space: nowrap;
 }
 
@@ -72,7 +72,7 @@
 }
 
 .body[data-placeholder] {
-  color: var(--placeholder);
+  color: #81917e;
 }
 
 .body[data-over] {
@@ -80,7 +80,7 @@
   mask-image: linear-gradient(to bottom, #000 82%, transparent);
 }
 
-/* Each new character inks in: soft rose, slightly blurred, then dries to brown. */
+/* Fresh ink settles from a soft sage to the same forest tone as the packaging. */
 .ch {
   animation: ink 900ms var(--ease-soft) both;
 }
@@ -89,7 +89,7 @@
   0% {
     opacity: 0;
     filter: blur(0.35cqw);
-    color: #c79b8b;
+    color: #a5b39e;
   }
   45% {
     opacity: 1;
@@ -108,7 +108,7 @@
   margin-left: 0.04em;
   vertical-align: -0.12em;
   border-radius: 2px;
-  background: #b08474;
+  background: var(--card-logo);
   animation: blink 1.1s steps(1) infinite;
 }
 
@@ -124,7 +124,7 @@
   top: var(--from-top);
   font-size: var(--from-fs);
   line-height: 1;
-  color: #6b5a4d;
+  color: var(--card-soft);
   white-space: pre;
 }
 
@@ -142,23 +142,23 @@
 .logo {
   width: var(--logo-w);
   height: auto;
-  color: #3a2d21;
+  color: var(--card-logo);
 }
 
 .date {
   font-size: var(--date-fs);
   line-height: 1;
-  color: #6b5a4d;
+  color: var(--card-soft);
   font-variant-numeric: tabular-nums;
 }
 
-/* Back of the card: the seal side. */
+/* Sage reverse with the same monogram and ink as the unit carton. */
 .back {
   display: grid;
   place-items: center;
   align-content: center;
   gap: 4cqw;
-  background-color: #f3ebdf;
+  background-color: var(--card-back);
   transform: rotateY(180deg);
 }
 
@@ -167,20 +167,18 @@
   place-items: center;
   width: 30cqw;
   aspect-ratio: 1;
-  border-radius: 50%;
-  background: #e9d8cc;
-  color: #3a2d21;
+  color: var(--card-logo);
 }
 
 .mark {
-  width: 9cqw;
+  width: 13cqw;
   height: auto;
 }
 
 .note {
   font-size: 7cqw;
   line-height: 1.2;
-  color: #2b221c;
+  color: var(--card-ink);
 }
 
 .backFoot {
@@ -188,7 +186,7 @@
   bottom: 9cqw;
   font-size: 2.6cqw;
   letter-spacing: 0.02em;
-  color: #6b5a4d;
+  color: var(--card-soft);
 }
 
 @media (prefers-reduced-motion: reduce) {

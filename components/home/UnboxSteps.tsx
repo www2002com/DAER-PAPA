@@ -12,32 +12,44 @@ const STEPS = [
 // "상자를 열면 편지 카드, 보틀, 사용 안내 순서" — an exploded view that lifts one layer at a time.
 export function UnboxSteps() {
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [automatic, setAutomatic] = useState(true);
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (!('IntersectionObserver' in window)) {
+      setVisible(true);
+      return;
+    }
     const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.4 });
     io.observe(el);
     return () => io.disconnect();
   }, []);
 
   useEffect(() => {
-    if (!visible || paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const t = window.setInterval(() => setActive((a) => (a + 1) % STEPS.length), 2800);
-    return () => clearInterval(t);
-  }, [visible, paused]);
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const stopIfReduced = () => { if (media.matches) setAutomatic(false); };
+    stopIfReduced();
+    media.addEventListener('change', stopIfReduced);
+    return () => media.removeEventListener('change', stopIfReduced);
+  }, []);
+
+  useEffect(() => {
+    if (!visible || !automatic || active === STEPS.length - 1 ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // Explain the three layers once, then leave the visitor in control.
+    const timer = window.setTimeout(() => setActive((step) => Math.min(step + 1, STEPS.length - 1)), 1500);
+    return () => clearTimeout(timer);
+  }, [visible, automatic, active]);
 
   return (
     <div
       ref={ref}
       className={styles.unbox}
-      onPointerEnter={() => setPaused(true)}
-      onPointerLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
+      onPointerDown={() => setAutomatic(false)}
+      onFocus={() => setAutomatic(false)}
     >
       <div className={styles.iso} aria-hidden="true">
         <div className={styles.plane} data-active={STEPS[active].id}>
@@ -61,7 +73,7 @@ export function UnboxSteps() {
       <ol className={styles.unboxSteps}>
         {STEPS.map((s, i) => (
           <li key={s.id}>
-            <button type="button" aria-pressed={active === i} onClick={() => setActive(i)}>
+            <button type="button" aria-pressed={active === i} onClick={() => { setAutomatic(false); setActive(i); }}>
               <span className={styles.unboxNum}>{String(i + 1).padStart(2, '0')}</span>
               <span>{s.label}</span>
             </button>

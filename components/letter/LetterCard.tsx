@@ -1,5 +1,5 @@
 import { Logo, LogoMark } from '@/components/Logo';
-import { CARD, TIERS, type Layout } from './card';
+import { CARD, TIERS, INK, INK_SOFT, PAPER, FRAME, LOGO_INK, BACK_PAPER, type Layout } from './card';
 import styles from './LetterCard.module.css';
 
 type Props = {
@@ -22,6 +22,12 @@ type Props = {
 
 // Card geometry → CSS custom properties (percentages of the card box).
 const geometry = {
+  '--card-paper': PAPER,
+  '--card-ink': INK,
+  '--card-soft': INK_SOFT,
+  '--card-frame': FRAME,
+  '--card-logo': LOGO_INK,
+  '--card-back': BACK_PAPER,
   '--pad-x': `${CARD.padX * 100}%`,
   '--frame': `${CARD.frame * 100}cqw`,
   '--head-top': `${CARD.head.top * 100}%`,

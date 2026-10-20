@@ -7,28 +7,24 @@ export function LetterSection() {
     <section id="letter" className={styles.section} aria-labelledby="letter-title">
       <div className="container">
         <header className={styles.head}>
-          <p className="eyebrow" data-reveal>
-            The Letter
-          </p>
-          <h2 id="letter-title" className={styles.title} data-reveal style={{ ['--reveal-delay' as string]: 80 }}>
-            말로 다 못한 마음,
-            <br />한 줄에 담아.
+          <h2 id="letter-title" className={styles.title} data-reveal>
+            말로 다 못한 마음,<br />여기서 시작해 볼까요?
           </h2>
-          <p className={styles.lead} data-reveal style={{ ['--reveal-delay' as string]: 160 }}>
-            쓰는 대로 카드에 손글씨 스타일로 담겨요. 짧은 한마디면 충분합니다.
+          <p className={styles.lead} data-reveal data-reveal-delay="60">
+            짧은 한마디면 충분해요. 쓰는 대로 아빠에게 건넬 카드가 됩니다.
           </p>
         </header>
 
         <Composer />
 
         <div className={styles.notes}>
-          <p>
+          <p data-reveal>
             <span className="tag" data-tone="now">
               지금 가능
             </span>
             {LETTER.feature}
           </p>
-          <p>
+          <p data-reveal data-reveal-delay="50">
             <span className="tag" data-tone="later">
               출시 후
             </span>

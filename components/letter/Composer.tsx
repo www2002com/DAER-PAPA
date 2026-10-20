@@ -204,6 +204,17 @@ export function Composer() {
     if (end) el.setSelectionRange(el.value.length, el.value.length);
   };
 
+  function startWriting() {
+    setView('write');
+    window.requestAnimationFrame(() => {
+      textareaRef.current?.scrollIntoView({
+        behavior: prefersReduced() ? 'instant' : 'smooth',
+        block: 'center',
+      });
+      focusText();
+    });
+  }
+
   function guard(): boolean {
     if (!text.trim()) {
       setWarn('empty');
@@ -443,9 +454,16 @@ export function Composer() {
           : '쓰는 동안 이 기기에 자동 저장돼요';
 
   return (
+    <>
+    <div className={styles.entry} data-reveal="cue" data-reveal-delay="100">
+      <button type="button" className="btn" onClick={startWriting} aria-controls={`${uid}-p-write`}>
+        아빠에게 편지 쓰기
+      </button>
+      <p>편지는 지금 쓸 수 있어요. 가입 없이, 이 기기에만.</p>
+    </div>
     <div className={styles.composer} data-view={view}>
       {/* Card stage */}
-      <div className={styles.stageCol}>
+      <div className={styles.stageCol} data-reveal="visual">
         <div className={styles.stageSticky}>
           <div
             ref={stageRef}
@@ -485,7 +503,7 @@ export function Composer() {
       </div>
 
       {/* Controls */}
-      <div className={styles.panel}>
+      <div className={styles.panel} data-reveal>
         <div className={styles.switch} role="tablist" aria-label="편지 쓰기와 보관함">
           <button
             type="button"
@@ -754,5 +772,6 @@ export function Composer() {
         )}
       </div>
     </div>
+    </>
   );
 }

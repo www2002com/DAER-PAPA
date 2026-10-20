@@ -1,0 +1,16 @@
+# These published files must keep the exact production bytes on every platform.
+*.pdf binary
+*.zip binary
+*.png binary
+*.webp binary
+public/robots.txt -text
+public/sitemap.xml -text
+public/llms.txt -text
+public/llm.md -text
+public/facts.json -text
+public/schema.jsonld -text
+public/answer.json -text
+public/citation.txt -text
+public/9b076fa14942e414697fb1378ad6107e.txt -text
+components/home/Story.tsx text eol=lf
+components/home/Story.module.css text eol=lf

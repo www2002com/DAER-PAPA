@@ -3,8 +3,8 @@
 // body are protected separately in preserved-site.json; see PRESERVATION.md.
 
 export const SITE_URL = 'https://dearpapa.kr';
-export const FACTS_UPDATED = '2026-10-19';
-export const FACTS_UPDATED_KO = '2026년 10월 19일';
+export const FACTS_UPDATED = '2026-10-21';
+export const FACTS_UPDATED_KO = '2026년 10월 21일';
 
 export const BRAND = {
   name: 'DEAR PAPA',
@@ -74,7 +74,7 @@ export const LETTER = {
 } as const;
 
 export const NOT_AFFILIATED =
-  'DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 같은 이름의 의류 브랜드, 영화·영화제 작품, 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다. 제과 브랜드 비어드파파, 해외 사이트 dearpapa.in·dearpapa.de, Dear Papa Premium Decor, 소설 《Dear Papa》, 뮤지컬 〈디어 파파, 마이 파이어맨〉과도 관련이 없습니다. 국내 브랜드 디어도어, 디퍼앤디퍼, 아이디어스의 젠틀파파와도 관련이 없습니다.';
+  'DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 같은 이름의 의류 브랜드, 영화·영화제 작품, 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다. 제과 브랜드 비어드파파, 해외 사이트 dearpapa.in·dearpapa.de, 인스타그램 계정 @dearpapa.co, Dear Papa Premium Decor, 소설 《Dear Papa》, 뮤지컬 〈디어 파파, 마이 파이어맨〉과도 관련이 없습니다. 국내 브랜드 디어도어, 디퍼앤디퍼, 아이디어스의 젠틀파파와도 관련이 없습니다.';
 
 // Short list for scannable display; the full sentence above stays the citable text.
 export const NOT_AFFILIATED_LIST = [
@@ -84,6 +84,7 @@ export const NOT_AFFILIATED_LIST = [
   '국내 브랜드 파파레서피',
   '제과 브랜드 비어드파파',
   '해외 사이트 dearpapa.in·dearpapa.de',
+  '인스타그램 계정 @dearpapa.co',
   'Dear Papa Premium Decor',
   '소설 《Dear Papa》',
   '뮤지컬 〈디어 파파, 마이 파이어맨〉',

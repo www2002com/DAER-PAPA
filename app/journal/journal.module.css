@@ -1,0 +1,143 @@
+/* 브랜드 자료실 — index rows and notes.
+   Selectors are doubled (.index .x) so they win over the shared .prose element styles. */
+
+.index .list {
+  display: block;
+  border-top: 1px solid var(--line);
+}
+
+.index .item {
+  padding-left: 0;
+}
+
+.index .item::before {
+  content: none;
+}
+
+.index .row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 24px;
+  padding: 30px 0 32px;
+  border-bottom: 1px solid var(--line);
+}
+
+.index .category {
+  display: block;
+  margin-bottom: 12px;
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+
+.index .title {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: clamp(1.4rem, 1.2rem + 0.9vw, 1.9rem);
+  font-weight: 300;
+  line-height: 1.3;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+}
+
+.index .row .title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--dur-1) var(--ease-out);
+}
+
+/* Whole row is the hit area; the accessible name stays the title. */
+.index .row .title a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-s);
+}
+
+.index .row .title a:focus-visible {
+  outline: none;
+}
+
+.index .row .title a:focus-visible::after {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.index .summary {
+  margin-top: 12px;
+  color: var(--ink-2);
+}
+
+.index .date {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.index .arrow {
+  flex: none;
+  color: var(--ink-3);
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    color var(--dur-1) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .index .row:hover .arrow {
+    transform: translateX(6px);
+    color: var(--ink);
+  }
+
+  .index .row:hover .title a {
+    color: var(--ink-2);
+  }
+}
+
+.index .row:focus-within .arrow {
+  transform: translateX(6px);
+  color: var(--ink);
+}
+
+/* Notes after the list (표기 기준 / 기록 원칙) */
+.index .note {
+  margin-top: clamp(48px, 7vw, 80px);
+  padding: 28px clamp(20px, 4vw, 32px) 30px;
+  border-radius: var(--radius-m);
+  background: var(--ivory);
+}
+
+.index .note + .note {
+  margin-top: 16px;
+}
+
+.index .note .noteTitle {
+  margin: 0 0 12px;
+  padding: 0;
+  border: 0;
+  font-size: var(--fs-h3);
+  color: var(--ink);
+}
+
+.index .note .noteBody + .noteBody {
+  margin-top: 14px;
+}
+
+/* Logo figure inside /journal/brand-identity */
+.logo {
+  width: 10rem;
+  max-width: 100%;
+  color: var(--logo);
+}
+
+@media (max-width: 520px) {
+  .index .row {
+    gap: 16px;
+    padding: 26px 0 28px;
+  }
+}

@@ -1,0 +1,397 @@
+/* ─────────────────────────────────────────────────────────────
+   DEAR PAPA — design tokens & base
+   Warm paper base, deep-brown ink, one quiet rose accent.
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --paper: #f8f4ee;
+  --ivory: #f1eadf;
+  --sand: #e6dac8;
+  --card: #fcfaf6;
+  --night: #2a221c;
+
+  /* Ink */
+  --ink: #2b221c;
+  --ink-2: #594b40;
+  --ink-3: #75675b;
+  --ink-inverse: #f4ede3;
+  --logo: #3a2d21;
+
+  /* Lines & accent */
+  --line: #dfd4c5;
+  --line-strong: #c9baa7;
+  --rose: #b08474;
+  --rose-soft: #eddcd2;
+  --rose-ink: #8e5f50; /* rose for small text (4.9:1 on paper) */
+  --placeholder: #958272; /* large handwriting placeholders (3.3:1) */
+
+  /* Type */
+  --font-sans:
+    'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo',
+    'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  --font-pen: var(--font-nanum-pen), 'Nanum Pen Script', cursive;
+
+  --fs-display: clamp(2.6rem, 1.55rem + 4.9vw, 6.25rem);
+  --fs-h2: clamp(1.85rem, 1.35rem + 2.3vw, 3.4rem);
+  --fs-h3: clamp(1.2rem, 1.08rem + 0.55vw, 1.55rem);
+  --fs-lead: clamp(1.05rem, 0.99rem + 0.3vw, 1.25rem);
+  --fs-body: clamp(1rem, 0.97rem + 0.12vw, 1.0625rem);
+  --fs-small: 0.875rem;
+  --fs-micro: 0.75rem;
+
+  /* Space */
+  --gutter: clamp(20px, 5vw, 64px);
+  --container: 1240px;
+  --measure: 38rem;
+  --section-y: clamp(104px, 13vw, 200px);
+
+  /* Shape & depth */
+  --radius-s: 6px;
+  --radius-m: 14px;
+  --radius-l: 28px;
+  --shadow-card:
+    0 1px 1px rgb(58 45 33 / 0.04), 0 8px 24px -8px rgb(58 45 33 / 0.12), 0 30px 60px -30px rgb(58 45 33 / 0.18);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-soft: cubic-bezier(0.33, 0, 0.15, 1);
+  --dur-1: 240ms;
+  --dur-2: 600ms;
+  --dur-3: 1100ms;
+
+  --header-h: 68px;
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--paper);
+  scroll-padding-top: calc(var(--header-h) + 12px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.75;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'ss06';
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+ol {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 300;
+  letter-spacing: -0.035em;
+  line-height: 1.22;
+  text-wrap: balance;
+}
+
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--rose-soft);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Utilities ─────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  left: 12px;
+  top: 12px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--ink-inverse);
+  font-size: var(--fs-small);
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform var(--dur-1) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* Small uppercase label above section titles */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+/* Korean labels read better without wide Latin tracking */
+.eyebrow--ko {
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+}
+
+/* Status chip: 지금 가능 / 출시 후 / 미정 / 디자인 시안 */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 24px;
+  padding: 2px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.tag[data-tone='now'] {
+  border-color: transparent;
+  background: var(--ink);
+  color: var(--ink-inverse);
+}
+
+.tag[data-tone='later'] {
+  border-style: dashed;
+}
+
+.tag[data-tone='soft'] {
+  border-color: transparent;
+  background: var(--rose-soft);
+  color: var(--ink);
+}
+
+/* Pen font helper */
+.pen {
+  font-family: var(--font-pen);
+  font-weight: 400;
+  letter-spacing: 0;
+  word-break: keep-all;
+}
+
+/* Buttons */
+.btn {
+  --btn-bg: var(--ink);
+  --btn-fg: var(--ink-inverse);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 26px;
+  border-radius: 999px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    transform var(--dur-1) var(--ease-out),
+    background-color var(--dur-1) var(--ease-out),
+    box-shadow var(--dur-1) var(--ease-out),
+    opacity var(--dur-1);
+}
+
+.btn:hover {
+  box-shadow: 0 10px 24px -12px rgb(43 34 28 / 0.55);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn[disabled],
+.btn[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+
+.btn--ghost:hover {
+  --btn-bg: rgb(255 255 255 / 0.5);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+/* Underlined text link with arrow */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) 0 calc(100% - 10px) / 100% 1px no-repeat;
+  transition: background-size var(--dur-2) var(--ease-out);
+}
+
+.link-arrow:hover {
+  background-size: 0% 1px;
+  background-position: 100% calc(100% - 10px);
+}
+
+.link-arrow svg {
+  transition: transform var(--dur-1) var(--ease-out);
+}
+
+.link-arrow:hover svg {
+  transform: translateX(3px);
+}
+
+/* ── Reveal on scroll (progressive: only hidden once JS is running) ── */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity var(--dur-3) var(--ease-soft),
+    transform var(--dur-3) var(--ease-soft);
+  transition-delay: calc(var(--reveal-delay, 0) * 1ms);
+}
+
+.js [data-reveal='fade'] {
+  transform: none;
+}
+
+.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

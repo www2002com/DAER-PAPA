@@ -1,15 +1,6 @@
 {
-  "cleanUrls": true,
+  "framework": "nextjs",
   "headers": [
-    {
-      "source": "/assets/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
     {
       "source": "/llm.md",
       "headers": [

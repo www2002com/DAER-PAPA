@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FooterLogo } from './FooterLogo';
-import { BRAND, CHANNELS, CONTACT_EMAIL, FACTS_UPDATED, FACTS_UPDATED_KO, UNDECIDED } from '@/lib/facts';
+import { ContactEmail } from './ContactEmail';
+import { BRAND, CHANNELS, FACTS_UPDATED, FACTS_UPDATED_KO, UNDECIDED } from '@/lib/facts';
 import styles from './SiteFooter.module.css';
 
 const EXPLORE = [
@@ -90,9 +91,7 @@ export function SiteFooter() {
               ))}
             </ul>
             <h2 className={`${styles.colTitle} ${styles.spaced}`}>문의</h2>
-            <a className={styles.mail} href={`mailto:${CONTACT_EMAIL}`}>
-              {CONTACT_EMAIL}
-            </a>
+            <ContactEmail />
           </div>
         </div>
 

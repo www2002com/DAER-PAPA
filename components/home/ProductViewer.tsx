@@ -33,7 +33,7 @@ export function ProductViewer() {
   const current = VIEWS.find((v) => v.id === view)!;
 
   return (
-    <div className={styles.viewer} data-reveal="visual">
+    <div className={styles.viewer} data-reveal="from-left">
       <div className={styles.stage} id={`${uid}-panel`} role="tabpanel" aria-labelledby={`${uid}-${view}`}>
         {VIEWS.map((v) => (
           <div

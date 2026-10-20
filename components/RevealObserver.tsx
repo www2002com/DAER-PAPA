@@ -11,11 +11,17 @@ export function RevealObserver() {
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     // Enhance the existing Story DOM without changing its protected source.
-    document.querySelectorAll<HTMLElement>(
-      '#story .container > div:first-child > *, #story .container > div:last-child > div > p, #story .container a',
-    ).forEach((element, index) => {
-      element.dataset.reveal = element.tagName === 'A' ? 'cue' : 'text';
-      element.dataset.revealDelay = String((index % 3) * 50);
+    const storyIntro = document.getElementById('story-title')?.parentElement;
+    const storyCopy = storyIntro?.nextElementSibling;
+    if (storyIntro) storyIntro.dataset.reveal = 'from-left';
+    const storyBody = storyCopy?.firstElementChild;
+    if (storyBody instanceof HTMLElement) {
+      storyBody.dataset.reveal = 'from-right';
+      storyBody.dataset.revealDelay = '60';
+    }
+    storyCopy?.querySelectorAll<HTMLAnchorElement>('a').forEach((element) => {
+      element.dataset.reveal = 'soft-cue';
+      element.dataset.revealDelay = '150';
     });
 
     const elements = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));

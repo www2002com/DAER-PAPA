@@ -390,12 +390,34 @@ dd {
     --enter-opacity: .9;
     animation-duration: 420ms;
   }
+
+  /* Two paired scenes; narrow layouts keep the quiet vertical entrance. */
+  :is([data-reveal='from-left'], [data-reveal='from-right'])[data-motion-state='entering'] {
+    --enter-x: 0px;
+    --enter-y: 10px;
+    --enter-opacity: .82;
+    animation-duration: 600ms;
+  }
+
+  [data-reveal='soft-cue'][data-motion-state='entering'] {
+    --enter-y: 0px;
+    --enter-opacity: .8;
+    animation-duration: 420ms;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 900px) {
+  :is([data-reveal='from-left'], [data-reveal='from-right'])[data-motion-state='entering'] {
+    --enter-y: 0px;
+  }
+  [data-reveal='from-left'][data-motion-state='entering'] { --enter-x: -32px; }
+  [data-reveal='from-right'][data-motion-state='entering'] { --enter-x: 32px; }
 }
 
 @keyframes page-enter {
   from {
     opacity: var(--enter-opacity, .72);
-    transform: translate3d(0, var(--enter-y, 10px), 0);
+    transform: translate3d(var(--enter-x, 0px), var(--enter-y, 10px), 0);
   }
   to {
     opacity: 1;

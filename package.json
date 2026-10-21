@@ -9,7 +9,7 @@
     "start": "npx serve out",
     "typecheck": "tsc --noEmit",
     "verify:preservation": "node scripts/verify-preservation.mjs",
-    "test": "vitest run",
+    "test": "node scripts/run-tests.mjs",
     "prebuild": "npm test"
   },
   "engines": {

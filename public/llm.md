@@ -61,6 +61,9 @@ DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 
 현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.
 전성분, 책임판매업자, 판매처: 출시 전 미정입니다.
 
+Q. 디어파파 선물 세트를 지금 살 수 있나요?
+A. 아니요. 디어파파는 아직 출시 전이며, 지금 판매 중인 선물 세트나 제품은 없습니다. 디어파파는 150ml 올인원 한 가지를 기획하고 만들고 있고, 가격, 전성분, 출시일과 최종 판매 구성은 아직 확정되지 않았습니다. 정확한 정보는 공식 사이트 dearpapa.kr에서만 안내합니다.
+
 ## 이름이 비슷한 브랜드와의 구분
 
 DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 같은 이름의 의류 브랜드, 영화·영화제 작품, 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다. 제과 브랜드 비어드파파, 해외 사이트 dearpapa.in·dearpapa.de, 인스타그램 계정 @dearpapa.co, Dear Papa Premium Decor, 소설 《Dear Papa》, 뮤지컬 〈디어 파파, 마이 파이어맨〉과도 관련이 없습니다. 국내 브랜드 디어도어, 디퍼앤디퍼, 아이디어스의 젠틀파파와도 관련이 없습니다.
@@ -76,6 +79,9 @@ DEAR PAPA began with a one-line letter from a daughter to her dad.
 We are adding a short, heartfelt letter to an everyday skincare product, so that words often left unsaid can be shared along with the gift.
 DEAR PAPA is not affiliated with dearpapa.com.tw, Papa Recipe, Beard Papa, dearpapa.in, dearpapa.de, the Instagram account @dearpapa.co, Dear Papa Premium Decor, the novel Dear Papa, the musical Dear Papa, My Fireman, or any other similarly named brand or work. It is also not affiliated with the Korean brands 디어도어, 디퍼앤디퍼, or 젠틀파파 on idus.
 DEAR PAPA is planning and making a single 150ml all-in-one. Price, full ingredient list, and launch date are not yet confirmed. The full ingredient list will be published after the manufacturer's sample is ready.
+
+Q. Can I buy a DEAR PAPA gift set now?
+A. No. DEAR PAPA has not launched yet, and no gift set or product is on sale. DEAR PAPA is planning and making a single 150ml all-in-one; price, full ingredients, launch date and final retail packaging are not yet confirmed. Official information is published only at dearpapa.kr.
 
 ## 공식 채널
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { LetterCard } from './LetterCard';
 import {
   MAX_CHARS,
@@ -24,6 +24,7 @@ import {
   type Letter,
 } from './storage';
 import { STARTERS } from './starters';
+import { trackAction } from '@/lib/analytics';
 import styles from './Composer.module.css';
 
 type View = 'write' | 'box';
@@ -76,8 +77,8 @@ export function Composer() {
   const [letters, setLetters] = useState<Letter[]>([]);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [focused, setFocused] = useState(false);
-  const [saved, setSaved] = useState<'none' | 'pending' | 'saved' | 'error'>('none');
-  const [warn, setWarn] = useState<'empty' | 'over' | 'storage' | null>(null);
+  const [saved, setSaved] = useState<'none' | 'saved' | 'error'>('none');
+  const [warn, setWarn] = useState<'empty' | 'over' | 'storage' | 'full' | null>(null);
   const [flip, setFlip] = useState(false);
   const [download, setDownload] = useState<Busy>('idle');
   const [canShare, setCanShare] = useState(false);
@@ -89,9 +90,9 @@ export function Composer() {
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const composing = useRef(false);
-  const ready = useRef(false); // draft restored; autosave may run
   const stageRef = useRef<HTMLDivElement>(null);
   const timers = useRef<number[]>([]);
+  const started = useRef(false);
   const { keysFor, reset } = useCharKeys(composing);
 
   const later = useCallback((fn: () => void, ms: number) => {
@@ -118,22 +119,18 @@ export function Composer() {
     } catch {
       setCanShare(false);
     }
-    ready.current = true;
     setMounted(true);
     const t = timers.current;
     return () => t.forEach(clearTimeout);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // ── Autosave (debounced) ────────────────────────────────────
-  useEffect(() => {
-    if (!ready.current) return;
-    setSaved('pending');
-    const id = window.setTimeout(() => {
-      setSaved(saveDraft({ text, from, editingId }) ? 'saved' : 'error');
-    }, 450);
-    return () => clearTimeout(id);
-  }, [text, from, editingId]);
+  // Commit the small local draft before navigation or paint can leave this render.
+  // Wait for restoration so the empty server render never overwrites a saved letter.
+  useLayoutEffect(() => {
+    if (!mounted) return;
+    setSaved(saveDraft({ text, from, editingId }) ? 'saved' : 'error');
+  }, [text, from, editingId, mounted]);
 
   // ── Load the handwriting glyphs this letter needs, then re-measure ──
   useEffect(() => {
@@ -188,7 +185,8 @@ export function Composer() {
   useEffect(() => {
     if (warn === 'over' && !over) setWarn(null);
     if (warn === 'empty' && text.trim()) setWarn(null);
-  }, [over, text, warn]);
+    if (warn === 'full' && letters.length < MAX_LETTERS) setWarn(null);
+  }, [over, text, warn, letters.length]);
 
   // ── Helpers ─────────────────────────────────────────────────
   function showToast(msg: string, action?: Toast['action']) {
@@ -230,13 +228,21 @@ export function Composer() {
   }
 
   // ── Editing ─────────────────────────────────────────────────
+  function markStarted() {
+    if (started.current) return;
+    started.current = true;
+    trackAction('letter_started');
+  }
+
   function onText(e: React.ChangeEvent<HTMLTextAreaElement>) {
     const v = e.target.value;
+    if (v.trim()) markStarted();
     setText(composing.current ? v.replace(/\r/g, '') : cleanText(v));
   }
 
   function insertLine(line: string) {
     if (inserting) return;
+    markStarted();
     const before = text;
     const base = text.replace(/\s+$/, '');
     const prefix = base ? `${base}\n` : '';
@@ -290,6 +296,11 @@ export function Composer() {
   // ── Archive ─────────────────────────────────────────────────
   function keep() {
     if (!guard()) return;
+    const updating = !!editingId && letters.some((l) => l.id === editingId);
+    if (letters.length > MAX_LETTERS || (!updating && letters.length >= MAX_LETTERS)) {
+      setWarn('full');
+      return;
+    }
     const date = todayStamp();
     const t = text.trim();
     const f = from.trim();
@@ -301,10 +312,8 @@ export function Composer() {
     } else {
       const id = Math.max(Date.now(), ...letters.map((l) => l.id + 1));
       next = [{ id, date, text: t, from: f }, ...letters];
-      if (next.length > MAX_LETTERS) note = `보관함에 담았어요. ${MAX_LETTERS}통이 넘어 가장 오래된 편지는 정리했어요.`;
       setEditingId(id);
     }
-    next = next.slice(0, MAX_LETTERS);
     if (!saveLetters(next)) {
       setWarn('storage');
       return;
@@ -356,6 +365,15 @@ export function Composer() {
     later(() => setStagger(false), 1800);
   }
 
+  function switchView(event: KeyboardEvent<HTMLButtonElement>, current: View) {
+    const next = event.key === 'Home' ? 'write' : event.key === 'End' ? 'box'
+      : ['ArrowLeft', 'ArrowRight'].includes(event.key) ? (current === 'write' ? 'box' : 'write') : null;
+    if (!next) return;
+    event.preventDefault();
+    setView(next);
+    document.getElementById(`${uid}-v-${next}`)?.focus();
+  }
+
   // ── Image ───────────────────────────────────────────────────
   async function makeBlob(l: { text: string; from: string; date: string }) {
     const canvas = await renderCard(l);
@@ -386,6 +404,7 @@ export function Composer() {
         return;
       }
       saveBlob(blob, data.date);
+      trackAction('letter_card_exported');
       setDownload('done');
       showToast('카드 이미지를 내 기기에 저장했어요.');
       later(() => setDownload('idle'), 2200);
@@ -438,6 +457,8 @@ export function Composer() {
       ? '아빠에게 전할 말을 한 줄 써 주세요.'
       : warn === 'over'
         ? '카드에 다 담기지 않아요. 문장이나 줄바꿈을 조금 줄여 주세요.'
+        : warn === 'full'
+          ? '보관함이 가득 찼어요. 기존 편지를 이미지로 저장한 뒤 직접 정리하거나, 지금 쓴 편지를 이미지로 저장해 주세요.'
         : warn === 'storage'
           ? '이 브라우저에 저장하지 못했어요. 저장 공간이나 브라우저 설정을 확인해 주세요.'
           : over
@@ -445,12 +466,10 @@ export function Composer() {
             : '';
 
   const savedLabel =
-    saved === 'pending'
-      ? '저장 중…'
-      : saved === 'saved'
+    saved === 'saved'
         ? '이 기기에 자동 저장됨'
         : saved === 'error'
-          ? '자동 저장을 할 수 없어요'
+          ? '자동 저장을 할 수 없어요. 카드 이미지로 저장해 주세요.'
           : '쓰는 동안 이 기기에 자동 저장돼요';
 
   return (
@@ -511,7 +530,9 @@ export function Composer() {
             id={`${uid}-v-write`}
             aria-selected={view === 'write'}
             aria-controls={`${uid}-p-write`}
+            tabIndex={view === 'write' ? 0 : -1}
             onClick={() => setView('write')}
+            onKeyDown={(event) => switchView(event, 'write')}
           >
             편지 쓰기
           </button>
@@ -521,7 +542,9 @@ export function Composer() {
             id={`${uid}-v-box`}
             aria-selected={view === 'box'}
             aria-controls={`${uid}-p-box`}
+            tabIndex={view === 'box' ? 0 : -1}
             onClick={() => setView('box')}
+            onKeyDown={(event) => switchView(event, 'box')}
           >
             보관함
             <span key={bump} className={styles.badge} data-bump={bump > 0 || undefined}>
@@ -616,7 +639,7 @@ export function Composer() {
               spellCheck={false}
             />
             <div className={styles.meta}>
-              <span className={styles.saved} data-state={saved}>
+              <span className={styles.saved} data-state={saved} role="status" aria-live="polite">
                 <span className={styles.savedDot} aria-hidden="true" />
                 {savedLabel}
               </span>
@@ -632,6 +655,7 @@ export function Composer() {
             </div>
             <p id={warnId} className={styles.warn} aria-live="polite">
               {warnText}
+              {warn === 'full' && <button type="button" className={styles.textBtn} onClick={() => setView('box')}>보관함 보기</button>}
             </p>
           </div>
 

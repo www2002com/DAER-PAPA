@@ -10,6 +10,7 @@ export const metadata = preservedMetadata('/journal');
 
 
 export default function JournalPage() {
+  const latest = JOURNAL.reduce((newest, entry) => entry.published > newest.published ? entry : newest);
   return (
     <>
       <ArticleLayout
@@ -24,6 +25,11 @@ export default function JournalPage() {
         }
       >
         <div className={styles.index}>
+          <section className={styles.latest} aria-label="새로 쓴 이야기">
+            <p className={styles.category}>새로 쓴 이야기 · <time dateTime={latest.published}>{dotDate(latest.published)}</time></p>
+            <h2 className={styles.title}><Link href={latest.href}>{latest.title} <span aria-hidden="true">↗</span></Link></h2>
+            <p className={styles.summary}>{latest.summary}</p>
+          </section>
           <ul className={styles.list}>
             {JOURNAL.map((entry) => (
               <li key={entry.slug} className={styles.item}>

@@ -73,6 +73,7 @@ export function SiteFooter() {
                   <a
                     className={styles.socialLink}
                     href={c.href}
+                    data-track-action="social_channel_opened"
                     target="_blank"
                     rel="noopener noreferrer"
                     title={`${c.label} ${c.handle} · 새 탭에서 열기`}
@@ -90,7 +91,7 @@ export function SiteFooter() {
                 </li>
               ))}
             </ul>
-            <h2 className={`${styles.colTitle} ${styles.spaced}`}>문의</h2>
+            <h2 id="contact" className={`${styles.colTitle} ${styles.spaced}`}>문의</h2>
             <ContactEmail />
           </div>
         </div>

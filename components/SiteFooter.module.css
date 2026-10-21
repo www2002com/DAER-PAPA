@@ -120,9 +120,15 @@
   max-width: 26rem;
 }
 
-.contact .mail { min-height: 44px; display: inline-flex; align-items: center; }
+.contact .mail { margin: 0; }
 
-.copyEmail {
+.contactActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.contact .contactAction {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -134,10 +140,14 @@
   background: transparent;
   color: var(--forest);
   font-size: 0.8125rem;
+  line-height: 1.5;
+  text-decoration: none;
   cursor: pointer;
 }
 
-.copyEmail:hover {
+.copyEmail { min-inline-size: 124px; }
+
+.contact .contactAction:hover {
   background: var(--paper);
 }
 

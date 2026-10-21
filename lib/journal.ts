@@ -71,6 +71,15 @@ export const JOURNAL: readonly JournalEntry[] = [
     published: '2026-10-22',
     modified: '2026-10-22',
   },
+  {
+    slug: 'dad-gift-skincare-guide',
+    href: '/journal/dad-gift-skincare-guide',
+    category: '선물 이야기',
+    title: '아빠 선물 화장품, 생신 선물 스킨케어 고르는 기준 7가지',
+    summary: '아빠 선물용 화장품은 아빠의 피부 타입, 향이 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 용량, 전성분, 예산 순서로 고르면 실패가 적습니다.',
+    published: '2026-10-22',
+    modified: '2026-10-22',
+  },
 ];
 
 /** guide-04 meta/og description and lead (longer than the list summary). */
@@ -80,6 +89,10 @@ export const GIFT_WITHOUT_ROUTINE_DESCRIPTION =
 /** after-shave-gift meta/og description (sentences taken verbatim from the article). */
 export const AFTER_SHAVE_GIFT_DESCRIPTION =
   '면도 후 아빠에게 줄 스킨케어는 향이 없는지, 에탄올이 들어 있지 않은지, 바르기 쉬운 한 단계인지부터 보면 됩니다. 디어파파는 아직 출시 전입니다.';
+
+/** dad-gift-skincare-guide meta/og description (sentence taken verbatim from the article). */
+export const DAD_GIFT_SKINCARE_GUIDE_DESCRIPTION =
+  '아빠 선물용 화장품은 아빠의 피부 타입, 향이 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 용량, 전성분, 예산 순서로 고르면 실패가 적습니다.';
 
 export const JOURNAL_SITE_SUFFIX = ' | DEAR PAPA 디어파파';
 

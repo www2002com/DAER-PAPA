@@ -23,7 +23,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     summary:
       'DEAR PAPA의 공식 표기와 브랜드 방향, 현재 준비 상황을 소개합니다. 아빠의 매일에 딸의 마음이 남는 선물을 준비합니다.',
     published: '2026-10-11',
-    modified: '2026-10-19',
+    modified: '2026-10-22',
   },
   {
     slug: 'development-principles',

@@ -5,6 +5,7 @@
 .status span { width: 6px; height: 6px; border-radius: 50%; background: var(--forest); }
 .title { font-size: clamp(40px, 4.5vw, 66px); font-weight: 400; line-height: 1.27; letter-spacing: -.055em; }
 .description { margin-top: 27px; font-size: 17px; line-height: 1.9; color: var(--ink-2); }
+.cta { margin-top: 22px; min-height: 44px; font-size: 14px; }
 .visual { --product-baseline: 10.55%; position: relative; height: clamp(500px, 44vw, 640px); overflow: hidden; border-radius: var(--radius-m); background: var(--sage); isolation: isolate; }
 .visualTitle { position: absolute; left: 30px; top: 28px; display: grid; gap: 3px; line-height: 1.6; z-index: 1; }
 .visualLogo { display: block; width: auto; height: 23px; color: var(--logo); }

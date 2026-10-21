@@ -6,11 +6,14 @@ Next.js(App Router) 정적 내보내기로 만든 사이트입니다. 서버 없
 
 ## 개발
 
+Node.js 24 LTS를 사용합니다. `npm run build`는 편지 보존 회귀 테스트를 먼저 실행합니다.
+
 ```bash
 npm install
 npm run dev        # http://localhost:3000
 npm run build      # out/ 생성 후 원문·주소·검색 데이터 보존 검사
 npm run typecheck
+npm test           # 빠른 페이지 이동·초과 저장·기존 편지 복원 회귀 검사
 npm run verify:preservation
 ```
 
@@ -47,6 +50,16 @@ main 변경은 연결된 Vercel 프로젝트 `dearpapa`의 운영 배포를 실�
 
 - `dearpapa.draft.v1` — 쓰던 편지 `{ text, from, editingId? }`
 - `dearpapa.letters.v1` — 보관함 `[{ id, date, text, from }]` (최대 20통)
+
+입력은 화면에 반영되는 즉시 저장합니다. 20통이 가득 차면 새 보관을 안내하며 기존 편지를 자동 삭제하지 않습니다. 이전 기기에 20통을 넘는 기록이 있으면 모두 불러오고, 사용자가 직접 정리하도록 유지합니다.
+
+## 문의와 행동 측정
+
+문의는 `/#contact`로 연결하며 전체 메뉴와 푸터에서 같은 이메일 복사 기능을 제공합니다. 메뉴의 복사 안내도 선택한 언어에 맞춥니다.
+
+Vercel Web Analytics는 페이지 조회와 고정된 행동 이름만 측정합니다: `letter_entry_clicked`, `letter_started`, `letter_card_exported`, `contact_email_copied`, `social_channel_opened`. 편지 내용·보내는 사람·메일 내용은 전송하지 않으며 URL의 검색 조건과 해시는 제거합니다. Custom Events는 연결된 Pro/Enterprise 요금제에서 확인합니다.
+
+주소 이동 검증은 배포 후 `node scripts/verify-legacy-redirects.mjs --url https://dearpapa.kr`로 실행합니다. Vercel이 `.html`과 끝 슬래시를 301로 정리하며 `/product/`도 최종 제품 주소로 바로 보냅니다.
 
 ## 서체
 

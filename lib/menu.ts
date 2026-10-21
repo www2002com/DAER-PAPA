@@ -32,7 +32,7 @@ export const MENU_GROUPS = [
   ] },
   { id: 'news', href: '/#news', children: [
     { id: 'press', href: '/press' },
-    { id: 'contact', href: 'mailto:hello@dearpapa.kr' },
+    { id: 'contact', href: '/#contact' },
   ] },
 ] as const;
 type GroupId = (typeof MENU_GROUPS)[number]['id'];

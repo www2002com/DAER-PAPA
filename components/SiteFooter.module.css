@@ -120,6 +120,8 @@
   max-width: 26rem;
 }
 
+.contact .mail { min-height: 44px; display: inline-flex; align-items: center; }
+
 .copyEmail {
   display: inline-flex;
   align-items: center;

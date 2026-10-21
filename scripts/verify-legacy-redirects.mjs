@@ -5,6 +5,11 @@ const originArg = process.argv.indexOf('--url');
 assert.ok(originArg >= 0 && process.argv[originArg + 1], 'Pass --url https://your-deployment');
 const origin = new URL(process.argv[originArg + 1]).origin;
 const cases = [
+  ['/product', '/letter-all-in-one'],
+  ['/product/', '/letter-all-in-one'],
+  ['/product.html', '/letter-all-in-one'],
+  ['/product/?utm_source=legacy', '/letter-all-in-one?utm_source=legacy'],
+  ['/about/facts/', '/about/facts'],
   ['/index.html', '/'],
   ['/journal.html', '/journal'],
   ['/about/facts.html', '/about/facts'],

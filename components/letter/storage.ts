@@ -46,11 +46,11 @@ export function loadLetters(): Letter[] {
         typeof (l as Letter).text === 'string' &&
         (l as Letter).text.trim() !== '',
     )
-    .slice(0, MAX_LETTERS)
     .map((l) => ({ id: l.id, date: l.date, text: l.text, from: typeof l.from === 'string' ? l.from : '' }));
 }
 
-export const saveLetters = (letters: Letter[]) => write(LETTERS_KEY, letters.slice(0, MAX_LETTERS));
+// Never make room by silently discarding an existing letter.
+export const saveLetters = (letters: Letter[]) => letters.length <= MAX_LETTERS && write(LETTERS_KEY, letters);
 
 export function loadDraft(): Draft | null {
   const d = read<Partial<Draft>>(DRAFT_KEY);

@@ -1,6 +1,17 @@
 /* 브랜드 자료실 — index rows and notes.
    Selectors are doubled (.index .x) so they win over the shared .prose element styles. */
 
+.index .latest {
+  padding: 26px clamp(20px, 4vw, 32px);
+  margin-bottom: 36px;
+  background: var(--sage);
+  border-radius: var(--radius-m);
+}
+
+.index .latest .title { line-height: 1.5; }
+.index .latest .title a { color: var(--logo); text-decoration-thickness: 1px; text-underline-offset: .2em; }
+.index .latest .category { margin-bottom: 10px; }
+
 .index .list {
   display: block;
   border-top: 1px solid var(--line);

@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { usePathname } from 'next/navigation';
 import { Logo } from './Logo';
-import { CHANNELS, CONTACT_EMAIL } from '@/lib/facts';
+import { ContactEmail } from './ContactEmail';
+import { CHANNELS } from '@/lib/facts';
 import { MENU_COPY, MENU_GROUPS, MENU_LANGUAGES, MENU_LANGUAGE_KEY, menuLanguage, type MenuLanguage } from '@/lib/menu';
 import styles from './SiteHeader.module.css';
 
@@ -150,11 +151,11 @@ export function SiteHeader() {
               </div>
               <div className={styles.contact}>
                 <p className={styles.contactLabel}>{copy.contact}</p>
-                <a className={styles.mail} href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+                <ContactEmail language={language} />
                 <ul className={styles.channels} aria-label={copy.channels}>
                   {CHANNELS.map((channel) => (
                     <li key={channel.key}>
-                      <a href={channel.href} target="_blank" rel="noopener noreferrer" title={`${channel.label} · ${copy.newTab}`}>
+                      <a href={channel.href} data-track-action="social_channel_opened" target="_blank" rel="noopener noreferrer" title={`${channel.label} · ${copy.newTab}`}>
                         <span className={styles.channelIcon} aria-hidden="true"
                           style={{ maskImage: `url(${CHANNEL_LOGOS[channel.key]})`, WebkitMaskImage: `url(${CHANNEL_LOGOS[channel.key]})` }} />
                         <span className="sr-only">{channel.label} {channel.handle} — {copy.newTab}</span>

@@ -170,7 +170,7 @@ export default function GiftWithoutRoutinePage() {
           </a>
         </li>
         <li>
-          문의: <a href="mailto:hello@dearpapa.kr">hello@dearpapa.kr</a>
+          문의: <a href="/#contact">hello@dearpapa.kr</a>
         </li>
       </ul>
       <p>이 글은 디어파파가 직접 쓴 브랜드 글이며, 글을 정리할 때 생성형 AI의 도움을 받았습니다.</p>

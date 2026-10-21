@@ -427,6 +427,8 @@
   }
 }
 
+.warn .textBtn { display: inline-flex; min-height: 44px; margin-left: 10px; }
+
 .warn {
   min-height: 1.4em;
   font-size: 0.8125rem;

@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from 'next';
 import { Nanum_Pen_Script } from 'next/font/google';
-import Script from 'next/script';
 import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
 import './globals.css';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { RevealObserver } from '@/components/RevealObserver';
+import { SiteAnalytics } from '@/components/SiteAnalytics';
 import { BRAND, SITE_URL, UNDECIDED, PRODUCT } from '@/lib/facts';
 
 // Handwriting face for letters. Korean glyphs arrive as unicode-range slices on demand.
@@ -87,7 +87,7 @@ export default function RootLayout({ children, structuredData }: {
         <main id="main">{children}</main>
         <SiteFooter />
         <RevealObserver />
-        {process.env.NODE_ENV === 'production' && <Script src="/_vercel/insights/script.js" strategy="afterInteractive" />}
+        <SiteAnalytics />
       </body>
     </html>
   );

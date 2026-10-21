@@ -17,7 +17,7 @@ export default function PressPage() {
         title="DEAR PAPA(디어파파) 소개 기사"
         meta={
           <p>
-            최종 업데이트: <time dateTime="2026-10-21">2026년 10월 21일</time>
+            최종 업데이트: <time dateTime="2026-10-22">2026년 10월 22일</time>
           </p>
         }
         footer={
@@ -27,6 +27,12 @@ export default function PressPage() {
         }
       >
         <ul>
+          <li>
+            <time dateTime="2026-10-22">2026년 10월 22일</time> · AUTHON ·{' '}
+            <a href="https://authonnews.com/article/dear-papa-official-site" {...EXTERNAL}>
+              디어파파 화장품 공식 홈페이지는 dearpapa.kr, 아빠를 위한 올인원 스킨케어 브랜드 | 디어파파 DEAR PAPA
+            </a>
+          </li>
           <li>
             <time dateTime="2026-10-21">2026년 10월 21일</time> · AUTHON ·{' '}
             <a href="https://authonnews.com/article/dear-papa-all-in-one-letter" {...EXTERNAL}>

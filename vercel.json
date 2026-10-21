@@ -8,6 +8,21 @@
       "statusCode": 301
     },
     {
+      "source": "/product",
+      "destination": "/letter-all-in-one",
+      "statusCode": 301
+    },
+    {
+      "source": "/product/",
+      "destination": "/letter-all-in-one",
+      "statusCode": 301
+    },
+    {
+      "source": "/product.html",
+      "destination": "/letter-all-in-one",
+      "statusCode": 301
+    },
+    {
       "source": "/:path*.html",
       "destination": "/:path*",
       "statusCode": 301

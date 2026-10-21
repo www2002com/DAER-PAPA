@@ -62,11 +62,24 @@ export const JOURNAL: readonly JournalEntry[] = [
     published: '2026-10-21',
     modified: '2026-10-21',
   },
+  {
+    slug: 'after-shave-gift',
+    href: '/journal/after-shave-gift',
+    category: '선물 이야기',
+    title: '면도 후 아빠 스킨케어, 선물 고를 때 볼 세 가지',
+    summary: '면도 후 아빠에게 줄 스킨케어는 향이 없는지, 에탄올이 들어 있지 않은지, 바르기 쉬운 한 단계인지부터 보면 됩니다.',
+    published: '2026-10-22',
+    modified: '2026-10-22',
+  },
 ];
 
 /** guide-04 meta/og description and lead (longer than the list summary). */
 export const GIFT_WITHOUT_ROUTINE_DESCRIPTION =
   '아빠의 스킨케어 루틴을 몰라도 고를 수 있는 선물 기준. 단계는 하나로, 향료는 빼는 쪽으로, 면도 후 바로 쓰기 편한지 살펴보세요. 디어파파는 출시 준비 중이며 가격·전성분·출시일은 아직 확정되지 않았습니다.';
+
+/** after-shave-gift meta/og description (sentences taken verbatim from the article). */
+export const AFTER_SHAVE_GIFT_DESCRIPTION =
+  '면도 후 아빠에게 줄 스킨케어는 향이 없는지, 에탄올이 들어 있지 않은지, 바르기 쉬운 한 단계인지부터 보면 됩니다. 디어파파는 아직 출시 전입니다.';
 
 export const JOURNAL_SITE_SUFFIX = ' | DEAR PAPA 디어파파';
 

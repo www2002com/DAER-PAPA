@@ -17,7 +17,7 @@ export default function PressPage() {
         title="DEAR PAPA(디어파파) 소개 기사"
         meta={
           <p>
-            최종 업데이트: <time dateTime="2026-10-22">2026년 10월 22일</time>
+            최종 업데이트: <time dateTime="2026-10-23">2026년 10월 23일</time>
           </p>
         }
         footer={
@@ -27,6 +27,12 @@ export default function PressPage() {
         }
       >
         <ul>
+          <li>
+            <time dateTime="2026-10-23">2026년 10월 23일</time> · AUTHON · 영어 ·{' '}
+            <a href="https://authonnews.com/article/dear-papa-dads-all-in-one-skincare" hrefLang="en" lang="en" {...EXTERNAL}>
+              DEAR PAPA cosmetics: a Korean all-in-one skincare brand for dads, official site dearpapa.kr | 디어파파 DEAR PAPA
+            </a>
+          </li>
           <li>
             <time dateTime="2026-10-22">2026년 10월 22일</time> · AUTHON ·{' '}
             <a href="https://authonnews.com/article/dear-papa-official-site" {...EXTERNAL}>

@@ -1,172 +1,188 @@
-// 모듈 6 경로 A: 승인된 기획서 → 장면 이미지 → 영상화 → 음성 → 렌더링 → 메타데이터 → 자동 검사.
-import { mkdir, readFile } from 'node:fs/promises';
+// 스킬 03: 소스 생성(GPT 이미지 → Veo 영상화 → ElevenLabs 청크 음성)과 FFmpeg 조립.
+// 실제 생성은 비용이 들므로 승인된 02 파일(해시 일치)로만 실행한다. 목업 실행은 승인 없이 돌지만 승인·게시 대상이 아니다.
+import { existsSync } from 'node:fs';
+import { appendFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { requireApproval } from './approvals.mjs';
-import { checkPlan, formatFindings } from './claims.mjs';
-import { askJson, imageBlock, usage as claudeUsage } from './claude.mjs';
-import * as mock from './providers/mock.mjs';
-import { buildAss, probe, renderFinal, renderSegment } from './render.mjs';
-import { reviewRun, runDir } from './review.mjs';
-import { buildNarration, captionChunks, sceneTimings } from './timeline.mjs';
-import { hashFile, readJson, ROOT, withRetry, writeJson } from './store.mjs';
+import { cutStats, planCuts } from './chunks.mjs';
+import { buildAss, ffmpeg, probe, renderCut, renderFinal } from './render.mjs';
+import { planFile, runInfo } from './script.mjs';
+import { buildNarration, sceneTimings } from './timeline.mjs';
+import { hashFile, INPUTS, OUTPUTS, projectDir, readJson, ROOT, runDir, withRetry, writeJson } from './store.mjs';
 
-const product = await readJson(path.join(ROOT, 'data/product.json'));
+const pad = (n, w = 2) => String(n).padStart(w, '0');
+const imageFile = (runId, key) => projectDir(runId, 'assets/images', `${key}.png`);
+const videoFile = (runId, n) => projectDir(runId, 'assets/videos', `scene_${pad(n)}.mp4`);
+const audioDir = (runId) => projectDir(runId, 'assets/audio');
 
-const STYLE = 'Photorealistic cinematic still, vertical 9:16, Korean family in a modern Korean apartment, '
-  + 'soft natural light, warm cream and sage green palette, shallow depth of field. '
-  + 'No text, no letters, no logos, no brand names, no cosmetic bottles or product packaging, no celebrities.';
+async function context(runId) {
+  const run = await runInfo(runId);
+  const plan = await readJson(planFile(runId));
+  const planHash = await hashFile(planFile(runId));
+  if (!run.mock) await requireApproval('plan', runId, planHash);
+  return { run, plan, planHash };
+}
 
-const PROMPT_SCHEMA = {
-  type: 'object',
-  additionalProperties: false,
-  required: ['scenes'],
-  properties: {
-    scenes: {
-      type: 'array',
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        required: ['n', 'imagePrompt', 'motionPrompt'],
-        properties: { n: { type: 'integer' }, imagePrompt: { type: 'string' }, motionPrompt: { type: 'string' } },
-      },
-    },
-  },
-};
-
-const INSPECT_SCHEMA = {
-  type: 'object',
-  additionalProperties: false,
-  required: ['ok', 'issues'],
-  properties: { ok: { type: 'boolean' }, issues: { type: 'array', items: { type: 'string' } } },
-};
-
-export function validatePlan(plan) {
-  const errors = [];
-  if (!plan.id || !Array.isArray(plan.scenes) || plan.scenes.length === 0) errors.push('id와 scenes가 필요합니다.');
-  for (const scene of plan.scenes ?? []) {
-    if (!scene.line?.trim()) errors.push(`장면 ${scene.n}: 대사(line)가 비었습니다.`);
-    if (scene.asset && !(scene.asset in product.assets)) errors.push(`장면 ${scene.n}: 알 수 없는 자산 ${scene.asset}`);
+// 보고서: 왜곡 발견 시 1회 재생성. 두 번째 요청은 사람 작업 큐로 넘긴다.
+async function allowRedo(runId, run, key) {
+  const count = run.redo[key] ?? 0;
+  if (count >= 1) {
+    await mkdir(OUTPUTS, { recursive: true });
+    await appendFile(path.join(OUTPUTS, 'manual-queue.jsonl'),
+      `${JSON.stringify({ runId, key, reason: '재생성 1회 후에도 왜곡', at: new Date().toISOString() })}\n`);
+    console.warn(`  ! ${key}: 이미 1회 재생성했습니다. 수동 큐로 넘겼습니다(outputs/manual-queue.jsonl).`);
+    return false;
   }
-  if (errors.length) throw new Error(`기획서 형식 오류:\n  ${errors.join('\n  ')}`);
+  run.redo[key] = count + 1;
+  await writeJson(runDir(runId, 'run.json'), run);
+  return true;
 }
 
-async function scenePrompts(plan) {
-  const scenes = plan.scenes.filter((s) => !s.asset).map(({ n, visual, camera, line }) => ({ n, visual, camera, line }));
-  const { scenes: prompts } = await askJson({
-    system: 'You convert Korean ad storyboard scenes into English prompts for an image model and an image-to-video model.',
-    content: `Style bible (apply to every imagePrompt): ${STYLE}\n`
-      + 'For each scene write imagePrompt (one rich sentence: subject, setting, framing from the camera note, light) '
-      + 'and motionPrompt (subtle camera or subject motion for a 5-second clip). Phone and shopping screens must be blurred. '
-      + `Keep scene numbers.\n\n${JSON.stringify(scenes, null, 2)}`,
-    schema: PROMPT_SCHEMA,
-    effort: 'medium',
-  });
-  return new Map(prompts.map((p) => [p.n, p]));
+function imageTargets(plan) {
+  return plan.scenes.filter((s) => !s.asset).flatMap((scene) => [
+    { n: scene.n, key: `scene_${pad(scene.n)}`, prompt: scene.image_prompt },
+    ...scene.chunks.flatMap((chunk, i) => (chunk.image_prompt
+      ? [{ n: scene.n, key: `scene_${pad(scene.n)}_c${i + 1}`, prompt: chunk.image_prompt }] : [])),
+  ]);
 }
 
-// 모듈 6·7: 손가락·얼굴 왜곡, 글자 뭉개짐, 제품·로고 노출이 있는 이미지는 자동 폐기하고 다시 만든다.
-async function inspectImage(file) {
-  return askJson({
-    system: 'You are a strict QA reviewer for AI-generated ad frames.',
-    content: [
-      imageBlock(await readFile(file), file.endsWith('.png') ? 'image/png' : 'image/jpeg'),
-      { type: 'text', text: 'Reject (ok=false) if any: distorted or extra fingers/hands, deformed faces, garbled or '
-        + 'readable text/letters, logos, cosmetic bottles or packaging, celebrity likeness. List issues briefly.' },
-    ],
-    schema: INSPECT_SCHEMA,
-    effort: 'low',
-  });
+export async function images(runId, { redo = [] } = {}) {
+  const { run, plan } = await context(runId);
+  await mkdir(projectDir(runId, 'assets/images'), { recursive: true });
+  const provider = run.mock ? await import('./providers/mock.mjs') : await import('./providers/openai.mjs');
+  for (const target of imageTargets(plan)) {
+    const out = imageFile(runId, target.key);
+    const again = redo.includes(target.n);
+    if (existsSync(out) && !(again && await allowRedo(runId, run, `image:${target.key}`))) continue;
+    const prompt = [target.prompt, plan.style].filter(Boolean).join('\n\n');
+    console.log(`  이미지 ${target.key}`);
+    await withRetry(`이미지 ${runId} ${target.key}`, () => (run.mock ? provider.image(target.n, out) : provider.image(prompt, out)));
+  }
 }
 
-async function aiScene(scene, prompt, dir, motion, usage) {
-  const fal = await import('./providers/fal.mjs');
-  const base = `scene-${String(scene.n).padStart(2, '0')}`;
-  const imageUrl = await withRetry(`장면 ${scene.n} 이미지`, async () => {
-    const url = await fal.generateImage(`${prompt.imagePrompt} ${STYLE}`);
-    usage.images += 1;
-    await fal.download(url, path.join(dir, `${base}.jpg`));
-    const check = await inspectImage(path.join(dir, `${base}.jpg`));
-    if (!check.ok) throw new Error(`왜곡 검사 폐기: ${check.issues.join(', ')}`);
-    return url;
-  });
-  if (motion === 'still') return { kind: 'still', source: `${base}.jpg` };
-  await withRetry(`장면 ${scene.n} 영상화`, async () => {
-    const url = await fal.imageToVideo(imageUrl, prompt.motionPrompt);
-    usage.videoClips += 1;
-    await fal.download(url, path.join(dir, `${base}.mp4`));
-  });
-  return { kind: 'clip', source: `${base}.mp4` };
+export async function videos(runId, { redo = [] } = {}) {
+  const { run, plan } = await context(runId);
+  await mkdir(projectDir(runId, 'assets/videos'), { recursive: true });
+  const provider = run.mock ? await import('./providers/mock.mjs') : await import('./providers/gemini.mjs');
+  for (const scene of plan.scenes.filter((s) => s.video_prompt)) {
+    const still = imageFile(runId, `scene_${pad(scene.n)}`);
+    if (!existsSync(still)) throw new Error(`장면 ${scene.n} 이미지가 없습니다. images를 먼저 실행하고 왜곡 검사를 마치세요.`);
+    const out = videoFile(runId, scene.n);
+    if (existsSync(out) && !(redo.includes(scene.n) && await allowRedo(runId, run, `video:${scene.n}`))) continue;
+    console.log(`  영상 장면 ${scene.n}`);
+    await withRetry(`영상 ${runId} 장면 ${scene.n}`,
+      () => (run.mock ? provider.video(still, out) : provider.imageToVideo(still, scene.video_prompt, out)));
+  }
 }
 
-export async function produce(planFile, { mockMode = false, motion = 'ai' } = {}) {
-  const plan = await readJson(planFile);
-  validatePlan(plan);
-  const planHash = await hashFile(planFile);
-  const claims = checkPlan(plan);
-  console.log(formatFindings(claims));
-  if (claims.verdict === 'reject') throw new Error('주장 상태표를 벗어난 문구가 있어 생성하지 않습니다.');
-  const approval = mockMode ? null : await requireApproval('plan', plan.id, planHash);
-
-  const runId = `${plan.id}-${new Date().toISOString().replace(/[-:]/g, '').replace(/\..+/, '')}${mockMode ? '-mock' : ''}`;
-  const dir = runDir(runId);
+// 전체 내레이션을 한 번에 합성(톤 일관성)하고, 글자 타임스탬프로 청크별 시간·음성 파일을 만든다.
+export async function tts(runId) {
+  const { run, plan, planHash } = await context(runId);
+  const items = plan.scenes.flatMap((s) => s.chunks.map((c, i) => ({ scene: s.n, chunk: i, line: c.text })));
+  const { text, spans } = buildNarration(items);
+  const dir = audioDir(runId);
   await mkdir(dir, { recursive: true });
-  await writeJson(path.join(dir, 'plan.json'), plan);
-  const usage = { images: 0, videoClips: 0, ttsChars: 0 };
-
-  console.log(`▶ ${runId}: 음성 생성`);
-  const { text, spans } = buildNarration(plan.scenes);
-  usage.ttsChars = text.length;
-  const alignment = mockMode
-    ? await mock.synthesize(text, 'narration.mp3', dir)
-    : await withRetry('음성 생성', async () => {
-      const { synthesize } = await import('./providers/elevenlabs.mjs');
-      return synthesize(text, path.join(dir, 'narration.mp3'));
-    });
+  const narration = path.join(dir, 'narration.mp3');
+  const provider = run.mock ? await import('./providers/mock.mjs') : await import('./providers/elevenlabs.mjs');
+  const alignment = await withRetry(`TTS ${runId}`, () => provider.synthesize(text, narration));
   const timings = sceneTimings(spans, alignment, alignment.seconds);
-
-  console.log(`▶ 장면 ${plan.scenes.length}개 생성·배치`);
-  const prompts = mockMode || plan.scenes.every((s) => s.asset) ? new Map() : await scenePrompts(plan);
-  const segments = [];
-  const events = [];
-  for (const [i, scene] of plan.scenes.entries()) {
-    const { start, duration } = timings[i];
-    const asset = scene.asset ? product.assets[scene.asset] : null;
-    let visual;
-    if (asset?.file) visual = { kind: 'asset', source: path.resolve(ROOT, asset.file) };
-    else if (asset) visual = { kind: 'endcard' };
-    else if (mockMode) {
-      await mock.image(scene.n, `scene-${scene.n}.png`, dir);
-      visual = { kind: 'still', source: `scene-${scene.n}.png` };
-    } else visual = await aiScene(scene, prompts.get(scene.n), dir, motion, usage);
-    const out = `seg-${String(scene.n).padStart(2, '0')}.mp4`;
-    await renderSegment({ ...visual, duration, out, cwd: dir });
-    segments.push(out);
-    const end = start + duration;
-    if (scene.overlay) events.push({ style: visual.kind === 'endcard' ? 'End' : 'Overlay', start, end, text: scene.overlay });
-    if (asset?.draft) events.push({ style: 'Label', start, end, text: asset.label });
+  const chunkTimings = items.map((item, i) => ({ scene: item.scene, chunk: item.chunk, text: item.line, ...timings[i] }));
+  for (const [i, t] of chunkTimings.entries()) {
+    await ffmpeg(['-ss', t.start.toFixed(3), '-t', t.duration.toFixed(3), '-i', narration, '-c:a', 'libmp3lame',
+      path.join(dir, `chunk_${pad(i + 1, 3)}.mp3`)]);
   }
-  for (const chunk of captionChunks(text, spans, alignment)) events.push({ style: 'Caption', ...chunk });
+  await writeJson(path.join(dir, 'tts.json'), { planHash, text, seconds: alignment.seconds, chunkTimings });
+  return chunkTimings;
+}
 
-  console.log('▶ 렌더링');
-  const total = timings.at(-1).start + timings.at(-1).duration;
-  await renderFinal({ segments, audio: 'narration.mp3', ass: buildAss(events), total, out: 'final.mp4', cwd: dir });
+function sceneSource(runId, scene, chunkIndex, brand) {
+  const chunkImage = imageFile(runId, `scene_${pad(scene.n)}_c${chunkIndex + 1}`);
+  if (existsSync(chunkImage)) return { kind: 'still', source: chunkImage };
+  if (scene.asset === 'endcard') return { kind: 'endcard', source: null };
+  if (scene.asset) {
+    const asset = brand.assets[scene.asset];
+    if (!asset?.file) throw new Error(`장면 ${scene.n}: 브랜드 자산 ${scene.asset} 파일이 없습니다.`);
+    return { kind: 'asset', source: path.resolve(ROOT, asset.file), label: asset.draft ? asset.label : null };
+  }
+  if (existsSync(videoFile(runId, scene.n))) return { kind: 'clip', source: videoFile(runId, scene.n) };
+  const still = imageFile(runId, `scene_${pad(scene.n)}`);
+  if (!existsSync(still)) throw new Error(`장면 ${scene.n} 소스가 없습니다. images를 먼저 실행하세요.`);
+  return { kind: 'still', source: still };
+}
 
-  const final = path.join(dir, 'final.mp4');
-  await writeJson(path.join(dir, 'metadata.json'), {
-    runId, planId: plan.id, hypothesis: plan.hypothesis, planHash,
-    planApproval: approval, mock: mockMode, motion,
-    variation: { base: true },
-    models: mockMode ? 'mock' : {
-      claude: process.env.DP_CLAUDE_MODEL ?? 'claude-opus-5-5',
-      image: process.env.DP_IMAGE_MODEL ?? 'fal-ai/flux-pro/v1.1',
-      video: motion === 'ai' ? (process.env.DP_VIDEO_MODEL ?? 'fal-ai/kling-video/v2.1/standard/image-to-video') : null,
-      tts: process.env.ELEVENLABS_MODEL ?? 'eleven_multilingual_v2',
-    },
-    usage: { ...usage, claudeTokens: { ...claudeUsage } },
-    durationSec: (await probe(final)).duration,
-    contentHash: await hashFile(final),
-    createdAt: new Date().toISOString(),
+const srtTime = (t) => {
+  const ms = Math.round(t * 1000);
+  return `${pad(Math.floor(ms / 3600000))}:${pad(Math.floor(ms / 60000) % 60)}:${pad(Math.floor(ms / 1000) % 60)},${pad(ms % 1000, 3)}`;
+};
+
+export async function assemble(runId) {
+  const { run, plan, planHash } = await context(runId);
+  const ttsInfo = await readJson(path.join(audioDir(runId), 'tts.json'));
+  if (ttsInfo.planHash !== planHash) throw new Error('02 파일이 TTS 이후 바뀌었습니다. tts를 다시 실행하세요.');
+  const brand = await readJson(path.join(INPUTS, 'brand_info.json'));
+  const scenes = new Map(plan.scenes.map((s) => [s.n, s]));
+  const cuts = planCuts(ttsInfo.chunkTimings);
+  const total = cuts.at(-1).start + cuts.at(-1).duration;
+
+  // 영상 소스는 장면 길이에 맞춰 ±15% 안에서 속도를 보정하고, 컷마다 이어지는 구간을 쓴다.
+  const clipPlan = new Map();
+  for (const scene of plan.scenes) {
+    const src = sceneSource(runId, scene, -1, brand);
+    if (src.kind !== 'clip') continue;
+    const length = (await probe(src.source)).duration;
+    const sceneSeconds = cuts.filter((c) => c.scene === scene.n).reduce((s, c) => s + c.duration, 0);
+    clipPlan.set(scene.n, { length, speed: Math.min(1, Math.max(0.85, length / sceneSeconds)), used: 0 });
+  }
+
+  const renderDir = projectDir(runId, 'render');
+  await mkdir(path.join(renderDir, 'segments'), { recursive: true });
+  const timeline = [];
+  for (const [i, cut] of cuts.entries()) {
+    const scene = scenes.get(cut.scene);
+    const src = sceneSource(runId, scene, cut.chunk, brand);
+    const clip = src.kind === 'clip' ? clipPlan.get(scene.n) : null;
+    const offset = clip ? clip.used % clip.length : 0;
+    if (clip) clip.used += cut.duration * clip.speed;
+    const segment = `segments/cut_${pad(i + 1, 3)}.mp4`;
+    await renderCut({ ...src, duration: cut.duration, framing: cut.framing, offset, speed: clip?.speed ?? 1, out: path.join(renderDir, segment) });
+    timeline.push({ cut: i + 1, ...cut, kind: src.kind, source: src.source && path.relative(runDir(runId), src.source),
+      sourceIn: offset, speed: clip?.speed ?? 1, segment, caption: scene.chunks[cut.chunk].text });
+  }
+
+  const sceneSpan = (n) => {
+    const own = cuts.filter((c) => c.scene === n);
+    return { start: own[0].start, end: own.at(-1).start + own.at(-1).duration };
+  };
+  const events = [];
+  for (const t of ttsInfo.chunkTimings) {
+    events.push({ style: 'Caption', start: t.start, end: t.start + t.duration, text: t.text });
+  }
+  for (const scene of plan.scenes) {
+    const { start, end } = sceneSpan(scene.n);
+    if (scene.overlay) events.push({ style: scene.asset === 'endcard' ? 'End' : 'Overlay', start, end, text: scene.overlay });
+    const label = scene.asset && brand.assets[scene.asset]?.draft ? brand.assets[scene.asset].label : null;
+    if (label) events.push({ style: 'Label', start, end, text: label });
+  }
+  const ass = buildAss(events);
+  const final = path.join(renderDir, 'final.mp4');
+  await renderFinal({ segments: timeline.map((t) => t.segment), audio: path.join(audioDir(runId), 'narration.mp3'), ass, total, out: final, cwd: renderDir });
+
+  // 편집 툴로 넘길 프로젝트 파일. 형식(CapCut/Premiere)이 정해질 때까지 중립 타임라인 JSON과 자막 파일을 남긴다.
+  const projDir = projectDir(runId, 'project');
+  await mkdir(projDir, { recursive: true });
+  await writeJson(path.join(projDir, 'timeline.json'), {
+    runId, planId: plan.id, fps: 30, width: 1080, height: 1920, durationSec: total,
+    audio: 'assets/audio/narration.mp3', cuts: timeline,
   });
-  const review = await reviewRun(runId);
-  return { runId, dir, review };
+  await writeFile(path.join(projDir, 'captions.ass'), ass);
+  await writeFile(path.join(projDir, 'captions.srt'), ttsInfo.chunkTimings
+    .map((t, i) => `${i + 1}\n${srtTime(t.start)} --> ${srtTime(t.start + t.duration)}\n${t.text}\n`).join('\n'));
+
+  const meta = {
+    runId, planId: plan.id, planHash, mock: run.mock, durationSec: (await probe(final)).duration,
+    contentHash: await hashFile(final), cuts: cutStats(cuts), createdAt: new Date().toISOString(),
+  };
+  await writeJson(runDir(runId, 'metadata.json'), meta);
+  const { reviewRun } = await import('./review.mjs');
+  return { meta, review: await reviewRun(runId), final };
 }

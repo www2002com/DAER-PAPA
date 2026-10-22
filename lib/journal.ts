@@ -80,6 +80,15 @@ export const JOURNAL: readonly JournalEntry[] = [
     published: '2026-10-22',
     modified: '2026-10-22',
   },
+  {
+    slug: 'dad-allinone-how-to-choose',
+    href: '/journal/dad-allinone-how-to-choose',
+    category: '선물 이야기',
+    title: '40~60대 아빠 올인원 고르는 법, 피부 타입·향료·단계 수로 보는 기준',
+    summary: '40~60대 아빠의 올인원은 피부 타입, 향료가 들어 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 면도 후에 쓰기 편한지, 전성분 순서로 확인하면 고르기 쉽습니다.',
+    published: '2026-10-22',
+    modified: '2026-10-22',
+  },
 ];
 
 /** guide-04 meta/og description and lead (longer than the list summary). */
@@ -93,6 +102,21 @@ export const AFTER_SHAVE_GIFT_DESCRIPTION =
 /** dad-gift-skincare-guide meta/og description (sentence taken verbatim from the article). */
 export const DAD_GIFT_SKINCARE_GUIDE_DESCRIPTION =
   '아빠 선물용 화장품은 아빠의 피부 타입, 향이 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 용량, 전성분, 예산 순서로 고르면 실패가 적습니다.';
+
+/** dad-allinone-how-to-choose meta/og description (한 줄 답, verbatim from the article). */
+export const DAD_ALLINONE_HOW_TO_CHOOSE_DESCRIPTION =
+  '40~60대 아빠의 올인원은 피부 타입, 향료가 들어 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 면도 후에 쓰기 편한지, 전성분 순서로 확인하면 고르기 쉽습니다.';
+
+/** dad-allinone-how-to-choose visible FAQ; the FAQPage JSON-LD is built from this, so both match exactly. */
+export const DAD_ALLINONE_HOW_TO_CHOOSE_FAQ = [
+  { q: '50대 아빠에게 올인원 하나면 충분한가요?', a: '여러 단계를 챙기지 않는 아빠라면 세안 후 한 가지로 마무리하는 올인원이 쓰기 편합니다. 낮에는 자외선 차단제를 따로 바르세요.' },
+  { q: '60대 아빠도 같은 기준으로 고르면 되나요?', a: '네. 나이보다 피부 타입, 향료, 에탄올, 단계 수, 전성분을 기준으로 보면 됩니다.' },
+  { q: '올인원과 스킨로션 세트 중 무엇이 나을까요?', a: '한 단계만 바르고 싶다면 올인원, 단계별로 나눠 바르는 데 익숙하다면 스킨·로션이 맞습니다.' },
+  { q: '디어파파 레터 올인원의 전성분은 무엇인가요?', a: '아직 확정되지 않았습니다. 정확한 전성분은 제조사 샘플이 나온 뒤 공개합니다.' },
+  { q: '레터 올인원의 가격과 출시일은요?', a: '아직 확정되지 않았습니다.' },
+  { q: '지금 어디에서 살 수 있나요?', a: '판매처는 아직 확정되지 않았습니다. 디어파파는 출시 준비 중이며 지금 판매 중인 제품은 없습니다.' },
+  { q: '문의는 어디로 하나요?', a: 'hello@dearpapa.kr로 보내 주세요.' },
+] as const;
 
 export const JOURNAL_SITE_SUFFIX = ' | DEAR PAPA 디어파파';
 

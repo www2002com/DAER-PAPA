@@ -1,5 +1,5 @@
 import { FACTS_UPDATED } from '@/lib/facts';
-import { AFTER_SHAVE_GIFT_DESCRIPTION, getJournalEntry } from '@/lib/journal';
+import { AFTER_SHAVE_GIFT_DESCRIPTION, AFTER_SHAVE_GIFT_FAQ, getJournalEntry } from '@/lib/journal';
 
 // New page (not part of the preserved production snapshot). Author/publisher point at the
 // site-wide Organization node (@id …/#organization, defined on the home page and schema.jsonld).
@@ -28,6 +28,17 @@ const jsonLd = {
       isPartOf: { '@id': 'https://dearpapa.kr/#website' },
       isBasedOn: { '@id': FACTS },
       citation: [FACTS],
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${URL}#faq`,
+      inLanguage: 'ko-KR',
+      isPartOf: { '@id': URL },
+      mainEntity: AFTER_SHAVE_GIFT_FAQ.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
     },
     {
       '@type': 'BreadcrumbList',

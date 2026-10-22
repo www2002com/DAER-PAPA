@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/ArticleLayout';
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
-import { AFTER_SHAVE_GIFT_DESCRIPTION, dotDate, getJournalEntry, AFTER_SHAVE_GIFT_META_TITLE, AFTER_SHAVE_GIFT_META_DESCRIPTION } from '@/lib/journal';
+import { AFTER_SHAVE_GIFT_DESCRIPTION, AFTER_SHAVE_GIFT_FAQ, dotDate, getJournalEntry, AFTER_SHAVE_GIFT_META_TITLE, AFTER_SHAVE_GIFT_META_DESCRIPTION } from '@/lib/journal';
 
 // Ported verbatim from content/journal/journal-after-shave-gift-v3.md (article body only; status note omitted).
 
@@ -77,8 +77,12 @@ export default function AfterShaveGiftPage() {
       </p>
 
       <h2>자주 묻는 질문</h2>
-      <p>Q. 지금 살 수 있나요?</p>
-      <p>A. 아니요. 디어파파는 아직 출시 전입니다. 정확한 정보는 공식 사이트 dearpapa.kr에서 안내합니다.</p>
+      {AFTER_SHAVE_GIFT_FAQ.map(({ q, a }) => (
+        <div key={q}>
+          <p>Q. {q}</p>
+          <p>A. {a}</p>
+        </div>
+      ))}
 
       <p>
         출시 소식은 인스타그램{' '}

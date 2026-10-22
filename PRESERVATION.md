@@ -143,3 +143,8 @@ npm run verify:preservation -- --url http://127.0.0.1:3130
 - `/letter-all-in-one`: FAQPage `mainEntity`에 1·2·3번 추가, `dateModified`와 화면 수정일 2026-10-23.
 - `/journal/after-shave-gift`(보존 대상 외): FAQPage 신설, 6번은 일반 안내 Q와 제품 Q로 분리.
 - 9번(자외선 차단)은 제품 기획 확인 전까지 보류. facts 최종 업데이트 날짜(10/22)는 바꾸지 않았습니다.
+
+## 2026-10-23 새 저널 /journal/allinone-3-questions
+
+- 보존 대상 외 새 글. 콘텐츠 원문 v2(content/journal/guide-allinone-3questions-v2-2026-10-23.md) 본문을 그대로 옮김. Article·FAQPage·BreadcrumbList JSON-LD.
+- sitemap.xml, llms.txt, rss.xml에 추가하고 sitemap·llms 해시만 갱신.

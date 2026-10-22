@@ -86,7 +86,7 @@ export default function DadGiftSkincareGuidePage() {
 
       <h2>7. 예산</h2>
       <p>
-        생신 선물이라면 10만 원 이하에서도 스킨케어 하나와 손편지를 함께 준비할 수 있습니다. 가격보다 아빠가 매일 쓸 수 있는지가 더
+        선물 예산에 정해진 기준은 없습니다. 가격보다 아빠가 매일 쓸 수 있는지가 더
         중요합니다.
       </p>
 
@@ -99,10 +99,10 @@ export default function DadGiftSkincareGuidePage() {
           <tr><td>피부 타입</td><td>지성·건성·민감 중 어디인지</td><td>모든 아빠</td></tr>
           <tr><td>향</td><td>향료가 있는지</td><td>향을 싫어하는 아빠</td></tr>
           <tr><td>에탄올</td><td>전성분에 에탄올이 있는지</td><td>매일 면도하는 아빠</td></tr>
-          <tr><td>단계 수</td><td>한 단계로 끝나는지</td><td>바르기 귀찮아하는 아빠</td></tr>
+          <tr><td>단계 수</td><td>몇 단계로 바르는지</td><td>바르기 귀찮아하는 아빠</td></tr>
           <tr><td>용량</td><td>ml와 사용 기간</td><td>매일 쓰는 아빠</td></tr>
           <tr><td>전성분</td><td>맞지 않았던 성분이 있는지</td><td>민감한 아빠</td></tr>
-          <tr><td>예산</td><td>생신 10만 원 이하 등</td><td>선물을 준비하는 자녀</td></tr>
+          <tr><td>예산</td><td>매일 쓸 수 있는 제품인지</td><td>선물을 준비하는 자녀</td></tr>
         </tbody>
       </table>
 
@@ -118,7 +118,7 @@ export default function DadGiftSkincareGuidePage() {
       <p>A. 아빠의 피부 타입과 평소 몇 단계를 바르는지입니다. 한 단계만 바르는 아빠라면 올인원이 맞습니다.</p>
 
       <p>Q. 생신 선물 예산은 얼마가 적당한가요?</p>
-      <p>A. 정해진 기준은 없지만, 10만 원 이하로 스킨케어 하나와 편지를 함께 준비할 수 있습니다.</p>
+      <p>A. 정해진 기준은 없습니다. 아빠가 매일 쓸 수 있는 제품인지가 더 중요합니다.</p>
 
       <p>Q. 올인원 하나면 선크림은 안 발라도 되나요?</p>
       <p>A. 낮에는 자외선 차단제를 별도로 바르는 것이 일반적인 권고입니다.</p>
@@ -128,7 +128,7 @@ export default function DadGiftSkincareGuidePage() {
 
       <p>Q. 문의는 어디로 하나요?</p>
       <p>
-        A. <a href="mailto:contact@dearpapa.kr">contact@dearpapa.kr</a>로 보내 주세요.
+        A. <a href="mailto:hello@dearpapa.kr">hello@dearpapa.kr</a>로 보내 주세요.
       </p>
 
       <p>

@@ -4,7 +4,7 @@
   "pages": {
     "/": {
       "file": "index.html",
-      "title": "아빠 선물 올인원 스킨케어 | 디어파파 DEAR PAPA",
+      "title": "디어파파 DEAR PAPA | 아빠 선물 올인원 스킨케어",
       "canonical": "https://dearpapa.kr/",
       "meta": [
         {
@@ -29,7 +29,7 @@
         },
         {
           "property": "og:title",
-          "content": "아빠 선물 올인원 스킨케어 | 디어파파 DEAR PAPA"
+          "content": "디어파파 DEAR PAPA | 아빠 선물 올인원 스킨케어"
         },
         {
           "property": "og:description",

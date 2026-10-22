@@ -102,7 +102,7 @@ export function SiteFooter() {
               <span className={styles.dot} aria-hidden="true" />
               출시 준비 중
             </span>
-            기준일 <time dateTime={FACTS_UPDATED}>{FACTS_UPDATED_KO}</time> · {UNDECIDED.status}
+            · 정보 기준일 <time dateTime={FACTS_UPDATED}>{FACTS_UPDATED_KO}</time> · 출시일 미정 · {UNDECIDED.status}
           </p>
           <p className={styles.muted}>
             출시 전 브랜드 소개용 페이지입니다. 제품 이미지는 개발 중인 디자인 시안이며, 제품 정보는 확정 후 공개합니다.

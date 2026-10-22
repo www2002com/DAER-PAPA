@@ -3,8 +3,8 @@
 // body are protected separately in preserved-site.json; see PRESERVATION.md.
 
 export const SITE_URL = 'https://dearpapa.kr';
-export const FACTS_UPDATED = '2026-10-22';
-export const FACTS_UPDATED_KO = '2026년 10월 22일';
+export const FACTS_UPDATED = '2026-10-23';
+export const FACTS_UPDATED_KO = '2026년 10월 23일';
 
 export const BRAND = {
   name: 'DEAR PAPA',
@@ -136,7 +136,7 @@ export const FAQ: { q: string; a: string }[] = [
     q: '가격과 전성분은 정해졌나요?',
     a: '가격, 전성분, 출시일은 아직 확정되지 않았습니다. 확정되면 공식 사이트 dearpapa.kr과 공식 SNS에서 알려 드릴게요.',
   },
-  { q: '출시일은 언제인가요?', a: '출시일은 미정이에요. 인스타그램 @dearpapa.kr에서 소식을 확인하실 수 있어요.' },
+  { q: '출시일은 언제인가요?', a: '아직 정해지지 않았어요. 출시일이 정해지면 공식 사이트 dearpapa.kr과 인스타그램 @dearpapa.kr에서 알려 드릴게요.' },
   {
     q: '40~60대 아빠 선물로도 괜찮을까요?',
     a: '디어파파는 40~60대 아빠를 위해 만들고 있어요. 피부 타입별 정보는 제품 정보가 확정되면 안내드릴게요.',

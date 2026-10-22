@@ -6,11 +6,13 @@
   ],
   "url": "https://dearpapa.kr/",
   "source": "https://dearpapa.kr/about/facts",
-  "dateModified": "2026-10-22",
-  "lastUpdated": "최종 업데이트: 2026년 10월 22일",
+  "dateModified": "2026-10-23",
+  "lastUpdated": "최종 업데이트: 2026년 10월 23일",
   "status": {
     "launch": "현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.",
     "undecided": "가격, 전성분, 출시일은 아직 확정되지 않았습니다.",
+    "launchDate": "미정",
+    "price": "미정",
     "undecidedDetail": "전성분, 책임판매업자, 판매처: 출시 전 미정입니다."
   },
   "sections": [

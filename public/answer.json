@@ -1,7 +1,7 @@
 {
   "source": "https://dearpapa.kr/about/facts",
-  "dateModified": "2026-10-22",
-  "lastUpdated": "최종 업데이트: 2026년 10월 22일",
+  "dateModified": "2026-10-23",
+  "lastUpdated": "최종 업데이트: 2026년 10월 23일",
   "answers": [
     {
       "question": "DEAR PAPA는 어떤 브랜드인가요",
@@ -42,6 +42,20 @@
       "question": "디어파파 선물 세트를 지금 살 수 있나요?",
       "answer": [
         "아니요. 디어파파는 아직 출시 전이며, 지금 판매 중인 선물 세트나 제품은 없습니다. 디어파파는 150ml 올인원 한 가지를 기획하고 만들고 있고, 가격, 전성분, 출시일과 최종 판매 구성은 아직 확정되지 않았습니다. 정확한 정보는 공식 사이트 dearpapa.kr에서만 안내합니다."
+      ],
+      "citation": "https://dearpapa.kr/about/facts"
+    },
+    {
+      "question": "디어파파 레터 올인원 출시일은 언제인가요?",
+      "answer": [
+        "아직 정해지지 않았어요. 디어파파는 출시 준비 중이고, 출시일이 정해지면 공식 사이트 dearpapa.kr에 안내할게요."
+      ],
+      "citation": "https://dearpapa.kr/about/facts"
+    },
+    {
+      "question": "디어파파 레터 올인원 가격은 얼마인가요?",
+      "answer": [
+        "아직 정해지지 않았어요. 디어파파는 출시 전이라 지금 정해진 가격이 없고, 가격이 정해지면 공식 사이트 dearpapa.kr에 안내할게요."
       ],
       "citation": "https://dearpapa.kr/about/facts"
     },

@@ -1,4 +1,4 @@
-// 모듈 6 §5: 장면 클립을 1080x1920 세로 영상으로 배치하고, 내레이션·자막·화면 문구를 합쳐 MP4로 렌더링한다.
+// 보고서 모듈 6 §5: 컷 클립을 1080x1920 세로 영상으로 배치하고, 내레이션·자막·화면 문구를 합쳐 MP4로 렌더링한다.
 import { execFile } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { writeFile } from 'node:fs/promises';
@@ -38,22 +38,31 @@ export function fontsDir() {
   return candidates.find((dir) => existsSync(dir)) ?? null;
 }
 
+// 같은 장면 안에서 컷마다 구도를 바꿔 1~2초 컷이 같은 화면의 반복으로 보이지 않게 한다.
+const FRAMES = {
+  wide: { f: 1, px: 0.5, py: 0.5, fit: 0.86 },
+  tight: { f: 1.18, px: 0.5, py: 0.42, fit: 0.9 },
+  left: { f: 1.12, px: 0.2, py: 0.5, fit: 0.8 },
+  right: { f: 1.12, px: 0.8, py: 0.55, fit: 0.84 },
+};
+
 // kind: 'clip'(AI 영상) | 'still'(AI 이미지, 꽉 채움) | 'asset'(시안 이미지, 잘리지 않게 여백) | 'endcard'
-export async function renderSegment({ kind, source, duration, out, cwd }) {
-  const frames = Math.round(duration * FPS);
-  const fill = `scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H}`;
-  const fit = `scale=${Math.round(W * 0.86)}:${Math.round(H * 0.7)}:force_original_aspect_ratio=decrease,`
+// clip은 offset(원본 초)부터 speed(0.85~1.15, 보고서의 ±15% 보정) 배속으로 쓴다.
+export async function renderCut({ kind, source, duration, out, framing = 'wide', offset = 0, speed = 1 }) {
+  const { f, px, py, fit } = FRAMES[framing] ?? FRAMES.wide;
+  const fill = `scale=${Math.round(W * f)}:${Math.round(H * f)}:force_original_aspect_ratio=increase,`
+    + `crop=${W}:${H}:(iw-ow)*${px}:(ih-oh)*${py}`;
+  const pad = `scale=${Math.round(W * fit)}:${Math.round(H * 0.62 * fit)}:force_original_aspect_ratio=decrease,`
     + `pad=${W}:${H}:(ow-iw)/2:(oh-ih)/2:color=${CREAM}`;
-  const zoom = `scale=${W * 2}:${H * 2},zoompan=z='min(zoom+0.0006,1.06)':d=${frames}`
-    + `:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=${W}x${H}:fps=${FPS}`;
+  const t = duration.toFixed(3);
   const args = {
-    clip: ['-stream_loop', '-1', '-i', source, '-t', duration.toFixed(3), '-vf', `${fill},fps=${FPS}`],
-    still: ['-i', source, '-vf', `${fill},${zoom}`, '-frames:v', String(frames)],
-    asset: ['-i', source, '-vf', `${fit},${zoom}`, '-frames:v', String(frames)],
-    endcard: ['-f', 'lavfi', '-i', `color=c=${CREAM}:s=${W}x${H}:r=${FPS}`, '-t', duration.toFixed(3)],
+    clip: ['-stream_loop', '-1', '-ss', offset.toFixed(3), '-i', source, '-vf', `setpts=PTS/${speed.toFixed(4)},${fill},fps=${FPS}`],
+    still: ['-loop', '1', '-framerate', String(FPS), '-i', source, '-vf', fill],
+    asset: ['-loop', '1', '-framerate', String(FPS), '-i', source, '-vf', pad],
+    endcard: ['-f', 'lavfi', '-i', `color=c=${CREAM}:s=${W}x${H}:r=${FPS}`],
   }[kind];
-  if (!args) throw new Error(`알 수 없는 장면 종류: ${kind}`);
-  await ffmpeg([...args, '-an', ...ENCODE, out], cwd);
+  if (!args) throw new Error(`알 수 없는 컷 종류: ${kind}`);
+  await ffmpeg([...args, '-t', t, '-an', ...ENCODE, out]);
 }
 
 const assTime = (t) => {

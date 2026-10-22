@@ -2,9 +2,9 @@
 // 자동 검사는 무결성을 보증하지 않는다. 사람 샘플링 검수와 승인을 대신하지 않는다.
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import { ROOT } from './store.mjs';
+import { INPUTS } from './store.mjs';
 
-const table = JSON.parse(readFileSync(path.join(ROOT, 'data/claims.json'), 'utf8'));
+const table = JSON.parse(readFileSync(path.join(INPUTS, 'claims.json'), 'utf8'));
 const rules = table.rules.map((rule) => ({
   ...rule,
   regexes: rule.patterns.map((p) => new RegExp(p, 'i')),
@@ -38,6 +38,8 @@ export function copyOf(plan) {
   const items = [];
   for (const scene of plan.scenes) {
     items.push([`장면 ${scene.n} 대사`, scene.line]);
+    // 청크는 대사를 나눈 것이지만, 사람이 손으로 고친 청크도 따로 대조한다.
+    for (const [i, chunk] of (scene.chunks ?? []).entries()) items.push([`장면 ${scene.n} 청크 ${i + 1}`, chunk.text]);
     if (scene.overlay) items.push([`장면 ${scene.n} 화면 문구`, scene.overlay]);
   }
   if (plan.post) items.push(['게시 캡션', [plan.post.caption, ...(plan.post.hashtags ?? [])].join('\n')]);

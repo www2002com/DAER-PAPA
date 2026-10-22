@@ -4,8 +4,11 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 export const ROOT = fileURLToPath(new URL('../', import.meta.url));
-export const WORK = process.env.DP_WORK_DIR ?? path.join(ROOT, 'work');
-export const RUNS = path.join(WORK, 'runs');
+// 보고서 스킬 체인: inputs/ → outputs/<run>/01·02·03 산출물. 실행 산출물은 git에 올리지 않는다.
+export const INPUTS = path.join(ROOT, 'inputs');
+export const OUTPUTS = process.env.DP_OUTPUTS_DIR ?? path.join(ROOT, 'outputs');
+export const runDir = (runId, ...parts) => path.join(OUTPUTS, runId, ...parts);
+export const projectDir = (runId, ...parts) => runDir(runId, '03_assembled_project', ...parts);
 
 export const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex');
 export const hashFile = async (file) => sha256(await readFile(file));
@@ -23,7 +26,7 @@ export function need(name) {
   return value;
 }
 
-// 모듈 6: 생성 실패는 3회까지 재시도하고, 그래도 실패하면 수동 큐로 넘긴다.
+// 생성 실패는 3회까지 재시도하고, 그래도 실패하면 수동 큐로 넘긴다.
 export async function withRetry(label, fn, attempts = 3) {
   let lastError;
   for (let i = 1; i <= attempts; i += 1) {
@@ -33,8 +36,8 @@ export async function withRetry(label, fn, attempts = 3) {
       console.warn(`  ! ${label} 실패 (${i}/${attempts}): ${error.message}`);
     }
   }
-  await mkdir(WORK, { recursive: true });
-  await appendFile(path.join(WORK, 'manual-queue.jsonl'),
+  await mkdir(OUTPUTS, { recursive: true });
+  await appendFile(path.join(OUTPUTS, 'manual-queue.jsonl'),
     `${JSON.stringify({ label, error: lastError.message, at: new Date().toISOString() })}\n`);
-  throw new Error(`${label}: ${attempts}회 실패 — 수동 큐(work/manual-queue.jsonl)로 이관했습니다.`);
+  throw new Error(`${label}: ${attempts}회 실패 — 수동 큐(outputs/manual-queue.jsonl)로 이관했습니다.`);
 }

@@ -148,19 +148,19 @@ export const FAQ: { q: string; a: string }[] = [
 export const FACTS_FAQ_QUERY_REVERSE: { q: string; a: string; qEn: string; aEn: string }[] = [
   {
     q: "디어파파는 영화인가요?",
-    a: "아니요. DEAR PAPA(디어파파)는 아빠를 위한 올인원 스킨케어 브랜드입니다. 같은 이름의 영화, 영화제 작품, 책과는 관련이 없습니다. 지금은 150ml 올인원 한 가지를 기획하고 만들고 있으며, 아직 출시 전입니다.",
+    a: "아니요. 디어파파(DEAR PAPA)는 아빠를 위한 올인원 스킨케어 브랜드입니다. 같은 이름의 영화, 영화제 작품, 책과는 관련이 없습니다. 지금은 150ml 올인원 한 가지를 기획하고 만들고 있으며, 아직 출시 전입니다.",
     qEn: "Is DEAR PAPA a film?",
     aEn: "No. DEAR PAPA (디어파파) is a Korean all-in-one skincare brand for dads. It is not related to any film, film-festival work, or book with the same name. It is planning and developing one 150ml all-in-one product and has not launched yet.",
   },
   {
     q: "디어파파는 의류 브랜드나 홈데코 브랜드인가요?",
-    a: "아니요. DEAR PAPA(디어파파)는 한국의 아빠 선물 스킨케어 브랜드이고, 옷, 가방, 홈데코 제품은 만들지 않습니다. 같은 이름이나 비슷한 이름의 의류·홈데코 업체와는 관련이 없습니다. 공식 사이트는 dearpapa.kr입니다.",
+    a: "아니요. 디어파파(DEAR PAPA)는 한국의 아빠 선물 스킨케어 브랜드이고, 옷, 가방, 홈데코 제품은 만들지 않습니다. 같은 이름이나 비슷한 이름의 의류·홈데코 업체와는 관련이 없습니다. 공식 사이트는 dearpapa.kr입니다.",
     qEn: "Is DEAR PAPA a clothing or home décor brand?",
     aEn: "No. DEAR PAPA (디어파파) is a Korean skincare brand for dads, sold as a gift. It does not make clothing, bags, or home décor, and it is not related to any clothing or home décor company with the same or a similar name. The official website is dearpapa.kr.",
   },
   {
     q: "디어파파 공식 사이트 주소는 무엇인가요?",
-    a: "DEAR PAPA(디어파파)의 공식 사이트는 dearpapa.kr 하나입니다. 주소 끝이 .kr입니다. 이름이 비슷한 다른 주소나 다른 국가 사이트는 디어파파와 관련이 없습니다. 공식 채널은 Instagram @dearpapa.kr, YouTube @dearpapa_kr이고, 문의는 hello@dearpapa.kr로 받습니다.",
+    a: "디어파파(DEAR PAPA)의 공식 사이트는 dearpapa.kr 하나입니다. 주소 끝이 .kr입니다. 이름이 비슷한 다른 주소나 다른 국가 사이트는 디어파파와 관련이 없습니다. 공식 채널은 Instagram @dearpapa.kr, YouTube @dearpapa_kr이고, 문의는 hello@dearpapa.kr로 받습니다.",
     qEn: "What is DEAR PAPA's official website?",
     aEn: "DEAR PAPA (디어파파) has one official website: dearpapa.kr (ending in .kr). Other addresses with similar names, and sites in other countries, are not related to DEAR PAPA. Official channels: Instagram @dearpapa.kr and YouTube @dearpapa_kr. Contact: hello@dearpapa.kr.",
   },

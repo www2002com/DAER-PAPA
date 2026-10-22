@@ -58,7 +58,7 @@ export default function DadGiftSkincareGuidePage() {
       <h2>1. 피부 타입부터 확인하기</h2>
       <ul>
         <li>지성: 번들거림이 고민이라면 가볍고 빨리 흡수되는 제형이 편합니다.</li>
-        <li>건성: 세안 후 당기는 느낌이 있다면 보습감이 충분한 제형을 고르세요.</li>
+        <li>건성: 세안 후 당김이 신경 쓰인다면, 바른 뒤 느낌이 아빠에게 편한지 먼저 확인해 보세요.</li>
         <li>민감: 새 제품은 귀 뒤나 팔 안쪽에 먼저 발라 보고 쓰는 것이 좋습니다.</li>
       </ul>
       <p>아빠의 피부 타입을 모르면 평소 세안 후 당기는지, 오후에 번들거리는지 물어보면 됩니다.</p>
@@ -136,7 +136,7 @@ export default function DadGiftSkincareGuidePage() {
         <a href="https://www.instagram.com/dearpapa.kr/" rel="noopener">
           @dearpapa.kr
         </a>
-        과 공식 사이트 <Link href="/">dearpapa.kr</Link>에서 가장 먼저 알려 드립니다.
+        과 공식 사이트 <Link href="/">dearpapa.kr</Link>에서 알려 드립니다.
       </p>
 
       <RelatedLinks

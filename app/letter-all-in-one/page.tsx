@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import { ArticleLayout, RelatedLinks } from '@/components/article/ArticleLayout';
 import { preservedMetadata } from '@/lib/preserved-metadata';
+import {
+  COMPARE_HEAD, COMPARE_INTRO, COMPARE_NOTES, COMPARE_ROWS, FIT_FOR, FIT_INTRO, NOT_YET_FOR, PRODUCT_FAQ,
+} from '@/lib/product-fit';
 
 // Copied verbatim from the previous /letter-all-in-one page. Heading ids are kept for old #anchors.
 
@@ -16,7 +19,7 @@ export default function LetterAllInOnePage() {
         lead={<p>제품명: 디어파파 레터 올인원 / DEAR&nbsp;PAPA LETTER ALL-IN-ONE (출시 준비 중)</p>}
         meta={
           <p>
-            최종 업데이트: <time dateTime="2026-10-19">2026년 10월 19일</time>
+            최종 업데이트: <time dateTime="2026-10-22">2026년 10월 22일</time>
           </p>
         }
         footer={
@@ -35,6 +38,39 @@ export default function LetterAllInOnePage() {
           2중 기능성화장품 심사를 준비하고 있습니다. 효능과 사용감, 심사 결과는 확인되면 공식 정보 페이지에 가장 먼저
           올립니다.
         </p>
+
+        <h2 id="fit">이런 분께 맞아요</h2>
+        <p>{FIT_INTRO}</p>
+        <ul>
+          {FIT_FOR.map((item) => <li key={item}>{item}</li>)}
+        </ul>
+
+        <h2 id="not-yet-fit">아직 이런 분께는 맞지 않아요</h2>
+        <ul>
+          {NOT_YET_FOR.map((item) => <li key={item}>{item}</li>)}
+        </ul>
+
+        <h2 id="compare">올인원과 스킨(토너)·로션·애프터셰이브 비교</h2>
+        <p>{COMPARE_INTRO}</p>
+        <table>
+          <thead>
+            <tr>{COMPARE_HEAD.map((cell) => <th scope="col" key={cell}>{cell}</th>)}</tr>
+          </thead>
+          <tbody>
+            {COMPARE_ROWS.map(([label, ...cells]) => (
+              <tr key={label}><th scope="row">{label}</th>{cells.map((cell, i) => <td key={i}>{cell}</td>)}</tr>
+            ))}
+          </tbody>
+        </table>
+        {COMPARE_NOTES.map((note) => <p key={note}>{note}</p>)}
+
+        <h2 id="faq">자주 묻는 질문</h2>
+        {PRODUCT_FAQ.map(({ q, a }) => (
+          <div key={q}>
+            <h3>{q}</h3>
+            <p>{a}</p>
+          </div>
+        ))}
 
         <h2 id="gift-letter">선물과 편지</h2>
         <p>디어파파 레터 올인원은 선물과 편지를 함께 건네는 구조로 기획하고 만들고 있습니다.</p>

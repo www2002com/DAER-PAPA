@@ -132,3 +132,14 @@ npm run verify:preservation -- --url http://127.0.0.1:3130
 현재 작업 브랜치는 `codex/office-renewal-20261020`입니다. main 푸시는 Vercel 운영 배포를 실행하므로, 리뉴얼 작업은 별도 브랜치/미리보기에서 검토합니다. 운영 배포는 별도 요청에 따라 진행합니다.
 
 보존 기준 파일이나 해시를 단순히 검사를 통과시키려고 변경하지 마세요. 공식 정보 변경은 사용자의 명시적인 수정 지시와 원본 확인이 있을 때만 반영합니다.
+
+### 2026-10-23 후속 승인: 구매 불안 FAQ와 facts 주어 표기
+
+써니(10/23)가 facts 면도 후 문장의 주어를 국문 표기 원칙에 맞춰 「DEAR PAPA는」에서 「디어파파는」으로 바꾸도록 정했고,
+콘텐츠 담당의 구매 불안 FAQ 초안 v1(1·2·3·6번)을 통과시켰습니다. 반영은 대표님 「올려」 뒤 병합합니다.
+
+- facts 원문(`lib/facts.ts`, `/about/facts` 본문·JSON-LD) 주어만 변경. 의미 변경 없음.
+- 파생 루트 파일 `facts.json`, `answer.json`, `llm.md`, `sitemap.xml`의 SHA-256 갱신.
+- `/letter-all-in-one`: FAQPage `mainEntity`에 1·2·3번 추가, `dateModified`와 화면 수정일 2026-10-23.
+- `/journal/after-shave-gift`(보존 대상 외): FAQPage 신설, 6번은 일반 안내 Q와 제품 Q로 분리.
+- 9번(자외선 차단)은 제품 기획 확인 전까지 보류. facts 최종 업데이트 날짜(10/22)는 바꾸지 않았습니다.

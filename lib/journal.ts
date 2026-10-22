@@ -69,7 +69,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     title: '면도 후 아빠 스킨케어, 선물 고를 때 볼 세 가지',
     summary: '면도 후 아빠에게 줄 스킨케어는 향이 없는지, 에탄올이 들어 있지 않은지, 바르기 쉬운 한 단계인지부터 보면 됩니다.',
     published: '2026-10-22',
-    modified: '2026-10-22',
+    modified: '2026-10-23',
   },
   {
     slug: 'dad-gift-skincare-guide',
@@ -144,3 +144,19 @@ export const DAD_GIFT_SKINCARE_GUIDE_META_DESCRIPTION =
 export const DAD_ALLINONE_HOW_TO_CHOOSE_META_TITLE = '50대 남자 올인원 고르는 법 | 디어파파 DEAR PAPA';
 export const DAD_ALLINONE_HOW_TO_CHOOSE_META_DESCRIPTION =
   '50대·60대 남자 올인원은 지성·건성·민감 피부 타입, 무향인지, 에탄올이 들어 있는지, 몇 단계로 바르는지, 면도 후 바르기 편한지, 전성분 순서로 확인하면 고르기 쉽습니다.';
+
+/** after-shave-gift FAQ: the visible Q&A and the FAQPage JSON-LD both render from this array. */
+export const AFTER_SHAVE_GIFT_FAQ = [
+  {
+    q: '지금 살 수 있나요?',
+    a: '아니요. 디어파파는 아직 출시 전입니다. 정확한 정보는 공식 사이트 dearpapa.kr에서 안내합니다.',
+  },
+  {
+    q: '면도 후에 바를 제품은 무엇을 보고 고르나요?',
+    a: '면도 후 용도인지, 전성분에 무엇이 들었는지 먼저 확인하세요. 피부가 민감하다면 사용 전에 전성분과 사용상 주의사항을 먼저 읽어 보시길 권합니다. 피부 반응은 사람마다 다르니 이상이 생기면 사용을 멈추세요.',
+  },
+  {
+    q: '디어파파 레터 올인원은 면도 후에 바를 수 있나요?',
+    a: '디어파파 레터 올인원은 면도 후 바르는 올인원으로, 「변성알코올(에탄올)을 넣지 않고, 향료를 넣지 않는 방향으로 기획하고 만들고 있습니다.」 전성분은 제조사 샘플이 나온 뒤 공개하고, 사용상 주의사항은 출시 때 안내합니다.',
+  },
+];

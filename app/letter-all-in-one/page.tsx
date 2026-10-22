@@ -19,7 +19,7 @@ export default function LetterAllInOnePage() {
         lead={<p>제품명: 디어파파 레터 올인원 / DEAR&nbsp;PAPA LETTER ALL-IN-ONE (출시 준비 중)</p>}
         meta={
           <p>
-            최종 업데이트: <time dateTime="2026-10-22">2026년 10월 22일</time>
+            최종 업데이트: <time dateTime="2026-10-23">2026년 10월 23일</time>
           </p>
         }
         footer={
@@ -29,7 +29,7 @@ export default function LetterAllInOnePage() {
         }
       >
         <h2 id="after-shave">면도 후에 바르는 올인원</h2>
-        <p>DEAR PAPA는 면도 후에 바르는 올인원을, 빠른 흡수의 워터리 제형으로 기획하고 만들고 있습니다.</p>
+        <p>디어파파는 면도 후에 바르는 올인원을, 빠른 흡수의 워터리 제형으로 기획하고 만들고 있습니다.</p>
         <p>세안 후 하나로 마무리하는 남성 올인원 스킨케어.</p>
         <p>
           디어파파 레터 올인원은 아빠들이 매일 겪는 피부 고민인 번들거림과 건조함이 함께 오는 피부와 주름을 생각하며,

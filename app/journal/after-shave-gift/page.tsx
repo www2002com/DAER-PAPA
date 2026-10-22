@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/ArticleLayout';
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
-import { AFTER_SHAVE_GIFT_DESCRIPTION, dotDate, getJournalEntry } from '@/lib/journal';
+import { AFTER_SHAVE_GIFT_DESCRIPTION, dotDate, getJournalEntry, AFTER_SHAVE_GIFT_META_TITLE, AFTER_SHAVE_GIFT_META_DESCRIPTION } from '@/lib/journal';
 
 // Ported verbatim from content/journal/journal-after-shave-gift-v3.md (article body only; status note omitted).
 
@@ -12,13 +12,13 @@ const PAGE_TITLE = `${entry.title} | 디어파파 DEAR PAPA`;
 
 export const metadata: Metadata = {
   metadataBase: null,
-  title: { absolute: PAGE_TITLE },
-  description: AFTER_SHAVE_GIFT_DESCRIPTION,
+  title: { absolute: AFTER_SHAVE_GIFT_META_TITLE },
+  description: AFTER_SHAVE_GIFT_META_DESCRIPTION,
   alternates: { canonical: URL },
   openGraph: {
     type: 'article',
-    title: entry.title,
-    description: AFTER_SHAVE_GIFT_DESCRIPTION,
+    title: AFTER_SHAVE_GIFT_META_TITLE,
+    description: AFTER_SHAVE_GIFT_META_DESCRIPTION,
     url: URL,
     siteName: 'DEAR PAPA 디어파파',
     locale: 'ko_KR',

@@ -133,16 +133,19 @@ export function RitualIcon({ kind, className }: { kind: 'wash' | 'pump' | 'apply
     <svg className={className} viewBox="0 0 48 48" aria-hidden="true" focusable="false">
       {kind === 'wash' && (
         <g {...common}>
-          <path d="M24 8c5 7 8 11.5 8 16a8 8 0 0 1-16 0c0-4.5 3-9 8-16z" />
-          <path d="M10 38c3-2 6-2 9 0s6 2 9 0 6-2 9 0" />
+          <path data-ritual-part="wash-drop" d="M24 8c5 7 8 11.5 8 16a8 8 0 0 1-16 0c0-4.5 3-9 8-16z" />
+          <path data-ritual-part="wash-wave" d="M10 38c3-2 6-2 9 0s6 2 9 0 6-2 9 0" />
         </g>
       )}
       {kind === 'pump' && (
         <g {...common}>
           <rect x="16" y="20" width="16" height="20" rx="5" />
-          <path d="M20 20v-4h8v4M24 16v-5h7" />
-          <circle cx="36" cy="16" r="1.4" fill="currentColor" stroke="none" />
-          <circle cx="38" cy="21" r="1" fill="currentColor" stroke="none" />
+          <path d="M20 20v-4h8v4" />
+          <path data-ritual-part="pump-head" d="M24 16v-5h7" />
+          <g data-ritual-part="pump-drops">
+            <circle cx="36" cy="16" r="1.4" fill="currentColor" stroke="none" />
+            <circle cx="38" cy="21" r="1" fill="currentColor" stroke="none" />
+          </g>
         </g>
       )}
       {kind === 'apply' && (
@@ -150,6 +153,8 @@ export function RitualIcon({ kind, className }: { kind: 'wash' | 'pump' | 'apply
           <path d="M14 30c0-7 4-13 10-13s10 6 10 13" />
           <path d="M12 34h24" />
           <path d="M18 24c2 2 4 2.5 6 2.5s4-.5 6-2.5" />
+          <path data-ritual-part="apply-cream" d="M18 23c1-.7 2-1.1 3.2-1.2M26.8 21.8c1.2.1 2.2.5 3.2 1.2" />
+          <path data-ritual-part="apply-hand" d="m32 23 3-3c.8-.8 2.1.2 1.4 1.2l-3.9 5.6c-.8 1.1-1.1 2.2-1 3.5" />
         </g>
       )}
     </svg>

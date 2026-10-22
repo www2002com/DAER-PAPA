@@ -60,11 +60,10 @@
 .ritual > p { font-size: 23px; line-height: 1.55; font-weight: 300; }
 .ritual > p strong { font-weight: 400; }
 .ritual > p small { display: block; font-size: 12px; font-weight: 400; margin-top: 12px; color: var(--ink-3); }
-.ritual ol { display: grid; grid-template-columns: repeat(3, 1fr); width: min(60%, 620px); gap: 32px; }
+.ritual ol { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; gap: 32px; }
 .ritual li { display: flex; align-items: center; gap: 16px; }
 .ritual li span { font-size: 18px; white-space: nowrap; }
 .ritual li small { display: block; font-size: 11px; margin-bottom: 4px; color: var(--ink-3); }
-.ritualIcon { width: 64px; height: 64px; }
 .unbox {
   display: grid;
   gap: 20px;

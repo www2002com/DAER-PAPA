@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { RitualIcon } from '@/components/art/Art';
 import { PRODUCT, UNDECIDED } from '@/lib/facts';
 import { ProductViewer } from './ProductViewer';
 import { UnboxSteps } from './UnboxSteps';
+import { RitualSteps } from './RitualSteps';
 import styles from './Product.module.css';
 
 const DETAILS = [
@@ -52,11 +52,9 @@ export function Product() {
             </Link>
           </div>
         </div>
-        <div className={styles.ritual}>
+        <div id="daily-ritual" className={styles.ritual}>
           <p data-reveal>아빠의 아침이<br /><strong>조금 더 간편해지도록.</strong><small>구상 중인 사용 순서</small></p>
-          <ol>{([['wash','씻고'],['pump','덜고'],['apply','바르고']] as const).map(([kind,label], i) => (
-            <li key={kind} data-reveal data-reveal-delay={i * 50}><RitualIcon kind={kind} className={styles.ritualIcon} /><span><small>{i + 1}</small>{label}</span></li>
-          ))}</ol>
+          <RitualSteps />
         </div>
       </div>
     </section>

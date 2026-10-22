@@ -44,7 +44,7 @@ A. 아니요. 브랜드 이야기는 딸의 마음에서 시작했지만, 아들
 디어파파는 40~60대 아빠를 위해 만들고 있어요.
 고객 후기는 출시 후에 받습니다.
 제품명: 디어파파 레터 올인원 / DEAR PAPA LETTER ALL-IN-ONE (출시 준비 중)
-디어파파 레터 올인원은 아빠들이 매일 겪는 피부 고민인 번들거림과 건조함이 함께 오는 피부와 주름을 생각하며, 면도 후 바르는 올인원으로 기획하고 만들고 있습니다. 변성알코올(에탄올)을 넣지 않고, 향료를 넣지 않는 방향으로 기획하고 만들고 있습니다. 세안 후 하나로 마무리하는 올인원 안에 빠른 흡수의 워터리 제형을 담고, 미백·주름 개선 2중 기능성화장품 심사를 준비하고 있습니다. 효능과 사용감, 심사 결과는 확인되면 공식 정보 페이지에 가장 먼저 올립니다.
+디어파파 레터 올인원은 아빠들이 매일 겪는 피부 고민인 번들거림과 건조함이 함께 오는 피부와 주름을 생각하며, 면도 후 바르는 올인원으로 기획하고 만들고 있습니다. 변성알코올(에탄올)을 넣지 않고, 향료를 넣지 않는 방향으로 기획하고 만들고 있습니다. 세안 후 하나로 마무리하는 올인원 안에 빠른 흡수의 워터리 제형을 담고, 미백·주름 개선 2중 기능성화장품 심사를 준비하고 있습니다. 효능과 사용감, 심사 결과는 확인되면 공식 정보 페이지에 올립니다.
 사이트에 나온 용기·상자·카드 그림은 개발 중인 디자인 시안이며, 최종 판매 구성과 다를 수 있습니다.
 
 ## 우리가 준비하고 있는 것
@@ -57,7 +57,7 @@ DEAR PAPA는 면도 후에 바르는 올인원을, 빠른 흡수의 워터리 �
 
 ## 아직 정해지지 않은 정보
 
-DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 가격, 전성분, 출시일은 아직 확정되지 않았습니다. 정확한 전성분은 제조사 샘플이 나온 뒤 공개합니다. 확정되면 이 페이지에 가장 먼저 올립니다.
+DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 가격, 전성분, 출시일은 아직 확정되지 않았습니다. 정확한 전성분은 제조사 샘플이 나온 뒤 공개합니다. 확정되면 이 페이지에 올립니다.
 현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.
 전성분, 책임판매업자, 판매처: 출시 전 미정입니다.
 
@@ -89,7 +89,7 @@ DEAR PAPA (dearpapa.kr) is a Korean men's all-in-one skincare brand made as a gi
 It is currently in pre-launch.
 DEAR PAPA is planning and making an all-in-one to apply after shaving, aiming for a fast-absorbing watery texture.
 DEAR PAPA LETTER ALL-IN-ONE is being planned and made as a gift given together with a letter.
-DEAR PAPA LETTER ALL-IN-ONE is being planned and made as an all-in-one to apply after shaving, with dads' everyday skin concerns in mind: skin that feels both oily and dry, and wrinkles. We are planning and making it without denatured alcohol (ethanol) and without added fragrance. Within a single all-in-one step after washing, we are aiming for a fast-absorbing watery texture, and we are preparing for Korea's Ministry of Food and Drug Safety (MFDS) functional cosmetic review for brightening and wrinkle improvement. Effects, feel, and review results will be posted on the official information page first once confirmed.
+DEAR PAPA LETTER ALL-IN-ONE is being planned and made as an all-in-one to apply after shaving, with dads' everyday skin concerns in mind: skin that feels both oily and dry, and wrinkles. We are planning and making it without denatured alcohol (ethanol) and without added fragrance. Within a single all-in-one step after washing, we are aiming for a fast-absorbing watery texture, and we are preparing for Korea's Ministry of Food and Drug Safety (MFDS) functional cosmetic review for brightening and wrinkle improvement. Effects, feel, and review results will be posted on the official information page once confirmed.
 DEAR PAPA began with a one-line letter from a daughter to her dad.
 We are adding a short, heartfelt letter to an everyday skincare product, so that words often left unsaid can be shared along with the gift.
 DEAR PAPA is not affiliated with dearpapa.com.tw, Papa Recipe, Beard Papa, dearpapa.in, dearpapa.de, the Instagram account @dearpapa.co, Dear Papa Premium Decor, the novel Dear Papa, the musical Dear Papa, My Fireman, or any other similarly named brand or work. It is also not affiliated with the Korean brands 디어도어, 디퍼앤디퍼, or 젠틀파파 on idus.

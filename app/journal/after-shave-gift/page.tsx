@@ -85,7 +85,7 @@ export default function AfterShaveGiftPage() {
         <a href="https://www.instagram.com/dearpapa.kr/" rel="noopener">
           @dearpapa.kr
         </a>
-        과 공식 사이트 <Link href="/">dearpapa.kr</Link>에서 가장 먼저 알려 드립니다.
+        과 공식 사이트 <Link href="/">dearpapa.kr</Link>에서 알려 드립니다.
       </p>
 
       <RelatedLinks

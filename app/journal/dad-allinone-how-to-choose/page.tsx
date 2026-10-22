@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/ArticleLayout';
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
-import { DAD_ALLINONE_HOW_TO_CHOOSE_DESCRIPTION, DAD_ALLINONE_HOW_TO_CHOOSE_FAQ, dotDate, getJournalEntry } from '@/lib/journal';
+import { DAD_ALLINONE_HOW_TO_CHOOSE_DESCRIPTION, DAD_ALLINONE_HOW_TO_CHOOSE_FAQ, dotDate, getJournalEntry, DAD_ALLINONE_HOW_TO_CHOOSE_META_TITLE, DAD_ALLINONE_HOW_TO_CHOOSE_META_DESCRIPTION } from '@/lib/journal';
 
 // Ported verbatim from content/journal/guide-dad-allinone-how-to-choose-v1.md (article body only; line-2 status note omitted).
 
@@ -12,13 +12,13 @@ const PAGE_TITLE = `${entry.title} | 디어파파 DEAR PAPA`;
 
 export const metadata: Metadata = {
   metadataBase: null,
-  title: { absolute: PAGE_TITLE },
-  description: DAD_ALLINONE_HOW_TO_CHOOSE_DESCRIPTION,
+  title: { absolute: DAD_ALLINONE_HOW_TO_CHOOSE_META_TITLE },
+  description: DAD_ALLINONE_HOW_TO_CHOOSE_META_DESCRIPTION,
   alternates: { canonical: URL },
   openGraph: {
     type: 'article',
-    title: entry.title,
-    description: DAD_ALLINONE_HOW_TO_CHOOSE_DESCRIPTION,
+    title: DAD_ALLINONE_HOW_TO_CHOOSE_META_TITLE,
+    description: DAD_ALLINONE_HOW_TO_CHOOSE_META_DESCRIPTION,
     url: URL,
     siteName: 'DEAR PAPA 디어파파',
     locale: 'ko_KR',

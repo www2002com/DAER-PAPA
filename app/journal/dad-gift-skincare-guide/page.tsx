@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/ArticleLayout';
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
-import { DAD_GIFT_SKINCARE_GUIDE_DESCRIPTION, dotDate, getJournalEntry } from '@/lib/journal';
+import { DAD_GIFT_SKINCARE_GUIDE_DESCRIPTION, dotDate, getJournalEntry, DAD_GIFT_SKINCARE_GUIDE_META_TITLE, DAD_GIFT_SKINCARE_GUIDE_META_DESCRIPTION } from '@/lib/journal';
 
 // Ported verbatim from content/journal/guide-dad-gift-skincare-v1.md (article body only; line-2 status note omitted).
 
@@ -12,13 +12,13 @@ const PAGE_TITLE = `${entry.title} | 디어파파 DEAR PAPA`;
 
 export const metadata: Metadata = {
   metadataBase: null,
-  title: { absolute: PAGE_TITLE },
-  description: DAD_GIFT_SKINCARE_GUIDE_DESCRIPTION,
+  title: { absolute: DAD_GIFT_SKINCARE_GUIDE_META_TITLE },
+  description: DAD_GIFT_SKINCARE_GUIDE_META_DESCRIPTION,
   alternates: { canonical: URL },
   openGraph: {
     type: 'article',
-    title: entry.title,
-    description: DAD_GIFT_SKINCARE_GUIDE_DESCRIPTION,
+    title: DAD_GIFT_SKINCARE_GUIDE_META_TITLE,
+    description: DAD_GIFT_SKINCARE_GUIDE_META_DESCRIPTION,
     url: URL,
     siteName: 'DEAR PAPA 디어파파',
     locale: 'ko_KR',

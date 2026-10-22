@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/ArticleLayout';
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
-import { GIFT_WITHOUT_ROUTINE_DESCRIPTION, JOURNAL_SITE_SUFFIX, dotDate, getJournalEntry } from '@/lib/journal';
+import { GIFT_WITHOUT_ROUTINE_DESCRIPTION, JOURNAL_SITE_SUFFIX, dotDate, getJournalEntry, GIFT_WITHOUT_ROUTINE_META_TITLE, GIFT_WITHOUT_ROUTINE_META_DESCRIPTION } from '@/lib/journal';
 
 // Ported from the static draft drafts/journal-guide-04-2026-10-20 (manuscript guide-04 v2).
 // Every 「…」 quote attributed to the official facts page must match /about/facts verbatim.
@@ -13,13 +13,13 @@ const AAD = 'https://www.aad.org/public/everyday-care/skin-care-basics/care/skin
 
 export const metadata: Metadata = {
   metadataBase: null,
-  title: { absolute: `${entry.title}${JOURNAL_SITE_SUFFIX}` },
-  description: GIFT_WITHOUT_ROUTINE_DESCRIPTION,
+  title: { absolute: GIFT_WITHOUT_ROUTINE_META_TITLE },
+  description: GIFT_WITHOUT_ROUTINE_META_DESCRIPTION,
   alternates: { canonical: URL },
   openGraph: {
     type: 'article',
-    title: entry.title,
-    description: GIFT_WITHOUT_ROUTINE_DESCRIPTION,
+    title: GIFT_WITHOUT_ROUTINE_META_TITLE,
+    description: GIFT_WITHOUT_ROUTINE_META_DESCRIPTION,
     url: URL,
     siteName: 'DEAR PAPA 디어파파',
     locale: 'ko_KR',

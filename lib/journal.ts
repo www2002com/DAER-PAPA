@@ -130,3 +130,17 @@ export function getJournalEntry(slug: string): JournalEntry {
 export function dotDate(iso: string): string {
   return iso.split('-').join('.');
 }
+
+/** 2026-10-23 search meta (title/description/og only; H1·article JSON-LD unchanged). */
+export const GIFT_WITHOUT_ROUTINE_META_TITLE = '화장품 안 쓰는 아빠 첫 선물 | 디어파파 DEAR PAPA';
+export const GIFT_WITHOUT_ROUTINE_META_DESCRIPTION =
+  '아빠가 평소 화장품을 거의 안 쓰신다면 세안 후 하나로 마무리하는 올인원부터. 단계 수, 향료가 들어 있는지, 면도 후 바르기 편한지 보는 기준을 정리했습니다.';
+export const AFTER_SHAVE_GIFT_META_TITLE = '면도 후 바르는 아빠 스킨케어 | 디어파파 DEAR PAPA';
+export const AFTER_SHAVE_GIFT_META_DESCRIPTION =
+  '면도 후 바르는 아빠 스킨케어는 향이 있는지, 에탄올이 들어 있는지, 한 단계로 바르기 쉬운지부터 보세요. 애프터셰이브·로션과 올인원의 차이도 정리했습니다.';
+export const DAD_GIFT_SKINCARE_GUIDE_META_TITLE = '아빠 선물 화장품 고르는 법 7가지 | 디어파파 DEAR PAPA';
+export const DAD_GIFT_SKINCARE_GUIDE_META_DESCRIPTION =
+  '50대·60대 아빠 생신이나 어버이날 화장품 선물은 피부 타입(지성·건성·민감), 향, 에탄올, 바르는 단계 수, 용량, 전성분 순서로 보면 고르기 쉽습니다.';
+export const DAD_ALLINONE_HOW_TO_CHOOSE_META_TITLE = '50대 남자 올인원 고르는 법 | 디어파파 DEAR PAPA';
+export const DAD_ALLINONE_HOW_TO_CHOOSE_META_DESCRIPTION =
+  '50대·60대 남자 올인원은 지성·건성·민감 피부 타입, 무향인지, 에탄올이 들어 있는지, 몇 단계로 바르는지, 면도 후 바르기 편한지, 전성분 순서로 확인하면 고르기 쉽습니다.';

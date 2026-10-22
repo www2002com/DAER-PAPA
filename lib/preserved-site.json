@@ -4,12 +4,12 @@
   "pages": {
     "/": {
       "file": "index.html",
-      "title": "DEAR PAPA 디어파파 — 아빠의 매일에, 딸의 마음을.",
+      "title": "아빠 선물 올인원 스킨케어 | 디어파파 DEAR PAPA",
       "canonical": "https://dearpapa.kr/",
       "meta": [
         {
           "name": "description",
-          "content": "편지와 함께 건네는 아빠 선물, DEAR PAPA(디어파파). 아빠를 위한 올인원 스킨케어. 현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다. 제품명: 디어파파 레터 올인원. DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다."
+          "content": "편지와 함께 건네는 아빠 선물, 디어파파 레터 올인원. 40~60대 아빠가 세안 후 하나로 마무리하는 올인원을 출시 준비 중입니다. 출시 알림을 받아 보세요."
         },
         {
           "property": "og:type",
@@ -29,11 +29,11 @@
         },
         {
           "property": "og:title",
-          "content": "DEAR PAPA 디어파파 — 아빠의 매일에, 딸의 마음을."
+          "content": "아빠 선물 올인원 스킨케어 | 디어파파 DEAR PAPA"
         },
         {
           "property": "og:description",
-          "content": "편지와 함께 건네는 아빠 선물, DEAR PAPA(디어파파). 아빠를 위한 올인원 스킨케어. 현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다. 제품명: 디어파파 레터 올인원. DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다."
+          "content": "편지와 함께 건네는 아빠 선물, 디어파파 레터 올인원. 40~60대 아빠가 세안 후 하나로 마무리하는 올인원을 출시 준비 중입니다. 출시 알림을 받아 보세요."
         },
         {
           "property": "og:image",
@@ -47,12 +47,12 @@
     },
     "/journal": {
       "file": "journal.html",
-      "title": "브랜드 자료실 | DEAR PAPA 디어파파",
+      "title": "아빠 선물·남자 올인원 가이드 | 디어파파 DEAR PAPA",
       "canonical": "https://dearpapa.kr/journal",
       "meta": [
         {
           "name": "description",
-          "content": "디어파파의 브랜드 이야기, 제품 개발 방향과 아빠를 위한 선물 가이드를 모았습니다."
+          "content": "아빠 선물 고르는 법, 면도 후 바르는 스킨케어, 남자 올인원 고르는 기준까지. 디어파파가 정리한 선물·스킨케어 가이드와 브랜드 이야기를 모았습니다."
         },
         {
           "property": "og:type",
@@ -68,11 +68,11 @@
         },
         {
           "property": "og:title",
-          "content": "브랜드 자료실"
+          "content": "아빠 선물·남자 올인원 가이드 | 디어파파 DEAR PAPA"
         },
         {
           "property": "og:description",
-          "content": "디어파파의 브랜드 이야기, 제품 개발 방향과 아빠를 위한 선물 가이드를 모았습니다."
+          "content": "아빠 선물 고르는 법, 면도 후 바르는 스킨케어, 남자 올인원 고르는 기준까지. 디어파파가 정리한 선물·스킨케어 가이드와 브랜드 이야기를 모았습니다."
         },
         {
           "property": "og:url",
@@ -102,12 +102,12 @@
     },
     "/journal/brand-identity": {
       "file": "journal/brand-identity.html",
-      "title": "디어파파가 전하고 싶은 마음 | DEAR PAPA 디어파파",
+      "title": "디어파파는 어떤 브랜드인가요 | 디어파파 DEAR PAPA",
       "canonical": "https://dearpapa.kr/journal/brand-identity",
       "meta": [
         {
           "name": "description",
-          "content": "DEAR PAPA의 공식 표기와 브랜드 방향, 현재 준비 상황을 소개합니다. 아빠의 매일에 딸의 마음이 남는 선물을 준비합니다."
+          "content": "디어파파(DEAR PAPA)는 편지와 함께 건네는 아빠 선물을 준비하는 남성 올인원 스킨케어 브랜드입니다. 공식 표기와 브랜드 방향, 지금의 준비 상황을 소개합니다."
         },
         {
           "property": "og:type",
@@ -123,11 +123,11 @@
         },
         {
           "property": "og:title",
-          "content": "디어파파가 전하고 싶은 마음"
+          "content": "디어파파는 어떤 브랜드인가요 | 디어파파 DEAR PAPA"
         },
         {
           "property": "og:description",
-          "content": "DEAR PAPA의 공식 표기와 브랜드 방향, 현재 준비 상황을 소개합니다. 아빠의 매일에 딸의 마음이 남는 선물을 준비합니다."
+          "content": "디어파파(DEAR PAPA)는 편지와 함께 건네는 아빠 선물을 준비하는 남성 올인원 스킨케어 브랜드입니다. 공식 표기와 브랜드 방향, 지금의 준비 상황을 소개합니다."
         },
         {
           "property": "og:url",
@@ -170,12 +170,12 @@
     },
     "/journal/development-principles": {
       "file": "journal/development-principles.html",
-      "title": "매일 쓰는 제품을 준비하는 기준 | DEAR PAPA 디어파파",
+      "title": "레터 올인원 개발 기준 | 디어파파 DEAR PAPA",
       "canonical": "https://dearpapa.kr/journal/development-principles",
       "meta": [
         {
           "name": "description",
-          "content": "디어파파의 올인원 스킨케어 개발 방향과 아직 확정되지 않은 제품 정보를 구분해 안내합니다."
+          "content": "디어파파 레터 올인원을 준비하는 기준. 세안 후 하나로 마무리하는 한 단계, 향료를 넣지 않는 방향, 면도 후 바르는 장면을 생각합니다. 확정 전 정보는 따로 구분합니다."
         },
         {
           "property": "og:type",
@@ -191,11 +191,11 @@
         },
         {
           "property": "og:title",
-          "content": "매일 쓰는 제품을 준비하는 기준"
+          "content": "레터 올인원 개발 기준 | 디어파파 DEAR PAPA"
         },
         {
           "property": "og:description",
-          "content": "디어파파의 올인원 스킨케어 개발 방향과 아직 확정되지 않은 제품 정보를 구분해 안내합니다."
+          "content": "디어파파 레터 올인원을 준비하는 기준. 세안 후 하나로 마무리하는 한 단계, 향료를 넣지 않는 방향, 면도 후 바르는 장면을 생각합니다. 확정 전 정보는 따로 구분합니다."
         },
         {
           "property": "og:url",
@@ -238,12 +238,12 @@
     },
     "/journal/fathers-gift-guide": {
       "file": "journal/fathers-gift-guide.html",
-      "title": "아빠 선물 스킨케어, 일상에 맞게 고르는 법 | DEAR PAPA 디어파파",
+      "title": "어버이날 아빠 선물 스킨케어 | 디어파파 DEAR PAPA",
       "canonical": "https://dearpapa.kr/journal/fathers-gift-guide",
       "meta": [
         {
           "name": "description",
-          "content": "아빠에게 스킨케어를 선물하기 전 살펴볼 취향과 생활 습관, 함께 전할 짧은 편지에 관한 디어파파의 제안입니다."
+          "content": "어버이날 아빠 선물로 스킨케어를 고를 때 살펴볼 생활 습관과 취향, 면도 후 바르는 단계, 함께 건넬 짧은 편지까지 디어파파가 정리했습니다."
         },
         {
           "property": "og:type",
@@ -259,11 +259,11 @@
         },
         {
           "property": "og:title",
-          "content": "아빠 선물 스킨케어, 일상에 맞게 고르는 법"
+          "content": "어버이날 아빠 선물 스킨케어 | 디어파파 DEAR PAPA"
         },
         {
           "property": "og:description",
-          "content": "아빠에게 스킨케어를 선물하기 전 살펴볼 취향과 생활 습관, 함께 전할 짧은 편지에 관한 디어파파의 제안입니다."
+          "content": "어버이날 아빠 선물로 스킨케어를 고를 때 살펴볼 생활 습관과 취향, 면도 후 바르는 단계, 함께 건넬 짧은 편지까지 디어파파가 정리했습니다."
         },
         {
           "property": "og:url",
@@ -300,12 +300,12 @@
     },
     "/journal/dad-gift-guide": {
       "file": "journal/dad-gift-guide.html",
-      "title": "아빠 선물 추천, 편지와 함께 건네는 스킨케어 | DEAR PAPA 디어파파",
+      "title": "아빠 선물 추천, 편지와 스킨케어 | 디어파파 DEAR PAPA",
       "canonical": "https://dearpapa.kr/journal/dad-gift-guide",
       "meta": [
         {
           "name": "description",
-          "content": "편지와 함께 건네는 아빠 선물, DEAR PAPA(디어파파). 아빠를 위한 올인원 스킨케어."
+          "content": "딸·아들이 40~60대 아빠에게 주는 선물로 매일 쓰는 스킨케어와 한 줄 편지를 제안합니다. 생신·어버이날·퇴직처럼 장면별로 고르는 기준을 정리했습니다."
         },
         {
           "property": "og:type",
@@ -321,11 +321,11 @@
         },
         {
           "property": "og:title",
-          "content": "아빠 선물 추천, 편지와 함께 건네는 스킨케어"
+          "content": "아빠 선물 추천, 편지와 스킨케어 | 디어파파 DEAR PAPA"
         },
         {
           "property": "og:description",
-          "content": "편지와 함께 건네는 아빠 선물, DEAR PAPA(디어파파). 아빠를 위한 올인원 스킨케어."
+          "content": "딸·아들이 40~60대 아빠에게 주는 선물로 매일 쓰는 스킨케어와 한 줄 편지를 제안합니다. 생신·어버이날·퇴직처럼 장면별로 고르는 기준을 정리했습니다."
         },
         {
           "property": "og:url",
@@ -366,12 +366,12 @@
     },
     "/letter-all-in-one": {
       "file": "letter-all-in-one.html",
-      "title": "우리가 준비하고 있는 것 | 디어파파 레터 올인원",
+      "title": "디어파파 레터 올인원 | 아빠를 위한 올인원 스킨케어",
       "canonical": "https://dearpapa.kr/letter-all-in-one",
       "meta": [
         {
           "name": "description",
-          "content": "현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다. 디어파파 레터 올인원은 선물과 편지를 함께 건네는 구조로 기획하고 만들고 있습니다. DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다."
+          "content": "40~60대 아빠를 위해 준비 중인 남성 올인원. 세안 후 하나로 마무리하고, 면도 후 바르는 한 단계로 기획합니다. 아직 판매 전이며 출시 알림을 받을 수 있습니다."
         },
         {
           "property": "og:type",
@@ -387,11 +387,11 @@
         },
         {
           "property": "og:title",
-          "content": "우리가 준비하고 있는 것 | 디어파파 레터 올인원"
+          "content": "디어파파 레터 올인원 | 아빠를 위한 올인원 스킨케어"
         },
         {
           "property": "og:description",
-          "content": "현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다. 디어파파 레터 올인원은 선물과 편지를 함께 건네는 구조로 기획하고 만들고 있습니다. DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다."
+          "content": "40~60대 아빠를 위해 준비 중인 남성 올인원. 세안 후 하나로 마무리하고, 면도 후 바르는 한 단계로 기획합니다. 아직 판매 전이며 출시 알림을 받을 수 있습니다."
         },
         {
           "property": "og:url",
@@ -428,12 +428,12 @@
     },
     "/about/facts": {
       "file": "about/facts.html",
-      "title": "DEAR PAPA(디어파파) 공식 정보 | 편지와 함께 건네는 아빠 선물 스킨케어",
+      "title": "디어파파 공식 정보 | 디어파파 DEAR PAPA",
       "canonical": "https://dearpapa.kr/about/facts",
       "meta": [
         {
           "name": "description",
-          "content": "디어파파 화장품 공식 정보. DEAR PAPA(디어파파, dearpapa.kr)는 편지와 함께 건네는 아빠 선물, 아빠를 위한 올인원 스킨케어 브랜드입니다. 제품명: 디어파파 레터 올인원. Official information on DEAR PAPA cosmetics."
+          "content": "디어파파(DEAR PAPA, dearpapa.kr) 공식 정보. 편지와 함께 건네는 아빠 선물, 디어파파 레터 올인원을 준비하는 브랜드입니다. 파파레서피와는 관련이 없습니다."
         },
         {
           "property": "og:type",
@@ -449,11 +449,11 @@
         },
         {
           "property": "og:title",
-          "content": "DEAR PAPA(디어파파) 공식 정보 | 편지와 함께 건네는 아빠 선물 스킨케어"
+          "content": "디어파파 공식 정보 | 디어파파 DEAR PAPA"
         },
         {
           "property": "og:description",
-          "content": "디어파파 화장품 공식 정보. DEAR PAPA(디어파파, dearpapa.kr)는 편지와 함께 건네는 아빠 선물, 아빠를 위한 올인원 스킨케어 브랜드입니다. 제품명: 디어파파 레터 올인원. Official information on DEAR PAPA cosmetics."
+          "content": "디어파파(DEAR PAPA, dearpapa.kr) 공식 정보. 편지와 함께 건네는 아빠 선물, 디어파파 레터 올인원을 준비하는 브랜드입니다. 파파레서피와는 관련이 없습니다."
         },
         {
           "property": "og:url",
@@ -542,12 +542,12 @@
     },
     "/press": {
       "file": "press.html",
-      "title": "DEAR PAPA(디어파파) 소개 기사",
+      "title": "디어파파 소개 기사 | 디어파파 DEAR PAPA",
       "canonical": "https://dearpapa.kr/press",
       "meta": [
         {
           "name": "description",
-          "content": "DEAR PAPA(디어파파, dearpapa.kr) 소개 기사 모음. Articles about DEAR PAPA."
+          "content": "디어파파(DEAR PAPA, dearpapa.kr)를 소개한 기사 모음입니다. 편지와 함께 건네는 아빠 선물, 디어파파 레터 올인원을 준비하는 브랜드 이야기를 담았습니다."
         },
         {
           "property": "og:type",
@@ -567,11 +567,11 @@
         },
         {
           "property": "og:title",
-          "content": "DEAR PAPA(디어파파) 소개 기사"
+          "content": "디어파파 소개 기사 | 디어파파 DEAR PAPA"
         },
         {
           "property": "og:description",
-          "content": "DEAR PAPA(디어파파, dearpapa.kr) 소개 기사 모음."
+          "content": "디어파파(DEAR PAPA, dearpapa.kr)를 소개한 기사 모음입니다. 편지와 함께 건네는 아빠 선물, 디어파파 레터 올인원을 준비하는 브랜드 이야기를 담았습니다."
         },
         {
           "property": "og:image",

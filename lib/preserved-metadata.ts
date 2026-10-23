@@ -22,8 +22,8 @@ export function preservedMetadata(path: PreservedPath): Metadata {
       url: fields['og:url'],
       siteName: fields['og:site_name'],
       locale: fields['og:locale'],
-      images: fields['og:image'] ? [{ url: fields['og:image'] }] : [],
+      images: [{ url: fields['og:image'] || 'https://dearpapa.kr/og.png' }],
     },
-    twitter: { card: 'summary_large_image' },
+    twitter: { card: 'summary_large_image', images: [fields['og:image'] || 'https://dearpapa.kr/og.png'] },
   };
 }

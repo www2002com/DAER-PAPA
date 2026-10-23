@@ -154,3 +154,8 @@ npm run verify:preservation -- --url http://127.0.0.1:3130
 - 보존 대상 외 새 글. 콘텐츠 원문 v2(content/journal/guide-fragrance-alcohol-free-allinone-v2-2026-10-23.md) 본문을 그대로 옮김(상태·점검 메모 제외). Article·FAQPage·BreadcrumbList JSON-LD, 출처 law.go.kr·mfds.go.kr·AAD.
 - sitemap.xml, llms.txt, rss.xml에 추가하고 sitemap·llms 해시만 갱신.
 - 홈 제품 정보: 「용기」 문장을 용량 목록에서 분리해 별도 줄로 옮김(문구 그대로).
+
+## 2026-10-23 새 저널 /journal/dad-skincare-gift-types
+
+- 보존 대상 외 새 글. 콘텐츠 원문 guide-02 v6(content/guide/guide-02-dad-skincare-gift-types-v6.md)의 붙여넣기용 본문을 옮김(해시태그·내부 메모 제외). 첫 브랜드 언급은 「디어파파(DEAR PAPA)는」, 150ml 문장은 「디어파파는」으로 맞춤. Article·BreadcrumbList JSON-LD(Q&A 글이 아니라 FAQPage 없음).
+- sitemap.xml, llms.txt, rss.xml에 추가하고 sitemap·llms 해시만 갱신.

@@ -9,7 +9,6 @@ const DETAILS = [
   ['용량', '150ml 한 가지를 기획하고 있습니다.'],
   ['가격 · 출시일', '아직 확정되지 않았습니다.'],
   ['전성분', UNDECIDED.ingredients],
-  ['용기', PRODUCT.container],
   ['책임판매업자 · 판매처', '출시 전 미정입니다.'],
 ];
 
@@ -37,6 +36,7 @@ export function Product() {
             <details className={styles.details}>
               <summary>지금까지 정해진 제품 정보<span aria-hidden="true" /></summary>
               <dl className={styles.specs}>{DETAILS.map(([k,v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+              <p className={styles.notice}>용기: {PRODUCT.container}</p>
               <p className={styles.notice}>미백·주름 개선 2중 기능성화장품 심사를 준비하고 있습니다. {PRODUCT.resultsFirst} {UNDECIDED.status}</p>
             </details>
             <details className={styles.details}>

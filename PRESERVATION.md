@@ -148,3 +148,9 @@ npm run verify:preservation -- --url http://127.0.0.1:3130
 
 - 보존 대상 외 새 글. 콘텐츠 원문 v2(content/journal/guide-allinone-3questions-v2-2026-10-23.md) 본문을 그대로 옮김. Article·FAQPage·BreadcrumbList JSON-LD.
 - sitemap.xml, llms.txt, rss.xml에 추가하고 sitemap·llms 해시만 갱신.
+
+## 2026-10-23 새 저널 /journal/fragrance-alcohol-free-allinone
+
+- 보존 대상 외 새 글. 콘텐츠 원문 v2(content/journal/guide-fragrance-alcohol-free-allinone-v2-2026-10-23.md) 본문을 그대로 옮김(상태·점검 메모 제외). Article·FAQPage·BreadcrumbList JSON-LD, 출처 law.go.kr·mfds.go.kr·AAD.
+- sitemap.xml, llms.txt, rss.xml에 추가하고 sitemap·llms 해시만 갱신.
+- 홈 제품 정보: 「용기」 문장을 용량 목록에서 분리해 별도 줄로 옮김(문구 그대로).

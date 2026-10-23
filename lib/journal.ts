@@ -107,6 +107,15 @@ export const JOURNAL: readonly JournalEntry[] = [
     published: '2026-10-23',
     modified: '2026-10-23',
   },
+  {
+    slug: 'dad-skincare-gift-types',
+    href: '/journal/dad-skincare-gift-types',
+    category: '선물 이야기',
+    title: '아빠 선물 추천 화장품, 40~60대 아빠 스킨케어 선물 종류별 비교: 피부 타입·향·사용 단계',
+    summary: '아빠가 평소 몇 단계를 바르시는지, 피부가 번들거리는 편인지 당기는 편인지, 향을 좋아하시는지 세 가지만 먼저 확인하면 선물 종류가 거의 정해져요.',
+    published: '2026-10-23',
+    modified: '2026-10-23',
+  },
 ];
 
 /** guide-04 meta/og description and lead (longer than the list summary). */
@@ -206,3 +215,7 @@ export const FRAGRANCE_FREE_FAQ = [
   { q: "이 기준이 중요한 경우는?", points: ["향이 있는 제품을 피하고 싶은 경우.", "향 원료나 에탄올에 맞지 않았던 경험이 있는 경우.", "면도 후 매일 바르는 제품이라 성분을 꼼꼼히 보고 싶은 경우.", "아빠 선물로 고르면서 받는 사람의 취향을 모르는 경우."] },
   { q: "이 기준이 덜 중요한 경우는?", points: ["향이 있는 제품을 좋아하고, 써 온 제품에 불편이 없던 경우.", "성분보다 제형이나 사용감이 더 고민인 경우. 이때는 제형 확인이 먼저입니다.", "향료나 에탄올이 없다고 해서 모든 사람에게 맞는다는 뜻은 아닙니다. 전성분 전체와 자신의 경험을 함께 보세요."] },
 ];
+/** dad-skincare-gift-types (guide-02 v6) meta/og. */
+export const DAD_SKINCARE_GIFT_TYPES_META_TITLE = '아빠 선물 화장품 종류별 비교: 피부 타입·향·사용 단계 | 디어파파 DEAR PAPA';
+export const DAD_SKINCARE_GIFT_TYPES_DESCRIPTION =
+  '아빠가 평소 몇 단계를 바르시는지, 피부가 번들거리는 편인지 당기는 편인지, 향을 좋아하시는지 세 가지만 먼저 확인하면 선물 종류가 거의 정해져요.';

@@ -1,5 +1,6 @@
 import { Composer } from '@/components/letter/Composer';
 import { LETTER } from '@/lib/facts';
+import { launchNotifyReady } from '@/lib/launch-notify-config';
 import styles from './LetterSection.module.css';
 
 export function LetterSection() {
@@ -15,7 +16,7 @@ export function LetterSection() {
           </p>
         </header>
 
-        <Composer />
+        <Composer notifyReady={launchNotifyReady()} />
 
         <div className={styles.notes}>
           <p data-reveal>

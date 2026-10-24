@@ -23,8 +23,10 @@ export function LaunchNotify({ placement, headingLevel = 'h2' }: { placement: La
   useEffect(() => {
     const el = root.current;
     if (!el || typeof IntersectionObserver === 'undefined') return;
+    let viewed = false;
     const observer = new IntersectionObserver((entries) => {
-      if (entries.some((e) => e.isIntersecting)) {
+      if (!viewed && entries.some((e) => e.isIntersecting && e.intersectionRatio >= 0.5)) {
+        viewed = true;
         trackAction('launch_notify_viewed', { placement });
         observer.disconnect();
       }
@@ -39,6 +41,7 @@ export function LaunchNotify({ placement, headingLevel = 'h2' }: { placement: La
     if (!normalizeEmail(email)) return setStatus({ kind: 'error', code: 'invalid_email' });
     if (!consent) return setStatus({ kind: 'error', code: 'consent_required' });
     setStatus({ kind: 'submitting' });
+    trackAction('launch_notify_attempted', { placement });
     try {
       const res = await fetch(LAUNCH_NOTIFY_ENDPOINT, {
         method: 'POST',
@@ -53,9 +56,11 @@ export function LaunchNotify({ placement, headingLevel = 'h2' }: { placement: La
         trackAction('launch_notify_submitted', { placement });
         return;
       }
-      const code = (data.error && data.error in COPY.errors ? data.error : 'server_error') as LaunchNotifyErrorCode;
+      const code = (typeof data?.error === 'string' && Object.hasOwn(COPY.errors, data.error) ? data.error : 'server_error') as LaunchNotifyErrorCode;
+      trackAction('launch_notify_failed', { placement, reason: code });
       setStatus({ kind: 'error', code });
     } catch {
+      trackAction('launch_notify_failed', { placement, reason: 'server_error' });
       setStatus({ kind: 'error', code: 'server_error' });
     }
   }

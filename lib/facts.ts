@@ -59,7 +59,7 @@ export const UNDECIDED = {
   tbd: '가격, 전성분, 출시일은 아직 확정되지 않았습니다.',
   ingredients: '정확한 전성분은 제조사 샘플이 나온 뒤 공개합니다.',
   status: '현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.',
-  orders: '사전 예약이나 주문은 받지 않으며, 출시 소식은 공식 사이트 dearpapa.kr과 공식 인스타그램 @dearpapa.kr에서 알려 드립니다.',
+  orders: '디어파파는 출시 소식을 공식 사이트 dearpapa.kr과 공식 인스타그램 @dearpapa.kr에서 알려 드립니다.',
   seller: '전성분, 책임판매업자, 판매처: 출시 전 미정입니다.',
 } as const;
 

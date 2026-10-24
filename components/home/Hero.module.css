@@ -6,7 +6,7 @@
 .status span { width: 6px; height: 6px; border-radius: 50%; background: var(--forest); }
 .title { font-size: clamp(40px, 5.2vw, 76px); font-weight: 850; line-height: 1.15; letter-spacing: -.065em; text-shadow: 2px 2px 0 white, 4px 5px 0 #abc5f6; }
 .description { margin-top: 27px; font-size: 17px; line-height: 1.9; color: var(--ink-2); }
-.invitation { display: flex; align-items: center; gap: clamp(12px, 3vw, 40px); margin-top: 16px; }
+.invitation { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(12px, 3vw, 40px); margin-top: 16px; }
 .invitation .cta { margin-top: 0; flex-shrink: 0; }
 .cta { margin-top: 26px; min-height: 54px; padding: 0 24px; border-radius: 999px; font-size: 15px; font-weight: 700; background: var(--ink); color: var(--paper); box-shadow: 4px 4px 0 #c9b7e7; transition: transform 180ms ease, box-shadow 180ms ease; }
 .cta:hover { background: var(--forest); box-shadow: 2px 2px 0 #c9b7e7; transform: translate(2px,2px); }

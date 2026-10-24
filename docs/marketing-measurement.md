@@ -9,7 +9,7 @@
 | letter_entry_clicked | 표시된 편지 진입 링크 또는 내부 쓰기 버튼 클릭 | 입력 진입 의도, 작성 완료 아님 |
 | letter_started | 편지 입력 시작 | 작성 활동 |
 | letter_card_exported | 카드 내보내기 처리 | OS 저장이나 인쇄 확인 아님 |
-| product_details_after_letter_clicked | 카드 내보내기 요청 처리 후 선택형 제품 링크 클릭 | 구매·신청·공유 완료 아님 |
+| product_details_after_letter_clicked | 카드 내보내기, 보관함 재저장, 공유창의 전송 동작 선택 뒤 나타나는 선택형 제품 링크 클릭. 속성 `source` = `export` · `archive` · `share` (속성 없는 이전 기록은 export) | 구매·신청 아님. `share`는 카카오 보내기·기기 공유창·링크 복사·이미지 저장 중 하나를 고른 시점이며, 카카오는 완료 신호가 없어 **전달 완료를 뜻하지 않음** |
 | campaign_landing | 승인된 캠페인 URL 조합(docs/utm-links.md)으로 방문 | 탭 세션당 캠페인별 1회, 고유 고객 아님 |
 | launch_notify_viewed | 폼이 50% 이상 보인 첫 시점 | 해당 마운트당 1회, 고유 방문자 아님 |
 | launch_notify_attempted | 클라이언트 이메일·동의 검증 후 API 요청 | 재시도 포함 |

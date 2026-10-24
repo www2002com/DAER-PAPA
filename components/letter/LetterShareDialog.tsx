@@ -8,7 +8,12 @@ import { createLetterStory } from './share-story';
 import { SODAM_LETTER_STICKER } from './share-assets';
 import styles from './LetterShareDialog.module.css';
 
-export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; onClose: () => void }) {
+/**
+ * onShareAction fires when the writer actually chose a send action: Kakao send opened, the system share
+ * sheet resolved, the link was copied, or the story image was saved. Kakao gives no completion callback,
+ * so this means "a share was attempted", never "the letter was delivered".
+ */
+export function LetterShareDialog({ letter, onClose, onShareAction }: { letter: LetterInput; onClose: () => void; onShareAction?: () => void }) {
   const id = useId();
   const dialog = useRef<HTMLDialogElement>(null);
   const alive = useRef(false);
@@ -73,7 +78,7 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
     busyRef.current = true;
     setBusy(true);
     setStatus('');
-    try { await navigator.share(data); }
+    try { await navigator.share(data); onShareAction?.(); }
     catch (error) {
       if (alive.current && (error as DOMException)?.name !== 'AbortError') setStatus('공유창을 열 수 없었어요. 링크를 복사하거나 이미지를 저장해 주세요.');
     } finally {
@@ -83,13 +88,14 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
   }
   function shareKakao() {
     setStatus('');
-    try { sendLetterToKakao(letter); }
+    try { sendLetterToKakao(letter); onShareAction?.(); }
     catch { setKakao('fallback'); setStatus('카카오톡 공유창을 열 수 없었어요. 편지 링크를 복사해 보내 주세요.'); }
   }
   async function copyLink() {
     try {
       if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
       await navigator.clipboard.writeText(shareUrl);
+      onShareAction?.();
       if (alive.current) setStatus('편지 링크를 복사했어요.');
     } catch {
       if (alive.current) { setManualCopy(true); setStatus('아래 링크를 길게 누르거나 선택해서 복사해 주세요.'); }
@@ -138,7 +144,7 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
           </div>
           <p className={styles.privacy}>이미지에는 편지 내용과 이름이 보여요. 올리기 전에 공개 범위를 확인해 주세요.</p>
           {story?.canShare && <><button type="button" className={styles.instagramButton} disabled={busy} onClick={() => nativeShare({ files: [story.file], title: '편지 왔어요!!' })}>이미지 공유창 열기</button><p className={styles.note}>공유창에서 Instagram을 선택해 주세요.</p></>}
-          {story && <a className={styles.secondary} href={story.url} download="DEAR-PAPA-letter-story.png">Instagram용 이미지 저장</a>}
+          {story && <a className={styles.secondary} href={story.url} download="DEAR-PAPA-letter-story.png" onClick={() => onShareAction?.()}>Instagram용 이미지 저장</a>}
           {storyError && <button type="button" className={styles.secondary} onClick={() => setStoryAttempt(v => v + 1)}>이미지 다시 만들기</button>}
           <p className={styles.note}>저장한 이미지를 Instagram 스토리나 게시물에 올릴 수 있어요.</p>
           <a className={styles.external} href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram 열기 <span aria-hidden="true">↗</span></a>

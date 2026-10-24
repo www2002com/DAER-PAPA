@@ -18,6 +18,8 @@ export type ActionData = {
   placement?: 'home' | 'product';
   reason?: LaunchNotifyErrorCode;
   campaign?: CampaignId;
+  /** Which letter action revealed the product link: export (card saved), archive (saved letter exported), share (a send action picked in the share dialog; attempted, not delivered). */
+  source?: 'export' | 'share' | 'archive';
 };
 
 const CAMPAIGN_SCOPED_ACTIONS: ReadonlySet<SiteAction> = new Set([

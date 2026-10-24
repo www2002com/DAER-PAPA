@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/next';
 import { ACTIONS, trackAction, type SiteAction } from '@/lib/analytics';
+import { CampaignAttribution } from './CampaignAttribution';
 
 export function SiteAnalytics() {
   useEffect(() => {
@@ -17,10 +18,10 @@ export function SiteAnalytics() {
   }, []);
 
   if (process.env.NODE_ENV !== 'production') return null;
-  return <Analytics beforeSend={(event) => {
+  return <><Analytics beforeSend={(event) => {
     const url = new URL(event.url, window.location.origin);
     url.search = '';
     url.hash = '';
     return { ...event, url: url.href };
-  }} />;
+  }} /><CampaignAttribution /></>;
 }

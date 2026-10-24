@@ -3,15 +3,21 @@ import type { LaunchNotifyErrorCode } from './launch-notify';
 
 export const ACTIONS = [
   'letter_entry_clicked', 'letter_started', 'letter_card_exported', 'contact_email_copied', 'social_channel_opened',
+  'product_details_after_letter_clicked',
+  'campaign_landing',
   // 출시 알림 신청 conversion: form seen vs accepted submission, split by placement (home | product).
   'launch_notify_viewed', 'launch_notify_attempted', 'launch_notify_submitted', 'launch_notify_failed',
 ] as const;
 export type SiteAction = (typeof ACTIONS)[number];
 
 /** Fixed, non-personal event properties only. */
-export type ActionData = { placement?: 'home' | 'product'; reason?: LaunchNotifyErrorCode };
+export type ActionData = {
+  placement?: 'home' | 'product';
+  reason?: LaunchNotifyErrorCode;
+  campaign?: 'ig_letter' | 'ig_product' | 'yt_letter' | 'naver_product';
+};
 
-// Vercel Web Analytics is cookieless. Only fixed action names, placement and error categories are sent.
+// Only fixed action names, placement, campaign codes and error categories are sent.
 // Letter text, sender names and email addresses never enter analytics.
 // NEXT_PUBLIC_LAUNCH_NOTIFY_ANALYTICS=off turns the launch_notify_* events off without a code change.
 export function trackAction(action: SiteAction, data?: ActionData) {

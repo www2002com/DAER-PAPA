@@ -81,6 +81,7 @@ export function Composer() {
   const [warn, setWarn] = useState<'empty' | 'over' | 'storage' | 'full' | null>(null);
   const [flip, setFlip] = useState(false);
   const [download, setDownload] = useState<Busy>('idle');
+  const [hasExported, setHasExported] = useState(false);
   const [canShare, setCanShare] = useState(false);
   const [toast, setToast] = useState<Toast | null>(null);
   const [tab, setTab] = useState<(typeof STARTERS)[number]['id']>('thanks');
@@ -405,6 +406,7 @@ export function Composer() {
       }
       saveBlob(blob, data.date);
       trackAction('letter_card_exported');
+      setHasExported(true);
       setDownload('done');
       showToast('카드 이미지를 내 기기에 저장했어요.');
       later(() => setDownload('idle'), 2200);
@@ -776,6 +778,16 @@ export function Composer() {
           </p>
         </div>
       </div>
+
+      {hasExported && (
+        <aside className={styles.productFollowup} aria-label="디어파파 제품 알아보기">
+          <p>편지에 담은 마음, 아빠의 매일에도.</p>
+          <p>디어파파는 아빠를 위한 올인원 스킨케어를 준비하고 있어요.</p>
+          <a href="/letter-all-in-one" onClick={() => trackAction('product_details_after_letter_clicked')}>
+            레터 올인원 준비 내용 보기
+          </a>
+        </aside>
+      )}
 
       <div className={styles.toastWrap} role="status" aria-live="polite">
         {toast && (

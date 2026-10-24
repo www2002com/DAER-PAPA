@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArticleLayout, FactList } from '@/components/article/ArticleLayout';
 import { CONTACT_EMAIL } from '@/lib/facts';
-import { PRIVACY_EFFECTIVE_DATE, PRIVACY_OFFICER, STORAGE_PROCESSOR } from '@/lib/business';
+import { PRIVACY_EFFECTIVE_DATE, PRIVACY_OFFICER, PROCESSORS } from '@/lib/business';
 
 // 개인정보처리방침 (개인정보 보호법 제30조, 표준 개인정보 처리방침 작성지침 기준).
 // Covers only what the site actually processes: the 출시 알림 신청 email. TODO values live in lib/business.ts
@@ -65,6 +65,7 @@ export default function PrivacyPage() {
           ['필수 항목', '이메일 주소'],
           ['함께 기록하는 정보', '동의 여부, 동의 일시, 동의 문구 버전, 신청한 화면(홈 또는 제품 소개 페이지)'],
           ['수집 방법', '사이트의 출시 소식 신청 칸에 정보주체가 직접 입력'],
+          ['보관 방법', '신청 내용을 디어파파 업무용 메일함(hello@dearpapa.kr)으로 전달받아 보관'],
         ]}
       />
       <p>
@@ -76,12 +77,12 @@ export default function PrivacyPage() {
       <h2 id="retention">3. 개인정보의 처리 및 보유 기간</h2>
       <p>
         출시 소식 안내를 마친 뒤, 또는 정보주체가 동의를 철회한 때에는 지체 없이 파기합니다. 출시가 취소되는 등 처리 목적이 없어진 경우에도
-        지체 없이 파기합니다.
+        지체 없이 파기합니다. 메일 전달을 맡은 Resend는 자체 보관 정책에 따라 발송 기록을 30일 동안 보관한 뒤 삭제합니다.
       </p>
 
       <h2 id="destruction">4. 개인정보의 파기 절차 및 방법</h2>
       <p>
-        파기 사유가 생긴 개인정보는 지체 없이 파기합니다. 전자적 파일 형태의 정보는 복구할 수 없는 방법으로 삭제하며, 종이 문서로는
+        파기 사유가 생긴 개인정보는 지체 없이 파기합니다. 신청 메일은 메일함과 휴지통에서 모두 삭제하는 등 전자적 파일 형태의 정보는 복구할 수 없는 방법으로 삭제하며, 종이 문서로는
         보관하지 않습니다.
       </p>
 
@@ -90,32 +91,31 @@ export default function PrivacyPage() {
 
       <h2 id="processors">6. 개인정보 처리의 위탁</h2>
       <p>원활한 서비스 운영을 위해 다음과 같이 개인정보 처리 업무를 위탁합니다.</p>
-      <FactList
-        rows={[
-          ['Vercel Inc.', '웹사이트 호스팅 및 출시 소식 신청을 처리하는 서버 운영'],
-          ...(STORAGE_PROCESSOR ? [[STORAGE_PROCESSOR.name, STORAGE_PROCESSOR.task] as const] : []),
-        ]}
-      />
-      {!STORAGE_PROCESSOR && (
-        <p>신청 정보를 보관하는 서비스가 정해지면, 신청을 받기 전에 이 항목에 추가하여 알려 드립니다.</p>
-      )}
+      <FactList rows={PROCESSORS.map((p) => [p.name, p.task] as const)} />
       <p>위탁 계약 시 개인정보가 안전하게 관리되도록 필요한 사항을 정하고, 수탁자를 관리·감독합니다.</p>
 
       <h2 id="overseas">7. 개인정보의 국외 이전</h2>
-      <p>웹사이트 호스팅과 신청 처리를 위해 다음과 같이 개인정보를 국외로 이전(처리 위탁·보관)합니다.</p>
+      <p>
+        위 6번의 수탁자는 모두 국외 사업자로, 신청 처리와 전달을 위해 다음과 같이 개인정보를 국외로 이전(처리 위탁·보관)합니다.
+        공통 사항은 다음과 같습니다.
+      </p>
       <FactList
         rows={[
-          ['이전받는 자', 'Vercel Inc. (privacy@vercel.com)'],
-          ['이전 국가', '미국'],
-          ['이전 항목', '이메일 주소 및 2번의 함께 기록하는 정보'],
-          ['이전 일시와 방법', '신청할 때 암호화된 통신(HTTPS)으로 전송'],
-          ['이용 목적', '웹사이트 호스팅 및 출시 소식 신청 처리'],
-          ['보유·이용 기간', '3번의 보유 기간과 같음'],
-          ...(STORAGE_PROCESSOR
-            ? [[`${STORAGE_PROCESSOR.name}`, `${STORAGE_PROCESSOR.country} · ${STORAGE_PROCESSOR.contact}`] as const]
-            : []),
+          ['이전 항목', '이메일 주소, 동의 여부·일시, 신청한 화면'],
+          ['이전 일시와 방법', '신청할 때 네트워크를 통해 전송 (사이트와의 통신은 HTTPS로 암호화)'],
         ]}
       />
+      {PROCESSORS.map((p) => (
+        <FactList
+          key={p.name}
+          rows={[
+            ['이전받는 자', `${p.name} (${p.contact})`],
+            ['이전 국가', p.country],
+            ['이용 목적', p.task],
+            ['보유·이용 기간', p.retention],
+          ]}
+        />
+      ))}
       <p>국외 이전을 원하지 않으시면 출시 소식 신청을 하지 않으시면 됩니다. 이 경우 출시 소식 메일을 받으실 수 없습니다.</p>
 
       <h2 id="rights">8. 정보주체의 권리·의무 및 행사 방법</h2>
@@ -128,8 +128,9 @@ export default function PrivacyPage() {
       <h2 id="safety">9. 개인정보의 안전성 확보 조치</h2>
       <ul>
         <li>신청 정보는 암호화된 통신(HTTPS)으로만 전송합니다.</li>
-        <li>신청 정보를 공개 소스 저장소나 웹사이트 공개 파일에 저장하지 않으며, 접근 권한을 필요한 최소 인원으로 제한합니다.</li>
-        <li>저장소 접근 키는 소스 코드와 분리된 서버 환경 변수로 관리합니다.</li>
+        <li>신청 정보는 업무용 메일함에만 보관하고 공개 소스 저장소나 웹사이트 공개 파일에 저장하지 않으며, 접근 권한을 필요한 최소 인원으로 제한합니다.</li>
+        <li>메일 발송 키는 발송 전용 권한으로 만들고, 소스 코드와 분리된 서버 환경 변수로만 관리합니다.</li>
+        <li>신청한 분에게 자동 회신 메일을 보내지 않습니다.</li>
         <li>서버 기록(로그)에 이메일 주소를 남기지 않습니다.</li>
       </ul>
 

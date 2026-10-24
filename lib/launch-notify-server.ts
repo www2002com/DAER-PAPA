@@ -1,13 +1,13 @@
-// 출시 알림 신청: server-side handler and storage adapter for the Vercel Function in /api.
+// 출시 알림 신청: server-side handler for the Vercel Function in /api.
 // Relative imports only (no "@/" alias) so the Vercel Function bundler can resolve them.
 //
-// Storage is chosen by env var LAUNCH_NOTIFY_STORE. With no store configured the API answers
-// 503 { ok: false, error: 'not_configured' } and the form shows a graceful message.
-//   upstash : LAUNCH_NOTIFY_UPSTASH_URL + LAUNCH_NOTIFY_UPSTASH_TOKEN (Upstash Redis REST; also accepts
-//             KV_REST_API_URL / KV_REST_API_TOKEN or UPSTASH_REDIS_REST_URL / _TOKEN from the Vercel Marketplace)
-//   webhook : LAUNCH_NOTIFY_WEBHOOK_URL (+ optional LAUNCH_NOTIFY_WEBHOOK_SECRET), e.g. Google Apps Script → Sheet
-//   resend  : RESEND_API_KEY + LAUNCH_NOTIFY_EMAIL_FROM (+ LAUNCH_NOTIFY_EMAIL_TO, default hello@dearpapa.kr)
-// Emails are never logged.
+// Delivery: each consented signup is forwarded as one plain-text email to hello@dearpapa.kr through the
+// Resend REST API (no SDK dependency). Nothing is sent to the subscriber.
+//   RESEND_API_KEY      required. Read from env only; never hardcoded, logged or returned.
+//   LAUNCH_NOTIFY_FROM  optional, default "DEAR PAPA <notify@dearpapa.kr>" (dearpapa.kr must be verified in Resend)
+//   LAUNCH_NOTIFY_TO    optional, default "hello@dearpapa.kr"
+// With no RESEND_API_KEY the API answers 503 { ok: false, error: 'not_configured' } and the form shows a
+// graceful message. Emails are never logged.
 
 import { CONSENT_VERSION, isPlacement, normalizeEmail, type LaunchNotifyErrorCode, type LaunchNotifyPlacement } from './launch-notify';
 
@@ -22,72 +22,57 @@ export type SignupRecord = {
 export type Store = { name: string; save(record: SignupRecord): Promise<void> };
 type Env = Record<string, string | undefined>;
 
-const HASH_KEY = 'dearpapa:launch-notify';
+export const RESEND_ENDPOINT = 'https://api.resend.com/emails';
+export const DEFAULT_FROM = 'DEAR PAPA <notify@dearpapa.kr>';
+export const DEFAULT_TO = 'hello@dearpapa.kr';
+
+const PAGE_LABEL: Record<SignupRecord['placement'], string> = {
+  home: '홈 (https://dearpapa.kr/)',
+  product: 'letter-all-in-one (https://dearpapa.kr/letter-all-in-one)',
+  unknown: '알 수 없음',
+};
+
+function kst(iso: string): string {
+  const d = new Date(new Date(iso).getTime() + 9 * 60 * 60 * 1000);
+  return d.toISOString().replace('T', ' ').slice(0, 19) + ' KST';
+}
+
+/** Plain-text notification body: subscriber email, consent + timestamp, page source. Nothing else personal. */
+export function notificationText(record: SignupRecord): string {
+  return [
+    '디어파파 출시 소식 신청이 1건 들어왔습니다.',
+    '',
+    `신청 이메일: ${record.email}`,
+    `개인정보 수집·이용 동의: 예 (동의 문구 버전 ${record.consentVersion})`,
+    `동의 시각: ${kst(record.consentedAt)} (${record.consentedAt})`,
+    `신청 페이지: ${PAGE_LABEL[record.placement]}`,
+    '',
+    '이용 목적은 출시 소식 안내뿐입니다. 출시 안내를 보낸 뒤 또는 동의 철회 요청 시 이 메일을 지체 없이 삭제해 주세요.',
+  ].join('\n');
+}
 
 export function storeFromEnv(env: Env = process.env, fetchImpl: typeof fetch = fetch): Store | null {
-  const kind = (env.LAUNCH_NOTIFY_STORE ?? '').trim().toLowerCase();
-  if (kind === 'upstash') {
-    const url = env.LAUNCH_NOTIFY_UPSTASH_URL ?? env.KV_REST_API_URL ?? env.UPSTASH_REDIS_REST_URL;
-    const token = env.LAUNCH_NOTIFY_UPSTASH_TOKEN ?? env.KV_REST_API_TOKEN ?? env.UPSTASH_REDIS_REST_TOKEN;
-    if (!url || !token) return null;
-    return {
-      name: 'upstash',
-      async save(record) {
-        const res = await fetchImpl(url.replace(/\/$/, ''), {
-          method: 'POST',
-          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify(['HSET', HASH_KEY, record.email, JSON.stringify(record)]),
-        });
-        if (!res.ok) throw new Error(`upstash ${res.status}`);
-      },
-    };
-  }
-  if (kind === 'webhook') {
-    const url = env.LAUNCH_NOTIFY_WEBHOOK_URL;
-    if (!url) return null;
-    return {
-      name: 'webhook',
-      async save(record) {
-        const res = await fetchImpl(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...record, secret: env.LAUNCH_NOTIFY_WEBHOOK_SECRET ?? '' }),
-          redirect: 'follow',
-        });
-        if (!res.ok) throw new Error(`webhook ${res.status}`);
-      },
-    };
-  }
-  if (kind === 'resend') {
-    const key = env.RESEND_API_KEY;
-    const from = env.LAUNCH_NOTIFY_EMAIL_FROM;
-    const to = env.LAUNCH_NOTIFY_EMAIL_TO ?? 'hello@dearpapa.kr';
-    if (!key || !from) return null;
-    return {
-      name: 'resend',
-      async save(record) {
-        const res = await fetchImpl('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            from,
-            to: [to],
-            subject: '[디어파파] 출시 소식 신청 1건',
-            text: [
-              '출시 소식 안내 신청이 접수됐습니다.',
-              `이메일: ${record.email}`,
-              `동의: 개인정보 수집·이용(출시 소식 안내) · 동의 문구 버전 ${record.consentVersion}`,
-              `시각(UTC): ${record.consentedAt}`,
-              `위치: ${record.placement}`,
-              '보유 기간: 출시 안내 후 또는 동의 철회 시 지체 없이 파기',
-            ].join('\n'),
-          }),
-        });
-        if (!res.ok) throw new Error(`resend ${res.status}`);
-      },
-    };
-  }
-  return null;
+  const key = env.RESEND_API_KEY?.trim();
+  if (!key) return null;
+  const from = env.LAUNCH_NOTIFY_FROM?.trim() || DEFAULT_FROM;
+  const to = env.LAUNCH_NOTIFY_TO?.trim() || DEFAULT_TO;
+  return {
+    name: 'resend',
+    async save(record) {
+      const res = await fetchImpl(RESEND_ENDPOINT, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          from,
+          to: [to],
+          subject: '[디어파파] 출시 소식 신청 1건',
+          text: notificationText(record),
+        }),
+      });
+      // Status only: Resend error bodies are not logged (they could echo request data).
+      if (!res.ok) throw new Error(`resend ${res.status}`);
+    },
+  };
 }
 
 // Basic per-instance rate limit. IPs live only in memory for the window and are never stored or logged.

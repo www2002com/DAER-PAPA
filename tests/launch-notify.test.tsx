@@ -1,7 +1,7 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { normalizeEmail, LAUNCH_NOTIFY_COPY } from '@/lib/launch-notify';
-import { handleLaunchNotify, resetRateLimit, storeFromEnv, type SignupRecord } from '@/lib/launch-notify-server';
+import { DEFAULT_FROM, RESEND_ENDPOINT, handleLaunchNotify, notificationText, resetRateLimit, storeFromEnv, type SignupRecord } from '@/lib/launch-notify-server';
 import { businessLines, BUSINESS } from '@/lib/business';
 import { LaunchNotify } from '@/components/LaunchNotify';
 
@@ -12,7 +12,10 @@ const post = (body: unknown, ip = '203.0.113.1') =>
     body: JSON.stringify(body),
   });
 
-beforeEach(() => resetRateLimit());
+beforeEach(() => {
+  resetRateLimit();
+  vi.restoreAllMocks();
+});
 
 describe('launch notify validation', () => {
   it('accepts plausible emails and rejects others', () => {
@@ -63,12 +66,74 @@ describe('launch notify API handler', () => {
     expect(res.status).toBe(405);
   });
 
-  it('selects no store unless the env var and credentials are set', () => {
+  it('is not configured without RESEND_API_KEY', async () => {
     expect(storeFromEnv({})).toBeNull();
-    expect(storeFromEnv({ LAUNCH_NOTIFY_STORE: 'upstash' })).toBeNull();
-    expect(storeFromEnv({ LAUNCH_NOTIFY_STORE: 'upstash', KV_REST_API_URL: 'https://u', KV_REST_API_TOKEN: 't' })?.name).toBe('upstash');
-    expect(storeFromEnv({ LAUNCH_NOTIFY_STORE: 'webhook', LAUNCH_NOTIFY_WEBHOOK_URL: 'https://w' })?.name).toBe('webhook');
-    expect(storeFromEnv({ LAUNCH_NOTIFY_STORE: 'resend', RESEND_API_KEY: 'k' })).toBeNull();
+    expect(storeFromEnv({ RESEND_API_KEY: '   ' })).toBeNull();
+    const res = await handleLaunchNotify(post({ email: 'a@example.com', consent: true }), storeFromEnv({}));
+    expect(res.status).toBe(503);
+    expect(await res.json()).toEqual({ ok: false, error: 'not_configured' });
+  });
+});
+
+describe('Resend delivery', () => {
+  const env = { RESEND_API_KEY: 're_test_dummy' };
+
+  it('forwards one plain-text email to hello@ only, with email, consent time and page', async () => {
+    const fetchMock = vi.fn(async () => new Response(JSON.stringify({ id: 'x' }), { status: 200 }));
+    const store = storeFromEnv(env, fetchMock as unknown as typeof fetch);
+    const res = await handleLaunchNotify(post({ email: 'test+honey@dearpapa.kr', consent: true, placement: 'product' }), store);
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    const [url, init] = fetchMock.mock.calls[0] as unknown as [string, RequestInit];
+    expect(url).toBe(RESEND_ENDPOINT);
+    expect((init.headers as Record<string, string>).Authorization).toBe('Bearer re_test_dummy');
+    const payload = JSON.parse(String(init.body));
+    expect(payload.from).toBe(DEFAULT_FROM);
+    expect(payload.to).toEqual(['hello@dearpapa.kr']);
+    expect(payload).not.toHaveProperty('reply_to');
+    expect(payload).not.toHaveProperty('cc');
+    expect(payload).not.toHaveProperty('bcc');
+    expect(payload.text).toContain('신청 이메일: test+honey@dearpapa.kr');
+    expect(payload.text).toContain('동의: 예');
+    expect(payload.text).toMatch(/동의 시각: \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} KST/);
+    expect(payload.text).toContain('letter-all-in-one');
+  });
+
+  it('honours LAUNCH_NOTIFY_FROM / LAUNCH_NOTIFY_TO overrides', async () => {
+    const fetchMock = vi.fn(async () => new Response('{}', { status: 200 }));
+    const store = storeFromEnv({ ...env, LAUNCH_NOTIFY_FROM: 'X <x@dearpapa.kr>', LAUNCH_NOTIFY_TO: 'ops@dearpapa.kr' }, fetchMock as unknown as typeof fetch);
+    await handleLaunchNotify(post({ email: 'a@example.com', consent: true, placement: 'home' }), store);
+    const payload = JSON.parse(String((fetchMock.mock.calls[0] as unknown as [string, RequestInit])[1].body));
+    expect(payload.from).toBe('X <x@dearpapa.kr>');
+    expect(payload.to).toEqual(['ops@dearpapa.kr']);
+    expect(payload.text).toContain('신청 페이지: 홈');
+  });
+
+  it('turns a Resend error into a graceful server_error without logging the email or key', async () => {
+    const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const fetchMock = vi.fn(async () => new Response(JSON.stringify({ name: 'validation_error', message: 'domain not verified' }), { status: 403 }));
+    const store = storeFromEnv(env, fetchMock as unknown as typeof fetch);
+    const res = await handleLaunchNotify(post({ email: 'secret-person@example.com', consent: true }), store);
+    expect(res.status).toBe(502);
+    expect(await res.json()).toEqual({ ok: false, error: 'server_error' });
+    const logged = JSON.stringify(errSpy.mock.calls);
+    expect(logged).not.toContain('secret-person');
+    expect(logged).not.toContain('re_test_dummy');
+    errSpy.mockRestore();
+  });
+
+  it('also fails gracefully when Resend is unreachable', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    const store = storeFromEnv(env, (async () => { throw new TypeError('fetch failed'); }) as unknown as typeof fetch);
+    const res = await handleLaunchNotify(post({ email: 'a@example.com', consent: true }), store);
+    expect(res.status).toBe(502);
+  });
+
+  it('builds a notification with nothing beyond email, consent and page', () => {
+    const text = notificationText({ email: 'a@example.com', consent: true, consentVersion: '2026-10-24', consentedAt: '2026-10-24T11:00:00.000Z', placement: 'home' });
+    expect(text).toContain('2026-10-24 20:00:00 KST');
+    expect(text).not.toMatch(/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/);
   });
 });
 

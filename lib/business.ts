@@ -39,11 +39,33 @@ export function businessLines(): { label: string; value: string }[] {
 }
 
 /**
- * 출시 알림 신청 정보를 보관하는 서비스(수탁사). TODO(대표님): 저장소를 정하면 채운다.
- * null 이면 개인정보처리방침에 "정해지면 시행 전에 추가 고지" 문장만 보인다.
- * 예: { name: 'Upstash, Inc.', task: '출시 소식 신청 정보(이메일) 보관', country: '미국 또는 선택한 리전', contact: '...' }
+ * 개인정보 처리 위탁·국외 이전 대상 (개인정보처리방침 6·7항).
+ * 신청 흐름: 사이트 신청 칸 → Vercel Function(api/launch-notify) → Resend API → hello@dearpapa.kr 메일함(Google Workspace).
+ * 실제로 쓰는 서비스만 적는다. 서비스를 바꾸면 이 목록과 방침 시행일을 함께 고친다.
  */
-export const STORAGE_PROCESSOR = null as null | { name: string; task: string; country: string; contact: string };
+export const PROCESSORS = [
+  {
+    name: 'Vercel Inc.',
+    task: '웹사이트 호스팅 및 출시 소식 신청을 처리하는 서버 운영',
+    country: '미국',
+    contact: 'privacy@vercel.com',
+    retention: '신청을 받은 즉시 메일로 전달하며, 신청 내용을 따로 보관하지 않음',
+  },
+  {
+    name: 'Resend, Inc.',
+    task: '신청 내용을 디어파파 메일함(hello@dearpapa.kr)으로 전달하는 메일 발송',
+    country: '미국',
+    contact: 'support@resend.com',
+    retention: '전달 처리 후 Resend 보관 정책에 따라 발송 기록(메일 내용 포함)을 30일 동안 보관한 뒤 삭제',
+  },
+  {
+    name: 'Google LLC',
+    task: '신청 메일을 받는 업무용 메일함(Google Workspace) 운영',
+    country: '미국 등 Google 데이터센터가 있는 국가',
+    contact: 'policies.google.com/privacy',
+    retention: '3번의 보유 기간과 같음',
+  },
+] as const;
 
 /** 개인정보처리방침 시행일 (YYYY-MM-DD). TODO(대표님): 사이트에 게시(머지)하는 날짜로 채운다. */
 export const PRIVACY_EFFECTIVE_DATE = null as string | null;

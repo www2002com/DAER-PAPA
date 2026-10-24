@@ -7,6 +7,7 @@ export function Hero() {
     <section className={styles.hero} aria-labelledby="hero-title">
       <div className={`container ${styles.layout}`}>
         <div className={styles.copy}>
+          <p className={styles.handnote} aria-hidden="true">Dear Papa, with love!</p>
           <p className={styles.status} data-reveal><span aria-hidden="true" />아빠를 위한 스킨케어, 출시 준비 중</p>
           <h1 id="hero-title" className={styles.title} data-reveal data-reveal-delay="50">아빠의 매일에,<br />딸의 마음을.</h1>
           <p className={styles.description} data-reveal data-reveal-delay="100">
@@ -19,6 +20,11 @@ export function Hero() {
           </a>
         </div>
         <figure className={styles.visual} data-reveal="visual" data-reveal-delay="80">
+          <span className={styles.postmark} aria-hidden="true">TO. PAPA<br /><small>마음을 보내요</small></span>
+          <svg className={styles.heartSticker} viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M50 85 16 52C-5 30 22 2 50 28 78 2 105 30 84 52Z" />
+            <path className={styles.heartGlint} d="m25 30 8-4m-13 13 2-3" />
+          </svg>
           <div className={styles.stageRing} aria-hidden="true" />
           <svg className={styles.sparkle} viewBox="0 0 100 100" aria-hidden="true"><path d="M50 2C55 35 65 45 98 50C65 55 55 65 50 98C45 65 35 55 2 50C35 45 45 35 50 2Z" /></svg>
           <div className={styles.visualTitle}>

@@ -1,16 +1,21 @@
 .hero { padding-top: 42px; background: var(--paper); }
+.handnote { margin-bottom: 14px; font-family: var(--font-pen); font-size: clamp(26px, 3vw, 38px); color: var(--forest); transform: rotate(-5deg); transform-origin: left center; }
 .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; align-items: center; }
 .copy { padding: 38px 0 54px; position: relative; z-index: 4; }
 .status { display: inline-flex; gap: 9px; align-items: center; padding: 8px 15px; border: 1px solid var(--line-strong); border-radius: 999px; font-size: 13px; color: var(--ink); margin-bottom: 28px; background: var(--lime); }
 .status span { width: 6px; height: 6px; border-radius: 50%; background: var(--forest); }
-.title { font-size: clamp(40px, 5.2vw, 76px); font-weight: 850; line-height: 1.15; letter-spacing: -.065em; text-shadow: 3px 4px 0 #e9e2ff; }
+.title { font-size: clamp(40px, 5.2vw, 76px); font-weight: 850; line-height: 1.15; letter-spacing: -.065em; text-shadow: 2px 2px 0 white, 4px 5px 0 #abc5f6; }
 .description { margin-top: 27px; font-size: 17px; line-height: 1.9; color: var(--ink-2); }
 .cta { margin-top: 26px; min-height: 54px; padding: 0 24px; border-radius: 999px; font-size: 15px; font-weight: 700; background: var(--ink); color: var(--paper); box-shadow: 4px 4px 0 #c9b7e7; transition: transform 180ms ease, box-shadow 180ms ease; }
 .cta:hover { background: var(--forest); box-shadow: 2px 2px 0 #c9b7e7; transform: translate(2px,2px); }
-.visual { --product-baseline: 29%; position: relative; height: clamp(500px, 44vw, 640px); overflow: hidden; border-radius: 48% 48% 28px 28px; background: var(--sage); isolation: isolate; container-type: inline-size; }
+.visual { --product-baseline: 29%; position: relative; height: clamp(500px, 44vw, 640px); overflow: hidden; border: 1px solid #b3c7e7; border-radius: 36px 100px 36px 36px; background-color: #e8f1ff; background-image: linear-gradient(#cbdcf5 1px, transparent 1px), linear-gradient(90deg, #cbdcf5 1px, transparent 1px); background-size: 28px 28px; isolation: isolate; container-type: inline-size; }
 .visual::after { content: ''; position: absolute; left: -10%; right: -10%; bottom: 12%; height: 20%; border-radius: 50%; background: #f4bddf; z-index: -1; }
-.stageRing { position: absolute; inset: 5% 7% 18%; border: 11px solid #dce2ea; border-radius: 50%; box-shadow: inset 3px 3px 3px white, inset -4px -3px 3px #a4a2ba, 3px 3px 0 white, -3px -2px 0 #b5adc9; transform: rotate(14deg); pointer-events: none; }
+.stageRing { position: absolute; inset: 5% 7% 18%; border: 11px solid #dce2ea; border-radius: 50%; background: #e8f1ff; box-shadow: inset 3px 3px 3px white, inset -4px -3px 3px #a4a2ba, 3px 3px 0 white, -3px -2px 0 #b5adc9; transform: rotate(14deg); pointer-events: none; }
 .sparkle { position: absolute; width: 13%; height: auto; right: 7%; top: 29%; fill: var(--lime); stroke: var(--ink); stroke-width: 1.2; z-index: 3; }
+.heartSticker { position: absolute; left: 4%; top: 31%; width: 15%; height: auto; fill: #f6a9d2; stroke: white; stroke-width: 7px; paint-order: stroke; filter: drop-shadow(1px 2px 0 #7385b5); transform: rotate(-16deg); z-index: 3; }
+.heartGlint { fill: none; stroke: white; stroke-width: 4px; stroke-linecap: round; }
+.postmark { position: absolute; left: 5%; top: 6%; padding: 6px 10px; border: 2px solid currentColor; border-radius: 50%; color: #34559c; font-size: clamp(11px, 2.8cqw, 17px); font-weight: 800; line-height: 1.2; text-align: center; transform: rotate(-12deg); z-index: 3; background: #fff9fc; }
+.postmark small { font-family: var(--font-pen); font-weight: 400; font-size: 1em; }
 .visualTitle { position: absolute; left: 50%; top: 8%; transform: translateX(-50%); display: grid; gap: 3px; line-height: 1.6; z-index: 3; }
 .visualLogo { display: block; width: auto; height: 23px; color: var(--logo); }
 /* Align the visible bases, compensating for each source image's bottom margin.
@@ -20,12 +25,13 @@
 .bottle { position: absolute; left: 33%; bottom: calc(var(--product-baseline) - 4.91%); width: auto; max-width: none; height: 66%; transform: translateX(-55.04%); object-fit: contain; mix-blend-mode: multiply; z-index: 2; }
 .carton { position: absolute; left: 66%; bottom: calc(var(--product-baseline) - 2.58%); width: auto; max-width: none; height: 66%; transform: translateX(-53.714%); object-fit: contain; mix-blend-mode: multiply; z-index: 1; }
 .letterCard { position: absolute; z-index: 3; left: 14%; bottom: 16%; width: 72%; padding: 3cqw 5cqw; background: #fffdfb; border: 1px solid #b9a3ca; box-shadow: 5px 7px 0 rgb(84 38 117 / 12%); transform: rotate(-7deg); color: var(--forest); }
+.letterCard::before { content: ''; position: absolute; width: 26%; height: 20px; top: -10px; left: 37%; transform: rotate(5deg); border-inline: 1px dashed #bc9bac; background: rgb(250 175 210 / 70%); }
 .letterSalutation { display: block; font-family: var(--font-pen); font-size: clamp(16px, 3.5cqw, 23px); line-height: 1.2; }
 .letterMessage { margin-top: 1cqw; font-family: var(--font-pen); font-size: clamp(24px, 6.2cqw, 38px); line-height: 1.3; }
 .letterRule { display: block; width: 100%; margin-top: 2cqw; border-top: 1px solid #d9dccf; }
 .caption { position: absolute; bottom: 16px; left: 20px; right: 20px; font-size: 11px; line-height: 1.5; color: var(--ink-2); text-align: right; }
 .caption span { display: block; }
-.intro { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 40px; margin-top: 42px; padding-top: 32px; padding-bottom: 32px; background: var(--lime); border-block: 1px solid #b4d966; }
+.intro { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 40px; margin-top: 42px; padding-top: 32px; padding-bottom: 32px; background: var(--lime); border-block: 2px dashed #87a651; }
 .intro > p { font-size: 26px; line-height: 1.4; letter-spacing: -.04em; font-weight: 750; }
 .intro strong { font-weight: 850; }
 .intro h2 { font-size: 16px; font-weight: 500; margin-bottom: 10px; }

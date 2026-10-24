@@ -76,17 +76,25 @@ export function storeFromEnv(env: Env = process.env, fetchImpl: typeof fetch = f
 }
 
 // Basic per-instance rate limit. IPs live only in memory for the window and are never stored or logged.
-const WINDOW_MS = 10 * 60 * 1000;
+// Expired entries are pruned on every call, so an address stays in memory for at most WINDOW_MS after its
+// last request. This is the "서버 메모리에서 최대 10분" promise in the privacy notice (app/privacy/page.tsx).
+export const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
 const hits = new Map<string, number[]>();
 export function rateLimited(key: string, now = Date.now()): boolean {
-  const recent = (hits.get(key) ?? []).filter((t) => now - t < WINDOW_MS);
+  for (const [k, stamps] of hits) {
+    const live = stamps.filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+    if (live.length) hits.set(k, live);
+    else hits.delete(k);
+  }
+  const recent = hits.get(key) ?? [];
   recent.push(now);
   hits.set(key, recent);
-  if (hits.size > 5000) hits.clear();
   return recent.length > MAX_PER_WINDOW;
 }
 export function resetRateLimit() { hits.clear(); }
+/** Number of addresses currently held in memory (tests only). */
+export function rateLimitSize() { return hits.size; }
 
 const json = (status: number, body: Record<string, unknown>) =>
   new Response(JSON.stringify(body), {

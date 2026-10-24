@@ -1,7 +1,10 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { normalizeEmail, LAUNCH_NOTIFY_COPY } from '@/lib/launch-notify';
-import { DEFAULT_FROM, RESEND_ENDPOINT, handleLaunchNotify, notificationText, resetRateLimit, storeFromEnv, type SignupRecord } from '@/lib/launch-notify-server';
+import {
+  DEFAULT_FROM, RATE_LIMIT_WINDOW_MS, RESEND_ENDPOINT, handleLaunchNotify, notificationText, rateLimitSize, rateLimited, resetRateLimit, storeFromEnv,
+  type SignupRecord,
+} from '@/lib/launch-notify-server';
 import { businessLines, BUSINESS } from '@/lib/business';
 import { LaunchNotify } from '@/components/LaunchNotify';
 
@@ -59,6 +62,31 @@ describe('launch notify API handler', () => {
     for (let i = 0; i < 6; i++) statuses.push((await handleLaunchNotify(post({ email: `a${i}@example.com`, consent: true }), store)).status);
     expect(statuses.slice(0, 5).every((s) => s === 200)).toBe(true);
     expect(statuses[5]).toBe(429);
+  });
+
+  it('forgets an address once its window has passed, as the privacy notice promises', () => {
+    const t0 = 1_700_000_000_000;
+    expect(rateLimited('203.0.113.10', t0)).toBe(false);
+    expect(rateLimitSize()).toBe(1);
+    // A different address arrives after the window: the first one must be gone, not kept until a bulk clear.
+    rateLimited('203.0.113.11', t0 + RATE_LIMIT_WINDOW_MS + 1);
+    expect(rateLimitSize()).toBe(1);
+  });
+
+  it('keeps limiting an active address while pruning idle ones', () => {
+    const t0 = 1_700_000_000_000;
+    for (let i = 0; i < 5; i++) rateLimited('203.0.113.20', t0 + i);
+    rateLimited('203.0.113.21', t0); // idle after this one request
+    expect(rateLimitSize()).toBe(2);
+    const later = t0 + RATE_LIMIT_WINDOW_MS - 1; // still inside the active address's window
+    expect(rateLimited('203.0.113.20', later)).toBe(true);
+    expect(rateLimited('203.0.113.21', later)).toBe(false);
+    expect(rateLimitSize()).toBe(2);
+    // Past the window, the active address is allowed again and the idle one has been dropped.
+    resetRateLimit();
+    for (let i = 0; i < 6; i++) rateLimited('203.0.113.22', t0 + i);
+    expect(rateLimited('203.0.113.22', t0 + RATE_LIMIT_WINDOW_MS + 10)).toBe(false);
+    expect(rateLimitSize()).toBe(1);
   });
 
   it('rejects non-POST methods', async () => {

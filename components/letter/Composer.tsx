@@ -66,7 +66,8 @@ function useCharKeys(composing: React.RefObject<boolean>) {
   return { keysFor, reset };
 }
 
-export function Composer() {
+/** notifyReady comes from the server-side launchNotifyReady() check; the client never sees credentials. */
+export function Composer({ notifyReady = false }: { notifyReady?: boolean } = {}) {
   const uid = useId();
   const [mounted, setMounted] = useState(false);
   const [fontVersion, setFontVersion] = useState(0);
@@ -786,6 +787,11 @@ export function Composer() {
           <a href="/letter-all-in-one" onClick={() => trackAction('product_details_after_letter_clicked')}>
             레터 올인원 준비 내용 보기
           </a>
+          {notifyReady && (
+            <a href="/#launch-notify" onClick={() => trackAction('launch_notify_after_letter_clicked')}>
+              출시 소식 받기
+            </a>
+          )}
         </aside>
       )}
 

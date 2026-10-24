@@ -69,4 +69,26 @@ describe('optional product discovery after letter export', () => {
     expect(productLink()).toBeNull();
     expect(trackAction).not.toHaveBeenCalledWith('letter_card_exported');
   });
+
+  const notifyLink = () => screen.queryByRole('link', { name: '출시 소식 받기' });
+
+  it('hides the launch-notify button when the form is not configured', async () => {
+    render(<Composer />);
+    fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: '아빠, 고마워요.' } });
+    fireEvent.click(screen.getByRole('button', { name: '카드 이미지 저장' }));
+    await waitFor(() => expect(productLink()).not.toBeNull());
+    expect(notifyLink()).toBeNull();
+  });
+
+  it('offers the launch-notify button after export when the form is ready', async () => {
+    render(<Composer notifyReady />);
+    expect(notifyLink()).toBeNull();
+    fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: '아빠, 고마워요.' } });
+    fireEvent.click(screen.getByRole('button', { name: '카드 이미지 저장' }));
+    await waitFor(() => expect(notifyLink()).not.toBeNull());
+    expect(notifyLink()?.getAttribute('href')).toBe('/#launch-notify');
+    notifyLink()!.addEventListener('click', event => event.preventDefault());
+    fireEvent.click(notifyLink()!);
+    expect(trackAction).toHaveBeenCalledWith('launch_notify_after_letter_clicked');
+  });
 });

@@ -14,3 +14,6 @@ public/citation.txt -text
 public/9b076fa14942e414697fb1378ad6107e.txt -text
 components/home/Story.tsx text eol=lf
 components/home/Story.module.css text eol=lf
+components/home/StoryProductReveal.tsx text eol=lf
+components/home/StoryProductReveal.module.css text eol=lf
+lib/ingredient-demo.ts text eol=lf

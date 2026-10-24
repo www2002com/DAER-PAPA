@@ -17,7 +17,7 @@ export default function PressPage() {
         title="DEAR PAPA(디어파파) 소개 기사"
         meta={
           <p>
-            최종 업데이트: <time dateTime="2026-10-24">2026년 10월 24일</time>
+            최종 업데이트: <time dateTime="2026-10-25">2026년 10월 25일</time>
           </p>
         }
         footer={
@@ -27,6 +27,12 @@ export default function PressPage() {
         }
       >
         <ul>
+          <li>
+            <time dateTime="2026-10-25">2026년 10월 25일</time> · AUTHON ·{' '}
+            <a href="https://authonnews.com/article/dear-papa-father-birthday-gift" {...EXTERNAL}>
+              아버지 생신 선물, 매일 쓰는 스킨케어 고르는 기준(출시 전 디어파파 레터 올인원) | 디어파파 DEAR PAPA
+            </a>
+          </li>
           <li>
             <time dateTime="2026-10-24">2026년 10월 24일</time> · AUTHON ·{' '}
             <a href="https://authonnews.com/article/dear-papa-all-in-one-skincare-2" {...EXTERNAL}>

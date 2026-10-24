@@ -20,7 +20,7 @@ export function LetterBunny() {
         aria-label="편지 토끼 움직임 다시 보기" title="눌러서 편지 토끼와 인사해요"
         onClick={() => setReplay((value) => value + 1)}>
         <span className={`${styles.portraitWrap} ${replay > 0 ? (replay % 2 ? styles.replay : styles.replayAgain) : ''}`}>
-        <Image src="/images/letter-bunny-grid-v1.webp"
+        <Image src="/images/letter-bunny-minimal-grid-v2.webp"
           width={640} height={640} alt=""
           className={styles.portrait} loading="eager" />
         </span>

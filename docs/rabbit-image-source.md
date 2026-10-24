@@ -1,6 +1,31 @@
 # Rabbit image
 
-## Current asset — user-approved generated concept, 2026-10-24
+## Current asset — transparent minimal mascot, 2026-10-25
+
+The user requested a background matching the surrounding letter, graph-paper
+texture only inside the bunny, and a Claude-character feeling. The new asset
+`public/images/letter-bunny-minimal-grid-v2.webp` uses a transparent exterior,
+muted blue fill, a simpler silhouette and face, and a grid confined to the body.
+The ivory envelope keeps the letter motif. Tape, floating hearts, postage and the
+rectangular grid backdrop were removed. This is a newly generated rabbit using
+the old illustration as an edit reference; it is not an official Claude asset.
+
+The built-in imagegen tool produced a 1254×1254 RGBA PNG. The website uses a
+640×640 WebP (47,434 bytes, quality 92, alpha quality 100), preserving transparency.
+Source, exact prompt and alpha/composite checks are retained in
+`outputs/dearpapa-minimal-bunny-20261025/`; the delivered PNG is also in
+`Downloads/DearPapa-Bunny-Tone-20261025/letter-bunny-minimal-grid.png`.
+The prior asset remains untouched. Only the `LetterBunny` image reference changes;
+the button, visible labels, live replies, keyboard behavior and reduced-motion
+support retain their implementation.
+
+Validation: `npm.cmd run build` (81 tests, TypeScript, export and preservation),
+plus desktop 1440×1000, mobile 390×844 and narrow 320×800 screenshots and interaction
+checks in the output folder's `site-review/`. Alpha corners are zero; the button
+is transparent over the white letter, without a separate image background.
+No production deployment or video generation is included in this change.
+
+## Previous asset — user-approved generated concept, 2026-10-24
 
 The user approved the seated letter rabbit with a blue graph-paper background,
 sticker border, hearts and postage motif and requested implementation.

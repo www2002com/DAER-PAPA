@@ -3,15 +3,27 @@
 import { useState } from 'react';
 import styles from './LetterBunny.module.css';
 
+const letterColors = [
+  { name: '로즈', color: '#f5bfd9' },
+  { name: '라일락', color: '#ddd0f5' },
+  { name: '라임', color: '#d3f580' },
+];
+
 export function LetterBunny() {
   const [replay, setReplay] = useState(0);
+  const [letterColor, setLetterColor] = useState(letterColors[0].color);
 
   return (
+    <div className={styles.companion}>
     <button type="button" className={styles.character} data-reveal
       aria-label="편지 토끼 움직임 다시 보기" title="눌러서 편지 토끼와 인사해요"
       onClick={() => setReplay((value) => value + 1)}>
       <svg key={replay} className={replay > 0 ? styles.replay : undefined}
         viewBox="0 0 160 200" fill="none" aria-hidden="true">
+        <g className={styles.hearts} fill="#ee98c5" stroke="#244790" strokeWidth="1.5">
+          <path d="m20 66-7-7c-6-6 2-13 7-7 5-6 13 1 7 7Z" />
+          <path d="m140 83-6-6c-5-5 2-11 6-6 4-5 11 1 6 6Z" />
+        </g>
         <ellipse className={styles.shadow} cx="80" cy="184" rx="43" ry="6" fill="#b9cbed" />
         <g className={styles.hop} stroke="#244790" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
           <g className={styles.leftEar}>
@@ -26,6 +38,10 @@ export function LetterBunny() {
           <ellipse cx="59" cy="176" rx="16" ry="10" fill="#fffdf9" />
           <ellipse cx="101" cy="176" rx="16" ry="10" fill="#fffdf9" />
           <path d="M29 94C29 67 48 58 80 60C112 58 131 69 131 94C131 120 108 133 80 132C52 133 29 120 29 94Z" fill="#fffdf9" />
+          <g fill="#f5bfd9" strokeWidth="2">
+            <path d="M49 65C29 45 27 68 48 69C34 86 61 85 53 68C76 75 72 51 52 65Z" />
+            <circle cx="50" cy="67" r="4" fill="#fffdf9" />
+          </g>
           <ellipse cx="45" cy="108" rx="11" ry="7" fill="#f5b6d4" stroke="none" />
           <ellipse cx="115" cy="108" rx="11" ry="7" fill="#f5b6d4" stroke="none" />
           <g fill="#244790" stroke="none">
@@ -37,7 +53,7 @@ export function LetterBunny() {
           <path d="M77 107Q80 104 83 107L80 110Z" fill="#ee98c5" strokeWidth="1.5" />
           <path d="M80 110v3m-8-1q4 7 8 1q4 7 8-1" strokeWidth="2.5" />
           <g className={styles.envelope}>
-            <rect x="40" y="137" width="80" height="32" rx="5" fill="#d3f580" />
+            <rect x="40" y="137" width="80" height="32" rx="5" fill={letterColor} />
             <path d="m42 139 38 20 38-20m-76 28 25-18m51 18-25-18" strokeWidth="2" />
             <path d="m80 157-7-7c-4-4 2-8 7-3 5-5 11-1 7 3Z" fill="#ee98c5" strokeWidth="1.5" />
           </g>
@@ -47,5 +63,18 @@ export function LetterBunny() {
       </svg>
       <span className={styles.label}>편지 왔어요!</span>
     </button>
+    <div className={styles.palette} role="group" aria-label="토끼의 편지봉투 색 고르기">
+      {letterColors.map(({ name, color }) => (
+        <button key={name} type="button" className={styles.swatch}
+          aria-label={`${name} 편지봉투`} aria-pressed={letterColor === color}
+          title={`${name} 편지봉투`} onClick={() => setLetterColor(color)}>
+          <span style={{ backgroundColor: color }} aria-hidden="true">
+            {letterColor === color ? '♥' : ''}
+          </span>
+        </button>
+      ))}
+    </div>
+    <span className={styles.paletteHint}>토끼의 편지 색 고르기</span>
+    </div>
   );
 }

@@ -40,8 +40,10 @@ export function LaunchNotify({ placement, headingLevel = 'h2' }: { placement: La
     if (status.kind === 'submitting') return;
     if (!normalizeEmail(email)) return setStatus({ kind: 'error', code: 'invalid_email' });
     if (!consent) return setStatus({ kind: 'error', code: 'consent_required' });
+    // The API deliberately returns success for the bot trap without saving a signup.
+    const measureSubmission = website.trim() === '';
     setStatus({ kind: 'submitting' });
-    trackAction('launch_notify_attempted', { placement });
+    if (measureSubmission) trackAction('launch_notify_attempted', { placement });
     try {
       const res = await fetch(LAUNCH_NOTIFY_ENDPOINT, {
         method: 'POST',
@@ -53,14 +55,14 @@ export function LaunchNotify({ placement, headingLevel = 'h2' }: { placement: La
         setStatus({ kind: 'success' });
         setEmail('');
         setConsent(false);
-        trackAction('launch_notify_submitted', { placement });
+        if (measureSubmission) trackAction('launch_notify_submitted', { placement });
         return;
       }
       const code = (typeof data?.error === 'string' && Object.hasOwn(COPY.errors, data.error) ? data.error : 'server_error') as LaunchNotifyErrorCode;
-      trackAction('launch_notify_failed', { placement, reason: code });
+      if (measureSubmission) trackAction('launch_notify_failed', { placement, reason: code });
       setStatus({ kind: 'error', code });
     } catch {
-      trackAction('launch_notify_failed', { placement, reason: 'server_error' });
+      if (measureSubmission) trackAction('launch_notify_failed', { placement, reason: 'server_error' });
       setStatus({ kind: 'error', code: 'server_error' });
     }
   }

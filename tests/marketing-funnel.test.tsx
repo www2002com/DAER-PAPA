@@ -27,6 +27,14 @@ function submit() {
 }
 
 describe('marketing funnel measurement', () => {
+  it('does not count a honeypot response as a real signup attempt or success', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('{"ok":true}', { status: 200 }));
+    render(<LaunchNotify placement="home" />);
+    fireEvent.change(screen.getByLabelText('Website'), { target: { value: 'https://spam.example' } });
+    submit();
+    await screen.findByText(COPY.success);
+    expect(emitted).not.toHaveBeenCalled();
+  });
   it('does not count the initial intersection below 50%, and counts one qualifying view', () => {
     render(<LaunchNotify placement="home" />);
     const entry = (ratio: number) => ({ isIntersecting: true, intersectionRatio: ratio } as IntersectionObserverEntry);

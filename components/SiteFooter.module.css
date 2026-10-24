@@ -10,7 +10,7 @@
 .sign {
   margin-bottom: 38px;
   font-size: clamp(1.9rem, 3.5vw, 3.4rem);
-  font-weight: 300;
+  font-weight: 800;
   letter-spacing: -.04em;
   line-height: 1.35;
   color: var(--logo);

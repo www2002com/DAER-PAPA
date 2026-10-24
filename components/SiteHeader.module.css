@@ -10,7 +10,7 @@
 .header[data-scrolled] { box-shadow: 0 1px 0 var(--line); }
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   .header[data-scrolled] {
-    background: rgb(247 247 242 / 0.62);
+    background: rgb(255 249 252 / 0.92);
     -webkit-backdrop-filter: blur(16px) saturate(1.05);
     backdrop-filter: blur(16px) saturate(1.05);
   }
@@ -21,8 +21,8 @@
 .bar, .sheetBar { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: var(--header-h); }
 .brand { display: inline-flex; align-items: center; min-height: 44px; color: var(--logo); flex-shrink: 0; }
 .logo { width: auto; height: 23px; }
-.nav { display: none; gap: 32px; margin-left: auto; }
-.navLink { display: inline-flex; align-items: center; min-height: 44px; font-size: .875rem; color: var(--ink-2); text-decoration: none; }
+.nav { display: none; gap: 10px; margin-left: auto; }
+.navLink { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid var(--line); border-radius: 999px; font-size: .875rem; font-weight: 600; color: var(--ink); text-decoration: none; }
 .menuBtn {
   display: inline-grid;
   place-items: center;

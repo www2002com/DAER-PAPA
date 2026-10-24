@@ -36,10 +36,39 @@ describe('optional product discovery after letter export', () => {
     expect(trackAction).toHaveBeenCalledWith('letter_card_exported');
     productLink()!.addEventListener('click', event => event.preventDefault());
     fireEvent.click(productLink()!);
-    expect(trackAction).toHaveBeenCalledWith('product_details_after_letter_clicked');
+    expect(trackAction).toHaveBeenCalledWith('product_details_after_letter_clicked', { source: 'export' });
     expect(vi.mocked(trackAction).mock.calls.filter(call => call[0] === 'product_details_after_letter_clicked')).toHaveLength(1);
-    expect(vi.mocked(trackAction).mock.calls.every(call => call.length === 1)).toBe(true);
+    // Only fixed property values travel with events; never the letter text or sender.
+    const serialized = JSON.stringify(vi.mocked(trackAction).mock.calls);
+    expect(serialized).not.toContain('개인적인 문장');
+    expect(vi.mocked(trackAction).mock.calls.every(call => call.length === 1 || Object.keys(call[1] as object).every(k => k === 'source'))).toBe(true);
     expect((screen.getByLabelText('편지 내용') as HTMLTextAreaElement).value).toBe('아빠에게 전하는 개인적인 문장');
+  });
+
+  it('offers the same link after a completed system share, tagged as share', async () => {
+    const share = vi.fn().mockResolvedValue(undefined);
+    vi.stubGlobal('navigator', { ...navigator, share, canShare: () => true });
+    render(<Composer />);
+    fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: '공유로 전하는 문장' } });
+    expect(productLink()).toBeNull();
+    fireEvent.click(await screen.findByRole('button', { name: '공유하기' }));
+    await waitFor(() => expect(productLink()).not.toBeNull());
+    expect(share).toHaveBeenCalledTimes(1);
+    productLink()!.addEventListener('click', event => event.preventDefault());
+    fireEvent.click(productLink()!);
+    expect(trackAction).toHaveBeenCalledWith('product_details_after_letter_clicked', { source: 'share' });
+    vi.unstubAllGlobals();
+  });
+
+  it('does not reveal the link when the share sheet is dismissed', async () => {
+    const abort = Object.assign(new Error('cancelled'), { name: 'AbortError' });
+    vi.stubGlobal('navigator', { ...navigator, share: vi.fn().mockRejectedValue(abort), canShare: () => true });
+    render(<Composer />);
+    fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: '취소되는 공유' } });
+    fireEvent.click(await screen.findByRole('button', { name: '공유하기' }));
+    await act(async () => { await Promise.resolve(); });
+    expect(productLink()).toBeNull();
+    vi.unstubAllGlobals();
   });
 
   it('keeps the product link hidden for empty input', () => {
@@ -56,6 +85,9 @@ describe('optional product discovery after letter export', () => {
     fireEvent.click(screen.getByRole('button', { name: '이미지 저장' }));
     await waitFor(() => expect(productLink()).not.toBeNull());
     expect(productLink()?.closest('[hidden]')).toBeNull();
+    productLink()!.addEventListener('click', event => event.preventDefault());
+    fireEvent.click(productLink()!);
+    expect(trackAction).toHaveBeenCalledWith('product_details_after_letter_clicked', { source: 'archive' });
   });
 
   it.each(['render', 'blob', 'exception'])('does not show a success follow-up after %s failure', async (failure) => {

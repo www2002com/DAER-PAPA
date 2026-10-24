@@ -81,7 +81,8 @@ export function Composer() {
   const [warn, setWarn] = useState<'empty' | 'over' | 'storage' | 'full' | null>(null);
   const [flip, setFlip] = useState(false);
   const [download, setDownload] = useState<Busy>('idle');
-  const [hasExported, setHasExported] = useState(false);
+  // Which letter action last revealed the optional product link; null until the writer has exported, shared or re-exported.
+  const [bridge, setBridge] = useState<'export' | 'share' | 'archive' | null>(null);
   const [canShare, setCanShare] = useState(false);
   const [toast, setToast] = useState<Toast | null>(null);
   const [tab, setTab] = useState<(typeof STARTERS)[number]['id']>('thanks');
@@ -406,7 +407,7 @@ export function Composer() {
       }
       saveBlob(blob, data.date);
       trackAction('letter_card_exported');
-      setHasExported(true);
+      setBridge(l ? 'archive' : 'export');
       setDownload('done');
       showToast('카드 이미지를 내 기기에 저장했어요.');
       later(() => setDownload('idle'), 2200);
@@ -424,6 +425,7 @@ export function Composer() {
       if (!blob) return setWarn('over');
       const file = new File([blob], 'dear-papa-letter.png', { type: 'image/png' });
       await navigator.share({ files: [file], title: 'Dear Papa' });
+      setBridge('share');
     } catch (e) {
       if ((e as DOMException)?.name !== 'AbortError') showToast('공유창을 열 수 없었어요. 이미지로 저장해 주세요.');
     }
@@ -779,11 +781,11 @@ export function Composer() {
         </div>
       </div>
 
-      {hasExported && (
+      {bridge && (
         <aside className={styles.productFollowup} aria-label="디어파파 제품 알아보기">
           <p>편지에 담은 마음, 아빠의 매일에도.</p>
           <p>디어파파는 아빠를 위한 올인원 스킨케어를 준비하고 있어요.</p>
-          <a href="/letter-all-in-one" onClick={() => trackAction('product_details_after_letter_clicked')}>
+          <a href="/letter-all-in-one" onClick={() => trackAction('product_details_after_letter_clicked', { source: bridge })}>
             레터 올인원 준비 내용 보기
           </a>
         </aside>

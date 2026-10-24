@@ -25,12 +25,7 @@ export function Hero() {
         </div>
         <figure className={styles.visual} data-reveal="visual" data-reveal-delay="80">
           <span className={styles.postmark} aria-hidden="true">TO. PAPA<br /><small>마음을 보내요</small></span>
-          <svg className={styles.heartSticker} viewBox="0 0 100 100" aria-hidden="true">
-            <path d="M50 85 16 52C-5 30 22 2 50 28 78 2 105 30 84 52Z" />
-            <path className={styles.heartGlint} d="m25 30 8-4m-13 13 2-3" />
-          </svg>
           <div className={styles.stageRing} aria-hidden="true" />
-          <svg className={styles.sparkle} viewBox="0 0 100 100" aria-hidden="true"><path d="M50 2C55 35 65 45 98 50C65 55 55 65 50 98C45 65 35 55 2 50C35 45 45 35 50 2Z" /></svg>
           <div className={styles.visualTitle}>
             <HeroLogo className={styles.visualLogo} />
           </div>

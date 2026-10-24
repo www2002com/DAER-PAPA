@@ -61,7 +61,7 @@ export function LetterBunny() {
           <ellipse cx="118" cy="149" rx="8" ry="10" transform="rotate(20 118 149)" fill="#fffdf9" />
         </g>
       </svg>
-      <span className={styles.label}>편지 왔어요!</span>
+      <span className={styles.label}>눌러서 인사해요!</span>
     </button>
     <div className={styles.palette} role="group" aria-label="토끼의 편지봉투 색 고르기">
       {letterColors.map(({ name, color }) => (
@@ -74,7 +74,7 @@ export function LetterBunny() {
         </button>
       ))}
     </div>
-    <span className={styles.paletteHint}>토끼의 편지 색 고르기</span>
+    <span className={styles.paletteHint}>토끼 봉투색 바꾸기</span>
     </div>
   );
 }

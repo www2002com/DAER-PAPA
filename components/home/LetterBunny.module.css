@@ -1,10 +1,10 @@
-.companion { display: grid; justify-items: center; width: clamp(105px, 11vw, 150px); flex-shrink: 0; }
+.companion { display: grid; justify-items: center; width: clamp(132px, 11vw, 150px); flex-shrink: 0; }
 .character { display: inline-grid; justify-items: center; width: 100%; color: var(--forest); border-radius: 22px; touch-action: manipulation; }
 .palette { display: flex; margin-top: 7px; }
-.swatch { width: 32px; height: 36px; display: grid; place-items: center; border-radius: 12px; touch-action: manipulation; }
+.swatch { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; touch-action: manipulation; }
 .swatch span { display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid #24479060; border-radius: 50%; font-size: 13px; color: #244790; }
 .swatch[aria-pressed='true'] span { outline: 2px solid #244790; outline-offset: 2px; }
-.paletteHint { margin-top: 2px; color: var(--ink); font-size: 10px; line-height: 1.5; white-space: nowrap; }
+.paletteHint { margin-top: 2px; color: var(--ink); font-size: 12px; line-height: 1.5; text-align: center; }
 .hearts { opacity: 0; transform-origin: 80px 100px; pointer-events: none; }
 .character svg { display: block; width: 100%; height: auto; overflow: visible; }
 .label { font-family: var(--font-pen); font-size: 22px; line-height: 1.2; transform: rotate(-5deg); }
@@ -26,4 +26,4 @@
 @keyframes ear-right { 0%,100% { transform: rotate(0); } 35% { transform: rotate(12deg); } 70% { transform: rotate(-7deg); } }
 @keyframes letter-wave { 0%,100% { transform: rotate(0); } 30% { transform: rotate(-6deg); } 70% { transform: rotate(5deg); } }
 @keyframes shadow-hop { 0%,100% { transform: scaleX(1); opacity: 1; } 35% { transform: scaleX(.72); opacity: .5; } }
-@media (max-width: 400px) { .companion { width: 96px; } .label { font-size: 18px; } }
+@media (max-width: 400px) { .character svg { width: 96px; } .label { font-size: 18px; } }

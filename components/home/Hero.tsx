@@ -19,6 +19,8 @@ export function Hero() {
           </a>
         </div>
         <figure className={styles.visual} data-reveal="visual" data-reveal-delay="80">
+          <div className={styles.stageRing} aria-hidden="true" />
+          <svg className={styles.sparkle} viewBox="0 0 100 100" aria-hidden="true"><path d="M50 2C55 35 65 45 98 50C65 55 55 65 50 98C45 65 35 55 2 50C35 45 45 35 50 2Z" /></svg>
           <div className={styles.visualTitle}>
             <HeroLogo className={styles.visualLogo} />
           </div>

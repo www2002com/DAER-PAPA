@@ -233,3 +233,6 @@
     grid-template-columns: 1.4fr 1fr 1.3fr minmax(200px, 1fr);
   }
 }
+
+.business { margin-top: 8px; }
+.privacy { font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }

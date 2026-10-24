@@ -1,5 +1,13 @@
 # dearpapa.kr
 
+## 2026-10-24 출시 알림 공개 상태
+
+현재 기본값은 이메일 수집 비활성입니다. 홈·제품 페이지에는 공식 소식 경로를 안내합니다.
+폼과 발송을 활성화하려면 `LAUNCH_NOTIFY_ENABLED=true`와 `RESEND_API_KEY`를 같은 환경에 설정하고 재배포해야 합니다.
+정적 HTML은 빌드 시, API는 런타임에 이 조건을 확인합니다. 담당 정보·처리방침·발신 도메인과 실제 수신을 먼저 검증하세요.
+키만 추가해서 수집이 우연히 시작되지 않습니다. 비활성 API는 저장·메일 전송 없이 503을 반환합니다.
+런타임은 ESM을 사용합니다. API에서 참조하는 상대 모듈은 컴파일 결과의 `.js` 확장자를 명시합니다.
+
 DEAR PAPA(디어파파) 공식 사이트 — 아빠의 매일에, 딸의 마음을.
 
 Next.js(App Router) 정적 내보내기로 만든 사이트입니다. 서버 없이 `out/`의 HTML만으로 동작하며, Vercel이 빌드·배포합니다.
@@ -7,6 +15,8 @@ Next.js(App Router) 정적 내보내기로 만든 사이트입니다. 서버 없
 ## 개발
 
 Node.js 24 LTS를 사용합니다. `npm run build`는 편지 보존 회귀 테스트를 먼저 실행합니다.
+
+출시 소식 신청 칸(`/api/launch-notify`)은 Vercel Function이라 `next dev`에서는 동작하지 않고 항상 "처리하지 못했어요" 오류가 보입니다. 로컬에서 신청 흐름까지 확인하려면 `vercel dev`를 쓰거나 프리뷰 배포에서 확인합니다. 서버 로직은 `npm test`의 `tests/launch-notify.test.tsx`로 검증합니다.
 
 ```bash
 npm install

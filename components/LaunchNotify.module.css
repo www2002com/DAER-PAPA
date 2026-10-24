@@ -1,0 +1,20 @@
+.box { background: var(--surface-soft); border: 1px solid var(--line); border-radius: var(--radius-m); padding: clamp(28px, 4vw, 48px); margin-block: 32px; }
+.title { font-size: clamp(22px, 2.4vw, 30px); }
+.body { margin-top: 12px; color: var(--ink-2, var(--ink)); font-size: 15px; max-width: var(--measure); }
+.form { margin-top: 22px; max-width: 40rem; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; }
+.input {
+  flex: 1 1 16rem; min-height: 52px; padding: 0 16px; font: inherit; color: var(--ink);
+  background: var(--card); border: 1px solid var(--line-strong); border-radius: var(--radius-s);
+}
+.input:focus-visible { outline: 2px solid var(--forest); outline-offset: 2px; }
+.input[aria-invalid='true'] { border-color: #8a3b2e; }
+.submit { flex: 0 0 auto; }
+.consent { display: flex; align-items: flex-start; gap: 10px; margin-top: 16px; font-size: 14px; }
+.consent input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--forest); flex-shrink: 0; }
+.detail { margin-top: 6px; padding-left: 28px; font-size: 13px; color: var(--ink-2, var(--ink)); line-height: 1.6; }
+.detail a { text-decoration: underline; text-underline-offset: 2px; }
+.msg, .error, .success { margin-top: 12px; font-size: 14px; min-height: 1.4em; }
+.error { color: #8a3b2e; }
+.success { margin-top: 20px; font-weight: 600; color: var(--forest); }
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }

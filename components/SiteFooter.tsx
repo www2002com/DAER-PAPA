@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { FooterLogo } from './FooterLogo';
 import { ContactEmail } from './ContactEmail';
 import { BRAND, CHANNELS, FACTS_UPDATED, FACTS_UPDATED_KO, UNDECIDED } from '@/lib/facts';
+import { businessLines } from '@/lib/business';
 import styles from './SiteFooter.module.css';
 
 const EXPLORE = [
@@ -108,8 +109,21 @@ export function SiteFooter() {
             출시 전 브랜드 소개용 페이지입니다. 제품 이미지는 개발 중인 디자인 시안이며, 제품 정보는 확정 후 공개합니다.
             손글씨 스타일 서체: 나눔 펜 스크립트(SIL OFL). 본문 서체: Pretendard(SIL OFL).
           </p>
+          <p className={`${styles.muted} ${styles.business}`} aria-label="사업자 정보">
+            {businessLines().map((line, i) => (
+              <span key={line.label}>
+                {i > 0 && ' · '}
+                {line.label} {line.value}
+              </span>
+            ))}
+          </p>
           <div className={styles.baseRow}>
-            <span>© 2026 DEAR PAPA 디어파파 · dearpapa.kr</span>
+            <span>
+              © 2026 DEAR PAPA 디어파파 · dearpapa.kr ·{' '}
+              <Link href="/privacy" className={styles.privacy}>
+                개인정보처리방침
+              </Link>
+            </span>
             <a href="#main" className={styles.top}>
               맨 위로
             </a>

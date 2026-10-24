@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { LaunchNotifySection } from '@/components/LaunchNotifySection';
 import { ArticleLayout, RelatedLinks } from '@/components/article/ArticleLayout';
 import { preservedMetadata } from '@/lib/preserved-metadata';
 import {
@@ -91,6 +92,8 @@ export default function LetterAllInOnePage() {
         </p>
         <p>현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.</p>
         <p>효능과 사용감, 심사 결과는 확인되면 공식 정보 페이지에 올립니다.</p>
+
+        <LaunchNotifySection placement="product" />
 
         <div id="see-also">
           <RelatedLinks

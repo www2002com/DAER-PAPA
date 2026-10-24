@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ProductBox } from '@/components/article/ProductBox';
 import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/ArticleLayout';
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
 import { AFTER_SHAVE_GIFT_DESCRIPTION, AFTER_SHAVE_GIFT_FAQ, dotDate, getJournalEntry, AFTER_SHAVE_GIFT_META_TITLE, AFTER_SHAVE_GIFT_META_DESCRIPTION } from '@/lib/journal';
@@ -64,10 +65,19 @@ export default function AfterShaveGiftPage() {
       <h2>2. 에탄올이 들어 있는지</h2>
       <p>면도한 직후 피부에 바르는 제품이라면 전성분에 에탄올(알코올)이 있는지 살펴보세요.</p>
 
-      <h2>3. 한 단계로 끝나는지</h2>
+      <h2>3. 한 단계로 바르는지</h2>
       <p>
         스킨, 로션, 크림을 따로 챙기지 않는 아빠라면 한 번만 바르면 되는 올인원이 쓰기 쉽습니다. 빨리 흡수되는 워터리 제형은
         바른 뒤 끈적임이 덜합니다.
+      </p>
+
+      <ProductBox />
+
+      <h2>모바일로 보내도 마음이 전해지는 법: 한 줄 편지 함께 쓰기</h2>
+      <p>
+        멀리 사는 아빠께 선물을 휴대폰으로 보내면 마음이 덜 전해질까 걱정될 수 있어요. 선물과 함께 아빠께 하고 싶은 말을 한 줄로
+        적어 보내 보세요. 디어파파는 dearpapa.kr에서 아빠께 보낼 한 줄 편지를 쓸 수 있게 하고 있어요.{' '}
+        <Link href="/#letter">한 줄 편지 쓰기</Link>
       </p>
 
       <h2>디어파파가 만들고 있는 제품</h2>

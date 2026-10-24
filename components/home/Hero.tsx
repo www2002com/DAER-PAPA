@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { HeroLogo } from './HeroLogo';
+import { LetterBunny } from './LetterBunny';
 import styles from './Hero.module.css';
 
 export function Hero() {
@@ -15,9 +16,12 @@ export function Hero() {
             평소에 하지 못했던 말 한 줄.<br />
             마음까지 전하는 아빠 선물을 준비합니다.
           </p>
+          <div className={styles.invitation}>
           <a className={`link-arrow ${styles.cta}`} href="/#letter" data-reveal="soft-cue" data-track-action="letter_entry_clicked">
             한 줄 편지 써보기 <span aria-hidden="true">→</span>
           </a>
+          <LetterBunny />
+          </div>
         </div>
         <figure className={styles.visual} data-reveal="visual" data-reveal-delay="80">
           <span className={styles.postmark} aria-hidden="true">TO. PAPA<br /><small>마음을 보내요</small></span>

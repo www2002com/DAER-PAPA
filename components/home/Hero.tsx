@@ -20,7 +20,6 @@ export function Hero() {
           <a className={`link-arrow ${styles.cta}`} href="/#letter" data-letter-entry data-reveal="soft-cue" data-track-action="letter_entry_clicked">
             한 줄 편지 써보기 <span aria-hidden="true">→</span>
           </a>
-          <LetterBunny />
           </div>
         </div>
         <figure className={styles.visual} data-reveal="visual" data-reveal-delay="80">
@@ -36,9 +35,7 @@ export function Hero() {
             alt="레터 올인원 용기와 한 세트로 구성한 딥그린 슬림 단상자 디자인 시안" width={700} height={1050}
             loading="eager" />
           <div className={styles.letterCard}>
-            <span className={styles.letterSalutation}>Dear Papa,</span>
-            <p className={styles.letterMessage}>아빠, 늘 고마워요.</p>
-            <span className={styles.letterRule} aria-hidden="true" />
+            <LetterBunny />
           </div>
           <figcaption className={styles.caption}>
             <span>선물 경험 기획 이미지 · 편지 문구 예시</span>

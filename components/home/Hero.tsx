@@ -28,7 +28,16 @@ export function Hero() {
           <Image className={styles.carton} src="/images/letter-all-in-one-carton-sage-v1.webp"
             alt="레터 올인원 용기와 한 세트로 구성한 딥그린 슬림 단상자 디자인 시안" width={700} height={1050}
             loading="eager" />
-          <figcaption className={styles.caption}>용기와 단상자는 개발 중인 디자인 시안입니다.</figcaption>
+          <div className={styles.letterCard}>
+            <span className={styles.letterSalutation}>Dear Papa,</span>
+            <p className={styles.letterMessage}>아빠, 늘 고마워요.</p>
+            <span className={styles.letterRule} aria-hidden="true" />
+          </div>
+          <figcaption className={styles.caption}>
+            <span>선물 경험 기획 이미지 · 편지 문구 예시</span>
+            <span>용기와 단상자는 개발 중인 디자인 시안입니다.</span>
+            <span>최종 판매 구성은 확정 전입니다.</span>
+          </figcaption>
         </figure>
       </div>
       <div className={`container ${styles.intro}`}>

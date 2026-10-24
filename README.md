@@ -31,6 +31,7 @@ npm run verify:preservation
 | `lib/preserved-site.json` | dearpapa.kr 원본 메타·JSON-LD·facts 본문·공식 문장 및 보호 파일 해시 |
 | `app/@structuredData/` | 경로별 JSON-LD를 루트 `<head>`에 서버 렌더링 |
 | `scripts/verify-preservation.mjs` | 초기 HTML과 공개 파일을 검사하는 빌드 보호 장치 |
+| `automation/` | 광고 자동화 2단계 MVP 파이프라인(로컬 CLI). 사이트 빌드와 분리 — [automation/README.md](automation/README.md) |
 
 ## 문구와 검색 데이터 보존
 

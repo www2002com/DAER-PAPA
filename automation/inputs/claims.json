@@ -1,0 +1,85 @@
+{
+  "source": "모듈 2 주장·자산 근거 (2026-10-22 기준). 상태가 바뀌면 이 파일만 갱신하고 변경 이력에 남긴다.",
+  "statusVerdict": {
+    "banned": "reject",
+    "prelaunch": "reject",
+    "dev_target": "reject",
+    "evidence_pending": "reject",
+    "conditional": "hold"
+  },
+  "rules": [
+    {
+      "id": "medical",
+      "status": "banned",
+      "patterns": ["치료", "완치", "여드름", "홍조", "아토피", "염증", "의약", "처방"],
+      "reason": "의약품 오인 표현 — 화장품 법령 위반 (1-D)"
+    },
+    {
+      "id": "endorsement",
+      "status": "banned",
+      "patterns": ["피부과\\s*(추천|의사|전문의)", "의사\\s*추천", "전문의\\s*추천", "약사\\s*추천"],
+      "reason": "근거 없는 전문가 추천 (1-D)"
+    },
+    {
+      "id": "superlative",
+      "status": "banned",
+      "patterns": ["최고", "최상", "1\\s*위", "넘버\\s*원", "No\\.?\\s*1", "유일", "최초", "가장\\s*좋은"],
+      "reason": "근거 없는 최상급 표현 (1-D)"
+    },
+    {
+      "id": "competitor",
+      "status": "banned",
+      "patterns": ["토리든", "라운드랩", "우르오스", "아이디얼\\s*포\\s*맨", "비오템", "타사", "다른\\s*제품보다"],
+      "reason": "경쟁 제품 직접 비교·언급 (1-D)"
+    },
+    {
+      "id": "price-and-sale",
+      "status": "prelaunch",
+      "patterns": ["\\d[\\d,]*\\s*원", "할인", "특가", "판매\\s*중", "지금\\s*구매", "구매하기", "주문하기", "장바구니", "출시일"],
+      "reason": "가격·출시일 미확정, 결제 미연결 — 확정·판매 중처럼 표현 불가 (1-A 조건, 모듈 1 §4)"
+    },
+    {
+      "id": "functional",
+      "status": "dev_target",
+      "patterns": ["미백", "주름", "화이트닝", "브라이트닝", "기능성", "나이아신아마이드", "아데노신", "탄력", "안티\\s*에이징"],
+      "reason": "기능성 보고·심사 완료 전 효능 표현 불가 (1-B → 1-D)"
+    },
+    {
+      "id": "texture",
+      "status": "dev_target",
+      "patterns": ["빠른\\s*흡수", "흡수력", "워터리", "산뜻"],
+      "reason": "제형은 관능 평가·최종 사양 확정 전 (1-B)"
+    },
+    {
+      "id": "ingredients",
+      "status": "dev_target",
+      "patterns": ["세라마이드", "병풀", "시카", "판테놀", "알란토인", "히알루론", "하이알루로네이트"],
+      "reason": "전성분 미확정 — 배합 표현 불가 (1-B)"
+    },
+    {
+      "id": "efficacy",
+      "status": "evidence_pending",
+      "patterns": ["보습", "촉촉", "수분\\s*(공급|충전)", "진정", "저자극", "순한", "자극\\s*(없|테스트)", "민감성", "피부\\s*(개선|가\\s*좋아|가\\s*달라)", "30\\s*개월", "유효\\s*기간"],
+      "reason": "효능·안전 표현은 시험 결과 등 증빙 확보 후에만 (1-C)"
+    },
+    {
+      "id": "free-from",
+      "status": "conditional",
+      "patterns": ["무향", "향료", "에탄올", "알코올"],
+      "allowIf": "(방향|기획|준비|설계)",
+      "reason": "무향료·무에탄올은 완제품 확정 전까지 '~방향으로 기획' 수준만 허용 (1-A 조건, 1-C)"
+    },
+    {
+      "id": "handwriting",
+      "status": "conditional",
+      "patterns": ["손글씨", "손편지", "손으로\\s*(쓴|적은)", "직접\\s*쓴\\s*카드"],
+      "reason": "편지 카드는 나눔 펜 스크립트 인쇄 — 실제 손글씨처럼 보이면 안 됨 (1-D, 사이트 정합)"
+    },
+    {
+      "id": "final-product",
+      "status": "conditional",
+      "patterns": ["실제\\s*제품", "실물", "최종\\s*(용기|디자인|패키지)", "완제품"],
+      "reason": "용기·단상자는 개발 중 시안 — 최종 제품처럼 표현 불가 (1-D)"
+    }
+  ]
+}

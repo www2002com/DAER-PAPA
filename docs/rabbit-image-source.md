@@ -1,5 +1,19 @@
 # Rabbit image
 
+## Current asset — user-approved generated concept, 2026-10-24
+
+The user approved the seated letter rabbit with a blue graph-paper background,
+sticker border, hearts and postage motif and requested implementation.
+`public/images/letter-bunny-grid-v1.webp` is a 640px WebP export of the approved
+generated PNG `exec-1dffb3de-e066-48e1-aa7a-19cad9f82b5e.png`.
+The approved full-resolution source is retained in the workspace outputs.
+Only size/encoding were optimized; the approved composition was retained.
+The previous Pinterest image is no longer served from public assets.
+Generation and user approval are provenance records, not a legal clearance
+or a guarantee of copyright exclusivity. No official artist affiliation is claimed.
+
+## Historical asset and implementation notes
+
 The user requested the supplied rabbit illustration itself on 2026-10-24,
 replacing the previous SVG interpretation. The matching illustration was
 visually verified in the user's open Pinterest pin:

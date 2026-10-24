@@ -24,17 +24,16 @@ export function LetterBunny() {
           width={736} height={977} alt=""
           className={styles.portrait} loading="eager" />
         </span>
-        <span className={styles.label}>{replay ? '한 번 더 인사해요' : '톡, 인사해요!'}</span>
+        <span className={styles.label}>{replay ? '다시 인사하기' : '토끼에게 인사하기'}</span>
       </button>
       <div className={styles.note}>
+        <span className={styles.salutation}>Dear Papa,</span>
+        <p className={styles.message}>아빠, 늘 고마워요.</p>
         <p className={styles.reply} aria-live="polite" aria-atomic="true">
           <span key={replay} className={replay > 0 ? styles.answer : undefined}>
             {greetings[replay === 0 ? 0 : 1 + ((replay - 1) % (greetings.length - 1))]}
           </span>
         </p>
-        <a className={styles.letterLink} href="/#letter" data-letter-entry data-track-action="letter_entry_clicked">
-          내 마음 적어보기 <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-        </a>
       </div>
     </div>
   );

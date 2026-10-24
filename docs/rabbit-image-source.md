@@ -18,3 +18,9 @@ short replies and replays a 420ms greeting without remounting the source image.
 A letter-entry link opens and focuses the existing composer without changing
 the visitor's draft. Reduced-motion users receive the text feedback without
 spatial animation; replies are announced through a polite live region.
+
+The subsequent approved refinement places the original rabbit inside the
+product scene's existing letter, removing the separate greeting widget and
+its duplicate letter-entry link. The hero retains one primary letter CTA.
+Guidance and greeting labels use the body font; handwriting is reserved for
+the sample letter. Product positioning leaves room above the unified letter.

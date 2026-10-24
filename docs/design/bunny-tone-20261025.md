@@ -38,3 +38,18 @@
 - 기록: `outputs/dearpapa-bunny-tone-20261025/site-review/checks.json`. 제공 이미지와 화면은 `C:/Users/www20/Downloads/DearPapa-Bunny-Tone-20261025/`에도 저장.
 
 로컬 미리보기: http://127.0.0.1:51898
+
+## 후속 요청: 사진 속 편지 문구
+
+사용자가 “그리고 사진속에 난 아빠가 행복해졌으면 좋겠어 문구를 넣어”라고 요청했다.
+선택된 다크 블루 선물 장면의 아이보리 카드에 기존 `Dear Papa,` 아래로
+“난 아빠가 / 행복해졌으면 좋겠어”를 두 줄의 푸른 손글씨로 넣었다.
+제품 형태·색·인쇄와 촬영 구도는 기존 이미지를 기준으로 유지했다.
+
+- 편집 도구: GPT 내장 imagegen. 결과 `shot-04-letter-message.png`, 실제 편집 문안 `letter-message-prompt.txt`.
+- 웹 자산: `public/images/campaign-blue/letter-gift-message.webp`, 1671×941, 51,428바이트, 품질 88.
+- 첫 화면 이미지 경로와 대체 텍스트를 갱신했다. 종전 `letter-gift.webp`와 본문·토끼 인터랙션은 보존했다.
+- `npm.cmd run build`: 81개 테스트와 TypeScript·정적 내보내기·보존 검사 통과.
+- 1440×1000, 390×844, 320×800에서 새 이미지 로드, 사진 속 문구, 잘림·가로 넘침·pageerror를 확인했다.
+- 캡처·측정 기록: `outputs/dearpapa-bunny-tone-20261025/message-review/`. PNG와 캡처는 Downloads의 동일 작업 폴더에도 보관한다.
+- 영상 제작은 기존 정지 상태를 유지하며, 운영 배포는 하지 않았다.

@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { Composer } from '@/components/letter/Composer';
 import { DRAFT_KEY, LETTERS_KEY, loadLetters, saveLetters } from '@/components/letter/storage';
@@ -9,6 +9,29 @@ const archive = () => Array.from({ length: 20 }, (_, i) => ({
 }));
 
 describe('letter preservation', () => {
+  it('focuses the message field when arriving at the letter hash', async () => {
+    const page = render(<Composer />);
+    window.history.replaceState(null, '', '/#letter');
+    fireEvent(window, new Event('hashchange'));
+    await waitFor(() => expect(document.activeElement).toBe(screen.getByLabelText('편지 내용')));
+    page.unmount();
+    window.history.replaceState(null, '', '/');
+  });
+
+  it('focuses the message field when the entry link is clicked on the current hash', async () => {
+    window.history.replaceState(null, '', '/');
+    render(<><a href="/#letter" data-letter-entry>편지 진입</a><Composer /></>);
+    window.history.replaceState(null, '', '/#letter');
+    fireEvent.click(screen.getByRole('link', { name: '편지 진입' }));
+    await waitFor(() => expect(document.activeElement).toBe(screen.getByLabelText('편지 내용')));
+    window.history.replaceState(null, '', '/');
+  });
+
+  it('marks the internal write button as the letter entry action', () => {
+    render(<Composer />);
+    expect(screen.getByRole('button', { name: '아빠에게 편지 쓰기' }).getAttribute('data-track-action')).toBe('letter_entry_clicked');
+  });
+
   it('retains the latest text and sender when the composer unmounts immediately after input', () => {
     const page = render(<Composer />);
     fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: '아빠, 마지막 문장까지 남겨 주세요.' } });

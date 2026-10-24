@@ -40,6 +40,7 @@ describe('optional product discovery after letter export', () => {
     expect(vi.mocked(trackAction).mock.calls.filter(call => call[0] === 'product_details_after_letter_clicked')).toHaveLength(1);
     expect(vi.mocked(trackAction).mock.calls.every(call => call.length === 1)).toBe(true);
     expect((screen.getByLabelText('편지 내용') as HTMLTextAreaElement).value).toBe('아빠에게 전하는 개인적인 문장');
+    expect(screen.getByText('카드 이미지를 만들었어요. 다운로드를 확인해 주세요.')).toBeTruthy();
   });
 
   it('keeps the product link hidden for empty input', () => {
@@ -47,6 +48,44 @@ describe('optional product discovery after letter export', () => {
     fireEvent.click(screen.getByRole('button', { name: '카드 이미지 저장' }));
     expect(productLink()).toBeNull();
     expect(renderCard).not.toHaveBeenCalled();
+  });
+
+  it('ignores a second export while the card is being prepared', async () => {
+    let resolveRender: (canvas: HTMLCanvasElement) => void = () => {};
+    vi.mocked(renderCard).mockImplementation(() => new Promise<HTMLCanvasElement>(resolve => { resolveRender = resolve; }));
+    render(<Composer />);
+    fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: '한 번만 카드로 만들어요.' } });
+    const button = screen.getByRole('button', { name: '카드 이미지 저장' });
+    fireEvent.click(button);
+    await waitFor(() => expect(button.getAttribute('aria-busy')).toBe('true'));
+    fireEvent.click(button);
+    expect(renderCard).toHaveBeenCalledTimes(1);
+    resolveRender(document.createElement('canvas'));
+    await waitFor(() => expect(button.getAttribute('aria-busy')).toBe('false'));
+  });
+
+  it('does not let an earlier completion timer clear a later export', async () => {
+    let resolveFirst: (canvas: HTMLCanvasElement) => void = () => {};
+    let resolveSecond: (canvas: HTMLCanvasElement) => void = () => {};
+    vi.mocked(renderCard)
+      .mockImplementationOnce(() => new Promise<HTMLCanvasElement>(resolve => { resolveFirst = resolve; }))
+      .mockImplementationOnce(() => new Promise<HTMLCanvasElement>(resolve => { resolveSecond = resolve; }));
+    render(<Composer />);
+    fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: '첫 번째 편지' } });
+    const button = screen.getByRole('button', { name: '카드 이미지 저장' });
+    fireEvent.click(button);
+    await waitFor(() => expect(button.getAttribute('aria-busy')).toBe('true'));
+    resolveFirst(document.createElement('canvas'));
+    await waitFor(() => expect(screen.getByRole('button', { name: '다운로드 준비됨' })).toBeTruthy());
+
+    fireEvent.click(screen.getByRole('button', { name: '다운로드 준비됨' }));
+    await waitFor(() => expect(button.getAttribute('aria-busy')).toBe('true'));
+    await new Promise(resolve => setTimeout(resolve, 2300));
+    expect(button.getAttribute('aria-busy')).toBe('true');
+    fireEvent.click(button);
+    expect(renderCard).toHaveBeenCalledTimes(2);
+    resolveSecond(document.createElement('canvas'));
+    await waitFor(() => expect(button.getAttribute('aria-busy')).toBe('false'));
   });
 
   it('offers the same optional link after exporting an archived letter', async () => {

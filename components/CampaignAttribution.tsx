@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { trackAction } from '@/lib/analytics';
-import { campaignFromSearch, type CampaignId } from '@/lib/campaign-attribution';
+import { campaignFromSearch, clearRememberedCampaign, hasAttributionParams, rememberCampaign, type CampaignId } from '@/lib/campaign-attribution';
 
 const STORAGE_PREFIX = 'dearpapa:campaign-landing:';
 const RETRY_MS = 100;
@@ -34,7 +34,17 @@ export function CampaignAttribution() {
   useEffect(() => {
     if (sent.current || process.env.NODE_ENV !== 'production') return;
     const campaign = campaignFromSearch(window.location.search);
-    if (!campaign) return;
+    if (!campaign) {
+      const sameOriginReferrer = (() => {
+        if (!document.referrer) return false;
+        try { return new URL(document.referrer).origin === window.location.origin; } catch { return false; }
+      })();
+      if (hasAttributionParams(window.location.search) || !sameOriginReferrer) clearRememberedCampaign();
+      return;
+    }
+    // Bind the current approved URL immediately so early follow-up actions cannot
+    // inherit a previous campaign while the analytics queue is still booting.
+    rememberCampaign(campaign);
     let cancelled = false;
     let retry: number | undefined;
     const startedAt = Date.now();

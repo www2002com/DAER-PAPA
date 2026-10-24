@@ -17,7 +17,7 @@ export function Hero() {
             마음까지 전하는 아빠 선물을 준비합니다.
           </p>
           <div className={styles.invitation}>
-          <a className={`link-arrow ${styles.cta}`} href="/#letter" data-reveal="soft-cue" data-track-action="letter_entry_clicked">
+          <a className={`link-arrow ${styles.cta}`} href="/#letter" data-letter-entry data-reveal="soft-cue" data-track-action="letter_entry_clicked">
             한 줄 편지 써보기 <span aria-hidden="true">→</span>
           </a>
           <LetterBunny />

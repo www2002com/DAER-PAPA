@@ -93,11 +93,15 @@ export function Composer() {
   const composing = useRef(false);
   const stageRef = useRef<HTMLDivElement>(null);
   const timers = useRef<number[]>([]);
+  const downloadResetTimer = useRef<number | null>(null);
+  const downloadBusyRef = useRef(false);
   const started = useRef(false);
   const { keysFor, reset } = useCharKeys(composing);
 
   const later = useCallback((fn: () => void, ms: number) => {
-    timers.current.push(window.setTimeout(fn, ms));
+    const timer = window.setTimeout(fn, ms);
+    timers.current.push(timer);
+    return timer;
   }, []);
 
   // ── Restore draft and archive ───────────────────────────────
@@ -213,6 +217,30 @@ export function Composer() {
       focusText();
     });
   }
+
+  // A link to /#letter is the primary entry point. Keep the anchor's native
+  // navigation fallback, then focus the composer once the hash target arrives.
+  useEffect(() => {
+    const openFromHash = () => {
+      if (window.location.hash !== '#letter') return;
+      startWriting();
+    };
+    const openFromCurrentHashEntry = (event: MouseEvent) => {
+      if (window.location.hash !== '#letter' || event.defaultPrevented || event.button !== 0
+        || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (!(event.target instanceof Element) || !event.target.closest('[data-letter-entry]')) return;
+      startWriting();
+    };
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+    document.addEventListener('click', openFromCurrentHashEntry);
+    return () => {
+      window.removeEventListener('hashchange', openFromHash);
+      document.removeEventListener('click', openFromCurrentHashEntry);
+    };
+    // startWriting only closes over stable refs/setters; the listener must be installed once.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function guard(): boolean {
     if (!text.trim()) {
@@ -394,7 +422,9 @@ export function Composer() {
   }
 
   async function downloadImage(l?: Letter) {
+    if (downloadBusyRef.current || download === 'busy') return;
     if (!l && !guard()) return;
+    downloadBusyRef.current = true;
     const data = l ?? { text: text.trim(), from: from.trim(), date: todayStamp() };
     setDownload('busy');
     try {
@@ -408,11 +438,17 @@ export function Composer() {
       trackAction('letter_card_exported');
       setHasExported(true);
       setDownload('done');
-      showToast('카드 이미지를 내 기기에 저장했어요.');
-      later(() => setDownload('idle'), 2200);
+      showToast('카드 이미지를 만들었어요. 다운로드를 확인해 주세요.');
+      if (downloadResetTimer.current !== null) window.clearTimeout(downloadResetTimer.current);
+      downloadResetTimer.current = later(() => {
+        downloadResetTimer.current = null;
+        setDownload(previous => previous === 'done' ? 'idle' : previous);
+      }, 2200);
     } catch {
       setDownload('idle');
       showToast('이미지를 만들 수 없었어요. 잠시 후 다시 시도해 주세요.');
+    } finally {
+      downloadBusyRef.current = false;
     }
   }
 
@@ -477,7 +513,7 @@ export function Composer() {
   return (
     <>
     <div className={styles.entry} data-reveal="soft-cue" data-reveal-delay="150">
-      <button type="button" className="btn" onClick={startWriting} aria-controls={`${uid}-p-write`}>
+      <button type="button" className="btn" onClick={startWriting} aria-controls={`${uid}-p-write`} data-track-action="letter_entry_clicked">
         아빠에게 편지 쓰기
       </button>
       <p>편지는 지금 쓸 수 있어요. 가입 없이, 이 기기에만.</p>
@@ -702,7 +738,7 @@ export function Composer() {
                   </svg>
                 )}
               </span>
-              {download === 'busy' ? '카드를 만드는 중…' : download === 'done' ? '저장했어요' : '카드 이미지 저장'}
+              {download === 'busy' ? '카드를 만드는 중…' : download === 'done' ? '다운로드 준비됨' : '카드 이미지 저장'}
             </button>
             <button type="button" className={`btn btn--ghost ${styles.secondary}`} onClick={keep}>
               {editingId ? '보관함에 다시 담기' : '보관함에 담기'}

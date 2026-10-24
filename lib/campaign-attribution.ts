@@ -1,6 +1,8 @@
 export const CAMPAIGN_IDS = ['ig_letter', 'ig_product', 'yt_letter', 'naver_product'] as const;
 export type CampaignId = (typeof CAMPAIGN_IDS)[number];
 
+const CURRENT_CAMPAIGN_KEY = 'dearpapa:campaign-current';
+
 type AttributionTuple = {
   utm_campaign: 'prelaunch_202610';
   utm_source: 'instagram' | 'youtube' | 'naver';
@@ -38,4 +40,58 @@ export function campaignFromSearch(search: string): CampaignId | null {
 
   const tuple = Object.fromEntries(KEYS.map((key) => [key, values[key][0]])) as AttributionTuple;
   return APPROVED.find(([approved]) => tupleEquals(approved, tuple))?.[1] ?? null;
+}
+
+/** True when a URL carries any attribution key, even if the tuple is invalid. */
+export function hasAttributionParams(search: string): boolean {
+  try {
+    const params = new URLSearchParams(search.startsWith('?') ? search : `?${search}`);
+    return KEYS.some((key) => params.has(key));
+  } catch {
+    return false;
+  }
+}
+
+function isCampaignId(value: string | null): value is CampaignId {
+  return value !== null && (CAMPAIGN_IDS as readonly string[]).includes(value);
+}
+
+/** Read only the allowlisted campaign code kept for this browser tab. */
+export function campaignFromSession(): CampaignId | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const value = window.sessionStorage.getItem(CURRENT_CAMPAIGN_KEY);
+    return isCampaignId(value) ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Store a fixed campaign code; raw query strings and personal values never enter storage. */
+export function rememberCampaign(campaign: CampaignId): void {
+  if (typeof window === 'undefined') return;
+  try {
+    window.sessionStorage.setItem(CURRENT_CAMPAIGN_KEY, campaign);
+  } catch {
+    // Storage can be blocked; analytics still remains best-effort.
+  }
+}
+
+/** Clear an old campaign when a fresh organic or unapproved entry is loaded. */
+export function clearRememberedCampaign(): void {
+  if (typeof window === 'undefined') return;
+  try {
+    window.sessionStorage.removeItem(CURRENT_CAMPAIGN_KEY);
+  } catch {
+    // Storage can be blocked by privacy settings.
+  }
+}
+
+/** Resolve attribution for an event on this page. A URL tuple wins over storage; invalid UTM never falls back. */
+export function campaignForCurrentLocation(): CampaignId | null {
+  if (typeof window === 'undefined') return null;
+  const direct = campaignFromSearch(window.location.search);
+  if (direct) return direct;
+  if (hasAttributionParams(window.location.search)) return null;
+  return campaignFromSession();
 }

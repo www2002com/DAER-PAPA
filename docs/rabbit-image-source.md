@@ -11,3 +11,10 @@ has additional white margins. Display keeps its aspect ratio and white backgroun
 The existing greeting button animates the whole image once per click, with
 reduced-motion support. Envelope color controls were removed because this
 illustration has no envelope.
+
+The follow-up refinement adds a blue-lined greeting note using the existing
+handwriting font. Clicking or keyboard-activating the rabbit cycles three
+short replies and replays a 420ms greeting without remounting the source image.
+A letter-entry link opens and focuses the existing composer without changing
+the visitor's draft. Reduced-motion users receive the text feedback without
+spatial animation; replies are announced through a polite live region.

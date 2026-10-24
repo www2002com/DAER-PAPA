@@ -28,7 +28,7 @@ export function LetterBunny() {
       </button>
       <div className={styles.note}>
         <span className={styles.salutation}>Dear Papa,</span>
-        <p className={styles.message}>난 아빠가 행복했으면 좋겠어</p>
+        <p className={styles.message}>난 아빠가 행복해졌으면 좋겠어</p>
         <p className={styles.reply} aria-live="polite" aria-atomic="true">
           <span key={replay} className={replay > 0 ? styles.answer : undefined}>
             {greetings[replay === 0 ? 0 : 1 + ((replay - 1) % (greetings.length - 1))]}

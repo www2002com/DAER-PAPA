@@ -1,6 +1,21 @@
 # Rabbit image
 
-## Current asset — transparent minimal mascot, 2026-10-25
+## Current asset — finer internal grid, 2026-10-25
+
+The user then requested a more detailed graph-paper feel. Built-in imagegen
+refined the existing mascot with smaller squares and finer lines, preserving
+the pose, face, envelope and transparent exterior. The active asset is now
+`public/images/letter-bunny-fine-grid-v3.webp` (640×640 RGBA, 53,000 bytes).
+The v2 source remains unchanged. Source PNG (1254×1254), exact prompt and
+alpha checks are in `outputs/dearpapa-fine-bunny-20261025/`; the delivered PNG
+is also in `Downloads/DearPapa-Bunny-Tone-20261025/letter-bunny-fine-grid.png`.
+
+Build, 81 tests, TypeScript and preservation checks passed. Desktop, 390px and
+320px browser checks verified image loading, no overflow or page errors,
+transparent background, click/keyboard greetings and reduced-motion behavior.
+Screenshots and results are in the output folder's `site-review/`.
+
+## Previous asset — transparent minimal mascot, 2026-10-25
 
 The user requested a background matching the surrounding letter, graph-paper
 texture only inside the bunny, and a Claude-character feeling. The new asset

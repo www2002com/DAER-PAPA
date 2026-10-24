@@ -2,6 +2,7 @@
   "name": "dearpapa-kr",
   "version": "2.0.0",
   "private": true,
+  "type": "module",
   "description": "DEAR PAPA(디어파파) 공식 사이트 — 아빠의 매일에, 딸의 마음을.",
   "scripts": {
     "dev": "next dev",

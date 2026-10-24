@@ -6,7 +6,7 @@ import { Story } from '@/components/home/Story';
 import { Product } from '@/components/home/Product';
 import { Facts } from '@/components/home/Facts';
 import { News } from '@/components/home/News';
-import { LaunchNotify } from '@/components/LaunchNotify';
+import { LaunchNotifySection } from '@/components/LaunchNotifySection';
 
 export const metadata = preservedMetadata('/');
 
@@ -20,7 +20,7 @@ export default function Home() {
       <GiftMeaning />
       <Facts />
       <div className="container">
-        <LaunchNotify placement="home" />
+        <LaunchNotifySection placement="home" />
       </div>
       <News />
     </>

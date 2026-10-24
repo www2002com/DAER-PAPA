@@ -9,7 +9,8 @@
 // With no RESEND_API_KEY the API answers 503 { ok: false, error: 'not_configured' } and the form shows a
 // graceful message. Emails are never logged.
 
-import { CONSENT_VERSION, isPlacement, normalizeEmail, type LaunchNotifyErrorCode, type LaunchNotifyPlacement } from './launch-notify';
+import { CONSENT_VERSION, isPlacement, normalizeEmail, type LaunchNotifyErrorCode, type LaunchNotifyPlacement } from './launch-notify.js';
+import { launchNotifyReady } from './launch-notify-config.js';
 
 export type SignupRecord = {
   email: string;
@@ -52,6 +53,7 @@ export function notificationText(record: SignupRecord): string {
 }
 
 export function storeFromEnv(env: Env = process.env, fetchImpl: typeof fetch = fetch): Store | null {
+  if (!launchNotifyReady(env)) return null;
   const key = env.RESEND_API_KEY?.trim();
   if (!key) return null;
   const from = env.LAUNCH_NOTIFY_FROM?.trim() || DEFAULT_FROM;
@@ -76,8 +78,8 @@ export function storeFromEnv(env: Env = process.env, fetchImpl: typeof fetch = f
 }
 
 // Basic per-instance rate limit. IPs live only in memory for the window and are never stored or logged.
-// Expired entries are pruned on every call, so an address stays in memory for at most WINDOW_MS after its
-// last request. This is the "서버 메모리에서 최대 10분" promise in the privacy notice (app/privacy/page.tsx).
+// Expired entries are pruned on the next request. Only the last 10 minutes affect rate limiting;
+// idle serverless instances may retain expired memory until another request or termination.
 export const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
 const hits = new Map<string, number[]>();

@@ -123,7 +123,7 @@ describe('launch notify API handler', () => {
 });
 
 describe('Resend delivery', () => {
-  const env = { RESEND_API_KEY: 're_test_dummy' };
+  const env = { RESEND_API_KEY: 're_test_dummy', LAUNCH_NOTIFY_ENABLED: 'true' };
 
   it('forwards one plain-text email to hello@ only, with email, consent time and page', async () => {
     const fetchMock = vi.fn(async () => new Response(JSON.stringify({ id: 'x' }), { status: 200 }));

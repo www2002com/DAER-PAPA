@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArticleLayout, FactList } from '@/components/article/ArticleLayout';
 import { CONTACT_EMAIL } from '@/lib/facts';
 import { PRIVACY_EFFECTIVE_DATE, PRIVACY_OFFICER, PROCESSORS } from '@/lib/business';
+import { launchNotifyReady } from '@/lib/launch-notify-config';
 
 // 개인정보처리방침 (개인정보 보호법 제30조, 표준 개인정보 처리방침 작성지침 기준).
 // Covers only what the site actually processes: the 출시 알림 신청 email. TODO values live in lib/business.ts
@@ -10,7 +11,7 @@ import { PRIVACY_EFFECTIVE_DATE, PRIVACY_OFFICER, PROCESSORS } from '@/lib/busin
 
 const URL = 'https://dearpapa.kr/privacy';
 const TITLE = '개인정보처리방침 | 디어파파 DEAR PAPA';
-const DESCRIPTION = '디어파파(DEAR PAPA) 공식 사이트 dearpapa.kr의 개인정보처리방침. 출시 소식 안내를 위해 이메일만 받으며, 출시 안내 후 또는 동의 철회 시 지체 없이 파기합니다.';
+const DESCRIPTION = '디어파파(DEAR PAPA) 공식 사이트의 개인정보 처리 안내. 편지 보관, 사이트 이용 정보와 문의 방법을 확인하세요.';
 
 export const metadata: Metadata = {
   metadataBase: null,
@@ -33,6 +34,18 @@ const dotted = (iso: string) => iso.replaceAll('-', '. ') + '.';
 
 export default function PrivacyPage() {
   const mail = <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>;
+  if (!launchNotifyReady()) return (
+    <ArticleLayout eyebrow="PRIVACY" title="개인정보 처리 안내" lead={<p>현재 출시 알림 신청을 위한 이메일을 수집하지 않습니다.</p>}>
+      <h2>편지 작성과 보관</h2>
+      <p>작성한 편지와 보내는 사람 표기는 이 기기의 브라우저에만 보관되며 서버로 전송하지 않습니다. 기기의 편지 도구에서 지우거나 브라우저 저장 데이터를 삭제할 수 있습니다.</p>
+      <h2>사이트 이용 정보</h2>
+      <p>사이트 호스팅과 방문 통계에 Vercel을 사용합니다. 통계 이벤트에 편지 원문·보내는 사람 이름·이메일을 넣지 않습니다.</p>
+      <h2>출시 소식과 문의</h2>
+      <p>출시 소식은 공식 사이트와 인스타그램에서 안내합니다. 이메일 신청 기능은 준비가 끝나고 수집 목적·항목·보유 기간·처리 담당 정보를 안내한 뒤 제공합니다.</p>
+      <p>개인정보 관련 문의: {mail}</p>
+      <p><Link href="/about/facts">공식 정보 확인하기</Link></p>
+    </ArticleLayout>
+  );
   return (
     <ArticleLayout
       eyebrow="PRIVACY"
@@ -69,7 +82,7 @@ export default function PrivacyPage() {
         ]}
       />
       <p>
-        부정 이용(자동 대량 신청)을 막기 위해 신청 시 접속 IP 주소를 서버 메모리에서 최대 10분 동안만 쓰며, 저장하거나 기록하지 않습니다.
+        부정 이용(자동 대량 신청)을 막기 위해 최근 10분의 접속 IP별 요청 횟수를 서버 메모리에서 확인합니다. 만료 항목은 다음 요청 시 정리되며, 서버 인스턴스 종료 시 메모리도 사라집니다. 별도 데이터베이스나 애플리케이션 로그에 기록하지 않습니다.
         사이트 방문 통계는 쿠키를 쓰지 않는 Vercel Web Analytics로 개인을 알아볼 수 없는 집계 형태로만 확인하며, 입력한 이메일 주소는
         통계에 보내지 않습니다.
       </p>

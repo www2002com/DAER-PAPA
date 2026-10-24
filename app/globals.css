@@ -16,23 +16,23 @@
   color-scheme: light;
 
   /* Surfaces */
-  --paper: #fff9fc;
-  --ivory: #f2edfa;
+  --paper: #f9fbff;
+  --ivory: #edf3ff;
   --sand: #ded6f2;
   --card: #ffffff;
-  --night: #351849;
+  --night: #183267;
   --sage: #e9e2ff;
   --surface-soft: #f8dbed;
-  --forest: #542675;
+  --forest: #294c9b;
   --lime: #d3f580;
   --silver: #dce2ea;
 
   /* Ink */
-  --ink: #351849;
-  --ink-2: #5e466e;
-  --ink-3: #6d567c;
+  --ink: #183267;
+  --ink-2: #465879;
+  --ink-3: #58698a;
   --ink-inverse: #fff9fc;
-  --logo: #482461;
+  --logo: #234486;
 
   /* Lines & accent */
   --line: #e0cfe6;
@@ -314,7 +314,7 @@ dd {
 }
 
 .btn:hover {
-  --btn-bg: #351849;
+  --btn-bg: #183267;
 }
 
 @media (hover: hover) and (pointer: fine) {

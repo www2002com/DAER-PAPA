@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { trackAction } from '@/lib/analytics';
-import { campaignFromSearch, type CampaignId } from '@/lib/campaign-attribution';
+import { landingFromPage, type LandingId as CampaignId } from '@/lib/campaign-attribution';
 
 const STORAGE_PREFIX = 'dearpapa:campaign-landing:';
 const RETRY_MS = 100;
@@ -33,7 +33,8 @@ export function CampaignAttribution() {
 
   useEffect(() => {
     if (sent.current || process.env.NODE_ENV !== 'production') return;
-    const campaign = campaignFromSearch(window.location.search);
+    // Approved campaign tuple, else an AI assistant (utm_source=chatgpt.com or referrer host). Only the fixed id leaves the browser.
+    const campaign = landingFromPage(window.location.search, document.referrer);
     if (!campaign) return;
     let cancelled = false;
     let retry: number | undefined;

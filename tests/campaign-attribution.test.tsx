@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, render } from '@testing-library/react';
 import { CampaignAttribution } from '@/components/CampaignAttribution';
-import { campaignFromSearch, type CampaignId } from '@/lib/campaign-attribution';
+import { aiSourceFromReferrer, aiSourceFromSearch, campaignFromSearch, landingFromPage, type CampaignId } from '@/lib/campaign-attribution';
 import { trackAction } from '@/lib/analytics';
 
 vi.mock('@/lib/analytics', () => ({ trackAction: vi.fn() }));
@@ -132,6 +132,57 @@ describe('CampaignAttribution', () => {
     vi.stubEnv('NODE_ENV', 'test');
     window.history.replaceState({}, '', validSearches[3][0]);
     render(<StrictMode><CampaignAttribution /></StrictMode>);
+    expect(trackAction).not.toHaveBeenCalled();
+  });
+});
+
+const setReferrer = (value: string) => Object.defineProperty(document, 'referrer', { value, configurable: true });
+
+describe('AI assistant attribution', () => {
+  afterEach(() => setReferrer(''));
+
+  it('maps the ChatGPT utm_source and AI referrer hosts to fixed ids only', () => {
+    expect(aiSourceFromSearch('?utm_source=chatgpt.com')).toBe('ai_chatgpt');
+    expect(aiSourceFromSearch('?utm_source=ChatGPT.com&utm_medium=whatever')).toBe('ai_chatgpt');
+    expect(aiSourceFromSearch('?utm_source=chatgpt.com&utm_source=chatgpt.com')).toBeNull();
+    expect(aiSourceFromSearch('?utm_source=instagram')).toBeNull();
+    expect(aiSourceFromSearch('')).toBeNull();
+    for (const [ref, id] of [
+      ['https://chatgpt.com/c/123-private-thread', 'ai_chatgpt'],
+      ['https://www.perplexity.ai/search/some-question', 'ai_perplexity'],
+      ['https://gemini.google.com/app/abc', 'ai_gemini'],
+      ['https://claude.ai/chat/abc', 'ai_claude'],
+      ['https://copilot.microsoft.com/', 'ai_copilot'],
+    ] as const) {
+      expect(aiSourceFromReferrer(ref)).toBe(id);
+    }
+    for (const bad of ['https://www.google.com/search?q=dearpapa', 'https://notchatgpt.com/', 'https://chatgpt.com.evil.example/', 'not a url', '']) {
+      expect(aiSourceFromReferrer(bad)).toBeNull();
+    }
+  });
+
+  it('prefers an approved campaign over AI signals, then utm_source, then referrer; direct yields nothing', () => {
+    expect(landingFromPage(validSearches[0][0], 'https://chatgpt.com/')).toBe('ig_letter');
+    expect(landingFromPage('?utm_source=chatgpt.com', 'https://www.perplexity.ai/')).toBe('ai_chatgpt');
+    expect(landingFromPage('?fbclid=x', 'https://www.perplexity.ai/')).toBe('ai_perplexity');
+    expect(landingFromPage('', '')).toBeNull();
+    expect(landingFromPage('?utm_source=naver', 'https://www.google.com/')).toBeNull();
+  });
+
+  it('sends one fixed AI landing event from the referrer without the referrer URL', () => {
+    setReferrer('https://chatgpt.com/c/very-private-conversation-id');
+    render(<StrictMode><CampaignAttribution /></StrictMode>);
+    expect(trackAction).toHaveBeenCalledTimes(1);
+    expect(trackAction).toHaveBeenCalledWith('campaign_landing', { campaign: 'ai_chatgpt' });
+    const serialized = JSON.stringify(vi.mocked(trackAction).mock.calls);
+    expect(serialized).not.toContain('very-private');
+    expect(serialized).not.toContain('chatgpt.com');
+    expect(sessionStorage.getItem('dearpapa:campaign-landing:ai_chatgpt')).toBe('1');
+  });
+
+  it('sends nothing for a direct or search-engine visit', () => {
+    setReferrer('https://www.google.com/');
+    render(<CampaignAttribution />);
     expect(trackAction).not.toHaveBeenCalled();
   });
 });

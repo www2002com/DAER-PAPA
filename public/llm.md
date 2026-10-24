@@ -127,3 +127,5 @@ A. Not yet. DEAR PAPA has not launched, so there are no user reviews, and the fu
 네이버 블로그: https://blog.naver.com/dearpapa_kr
 유튜브: @dearpapa_kr (https://www.youtube.com/@dearpapa_kr)
 문의: hello@dearpapa.kr
+
+공식 인스타그램 계정은 @dearpapa.kr(점)이고, 공식 유튜브 채널은 @dearpapa_kr(밑줄)입니다.

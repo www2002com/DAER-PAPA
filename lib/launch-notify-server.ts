@@ -76,17 +76,25 @@ export function storeFromEnv(env: Env = process.env, fetchImpl: typeof fetch = f
 }
 
 // Basic per-instance rate limit. IPs live only in memory for the window and are never stored or logged.
-const WINDOW_MS = 10 * 60 * 1000;
+// Expired entries are pruned on every call, so an address stays in memory for at most WINDOW_MS after its
+// last request. This is the "서버 메모리에서 최대 10분" promise in the privacy notice (app/privacy/page.tsx).
+export const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
 const hits = new Map<string, number[]>();
 export function rateLimited(key: string, now = Date.now()): boolean {
-  const recent = (hits.get(key) ?? []).filter((t) => now - t < WINDOW_MS);
+  for (const [k, stamps] of hits) {
+    const live = stamps.filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+    if (live.length) hits.set(k, live);
+    else hits.delete(k);
+  }
+  const recent = hits.get(key) ?? [];
   recent.push(now);
   hits.set(key, recent);
-  if (hits.size > 5000) hits.clear();
   return recent.length > MAX_PER_WINDOW;
 }
 export function resetRateLimit() { hits.clear(); }
+/** Number of addresses currently held in memory (tests only). */
+export function rateLimitSize() { return hits.size; }
 
 const json = (status: number, body: Record<string, unknown>) =>
   new Response(JSON.stringify(body), {
@@ -95,8 +103,19 @@ const json = (status: number, body: Record<string, unknown>) =>
   });
 const fail = (status: number, error: LaunchNotifyErrorCode) => json(status, { ok: false, error });
 
+// Browsers send Origin on cross-site POSTs. Only the official site and this project's Vercel previews may
+// submit; a missing header is tolerated so privacy tools that strip it do not lock real visitors out.
+const ALLOWED_ORIGIN_RE = /^https:\/\/(www\.)?dearpapa\.kr$|^https:\/\/dearpapa(-[a-z0-9-]+)?-www2002coms-projects\.vercel\.app$/;
+export function originAllowed(origin: string | null, env: Env = process.env): boolean {
+  if (!origin) return true;
+  if (ALLOWED_ORIGIN_RE.test(origin)) return true;
+  const extra = (env.LAUNCH_NOTIFY_ALLOWED_ORIGINS ?? '').split(',').map((s) => s.trim()).filter(Boolean);
+  return extra.includes(origin);
+}
+
 export async function handleLaunchNotify(request: Request, store: Store | null = storeFromEnv()): Promise<Response> {
   if (request.method !== 'POST') return new Response(null, { status: 405, headers: { Allow: 'POST' } });
+  if (!originAllowed(request.headers.get('origin'))) return fail(403, 'server_error');
   if (!(request.headers.get('content-type') ?? '').includes('application/json')) return fail(415, 'server_error');
 
   let body: Record<string, unknown>;

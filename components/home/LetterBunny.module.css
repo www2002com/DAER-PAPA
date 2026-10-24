@@ -8,10 +8,10 @@
 .hearts { opacity: 0; transform-origin: 80px 100px; pointer-events: none; }
 .character svg { display: block; width: 100%; height: auto; overflow: visible; }
 .label { font-family: var(--font-pen); font-size: 22px; line-height: 1.2; transform: rotate(-5deg); }
-.leftEar { transform-origin: 58px 73px; }
-.rightEar { transform-origin: 104px 73px; }
-.envelope { transform-origin: 80px 148px; }
-.shadow { transform-origin: 80px 184px; }
+.leftEar { transform-origin: 52px 88px; }
+.rightEar { transform-origin: 115px 90px; }
+.envelope { transform-origin: 80px 187px; }
+.shadow { transform-origin: 80px 229px; }
 @media (prefers-reduced-motion: no-preference) {
   .replay .hearts { animation: heart-pop 500ms ease-out; }
   .character[data-motion-state='entering'] .hop, .replay .hop { animation: bunny-hop 500ms ease-out; }
@@ -26,4 +26,4 @@
 @keyframes ear-right { 0%,100% { transform: rotate(0); } 35% { transform: rotate(12deg); } 70% { transform: rotate(-7deg); } }
 @keyframes letter-wave { 0%,100% { transform: rotate(0); } 30% { transform: rotate(-6deg); } 70% { transform: rotate(5deg); } }
 @keyframes shadow-hop { 0%,100% { transform: scaleX(1); opacity: 1; } 35% { transform: scaleX(.72); opacity: .5; } }
-@media (max-width: 400px) { .character svg { width: 96px; } .label { font-size: 18px; } }
+@media (max-width: 400px) { .character svg { width: 120px; } .label { font-size: 18px; } }

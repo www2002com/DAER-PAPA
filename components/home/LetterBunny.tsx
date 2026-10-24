@@ -15,29 +15,34 @@ export function LetterBunny() {
         <ellipse className={styles.shadow} cx="80" cy="184" rx="43" ry="6" fill="#b9cbed" />
         <g className={styles.hop} stroke="#244790" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
           <g className={styles.leftEar}>
-            <path d="M48 74C35 53 26 13 39 9C55 3 65 46 66 73" fill="#fffdf9" />
-            <path d="M45 24C46 36 51 51 55 59" stroke="#efa4cd" strokeWidth="7" />
+            <path d="M46 76C34 53 29 17 43 15C59 12 66 49 65 76" fill="#fffdf9" />
+            <path d="M45 29C46 40 50 52 54 61" stroke="#f5b6d4" strokeWidth="9" />
           </g>
           <g className={styles.rightEar}>
-            <path d="M94 70C95 39 112 5 123 13C136 23 119 56 111 77" fill="#fffdf9" />
-            <path d="M116 28C112 39 108 49 104 57" stroke="#efa4cd" strokeWidth="7" />
+            <path d="M96 75C95 50 101 17 115 18C129 18 132 37 123 43C119 46 115 42 115 38C115 53 113 66 111 79" fill="#fffdf9" />
+            <path d="M109 34C106 44 105 53 104 62" stroke="#f5b6d4" strokeWidth="9" />
           </g>
-          <ellipse cx="80" cy="140" rx="30" ry="35" fill="#fffdf9" />
-          <ellipse cx="55" cy="174" rx="22" ry="10" fill="#fffdf9" />
-          <ellipse cx="105" cy="174" rx="22" ry="10" fill="#fffdf9" />
-          <path d="M37 87C37 62 55 58 80 60C105 58 123 65 123 88C123 113 104 124 80 123C55 124 37 112 37 87Z" fill="#fffdf9" />
+          <ellipse cx="80" cy="146" rx="29" ry="31" fill="#fffdf9" />
+          <ellipse cx="59" cy="176" rx="16" ry="10" fill="#fffdf9" />
+          <ellipse cx="101" cy="176" rx="16" ry="10" fill="#fffdf9" />
+          <path d="M29 94C29 67 48 58 80 60C112 58 131 69 131 94C131 120 108 133 80 132C52 133 29 120 29 94Z" fill="#fffdf9" />
+          <ellipse cx="45" cy="108" rx="11" ry="7" fill="#f5b6d4" stroke="none" />
+          <ellipse cx="115" cy="108" rx="11" ry="7" fill="#f5b6d4" stroke="none" />
           <g fill="#244790" stroke="none">
-            <path d="M61 95 52 86C47 80 55 74 61 81C67 74 75 80 70 86Z" />
-            <path d="M99 95 90 86C85 80 93 74 99 81C105 74 113 80 108 86Z" />
+            <ellipse cx="61" cy="96" rx="7" ry="9" />
+            <ellipse cx="99" cy="96" rx="7" ry="9" />
+            <circle cx="59" cy="93" r="2.5" fill="white" />
+            <circle cx="97" cy="93" r="2.5" fill="white" />
           </g>
-          <path d="m76 101 4 3 4-3m-4 3v3m-10 0q10 12 20 0" strokeWidth="2.5" />
-          <path d="m40 99 8 2m64 0 8-2" stroke="#efa4cd" strokeWidth="5" />
+          <path d="M77 107Q80 104 83 107L80 110Z" fill="#ee98c5" strokeWidth="1.5" />
+          <path d="M80 110v3m-8-1q4 7 8 1q4 7 8-1" strokeWidth="2.5" />
           <g className={styles.envelope}>
-            <rect x="35" y="130" width="90" height="37" rx="3" fill="#d3f580" />
-            <path d="m36 132 44 23 44-23m-88 33 29-20m59 20-29-20" strokeWidth="2" />
+            <rect x="40" y="137" width="80" height="32" rx="5" fill="#d3f580" />
+            <path d="m42 139 38 20 38-20m-76 28 25-18m51 18-25-18" strokeWidth="2" />
             <path d="m80 157-7-7c-4-4 2-8 7-3 5-5 11-1 7 3Z" fill="#ee98c5" strokeWidth="1.5" />
           </g>
-          <path d="M37 132C22 125 21 145 38 149M123 132C138 125 139 145 122 149" fill="#fffdf9" />
+          <ellipse cx="42" cy="149" rx="8" ry="10" transform="rotate(-20 42 149)" fill="#fffdf9" />
+          <ellipse cx="118" cy="149" rx="8" ry="10" transform="rotate(20 118 149)" fill="#fffdf9" />
         </g>
       </svg>
       <span className={styles.label}>편지 왔어요!</span>

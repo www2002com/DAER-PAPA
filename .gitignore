@@ -5,3 +5,6 @@ next-env.d.ts
 *.tsbuildinfo
 .DS_Store
 .vercel
+.impeccable/review/
+.impeccable/questions/
+.impeccable/hook.cache.json

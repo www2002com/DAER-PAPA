@@ -1,0 +1,2 @@
+.campaign img { display: block; width: 100%; height: auto; border-radius: 4px; }
+.campaign figcaption { margin-top: 12px; font-size: 12px; line-height: 1.8; color: var(--ink-3); word-break: keep-all; }

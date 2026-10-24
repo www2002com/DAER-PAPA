@@ -28,12 +28,9 @@ export function Hero() {
             <HeroLogo className={styles.visualLogo} />
             <span>레터 올인원</span>
           </div>
-          <Image className={styles.bottle} src="/images/letter-all-in-one-deep-green-logo-v4.webp"
-            alt="디어파파 로고가 담긴 레터 올인원 연한 딥그린 용기 디자인 시안" width={700} height={1425}
+          <Image className={styles.campaign} src="/images/campaign/letter-gift.webp"
+            alt="파우더블루 배경 위 레터 올인원 용기·단상자와 Dear Papa 편지를 함께 놓은 선물 경험 디자인 시안" width={1672} height={941}
             loading="eager" fetchPriority="high" />
-          <Image className={styles.carton} src="/images/letter-all-in-one-carton-sage-v1.webp"
-            alt="레터 올인원 용기와 한 세트로 구성한 딥그린 슬림 단상자 디자인 시안" width={700} height={1050}
-            loading="eager" />
           </div>
           <div className={styles.letterCard}>
             <LetterBunny />

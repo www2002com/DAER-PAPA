@@ -34,4 +34,4 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
 ## 자산 출처
 
-신규 래스터 없음. public/images/letter-all-in-one-deep-green-logo-v4.webp 및 letter-all-in-one-carton-sage-v1.webp는 기존 승인 제품 시안. letter-bunny-grid-v1.webp는 기존 승인 일러스트이며 docs/rabbit-image-source.md를 따른다. 원본 바이트는 수정하지 않는다.
+최초 리뉴얼은 기존 자산만 사용했다. 이후 2026-10-25 사용자의 “사이트에 적용해봐” 요청에 따라 티저 기준 이미지 네 장을 `public/images/campaign/`에 추가했다. 원본 제품 시안의 바이트는 수정하지 않는다. 출처·사용 위치·검증은 `docs/design/teaser-images-20261025.md`에 기록했다. letter-bunny-grid-v1.webp는 기존 승인 일러스트이며 docs/rabbit-image-source.md를 따른다.

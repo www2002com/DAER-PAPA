@@ -164,7 +164,7 @@ Existing article titles use `clamp(2.1rem, 1.5rem + 2.8vw, 3.75rem)` at line-hei
 
 The shared container has 1240px usable content plus two fluid gutters. Vertical section rhythm uses `section-y`; local gaps use the recorded spacing steps. The sticky header is 76px high, and anchor scroll padding adds 12px.
 
-The homepage hero is a `1fr / 1.08fr` grid with a 4% gap. Its visual has three separate rows: product stage, white letter note, and disclosure caption, with a 16px gap. Keep the product artwork at its natural ratio; it must not overlap the note. At 700px and below, the order is title, status, actions, product/note, then explanatory copy. The visual height is `clamp(560px, 44vw, 640px)`, overridden to 600px at 1000px and 520px at 700px.
+The homepage hero is a `1fr / 1.08fr` grid with a 4% gap. Its visual has three separate rows: campaign product scene, white letter note, and disclosure caption, with a 16px gap. The visual height follows its content. The campaign photograph uses a 16:10 frame on desktop and 4:3 at 1000px and below, cropping surrounding studio space without distorting the products. The original logo sits in a row above the photograph. At 700px and below, the order is title, status, actions, product/note, then explanatory copy. The 2026-10-25 user request to apply the teaser images authorizes these derived campaign assets; provenance is recorded in `docs/design/teaser-images-20261025.md`.
 
 The product section uses `1.12fr / 1fr` with a fluid 32–100px gap, stacking at 800px. Desktop navigation appears at 900px; the dialog directory becomes one column at 540px. Composer actions wrap at 600px; editor and sticky preview become side by side at 1024px. These are component-specific transitions, not one universal breakpoint. Preserve the existing article reading column.
 
@@ -188,7 +188,7 @@ The hero note is rectangular. The saved letter remains a 4:5 artifact with its e
 - **Status and suggestions:** status tags use 12px/500 type, minimum 24px height, and distinct neutral/now/later/soft treatments. Sentence suggestion buttons use minimum 40px height and a visible border state. A status tag is not automatically an action.
 - **Writing fields:** the letter textarea has 46px ruling, a transparent ground, 148px minimum height, and a rose caret. Focus strengthens its rules. The signature input has a 52px minimum height and a bottom rule that darkens on focus. Preserve labels, counts, save/error feedback, and local drafts.
 - **Letter note and bunny:** the white note holds handwriting and a separate reply area; the approved bunny is a real button with polite live feedback. Its column is 104px, then 76px at 1000px and 64px at 700px. Its greeting animation lasts 420ms and runs only after interaction.
-- **Product viewer:** the bottle/carton stage uses `sage`, natural image proportions, explicit draft labeling, and keyboard-operable selection. Active thumbnails use the `ivory` surface and `forest` rule. Product, note, and disclosure remain separate readable elements.
+- **Product viewer:** four keyboard-operable views show the campaign bottle, original carton, cap detail, and paired packaging. Product proportions are preserved using cover for campaign scenes and contain for the original carton. The original logo and draft label sit above the image. Active thumbnails use the `ivory` surface and `forest` rule. Product, note, and disclosure remain separate readable elements.
 
 The common focus treatment is a two-pixel ink outline, offset 3px; writing fields retain their existing line-based focus treatment. Standard action transitions use 240ms and `cubic-bezier(0.22, 0.61, 0.36, 1)`. Existing page entrances run once without hiding server-rendered content. Reduced motion removes decorative movement; keyboard mode removes navigation/control transition delays. The sidecar contains precise motion and depth extensions plus ten self-contained component specimens.
 
@@ -205,5 +205,5 @@ The common focus treatment is a two-pixel ink outline, offset 3px; writing field
 - Don't copy Mobbin imagery, brand copy, or code into the site; use the recorded composition principles.
 - Don't promote a product draft or development direction into a confirmed specification, efficacy claim, price, or launch date.
 - Don't turn broad sections into floating cards or put the letter note over the product artwork.
-- Don't replace the original logo, product drafts, bunny, or fonts with new raster assets.
+- Don't overwrite the original logo, product drafts, bunny, or fonts. User-authorized campaign scenes may use derived images with documented provenance and visible draft disclosure.
 - Don't spread homepage composition into existing article layouts without a separate scoped change.

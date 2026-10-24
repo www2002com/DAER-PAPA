@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import styles from './ProductPage.module.css';
 import { LaunchNotifySection } from '@/components/LaunchNotifySection';
 import { ArticleLayout, RelatedLinks } from '@/components/article/ArticleLayout';
 import { preservedMetadata } from '@/lib/preserved-metadata';
@@ -29,6 +31,12 @@ export default function LetterAllInOnePage() {
           </p>
         }
       >
+        <figure className={styles.campaign}>
+          <Image src="/images/campaign/packaging.webp" width={1672} height={941}
+            alt="파우더블루 배경 위 레터 올인원 용기와 단상자를 나란히 놓은 디자인 시안"
+            loading="eager" />
+          <figcaption>용기와 단상자는 개발 중인 디자인 시안입니다. 최종 제품과 판매 구성은 확정 전입니다.</figcaption>
+        </figure>
         <h2 id="after-shave">면도 후에 바르는 올인원</h2>
         <p>디어파파는 면도 후에 바르는 올인원을, 빠른 흡수의 워터리 제형으로 기획하고 만들고 있습니다.</p>
         <p>세안 후 하나로 마무리하는 남성 올인원 스킨케어.</p>

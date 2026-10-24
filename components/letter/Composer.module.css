@@ -675,6 +675,26 @@
   }
 }
 
+.productFollowup {
+  grid-column: 1 / -1;
+  margin-top: 24px;
+  padding: 20px 0;
+  border-top: 1px solid currentColor;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.productFollowup p { margin: 0 0 8px; }
+.productFollowup a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.productFollowup a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+
 /* ── Wider screens: writing on the left, the card on the right ── */
 @media (min-width: 600px) {
   .chips {

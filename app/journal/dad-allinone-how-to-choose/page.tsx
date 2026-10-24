@@ -95,7 +95,7 @@ export default function DadAllInOneHowToChoosePage() {
         </thead>
         <tbody>
           <tr><td>올인원</td><td>1단계</td><td>세안 후, 면도 후</td><td>한 가지만 바르고 싶은 아빠</td></tr>
-          <tr><td>스킨</td><td>여러 단계 중 첫 단계</td><td>세안 후 가장 먼저</td><td>단계별로 나눠 바르는 데 익숙한 아빠</td></tr>
+          <tr><td>스킨</td><td>여러 단계 중 첫 단계</td><td>세안 직후</td><td>단계별로 나눠 바르는 데 익숙한 아빠</td></tr>
           <tr><td>로션</td><td>스킨 다음 단계</td><td>스킨을 바른 뒤</td><td>스킨과 함께 쓰는 아빠</td></tr>
           <tr><td>애프터셰이브</td><td>면도 후 단계</td><td>면도 직후</td><td>면도 후 바르는 제품을 따로 두는 아빠</td></tr>
         </tbody>

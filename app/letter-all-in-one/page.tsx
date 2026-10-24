@@ -32,8 +32,8 @@ export default function LetterAllInOnePage() {
         }
       >
         <figure className={styles.campaign}>
-          <Image src="/images/campaign/packaging.webp" width={1672} height={941}
-            alt="파우더블루 배경 위 레터 올인원 용기와 단상자를 나란히 놓은 디자인 시안"
+          <Image src="/images/campaign-blue/packaging.webp" width={1672} height={941}
+            alt="파우더블루 배경 위 차분한 블루 색상의 레터 올인원 용기와 단상자를 나란히 놓은 디자인 시안"
             loading="eager" />
           <figcaption>용기와 단상자는 개발 중인 디자인 시안입니다. 최종 제품과 판매 구성은 확정 전입니다.</figcaption>
         </figure>

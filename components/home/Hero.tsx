@@ -28,8 +28,8 @@ export function Hero() {
             <HeroLogo className={styles.visualLogo} />
             <span>레터 올인원</span>
           </div>
-          <Image className={styles.campaign} src="/images/campaign/letter-gift.webp"
-            alt="파우더블루 배경 위 레터 올인원 용기·단상자와 Dear Papa 편지를 함께 놓은 선물 경험 디자인 시안" width={1672} height={941}
+          <Image className={styles.campaign} src="/images/campaign-blue/letter-gift.webp"
+            alt="파우더블루 배경 위 차분한 블루 색상의 레터 올인원 용기·단상자와 Dear Papa 편지를 함께 놓은 선물 경험 디자인 시안" width={1671} height={941}
             loading="eager" fetchPriority="high" />
           </div>
           <div className={styles.letterCard}>

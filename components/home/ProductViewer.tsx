@@ -9,12 +9,12 @@ const VIEWS = [
   {
     id: 'bottle',
     label: '용기',
-    caption: '연한 딥그린 몸체에 DEAR PAPA의 이름을 담은 용기 시안입니다. 용기와 사양은 확정 전이에요.',
+    caption: '차분한 블루 몸체에 DEAR PAPA의 이름을 담은 용기 시안입니다. 용기와 사양은 확정 전이에요.',
   },
   {
     id: 'box',
     label: '단상자',
-    caption: '연한 딥그린 용기에 맞춘 슬림한 무광 단상자 시안입니다. 로고 중심의 접이식 상자. 상세 표기는 옆면과 뒷면에 정리합니다.',
+    caption: '차분한 블루 용기에 맞춘 슬림한 무광 단상자 시안입니다. 로고 중심의 접이식 상자. 상세 표기는 옆면과 뒷면에 정리합니다.',
   },
   {
     id: 'cap',
@@ -31,14 +31,13 @@ const VIEWS = [
 type ViewId = (typeof VIEWS)[number]['id'];
 
 function ViewArt({ id, small = false }: { id: ViewId; small?: boolean }) {
-  if (id === 'box') return <Image src="/images/letter-all-in-one-carton-sage-v1.webp" alt={small ? '' : '레터 올인원 용기와 색상·로고를 맞춘 연한 딥그린 슬림 단상자 디자인 시안'} width={700} height={1050} className={styles.vBox} />;
-  if (id === 'bottle' && small) return <Image src="/images/letter-all-in-one-deep-green-logo-v4.webp" alt="" width={700} height={1425} className={styles.vBottle} />;
+  if (id === 'box') return <Image src="/images/campaign-blue/carton.webp" alt={small ? '' : '레터 올인원 용기와 색상·로고를 맞춘 차분한 블루 슬림 단상자 디자인 시안'} width={1024} height={1536} className={styles.vBox} />;
   const art = {
-    bottle: { file: 'bottle', alt: '파우더블루 배경 위 레터 올인원 연한 딥그린 용기의 정면 디자인 시안' },
+    bottle: { file: 'bottle', alt: '파우더블루 배경 위 레터 올인원 블루 용기의 정면 디자인 시안' },
     cap: { file: 'cap', alt: '닫힌 투명 캡과 앞쪽 노즐을 낮은 시점에서 본 레터 올인원 디자인 시안' },
     together: { file: 'packaging', alt: '레터 올인원 용기와 단상자를 나란히 놓고 위에서 본 디자인 시안' },
   }[id];
-  return <Image src={`/images/campaign/${art.file}.webp`} alt={small ? '' : art.alt} width={1672} height={941} className={styles.vCampaign} />;
+  return <Image src={`/images/campaign-blue/${art.file}.webp`} alt={small ? '' : art.alt} width={1672} height={941} className={styles.vCampaign} />;
 }
 
 // Design drafts of the packaging, one at a time. Captions are the brand's own descriptions.

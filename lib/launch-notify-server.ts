@@ -103,8 +103,19 @@ const json = (status: number, body: Record<string, unknown>) =>
   });
 const fail = (status: number, error: LaunchNotifyErrorCode) => json(status, { ok: false, error });
 
+// Browsers send Origin on cross-site POSTs. Only the official site and this project's Vercel previews may
+// submit; a missing header is tolerated so privacy tools that strip it do not lock real visitors out.
+const ALLOWED_ORIGIN_RE = /^https:\/\/(www\.)?dearpapa\.kr$|^https:\/\/dearpapa(-[a-z0-9-]+)?-www2002coms-projects\.vercel\.app$/;
+export function originAllowed(origin: string | null, env: Env = process.env): boolean {
+  if (!origin) return true;
+  if (ALLOWED_ORIGIN_RE.test(origin)) return true;
+  const extra = (env.LAUNCH_NOTIFY_ALLOWED_ORIGINS ?? '').split(',').map((s) => s.trim()).filter(Boolean);
+  return extra.includes(origin);
+}
+
 export async function handleLaunchNotify(request: Request, store: Store | null = storeFromEnv()): Promise<Response> {
   if (request.method !== 'POST') return new Response(null, { status: 405, headers: { Allow: 'POST' } });
+  if (!originAllowed(request.headers.get('origin'))) return fail(403, 'server_error');
   if (!(request.headers.get('content-type') ?? '').includes('application/json')) return fail(415, 'server_error');
 
   let body: Record<string, unknown>;

@@ -8,6 +8,8 @@ Next.js(App Router) 정적 내보내기로 만든 사이트입니다. 서버 없
 
 Node.js 24 LTS를 사용합니다. `npm run build`는 편지 보존 회귀 테스트를 먼저 실행합니다.
 
+출시 소식 신청 칸(`/api/launch-notify`)은 Vercel Function이라 `next dev`에서는 동작하지 않고 항상 "처리하지 못했어요" 오류가 보입니다. 로컬에서 신청 흐름까지 확인하려면 `vercel dev`를 쓰거나 프리뷰 배포에서 확인합니다. 서버 로직은 `npm test`의 `tests/launch-notify.test.tsx`로 검증합니다.
+
 ```bash
 npm install
 npm run dev        # http://localhost:3000

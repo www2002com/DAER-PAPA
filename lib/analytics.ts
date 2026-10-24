@@ -1,6 +1,6 @@
 import { track } from '@vercel/analytics';
 import type { LaunchNotifyErrorCode } from './launch-notify';
-import { campaignForCurrentLocation, type CampaignId } from './campaign-attribution';
+import { campaignForCurrentLocation, type LandingId } from './campaign-attribution';
 
 export const ACTIONS = [
   'letter_entry_clicked', 'letter_started', 'letter_card_exported', 'contact_email_copied', 'social_channel_opened',
@@ -17,7 +17,8 @@ export type SiteAction = (typeof ACTIONS)[number];
 export type ActionData = {
   placement?: 'home' | 'product';
   reason?: LaunchNotifyErrorCode;
-  campaign?: CampaignId;
+  /** Approved campaign ids or AI assistant ids from lib/campaign-attribution; never a raw UTM or referrer value. */
+  campaign?: LandingId;
   /** Which letter action revealed the product link: export (card saved), archive (saved letter exported), share (a send action picked in the share dialog; attempted, not delivered). */
   source?: 'export' | 'share' | 'archive';
 };

@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, render } from '@testing-library/react';
 import { CampaignAttribution } from '@/components/CampaignAttribution';
-import { campaignFromSearch, type CampaignId } from '@/lib/campaign-attribution';
+import { campaignForCurrentLocation, campaignFromSearch, campaignFromSession, type CampaignId } from '@/lib/campaign-attribution';
 import { trackAction } from '@/lib/analytics';
 
 vi.mock('@/lib/analytics', () => ({ trackAction: vi.fn() }));
@@ -96,6 +96,7 @@ describe('CampaignAttribution', () => {
     window.history.replaceState({}, '', validSearches[2][0]);
     render(<CampaignAttribution />);
     expect(trackAction).not.toHaveBeenCalled();
+    expect(campaignFromSession()).toBe('yt_letter');
     expect(sessionStorage.getItem('dearpapa:campaign-landing:yt_letter')).toBeNull();
 
     const queue = vi.fn();
@@ -104,6 +105,31 @@ describe('CampaignAttribution', () => {
     expect(trackAction).toHaveBeenCalledTimes(1);
     expect(trackAction).toHaveBeenCalledWith('campaign_landing', { campaign: 'yt_letter' });
     expect(sessionStorage.getItem('dearpapa:campaign-landing:yt_letter')).toBe('1');
+    expect(campaignFromSession()).toBe('yt_letter');
+  });
+
+  it('clears a stale campaign on a fresh organic entry', () => {
+    sessionStorage.setItem('dearpapa:campaign-current', 'ig_letter');
+    window.history.replaceState({}, '', '/');
+    render(<CampaignAttribution />);
+    expect(campaignFromSession()).toBeNull();
+  });
+
+  it('rejects a forged stored campaign code', () => {
+    sessionStorage.setItem('dearpapa:campaign-current', 'alice@example.com');
+    expect(campaignFromSession()).toBeNull();
+  });
+
+  it('prefers the approved URL campaign while a new landing is initializing', () => {
+    sessionStorage.setItem('dearpapa:campaign-current', 'ig_letter');
+    window.history.replaceState({}, '', validSearches[1][0]);
+    expect(campaignForCurrentLocation()).toBe('ig_product');
+  });
+
+  it('does not reuse a stored campaign when attribution keys are invalid', () => {
+    sessionStorage.setItem('dearpapa:campaign-current', 'ig_letter');
+    window.history.replaceState({}, '', '?utm_source=unknown');
+    expect(campaignForCurrentLocation()).toBeNull();
   });
 
   it('does not mark or send when the analytics queue never becomes available', () => {

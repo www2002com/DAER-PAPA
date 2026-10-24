@@ -45,12 +45,15 @@
 }
 @media (max-width: 700px) {
   .hero { padding-top: 10px; }
-  .layout { grid-template-columns: 1fr; gap: 8px; }
-  .copy { padding: 28px 0 30px; }
-  .status { margin-bottom: 22px; font-size: 12px; }
-  .title { font-size: clamp(40px, 10vw, 62px); }
-  .description { font-size: 15px; margin-top: 22px; }
-  .visual { --product-baseline: 34%; height: auto; aspect-ratio: 1 / 1.25; }
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 18px; padding-top: 20px; }
+  .copy, .invitation { display: contents; }
+  .handnote { display: none; }
+  .status { grid-row: 1; justify-self: start; margin-bottom: 0; font-size: 12px; }
+  .title { grid-row: 2; font-size: clamp(40px, 10vw, 62px); }
+  .invitation .cta { grid-row: 3; justify-self: start; }
+  .visual { grid-row: 4; --product-baseline: 34%; height: clamp(340px, 95vw, 440px); aspect-ratio: auto; }
+  .description { grid-row: 5; font-size: 15px; margin-top: 0; }
+  .invitation > div { grid-row: 6; justify-self: center; }
   .bottle { height: 60%; bottom: calc(var(--product-baseline) - 4.46%); }
   .carton { height: 60%; bottom: calc(var(--product-baseline) - 2.34%); }
   .letterCard { bottom: calc(72px + 5cqw); }

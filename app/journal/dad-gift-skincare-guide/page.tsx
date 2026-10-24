@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ProductBox } from '@/components/article/ProductBox';
 import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/ArticleLayout';
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
 import { DAD_GIFT_SKINCARE_GUIDE_DESCRIPTION, dotDate, getJournalEntry, DAD_GIFT_SKINCARE_GUIDE_META_TITLE, DAD_GIFT_SKINCARE_GUIDE_META_DESCRIPTION } from '@/lib/journal';
@@ -105,6 +106,8 @@ export default function DadGiftSkincareGuidePage() {
           <tr><td>예산</td><td>매일 쓸 수 있는 제품인지</td><td>선물을 준비하는 자녀</td></tr>
         </tbody>
       </table>
+
+      <ProductBox />
 
       <h2>디어파파가 만들고 있는 제품</h2>
       <p>

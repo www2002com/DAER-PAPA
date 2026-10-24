@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ProductBox } from '@/components/article/ProductBox';
 import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/ArticleLayout';
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
 import { AFTER_SHAVE_GIFT_DESCRIPTION, AFTER_SHAVE_GIFT_FAQ, dotDate, getJournalEntry, AFTER_SHAVE_GIFT_META_TITLE, AFTER_SHAVE_GIFT_META_DESCRIPTION } from '@/lib/journal';
@@ -69,6 +70,8 @@ export default function AfterShaveGiftPage() {
         스킨, 로션, 크림을 따로 챙기지 않는 아빠라면 한 번만 바르면 되는 올인원이 쓰기 쉽습니다. 빨리 흡수되는 워터리 제형은
         바른 뒤 끈적임이 덜합니다.
       </p>
+
+      <ProductBox />
 
       <h2>디어파파가 만들고 있는 제품</h2>
       <p>

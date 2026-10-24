@@ -1,5 +1,6 @@
 import { track } from '@vercel/analytics';
 import type { LaunchNotifyErrorCode } from './launch-notify';
+import type { LandingId } from './campaign-attribution';
 
 export const ACTIONS = [
   'letter_entry_clicked', 'letter_started', 'letter_card_exported', 'contact_email_copied', 'social_channel_opened',
@@ -14,7 +15,10 @@ export type SiteAction = (typeof ACTIONS)[number];
 export type ActionData = {
   placement?: 'home' | 'product';
   reason?: LaunchNotifyErrorCode;
-  campaign?: 'ig_letter' | 'ig_product' | 'yt_letter' | 'naver_product';
+  /** Approved campaign ids or AI assistant ids from lib/campaign-attribution; never a raw UTM or referrer value. */
+  campaign?: LandingId;
+  /** Which letter action revealed the product link: export (card saved), share (system share sheet), archive (saved letter exported). */
+  source?: 'export' | 'share' | 'archive';
 };
 
 // Only fixed action names, placement, campaign codes and error categories are sent.

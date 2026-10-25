@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { LaunchNotify } from './LaunchNotify';
 import { launchNotifyReady } from '@/lib/launch-notify-config';
-import type { LaunchNotifyPlacement } from '@/lib/launch-notify';
+import { LAUNCH_NOTIFY_ENABLED_COPY, type LaunchNotifyPlacement } from '@/lib/launch-notify';
 import styles from './LaunchNotify.module.css';
 
 export function LaunchNotifySection({ placement }: { placement: LaunchNotifyPlacement }) {
-  if (launchNotifyReady()) return <LaunchNotify placement={placement} />;
+  if (launchNotifyReady()) {
+    return <LaunchNotify placement={placement} intro={placement === 'home' ? LAUNCH_NOTIFY_ENABLED_COPY.homeIntro : undefined} />;
+  }
   return (
     <section className={styles.box} aria-labelledby={`launch-news-${placement}`}>
       <h2 id={`launch-news-${placement}`} className={styles.title}>출시 소식은 공식 채널에서 확인해 주세요</h2>

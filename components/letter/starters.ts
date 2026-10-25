@@ -1,6 +1,17 @@
 // Opening lines grouped by occasion. Tapping one writes it into the letter.
 export const STARTERS = [
   {
+    // Team-approved example lines (content 10/26 v1 + brand guide). Shown first so a blank page has a start.
+    id: 'examples',
+    label: '예시 한 줄',
+    lines: [
+      '아빠, 말은 잘 못 해도 늘 고마워요.',
+      '요즘 내가 아빠 닮았다는 말 자주 들어. 그게 좋더라.',
+      '이번 주말엔 내가 먼저 전화할게요, 아빠.',
+      '아빠라는 직함이 제일 멋있어요.',
+    ],
+  },
+  {
     id: 'thanks',
     label: '고마운 마음',
     lines: [

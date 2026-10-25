@@ -4,6 +4,8 @@ import { ArticleLayout, FactList } from '@/components/article/ArticleLayout';
 import { CONTACT_EMAIL } from '@/lib/facts';
 import { PRIVACY_EFFECTIVE_DATE, PRIVACY_OFFICER, PROCESSORS } from '@/lib/business';
 import { launchNotifyReady } from '@/lib/launch-notify-config';
+import { LAUNCH_NOTIFY_ENABLED_COPY } from '@/lib/launch-notify';
+import { LetterStoryNotice } from '@/components/privacy/LetterStoryNotice';
 
 // 개인정보처리방침 (개인정보 보호법 제30조, 표준 개인정보 처리방침 작성지침 기준).
 // Covers only what the site actually processes: the 출시 알림 신청 email. TODO values live in lib/business.ts
@@ -59,6 +61,7 @@ export default function PrivacyPage() {
       <h2>편지 작성과 보관</h2>
       <p>작성한 편지와 보내는 사람 표기는 이 기기의 브라우저에만 보관되며 서버로 전송하지 않습니다. 기기의 편지 도구에서 지우거나 브라우저 저장 데이터를 삭제할 수 있습니다.</p>
       <AiPrivacyNotice />
+      <LetterStoryNotice />
       <h2>사이트 이용 정보</h2>
       <p>사이트 호스팅과 방문 통계에 Vercel을 사용합니다. 통계 이벤트에 편지 원문·보내는 사람 이름·이메일을 넣지 않습니다.</p>
       <p>승인된 홍보 링크로 방문하면 같은 탭의 세션 저장소에 정해진 캠페인 코드만 보관하여 이후 편지 작성·이미지 내보내기·제품 탐색 등의 활동을 유입 경로별로 구분합니다. 이 기능은 개인 식별자나 링크의 원문을 저장하지 않습니다.</p>
@@ -88,6 +91,11 @@ export default function PrivacyPage() {
         </p>
       }
     >
+      <section id="launch-email-summary" aria-labelledby="launch-email-summary-title">
+        <h2 id="launch-email-summary-title">{LAUNCH_NOTIFY_ENABLED_COPY.privacySummaryTitle}</h2>
+        <FactList rows={LAUNCH_NOTIFY_ENABLED_COPY.privacySummary.map(([k, v]) => [k, v] as const)} />
+      </section>
+
       <h2 id="purpose">1. 개인정보의 처리 목적</h2>
       <p>
         출시 소식 안내: 디어파파 레터 올인원의 출시 소식을 이메일로 알려 드리기 위해 처리합니다. 이 목적 외의 용도(광고성 정보 발송,
@@ -177,6 +185,7 @@ export default function PrivacyPage() {
       </p>
 
       <AiPrivacyNotice />
+      <LetterStoryNotice />
 
       <h2 id="officer">11. 개인정보 보호책임자</h2>
       <FactList

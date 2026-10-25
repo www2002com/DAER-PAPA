@@ -112,8 +112,21 @@ export default function DadGiftSkincareGuidePage() {
       <h2>모바일로 보내도 마음이 전해지는 법: 한 줄 편지 함께 쓰기</h2>
       <p>
         멀리 사는 아빠께 선물을 휴대폰으로 보내면 마음이 덜 전해질까 걱정될 수 있어요. 선물과 함께 아빠께 하고 싶은 말을 한 줄로
-        적어 보내 보세요. 디어파파는 dearpapa.kr에서 아빠께 보낼 한 줄 편지를 쓸 수 있게 하고 있어요.{' '}
+        적어 보내 보세요. 디어파파는 dearpapa.kr에서 아빠께 보낼 한 줄 편지를 쓸 수 있게 하고 있어요. 잘 쓰지 않아도 괜찮아요.
+        아빠는 문장보다 마음을 먼저 읽어요.{' '}
         <Link href="/#letter">한 줄 편지 쓰기</Link>
+      </p>
+      <p>
+        연구로 보면, 편지는 쓰는 사람이 걱정하는 것보다 훨씬 반갑게 읽혀요. Amit Kumar와 Nicholas Epley의 연구(2018, 학술지
+        Psychological Science)에서 감사 편지를 쓴 사람과 받은 사람을 비교했더니, 쓴 사람은 받는 사람이 어색해할 정도를 실제보다 높게
+        예상했고(10점 만점에 예상 2.95, 실제 1.95), 받는 사람의 기분은 실제보다 낮게 예상했어요(−5~5점에서 예상 3.11, 실제 4.12). 이
+        연구는 미국 성인을 대상으로 했고 아빠와 자녀만 따로 살펴본 것은 아니에요. 그래도 문장을 잘 다듬지 않아도 마음은 전해진다는 점을
+        보여 줘요. 출처:{' '}
+        <a href="https://doi.org/10.1177/0956797618772506" target="_blank" rel="noopener noreferrer">
+          Kumar, A., &amp; Epley, N. (2018). Undervaluing Gratitude: Expressers Misunderstand the Consequences of Showing
+          Appreciation. Psychological Science, 29(9), 1423–1435.
+        </a>{' '}
+        (<a href="https://www.chicagobooth.edu/media-relations-and-communications/press-releases/expressing-your-gratitude-is-more-powerful-than-you-think" target="_blank" rel="noopener noreferrer">시카고대 부스 경영대학원 보도자료</a>)
       </p>
 
       <h2>디어파파가 만들고 있는 제품</h2>

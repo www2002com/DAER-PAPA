@@ -7,11 +7,12 @@ import {
   LAUNCH_NOTIFY_COPY as COPY, LAUNCH_NOTIFY_ENDPOINT, normalizeEmail,
   type LaunchNotifyErrorCode, type LaunchNotifyPlacement,
 } from '@/lib/launch-notify';
+import { FamilyShareButton } from './FamilyShareButton';
 import styles from './LaunchNotify.module.css';
 
 type Status = { kind: 'idle' } | { kind: 'submitting' } | { kind: 'success' } | { kind: 'error'; code: LaunchNotifyErrorCode };
 
-export function LaunchNotify({ placement, headingLevel = 'h2' }: { placement: LaunchNotifyPlacement; headingLevel?: 'h2' | 'h3' }) {
+export function LaunchNotify({ placement, headingLevel = 'h2', intro }: { placement: LaunchNotifyPlacement; headingLevel?: 'h2' | 'h3'; intro?: string }) {
   const id = useId();
   const root = useRef<HTMLElement>(null);
   const [email, setEmail] = useState('');
@@ -72,10 +73,14 @@ export function LaunchNotify({ placement, headingLevel = 'h2' }: { placement: La
 
   return (
     <section ref={root} id={placement === 'home' ? 'launch-notify' : 'launch-notify-product'} className={styles.box} aria-labelledby={`${id}-title`} data-nosnippet>
+      {intro && <p className={styles.intro}>{intro}</p>}
       <Heading id={`${id}-title`} className={styles.title}>{COPY.title}</Heading>
       <p className={styles.body}>{COPY.body}</p>
       {status.kind === 'success' ? (
-        <p className={styles.success} role="status">{message}</p>
+        <>
+          <p className={styles.success} role="status">{message}</p>
+          <FamilyShareButton />
+        </>
       ) : (
         <form className={styles.form} onSubmit={onSubmit} noValidate>
           <div className={styles.row}>

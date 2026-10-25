@@ -38,7 +38,7 @@ The review branch remains local; this change has not been deployed to production
 ## Bunny writing invitation
 
 The next user request replaces the hero bunny's greeting action with the playful
-copy `그냥 써봐라, 각 잡지 말고.`. Clicking or keyboard-activating the bunny focuses
+copy `일단 써봐라, 각 잡지 말고.` (updated from `그냥 써봐라` at the user's request). Clicking or keyboard-activating the bunny focuses
 the live letter editor. The initial example is selected for easy replacement;
 once edited, the visitor's own text is retained without selecting it all.
 

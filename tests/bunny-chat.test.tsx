@@ -13,7 +13,7 @@ describe('letter bunny AI conversation', () => {
   it('changes its playful advice after a stroll and waits while the letter is being written', () => {
     const onWriteLetter = vi.fn();
     const view = render(<LetterBunny onWriteLetter={onWriteLetter} />);
-    const bunny = screen.getByRole('button', { name: '그냥 써봐라, 각 잡지 말고. 편지 쓰기' });
+    const bunny = screen.getByRole('button', { name: '일단 써봐라, 각 잡지 말고. 편지 쓰기' });
     const stroll = bunny.querySelector('[data-bunny-patrol]');
     expect(stroll).not.toBeNull();
     // jsdom lacks AnimationEvent; React then listens for the WebKit event.

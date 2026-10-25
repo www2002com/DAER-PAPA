@@ -7,7 +7,7 @@ afterEach(() => vi.unstubAllGlobals());
 describe('hero letter preview', () => {
   it('invites writing through the bunny, focuses the editor and pauses the nudge while writing', () => {
     render(<Hero />);
-    const bunny = screen.getByRole('button', { name: '그냥 써봐라, 각 잡지 말고. 편지 쓰기' });
+    const bunny = screen.getByRole('button', { name: '일단 써봐라, 각 잡지 말고. 편지 쓰기' });
     const input = screen.getByRole('textbox', { name: '사진 속 편지에 쓸 말' }) as HTMLTextAreaElement;
     expect(bunny.getAttribute('data-nudging')).toBe('true');
     fireEvent.click(bunny);
@@ -61,7 +61,7 @@ describe('hero letter preview', () => {
     expect(question.value).toBe('');
     fireEvent.change(question, { target: { value: '편지를 도와줘' } });
     fireEvent.click(screen.getByRole('button', { name: '질문창 닫기' }));
-    fireEvent.click(screen.getByRole('button', { name: '그냥 써봐라, 각 잡지 말고. 편지 쓰기' }));
+    fireEvent.click(screen.getByRole('button', { name: '일단 써봐라, 각 잡지 말고. 편지 쓰기' }));
     expect(input.value).toBe(message);
     expect(container.querySelector('[data-letter-preview]')?.textContent).toBe(message);
   });

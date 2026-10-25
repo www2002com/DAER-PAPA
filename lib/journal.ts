@@ -84,8 +84,8 @@ export const JOURNAL: readonly JournalEntry[] = [
     slug: 'dad-allinone-how-to-choose',
     href: '/journal/dad-allinone-how-to-choose',
     category: '선물 이야기',
-    title: '40~60대 아빠 올인원 고르는 법, 피부 타입·향료·단계 수로 보는 기준',
-    summary: '40~60대 아빠의 올인원은 피부 타입, 향료가 들어 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 면도 후에 쓰기 편한지, 전성분 순서로 확인하면 고르기 쉽습니다.',
+    title: '4060 아빠 올인원 고르는 법, 피부 타입·향료·단계 수로 보는 기준',
+    summary: '4060 아빠의 올인원은 피부 타입, 향료가 들어 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 면도 후에 쓰기 편한지, 전성분 순서로 확인하면 고르기 쉽습니다.',
     published: '2026-10-22',
     modified: '2026-10-22',
   },
@@ -111,7 +111,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     slug: 'dad-skincare-gift-types',
     href: '/journal/dad-skincare-gift-types',
     category: '선물 이야기',
-    title: '아빠 선물 추천 화장품, 40~60대 아빠 스킨케어 선물 종류별 비교: 피부 타입·향·사용 단계',
+    title: '아빠 선물 추천 화장품, 4060 아빠 스킨케어 선물 종류별 비교: 피부 타입·향·사용 단계',
     summary: '아빠가 평소 몇 단계를 바르시는지, 피부가 번들거리는 편인지 당기는 편인지, 향을 좋아하시는지 세 가지만 먼저 확인하면 선물 종류가 거의 정해져요.',
     published: '2026-10-23',
     modified: '2026-10-23',
@@ -132,7 +132,7 @@ export const DAD_GIFT_SKINCARE_GUIDE_DESCRIPTION =
 
 /** dad-allinone-how-to-choose meta/og description (한 줄 답, verbatim from the article). */
 export const DAD_ALLINONE_HOW_TO_CHOOSE_DESCRIPTION =
-  '40~60대 아빠의 올인원은 피부 타입, 향료가 들어 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 면도 후에 쓰기 편한지, 전성분 순서로 확인하면 고르기 쉽습니다.';
+  '4060 아빠의 올인원은 피부 타입, 향료가 들어 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 면도 후에 쓰기 편한지, 전성분 순서로 확인하면 고르기 쉽습니다.';
 
 /** dad-allinone-how-to-choose visible FAQ; the FAQPage JSON-LD is built from this, so both match exactly. */
 export const DAD_ALLINONE_HOW_TO_CHOOSE_FAQ = [
@@ -195,14 +195,14 @@ export const ALLINONE_3_QUESTIONS_META_TITLE = '올인원 사기 전 3가지 질
 
 /** allinone-3-questions: each visible question lists its points; the FAQPage answer joins the same points, so both match. */
 export const ALLINONE_3_QUESTIONS_FAQ = [
-  { q: "40~60대인데 세안 후 얼굴이 당겨요. 올인원만으로 보습이 충분할까요?", points: ["바로 답: 피부 상태와 계절에 따라 다릅니다. 하나로 충분한 사람도 있고, 더 필요한 사람도 있어요.", "맞는 조건: 세안 직후 피부가 촉촉할 때 바르면 보습에 도움이 된다고 미국피부과학회는 안내합니다. 같은 학회는 나이가 들면서 피부가 더 건조해질 수 있다고 설명합니다.", "확인할 근거: 제품이 보습 지속에 대해 어떤 시험을, 어떤 조건에서 했는지 봅니다. 근거 없이 시간을 약속하는 문구는 그대로 믿지 않는 것이 좋아요.", "맞지 않는 경우: 오후나 겨울 난방 속에서 계속 당긴다면 당기는 부위에 덧바르거나 보습제를 하나 더하는 방법을 생각해 보세요."] },
+  { q: "4060 아빠인데 세안 후 얼굴이 당겨요. 올인원만으로 보습이 충분할까요?", points: ["바로 답: 피부 상태와 계절에 따라 다릅니다. 하나로 충분한 사람도 있고, 더 필요한 사람도 있어요.", "맞는 조건: 세안 직후 피부가 촉촉할 때 바르면 보습에 도움이 된다고 미국피부과학회는 안내합니다. 같은 학회는 나이가 들면서 피부가 더 건조해질 수 있다고 설명합니다.", "확인할 근거: 제품이 보습 지속에 대해 어떤 시험을, 어떤 조건에서 했는지 봅니다. 근거 없이 시간을 약속하는 문구는 그대로 믿지 않는 것이 좋아요.", "맞지 않는 경우: 오후나 겨울 난방 속에서 계속 당긴다면 당기는 부위에 덧바르거나 보습제를 하나 더하는 방법을 생각해 보세요."] },
   { q: "면도하고 바로 발라도 될까요? 민감한 피부에도 맞나요?", points: ["바로 답: 면도 후에 바르는 용도로 나온 제품인지부터 확인하세요.", "맞는 조건: 미국피부과학회는 면도 후 보습을 권하고, 민감한 피부라면 향료가 든 제품을 주의하라고 안내합니다.", "확인할 근거: 제품 설명에 면도 후 사용이 적혀 있는지, 전성분에 무엇이 들었는지 봅니다.", "맞지 않는 경우: 바른 뒤 피부에 이상이 생기면 사용을 멈추고 전문가와 상담하세요. 피부 반응은 사람마다 다릅니다."] },
   { q: "비싼 올인원이 더 좋은가요? 얼마나 써야 알 수 있나요?", points: ["바로 답: 가격이 높다고 꼭 더 맞는 것은 아닙니다.", "맞는 조건: 미국피부과학회는 제품을 고를 때 피부 타입, 현실적인 기대, 예산을 함께 고려하라고 안내합니다.", "확인할 근거: 용량을 하루 사용량으로 나눠 한 통으로 얼마나 쓰는지 계산해 보세요. 스킨과 로션을 따로 살 때의 비용과도 같은 방식으로 비교할 수 있어요. 효과를 말하는 문구가 있다면 시험 대상과 기간이 밝혀져 있는지 봅니다. 후기와 시험 결과는 다른 근거입니다.", "맞지 않는 경우: 바로 달라지는 것을 기대하기보다 몇 주 꾸준히 써 본 뒤 판단하는 것이 일반적입니다."] },
 ];
 
 /** fragrance-alcohol-free-allinone meta/og (verbatim from the draft's 메타 제목/설명 안). */
 export const FRAGRANCE_FREE_META_TITLE = "향료·변성알코올 없는 올인원 고르는 법: 전성분표 읽기 | 디어파파 DEAR PAPA";
-export const FRAGRANCE_FREE_DESCRIPTION = "40~60대 아빠 올인원을 고를 때 전성분표에서 향료와 변성알코올(에탄올)을 확인하는 방법, 제형과 사용 장면 확인법을 정리했습니다.";
+export const FRAGRANCE_FREE_DESCRIPTION = "4060 아빠 올인원을 고를 때 전성분표에서 향료와 변성알코올(에탄올)을 확인하는 방법, 제형과 사용 장면 확인법을 정리했습니다.";
 /** 한 줄로 정리하면? (verbatim). */
 export const FRAGRANCE_FREE_SUMMARY = "전성분표에서 「향료」, 향 성분 이름, 에센셜오일, 「변성알코올」「에탄올」 표기를 찾고, 위치와 순서를 함께 보면 됩니다. 제품 설명의 문구보다 전성분표가 먼저입니다.";
 /** Question sections; visible list and FAQPage answer use the same points. */

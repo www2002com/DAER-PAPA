@@ -1,7 +1,7 @@
 // /sodam 캐릭터 소개 페이지 문구.
-// 원고: /workspace/dearpapa/content/site/sodam-character-page-v3-2026-10-25.md (콘텐츠 담당, 12:32 판).
+// 원고: /workspace/dearpapa/content/site/sodam-character-page-v3-2026-10-25.md (콘텐츠 담당, 12:37 판).
 // 원고가 바뀌면 이 파일만 고치면 된다. 페이지·구조화 데이터·테스트가 모두 이 값을 읽는다.
-// 원고와 다른 점: 「최대 150자까지 쓸 수 있어요.」는 넣지 않았다(써니 지시). 링크는 미리보기에서도 같은 배포로 가도록 상대 경로.
+// 원고와 다른 점: 편지 쓰는 법 2단계의 글자 수 제한 문구는 넣지 않았다(써니 지시). 링크는 미리보기에서도 같은 배포로 가도록 상대 경로.
 
 export type ProfileRow = { label: string; value: string };
 
@@ -67,7 +67,7 @@ export const SODAM_PAGE = {
 
   productBox: {
     name: '디어파파 레터 올인원',
-    body: '아빠를 위한 올인원 스킨케어, 150ml.',
+    body: '아빠를 위한 올인원 스킨케어예요. 150ml 올인원 한 가지로 기획하고 있어요.',
     link: { href: '/letter-all-in-one', label: '제품 알아보기' },
     image: '/images/campaign-blue/bottle.webp',
     imageAlt: '디어파파 레터 올인원 블루 용기 디자인 시안',

@@ -229,6 +229,13 @@ og:description 4개만 실제 제공하는 편지·공식 채널·제품 정보 
 이에 따라 `factsBodyHtml`, 홈·제품 페이지 메타와 JSON-LD 원문, facts 본문 문단, 루트 파일 3개(llms.txt·llm.md·facts.json) 해시를 갱신합니다.
 facts 기준일과 가격·출시일·확정 상태는 바꾸지 않습니다.
 
+### 2026-10-26 후속 요청: 편지 안심 문구·가족 공유·저널 연구 문단
+
+대표님이 2026-10-26 08:19 「모두 채택하여 적용하고 실행」으로 승인했습니다.
+`/journal/dad-gift-skincare-guide`, `/journal/after-shave-gift`의 「한 줄 편지 함께 쓰기」 문단에 안심 문구와 Kumar·Epley(2018) 연구 문단을 더하고,
+두 글의 `modified`와 `sitemap.xml` lastmod를 2026-10-26으로 바꿉니다. 이에 따라 루트 파일 1개(sitemap.xml) 해시만 갱신합니다.
+보존 대상 라우트의 메타·JSON-LD·facts 본문은 바꾸지 않습니다.
+
 ## 기준 원본
 
 - 운영 사이트: https://dearpapa.kr

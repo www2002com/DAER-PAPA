@@ -27,6 +27,9 @@ import { STARTERS } from './starters';
 import { trackAction } from '@/lib/analytics';
 import styles from './Composer.module.css';
 
+/** Helper line under the letter label; always visible (not tied to launch-notify). */
+export const LETTER_REASSURE = '잘 쓰지 않아도 괜찮아요. 아빠는 문장보다 마음을 먼저 읽어요.';
+
 type View = 'write' | 'box';
 type Toast = { id: number; msg: string; action?: { label: string; run: () => void } };
 type Busy = 'idle' | 'busy' | 'done';
@@ -84,7 +87,7 @@ export function Composer() {
   const [hasExported, setHasExported] = useState(false);
   const [canShare, setCanShare] = useState(false);
   const [toast, setToast] = useState<Toast | null>(null);
-  const [tab, setTab] = useState<(typeof STARTERS)[number]['id']>('thanks');
+  const [tab, setTab] = useState<(typeof STARTERS)[number]['id']>('examples');
   const [inserting, setInserting] = useState(false);
   const [stagger, setStagger] = useState(false);
   const [bump, setBump] = useState(0);
@@ -486,6 +489,7 @@ export function Composer() {
   const panelId = `${uid}-starters`;
   const countId = `${uid}-count`;
   const warnId = `${uid}-warn`;
+  const reassureId = `${uid}-reassure`;
   const activeStarters = STARTERS.find((s) => s.id === tab)!;
   const near = text.length >= MAX_CHARS * 0.9;
   const full = text.length >= MAX_CHARS;
@@ -656,6 +660,9 @@ export function Composer() {
             <label htmlFor={`${uid}-text`} className={styles.label}>
               편지 내용
             </label>
+            <p id={reassureId} className={styles.reassure}>
+              {LETTER_REASSURE}
+            </p>
             <textarea
               id={`${uid}-text`}
               ref={textareaRef}
@@ -672,7 +679,7 @@ export function Composer() {
               }}
               onFocus={() => setFocused(true)}
               onBlur={() => setFocused(false)}
-              aria-describedby={`${countId} ${warnId}`}
+              aria-describedby={`${reassureId} ${countId} ${warnId}`}
               aria-invalid={over || warn === 'empty' || undefined}
               spellCheck={false}
             />

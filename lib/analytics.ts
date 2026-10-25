@@ -8,6 +8,8 @@ export const ACTIONS = [
   'campaign_landing',
   // 출시 알림 신청 conversion: form seen vs accepted submission, split by placement (home | product).
   'launch_notify_viewed', 'launch_notify_attempted', 'launch_notify_submitted', 'launch_notify_failed',
+  // Shown only after a successful launch-notify submission (same gate as the form).
+  'family_link_shared',
 ] as const;
 export type SiteAction = (typeof ACTIONS)[number];
 

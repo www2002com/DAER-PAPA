@@ -18,3 +18,7 @@
 .error { color: #8a3b2e; }
 .success { margin-top: 20px; font-weight: 600; color: var(--forest); }
 .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.share { margin-top: 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.shareButton { flex: 0 0 auto; }
+.shareMsg { font-size: 14px; color: var(--forest); min-height: 1.4em; }
+.intro { margin-bottom: 8px; font-size: 14px; font-weight: 600; color: var(--forest); }

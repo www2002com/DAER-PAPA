@@ -69,7 +69,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     title: '면도 후 아빠 스킨케어, 선물 고를 때 볼 세 가지',
     summary: '면도 후 아빠에게 줄 스킨케어는 향이 없는지, 에탄올이 들어 있지 않은지, 바르기 쉬운 한 단계인지부터 보면 됩니다.',
     published: '2026-10-22',
-    modified: '2026-10-23',
+    modified: '2026-10-26',
   },
   {
     slug: 'dad-gift-skincare-guide',
@@ -78,7 +78,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     title: '아빠 선물 화장품, 생신 선물 스킨케어 고르는 기준 7가지',
     summary: '아빠 선물용 화장품은 아빠의 피부 타입, 향이 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 용량, 전성분, 예산 순서로 고르면 실패가 적습니다.',
     published: '2026-10-22',
-    modified: '2026-10-22',
+    modified: '2026-10-26',
   },
   {
     slug: 'dad-allinone-how-to-choose',

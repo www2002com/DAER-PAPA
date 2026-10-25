@@ -324,6 +324,18 @@
   margin-bottom: 24px;
 }
 
+.reassure {
+  justify-self: start;
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--ivory);
+  color: var(--forest);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
 .textarea {
   --rule: 46px;
   display: block;

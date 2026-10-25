@@ -32,7 +32,8 @@ describe('hero letter preview', () => {
     const message = '아빠, 늘 내 편이 되어 줘서 고마워요.\n오늘도 행복하세요!';
     fireEvent.change(input, { target: { value: message } });
     expect(container.querySelector('[data-letter-preview]')?.textContent).toBe(message);
-    expect(screen.getByRole('img', { name: `사진 속 편지: ${message}` })).toBeTruthy();
+    expect(screen.getByRole('img', { name: `사진 속 편지: ${message}, 소담이가` })).toBeTruthy();
+    expect(container.querySelector('[data-letter-signature]')?.textContent).toBe('소담이가');
     expect(request).not.toHaveBeenCalled();
     expect(localStorage.length).toBe(0);
   });
@@ -43,6 +44,7 @@ describe('hero letter preview', () => {
     fireEvent.change(input, { target: { value: '' } });
     expect(container.querySelector('[data-letter-preview]')?.textContent).toBe('');
     expect(screen.getByRole('img', { name: '사진 속 빈 편지' })).toBeTruthy();
+    expect(container.querySelector('[data-letter-signature]')).toBeNull();
     const message = '<img src=x onerror=alert(1)> 아빠 & 나';
     fireEvent.change(input, { target: { value: message } });
     const preview = container.querySelector('[data-letter-preview]');

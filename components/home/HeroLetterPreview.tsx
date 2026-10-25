@@ -65,11 +65,14 @@ export function HeroLetterPreview() {
           alt="차분한 블루 레터 올인원 용기·단상자와 편지를 함께 놓은 선물 경험 디자인 시안"
           width={1671} height={941} loading="eager" fetchPriority="high" />
         <svg className={styles.overlay} viewBox="0 0 1671 941" preserveAspectRatio="xMidYMid slice"
-          role="img" aria-label={message ? `사진 속 편지: ${message}` : '사진 속 빈 편지'}>
+          role="img" aria-label={message.trim() ? `사진 속 편지: ${message}, 소담이가` : '사진 속 빈 편지'}>
           {/* The whole photo coordinate space preserves the paper's perspective. */}
           <foreignObject width="1671" height="941">
             <div className={styles.paper}>
-              <div ref={ink} className={styles.ink} data-letter-preview="">{message}</div>
+              <div ref={ink} className={styles.ink}>
+                <span data-letter-preview="">{message}</span>
+                {message.trim() && <span className={styles.paperSignature} data-letter-signature="">소담이가</span>}
+              </div>
             </div>
           </foreignObject>
         </svg>

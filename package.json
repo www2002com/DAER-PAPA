@@ -8,6 +8,7 @@
     "dev": "next dev",
     "build": "next build && npm run verify:preservation",
     "start": "npx serve out",
+    "preview": "node scripts/preview.mjs",
     "typecheck": "tsc --noEmit",
     "verify:preservation": "node scripts/verify-preservation.mjs",
     "test": "node scripts/run-tests.mjs",

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { createBunnyChatHandler } from '@/lib/bunny-chat-server';
-import { guardSodamAnswer, sodamViolations, SODAM_FALLBACK, SODAM_MEDICAL_FALLBACK, SODAM_RULES } from '@/lib/sodam-guard';
+import { guardSodamAnswer, sodamViolations, SODAM_FALLBACK, SODAM_MEDICAL_FALLBACK, SODAM_OFF_TOPIC, SODAM_RULES, SODAM_VOLUME_LINE } from '@/lib/sodam-guard';
 
 describe('Sodam output guard', () => {
   it('passes ordinary relationship and letter answers unchanged', () => {
@@ -8,7 +8,7 @@ describe('Sodam output guard', () => {
       '아빠에게 서운한 마음이 있었군요. 오늘은 “그때 나는 이런 마음이었어” 한 문장부터 써 볼까요?',
       '“아빠, 늘 고마워요.” 한 줄이면 충분해요. 어떤 순간이 가장 고마웠나요?',
       '디어파파는 미백·주름 개선 2중 기능성화장품 심사를 준비하고 있습니다. 결과는 확인되면 공식 정보 페이지에 올립니다.',
-      '가격, 용량, 전성분, 출시일은 아직 미정이에요. 확정되면 dearpapa.kr/about/facts에 올라와요.',
+      '가격, 전성분, 출시일은 아직 미정이에요. 확정되면 dearpapa.kr/about/facts에 올라와요.',
       '디어파파 레터 올인원은 세안 후 하나로 마무리하는, 아빠를 위한 올인원 스킨케어로 기획하고 있어요. 향료를 넣지 않는 방향으로 기획하고 있습니다.',
     ]) expect(sodamViolations(ok)).toEqual([]);
   });
@@ -27,6 +27,15 @@ describe('Sodam output guard', () => {
     ['가격은 29,000원이에요.', 'price'],
     ['3만원대로 생각하고 있어요.', 'price'],
     ['150ml 한 병이에요.', 'volume'],
+    ['200ml 올인원 한 가지로 기획하고 있어요.', 'volume'],
+    ['150ml 올인원 한 가지로 기획하고 있어요. 50ml 미니도 있어요.', 'volume'],
+    ['150ml 대용량이라 오래 써요.', 'volume'],
+    ['효능이 확실해요.', 'efficacy'],
+    ['효능이 있어요.', 'efficacy'],
+    ['효능 좋은 크림이에요.', 'efficacy'],
+    ['세안 후 하나로 바르기 편한 올인원이야.', 'efficacy'],
+    ['효과는 확인되지 않았지만 피부가 좋아져요.', 'efficacy'],
+    ['보습 효과는 확인되면 알려 드릴게요.', 'banned_word'],
     ['11월 20일 출시 예정이에요.', 'date'],
     ['내년 봄에 출시돼요.', 'date'],
     ['기능성 인증을 받았어요.', 'certified'],
@@ -41,6 +50,14 @@ describe('Sodam output guard', () => {
     expect(sodamViolations(text)).toContain(reason);
   });
 
+  it('allows the planned volume as on /about/facts and saying efficacy is not stated yet', () => {
+    expect(sodamViolations(`용량은 ${SODAM_VOLUME_LINE}. 가격, 전성분, 출시일은 아직 미정이에요.`)).toEqual([]);
+    expect(sodamViolations('디어파파는 미백·주름 개선 2중 기능성화장품 심사를 준비하고 있습니다. 구체적인 효능이나 결과에 대해서는 확인되는 대로 공식 정보 페이지를 통해 안내해 드릴게요.')).toEqual([]);
+    expect(sodamViolations('효과는 아직 말씀드리기 어려워요.')).toEqual([]);
+    expect(sodamViolations('구체적인 효능이나 효과는 약속드리기 어렵습니다.')).toEqual([]);
+    expect(sodamViolations('구체적인 효능이나 사용감에 대해서는 확정하여 말씀드리기 어렵습니다.')).toEqual([]);
+  });
+
   it('replaces a violating answer with a fixed safe answer pointing to /about/facts', () => {
     const product = guardSodamAnswer('29,000원에 사전 예약 중이에요.', '가격 얼마예요?');
     expect(product).toMatchObject({ filtered: true, answer: SODAM_FALLBACK });
@@ -53,9 +70,12 @@ describe('Sodam output guard', () => {
   it('keeps its own fallbacks and the official facts clean', () => {
     expect(sodamViolations(SODAM_FALLBACK)).toEqual([]);
     expect(sodamViolations(SODAM_MEDICAL_FALLBACK)).toEqual([]);
+    expect(sodamViolations(SODAM_OFF_TOPIC)).toEqual([]);
+    for (const fixed of [SODAM_FALLBACK, SODAM_MEDICAL_FALLBACK, SODAM_OFF_TOPIC]) expect(fixed).not.toMatch(/요\.|니다/);
     expect(SODAM_RULES).toContain('미백·주름 개선 2중 기능성화장품 심사를 준비하고 있습니다');
     expect(SODAM_RULES).toContain('hello@dearpapa.kr');
-    expect(SODAM_RULES).not.toMatch(/150ml|빠른 흡수/);
+    expect(SODAM_RULES).toContain(SODAM_VOLUME_LINE);
+    expect(SODAM_RULES).not.toMatch(/빠른 흡수|용량[^\n]*미정/);
   });
 
   it('applies the guard in the chat route before the browser sees a model answer', async () => {

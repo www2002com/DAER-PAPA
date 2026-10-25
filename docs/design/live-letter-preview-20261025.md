@@ -48,8 +48,9 @@ cycle. It pauses at each side, tilts its head and nods; travel is ±18 px on
 desktop and ±10 px on mobile. The two-line instruction and hit area stay still.
 Each completed stroll advances one of five prewritten, playful phrases. Child
 animation events are ignored. These phrases are not represented as AI output.
-The second phrase is `공짜니까, 어려워 말고 써봐라.`, added at the user's request
-to encourage free letter writing. It uses three short lines; reserving caption
+The second phrase is `가입 없이, 한 줄만 써 봐.` (updated from an earlier
+"free" wording at the user's request) to encourage letter writing without sign-up.
+Phrases use up to three short lines; reserving caption
 height prevents the card from shifting when the phrases rotate.
 
 The stroll stops while the letter field is focused, the question panel is open,

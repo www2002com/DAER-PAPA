@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useId, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import styles from './LetterBunny.module.css';
 
 const greetings = [
@@ -11,7 +11,7 @@ const greetings = [
   '잘 쓰려 애쓰지 않아도 괜찮아요. 내 말투 그대로요.',
 ];
 
-export function LetterBunny() {
+export function LetterBunny({ messageEditor }: { messageEditor?: ReactNode }) {
   const [replay, setReplay] = useState(0);
   const [open, setOpen] = useState(false);
   const [question, setQuestion] = useState('');
@@ -134,7 +134,7 @@ export function LetterBunny() {
       </button>
       <div className={styles.note}>
         <span className={styles.salutation}>Dear Papa,</span>
-        <p className={styles.message}>난 아빠가 행복해졌으면 좋겠어</p>
+        {messageEditor ?? <p className={styles.message}>난 아빠가 행복해졌으면 좋겠어</p>}
         <div className={styles.reply}>
           <p className={styles.greeting}>
             <span key={replay} className={replay > 0 ? styles.answer : undefined} aria-live="polite">{greeting.replace(/\?$/, '')}</span>

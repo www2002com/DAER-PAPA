@@ -1,6 +1,4 @@
-import Image from 'next/image';
-import { HeroLogo } from './HeroLogo';
-import { LetterBunny } from './LetterBunny';
+import { HeroLetterPreview } from './HeroLetterPreview';
 import styles from './Hero.module.css';
 
 export function Hero() {
@@ -23,18 +21,7 @@ export function Hero() {
           </div>
         </div>
         <figure className={styles.visual} data-reveal="visual" data-reveal-delay="80">
-          <div className={styles.productStage}>
-          <div className={styles.visualTitle}>
-            <HeroLogo className={styles.visualLogo} />
-            <span>레터 올인원</span>
-          </div>
-          <Image className={styles.campaign} src="/images/campaign-blue/letter-gift-message.webp"
-            alt="차분한 블루 레터 올인원 용기·단상자와 ‘난 아빠가 행복해졌으면 좋겠어’라고 쓴 편지를 함께 놓은 선물 경험 디자인 시안" width={1671} height={941}
-            loading="eager" fetchPriority="high" />
-          </div>
-          <div className={styles.letterCard}>
-            <LetterBunny />
-          </div>
+          <HeroLetterPreview />
           <figcaption className={styles.caption}>
             <span>선물 경험 기획 이미지 · 편지 문구 예시</span>
             <span>용기와 단상자는 개발 중인 디자인 시안입니다.</span>

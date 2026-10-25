@@ -106,7 +106,7 @@ export default function DadAllInOneHowToChoosePage() {
 
       <h2>이런 분께 맞아요</h2>
       <ul>
-        <li>세안 후 하나로 마무리하고 싶은 40~60대 아빠</li>
+        <li>세안 후 하나로 마무리하고 싶은 4060 아빠</li>
         <li>면도 후 바르는 한 단계를 원하는 아빠</li>
         <li>스킨케어를 이제 시작하려는 아빠</li>
         <li>향료가 들어 있는지를 먼저 보는 아빠</li>

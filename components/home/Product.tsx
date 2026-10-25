@@ -26,7 +26,7 @@ export function Product() {
             <span className="tag" data-tone="soft">출시 준비 중</span>
             <h3 className={styles.name}>{PRODUCT.name}</h3>
             <p className={styles.nameEn}>Letter All-in-One</p>
-            <p className={styles.description}>40~60대 아빠의 매일을 생각한<br />올인원 스킨케어와 한 줄 편지.</p>
+            <p className={styles.description}>4060 아빠의 매일을 생각한<br />올인원 스킨케어와 한 줄 편지.</p>
             <dl className={styles.highlights}>
               <div><dt>세안 후, 하나로</dt><dd>면도 후에도 간편하게 쓰는 올인원을 기획합니다.</dd></div>
               <div><dt>가볍게 스미는 사용감</dt><dd>빠른 흡수의 워터리 제형을 개발 방향으로 삼고 있습니다.</dd></div>

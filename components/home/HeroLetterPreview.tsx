@@ -92,7 +92,7 @@ export function HeroLetterPreview() {
             }
           }}
           maxLength={150} rows={1} placeholder="아빠에게 전하고 싶은 말을 써보세요" spellCheck={false} />
-        <p className={styles.signature}>소담이가 <span lang="en">ing</span></p>
+        <p className={styles.signature}>소담이가</p>
         <p id={hintId} className={styles.hint}>문장을 바꾸면 위 편지에도 나타나요.<span className={styles.count}>{message.length} / 150</span></p>
         <p className={styles.hint}>잠시 멈추면 토끼가 먼저 답해요. Enter로 질문 · Shift+Enter로 줄바꿈</p>
         <button type="button" className={styles.ask} disabled={!message.trim() || busy || composing}

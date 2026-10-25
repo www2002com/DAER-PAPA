@@ -3,8 +3,8 @@
 // body are protected separately in preserved-site.json; see PRESERVATION.md.
 
 export const SITE_URL = 'https://dearpapa.kr';
-export const FACTS_UPDATED = '2026-10-23';
-export const FACTS_UPDATED_KO = '2026년 10월 23일';
+export const FACTS_UPDATED = '2026-10-26';
+export const FACTS_UPDATED_KO = '2026년 10월 26일';
 
 export const BRAND = {
   name: 'DEAR PAPA',
@@ -44,7 +44,7 @@ export const PRODUCT = {
     '세안 후 하나로 마무리하는 올인원 안에 빠른 흡수의 워터리 제형을 담고, 미백·주름 개선 2중 기능성화장품 심사를 준비하고 있습니다.',
   resultsFirst: '효능과 사용감, 심사 결과는 확인되면 공식 정보 페이지에 올립니다.',
   drafts: '사이트에 나온 용기·상자·카드 그림은 개발 중인 디자인 시안이며, 최종 판매 구성과 다를 수 있습니다.',
-  giftStructure: '디어파파 레터 올인원은 선물과 편지를 함께 건네는 구조로 기획하고 만들고 있습니다.',
+  giftStructure: '디어파파 레터 올인원은 선물과 편지를 함께 건네는 구조로 기획하고 만들고 있습니다(출시 후 제공 예정).',
   giftPlan: '출시 후 계획: 사이트에서 쓴 편지를 인쇄한 카드에 담아 제품과 함께 건네는 선물을 기획하고 만들고 있습니다.',
   unboxing:
     '구상 중(출시 후 계획): 상자를 열면 편지 카드, 보틀, 사용 안내 순서로 보이는 선물 구성을 기획하고 있습니다.',

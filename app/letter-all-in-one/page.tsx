@@ -22,7 +22,7 @@ export default function LetterAllInOnePage() {
         lead={<p>제품명: 디어파파 레터 올인원 / DEAR&nbsp;PAPA LETTER ALL-IN-ONE (출시 준비 중)</p>}
         meta={
           <p>
-            최종 업데이트: <time dateTime="2026-10-23">2026년 10월 23일</time>
+            최종 업데이트: <time dateTime="2026-10-26">2026년 10월 26일</time>
           </p>
         }
         footer={
@@ -82,7 +82,7 @@ export default function LetterAllInOnePage() {
         ))}
 
         <h2 id="gift-letter">선물과 편지</h2>
-        <p>디어파파 레터 올인원은 선물과 편지를 함께 건네는 구조로 기획하고 만들고 있습니다.</p>
+        <p>디어파파 레터 올인원은 선물과 편지를 함께 건네는 구조로 기획하고 만들고 있습니다(출시 후 제공 예정).</p>
         <p>출시 후 계획: 사이트에서 쓴 편지를 인쇄한 카드에 담아 제품과 함께 건네는 선물을 기획하고 만들고 있습니다.</p>
 
         <h2 id="unboxing">상자를 여는 순서 (구상 중)</h2>

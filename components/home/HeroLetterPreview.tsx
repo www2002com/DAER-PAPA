@@ -10,6 +10,8 @@ import styles from './HeroLetterPreview.module.css';
 export function HeroLetterPreview() {
   const [message, setMessage] = useState('난 아빠가 행복해졌으면 좋겠어');
   const [isWriting, setIsWriting] = useState(false);
+  const [composing, setComposing] = useState(false);
+  const composingRef = useRef(false);
   const hasEdited = useRef(false);
   const editor = useRef<HTMLTextAreaElement>(null);
   const ink = useRef<HTMLDivElement>(null);
@@ -74,16 +76,27 @@ export function HeroLetterPreview() {
       </div>
     </div>
     <div className={hero.letterCard}>
-      <LetterBunny isWriting={isWriting} onWriteLetter={() => {
+      <LetterBunny isWriting={isWriting} draft={hasEdited.current ? message : undefined} draftComposing={composing} onWriteLetter={() => {
         editor.current?.focus();
         if (!hasEdited.current) editor.current?.select();
-      }} messageEditor={<div className={styles.editor}>
+      }} messageEditor={({ replyTo, busy }) => <div className={styles.editor}>
         <textarea ref={editor} className={styles.input} aria-label="사진 속 편지에 쓸 말"
           aria-describedby={hintId} value={message}
           onFocus={() => setIsWriting(true)} onBlur={() => setIsWriting(false)}
           onChange={(event) => { hasEdited.current = true; setMessage(event.target.value); }}
+          onCompositionStart={() => { composingRef.current = true; setComposing(true); }}
+          onCompositionEnd={() => { composingRef.current = false; setComposing(false); }}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing && !composingRef.current && event.keyCode !== 229) {
+              event.preventDefault(); if (!busy) replyTo(message);
+            }
+          }}
           maxLength={150} rows={1} placeholder="아빠에게 전하고 싶은 말을 써보세요" spellCheck={false} />
         <p id={hintId} className={styles.hint}>문장을 바꾸면 위 편지에도 나타나요.<span className={styles.count}>{message.length} / 150</span></p>
+        <p className={styles.hint}>잠시 멈추면 토끼가 먼저 답해요. Enter로 질문 · Shift+Enter로 줄바꿈</p>
+        <button type="button" className={styles.ask} disabled={!message.trim() || busy || composing}
+          onClick={() => replyTo(message)}>{busy ? '답변을 듣는 중' : '답변 듣기'} <span aria-hidden="true">↗</span></button>
+        <p className={styles.sendNotice}>질문을 보내면 이 문장과 최근 대화가 OpenAI로 전송될 수 있어요. <a href="/privacy#ai-questions">개인정보 안내</a></p>
       </div>} />
     </div>
   </>;

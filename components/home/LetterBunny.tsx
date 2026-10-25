@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react';
+import { useCallback, useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react';
+import { preparedBunnyReply } from '@/lib/bunny-prepared-reply';
 import { BunnyPortrait } from './BunnyPortrait';
 import styles from './LetterBunny.module.css';
 
@@ -36,10 +37,13 @@ function readAction(value: unknown): AnswerAction | null {
   return null;
 }
 
-export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false }: {
-  messageEditor?: ReactNode;
+type EditorControls = { replyTo: (content: string) => void; busy: boolean };
+export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, draft, draftComposing = false }: {
+  messageEditor?: ReactNode | ((controls: EditorControls) => ReactNode);
   onWriteLetter?: () => void;
   isWriting?: boolean;
+  draft?: string;
+  draftComposing?: boolean;
 }) {
   const [replay, setReplay] = useState(0);
   const [adviceIndex, setAdviceIndex] = useState(0);
@@ -52,6 +56,7 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false }:
   const [error, setError] = useState('');
   const [answerAction, setAnswerAction] = useState<AnswerAction | null>(null);
   const [guidance, setGuidance] = useState(false);
+  const [prepared, setPrepared] = useState(false);
   const [supportUnavailable, setSupportUnavailable] = useState(false);
   const [supportOnly, setSupportOnly] = useState(false);
   const productShown = useRef(false);
@@ -64,15 +69,28 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false }:
   const requestNumber = useRef(0);
   const history = useRef<{ role: 'user' | 'assistant'; content: string }[]>([]);
   const answerRef = useRef('');
+  const draftTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const answeredDraft = useRef<string | undefined>(undefined);
+  const supportOnlyRef = useRef(false);
+  const responseElement = useRef<HTMLDivElement>(null);
+  const scrollToReply = useRef(false);
 
   useEffect(() => { if (open) input.current?.focus(); }, [open]);
+  useEffect(() => {
+    if (answer && !speaking && scrollToReply.current) {
+      scrollToReply.current = false;
+      responseElement.current?.scrollIntoView({ block: 'nearest', behavior: 'auto' });
+    }
+  }, [answer, speaking]);
   useEffect(() => () => {
     requestNumber.current += 1;
     controller.current?.abort();
     if (revealTimer.current) clearInterval(revealTimer.current);
+    if (draftTimer.current) clearTimeout(draftTimer.current);
   }, []);
 
   function closeQuestion() {
+    scrollToReply.current = false;
     requestNumber.current += 1;
     controller.current?.abort();
     controller.current = null;
@@ -84,7 +102,10 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false }:
     trigger.current?.focus();
   }
 
-  function revealAnswer(text: string, immediate = false) {
+  const revealAnswer = useCallback((text: string, immediate = false) => {
+    if (revealTimer.current) clearInterval(revealTimer.current);
+    setSpeaking(false);
+    setDisplayed('');
     answerRef.current = text;
     setAnswer(text);
     if (immediate || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -103,12 +124,53 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false }:
         setSpeaking(false);
       }
     }, 32);
-  }
+  }, []);
 
-  async function ask(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const content = question.trim();
-    if (!content || content.length > 300 || controller.current || speaking) return;
+  const showPrepared = useCallback((content: string) => {
+    const reply = preparedBunnyReply(content, supportOnlyRef.current);
+    const serious = reply.mode === 'urgent' || reply.mode === 'referral';
+    if (serious) { supportOnlyRef.current = true; setSupportOnly(true); }
+    setPrepared(reply.source === 'prepared');
+    setGuidance(reply.source === 'guidance');
+    setAnswerAction(null);
+    setSupportUnavailable(false);
+    revealAnswer(reply.answer, serious);
+    return reply.answer;
+  }, [revealAnswer]);
+
+  useEffect(() => {
+    if (draft === undefined || draft === answeredDraft.current) return;
+    // Editing cancels an older answer; an unfinished draft never leaves the browser.
+    scrollToReply.current = false;
+    requestNumber.current += 1;
+    controller.current?.abort();
+    controller.current = null;
+    if (revealTimer.current) clearInterval(revealTimer.current);
+    setLoading(false);
+    setSpeaking(false);
+    setDisplayed(answerRef.current);
+    setError('');
+    if (!draft.trim()) {
+      answeredDraft.current = undefined;
+      setAnswer(''); answerRef.current = ''; setDisplayed(''); setAnswerAction(null);
+      return;
+    }
+    if (draftComposing) return;
+    draftTimer.current = setTimeout(() => {
+      answeredDraft.current = draft;
+      showPrepared(draft);
+    }, 1400);
+    return () => { if (draftTimer.current) clearTimeout(draftTimer.current); };
+  }, [draft, draftComposing, showPrepared]);
+
+  async function replyTo(raw: string, fromDraft = false) {
+    const content = raw.trim();
+    if (!content || content.length > 300 || controller.current) return;
+    scrollToReply.current = true;
+    if (draftTimer.current) clearTimeout(draftTimer.current);
+    if (fromDraft) answeredDraft.current = draft;
+    if (revealTimer.current) clearInterval(revealTimer.current);
+    setSpeaking(false);
     const attempt = ++requestNumber.current;
     const abort = new AbortController();
     controller.current = abort;
@@ -136,18 +198,20 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false }:
       if (typeof data.answer !== 'string' || !data.answer.trim() || data.answer.length > 1200) throw new Error('답변을 불러오지 못했어요. 다시 물어봐 주세요.');
       history.current = [...messages, { role: 'assistant' as const, content: data.answer }].slice(-6);
       const serious = data.mode === 'urgent' || data.mode === 'referral';
-      if (serious) setSupportOnly(true);
+      if (serious) { supportOnlyRef.current = true; setSupportOnly(true); }
       const action = readAction(data.action);
       const allowedAction = action?.kind === 'product' && (serious || supportOnly || productShown.current) ? null : action;
       setAnswerAction(allowedAction);
       if (allowedAction?.kind === 'product') productShown.current = true;
       setGuidance(data.source === 'guidance');
+      setPrepared(data.source === 'prepared');
       setSupportUnavailable(serious && data.supportUnavailable === true);
       setQuestion('');
       revealAnswer(data.answer, serious);
     } catch (failure) {
       if (attempt !== requestNumber.current) return;
-      setSpeaking(false);
+      const fallbackAnswer = showPrepared(content);
+      history.current = [...messages, { role: 'assistant' as const, content: fallbackAnswer }].slice(-6);
       const friendly = failure instanceof Error && /^(지금은|잠깐|답변을)/.test(failure.message);
       setError(abort.signal.aborted
         ? '답변이 조금 늦어지고 있어요. 다시 물어봐 주세요.'
@@ -161,9 +225,14 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false }:
     }
   }
 
+  function ask(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    void replyTo(question);
+  }
+
   const greeting = greetings[replay === 0 ? 0 : 1 + ((replay - 1) % (greetings.length - 1))];
   const nudging = Boolean(onWriteLetter) && !isWriting && !open && !loading && !speaking && !supportOnly;
-  const advice = supportOnly ? ['천천히 해도', '괜찮아.'] : isWriting ? ['오, 쓰네.', '기다려 줄게.'] : writingAdvice[adviceIndex];
+  const advice = supportOnly ? ['천천히 해도', '괜찮아.'] : answer ? ['내 답은', '바로 아래.'] : isWriting ? ['오, 쓰네.', '기다려 줄게.'] : writingAdvice[adviceIndex];
   const portraitMotion = speaking ? styles.speaking : nudging ? styles.nudge
     : !onWriteLetter && replay > 0 ? (replay % 2 ? styles.replay : styles.replayAgain) : '';
 
@@ -194,10 +263,12 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false }:
       </button>
       <div className={styles.note}>
         <span className={styles.salutation}>Dear Papa,</span>
-        {messageEditor ?? <p className={styles.message}>난 아빠가 행복해졌으면 좋겠어</p>}
+        {typeof messageEditor === 'function'
+          ? messageEditor({ replyTo: (content) => { void replyTo(content, true); }, busy: loading })
+          : messageEditor ?? <p className={styles.message}>난 아빠가 행복해졌으면 좋겠어</p>}
         <div className={styles.reply}>
           <p className={styles.greeting}>
-            <span key={replay} className={replay > 0 ? styles.answer : undefined} aria-live="polite">{supportOnly ? '편한 만큼만 이야기해 주세요.' : greeting.replace(/\?$/, '')}</span>
+            <span key={replay} className={replay > 0 ? styles.answer : undefined} aria-live="polite">{supportOnly ? '편한 만큼만 이야기해 주세요.' : answer ? '한 줄 잘 읽었어요. 더 이야기해 볼까요' : greeting.replace(/\?$/, '')}</span>
             <button ref={trigger} type="button" className={styles.questionTrigger}
               aria-label="토끼에게 질문하기" title="토끼에게 질문하기" aria-expanded={open} aria-controls={panelId}
               onClick={() => { if (open) closeQuestion(); else setOpen(true); }}>
@@ -207,10 +278,11 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false }:
           {loading && <p className={styles.thinking} role="status">어떤 말을 건넬지 생각하고 있어요<span aria-hidden="true">···</span></p>}
         </div>
       </div>
-      {answer && <div className={styles.response}>
-            <span className={styles.responseLabel}>{guidance ? '도움 안내' : 'AI 답변'}</span>
+      {answer && <div ref={responseElement} className={styles.response}>
+            <span className={styles.responseLabel}>{guidance ? '도움 안내' : prepared ? '토끼의 기본 답변' : 'AI 답변'}</span>
             <p className={styles.responseText} aria-hidden="true">{displayed}<span className={speaking ? styles.caret : undefined} /></p>
             <p className="sr-only" role="status" aria-atomic="true">{speaking ? '토끼가 답변하고 있어요.' : answer}</p>
+            {prepared && <p className={styles.helpNote}>미리 준비한 답변이에요. AI가 생성한 답변은 아니에요.</p>}
             {!speaking && answerAction && <div className={styles.answerAction}>
               {answerAction.kind === 'product' && <><span className={styles.responseLabel}>브랜드 제안 · 선택사항</span><p>{answerAction.description}</p></>}
               {answerAction.kind === 'letter' && onWriteLetter
@@ -228,6 +300,11 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false }:
         </div>
         <p className={styles.scope}>아빠와의 고민, 여기서 편하게 풀어봐요. DEAR PAPA가 제공하는 무료 AI예요. 전문 상담을 대신하지 않아요.</p>
         <textarea ref={input} id={inputId} value={question} onChange={(event) => setQuestion(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing && event.keyCode !== 229) {
+              event.preventDefault(); void replyTo(question);
+            }
+          }}
           placeholder="아빠에게 어떤 마음을 전하고 싶나요?" maxLength={300} rows={2} disabled={loading || speaking}
           aria-describedby={`${inputId}-privacy`} />
         {!history.current.length && <div className={styles.suggestions}>

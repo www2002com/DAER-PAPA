@@ -17,5 +17,10 @@
 .hint { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 5px; color: var(--ink-2); font-size: 11px; line-height: 1.5; word-break: keep-all; }
 .count { margin-left: auto; visibility: hidden; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .editor:focus-within .count { visibility: visible; }
+.ask { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 7px; color: var(--forest); font-size: 13px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.ask:focus-visible { outline: 2px solid var(--forest); outline-offset: 3px; }
+.ask:disabled { opacity: .5; cursor: default; }
+.sendNotice { margin-top: 2px; font-size: 10px; line-height: 1.5; color: var(--ink-2); word-break: keep-all; overflow-wrap: anywhere; }
+.sendNotice a { text-decoration: underline; text-underline-offset: 2px; }
 @media (max-width: 1000px) { .input { font-size: 26px; } }
 @media (max-width: 700px) { .input { font-size: 24px; } .hint { font-size: 10px; } }

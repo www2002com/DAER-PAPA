@@ -69,6 +69,7 @@ describe('letter bunny AI conversation', () => {
     await waitFor(() => expect(screen.getByRole('alert').textContent).toContain('연결을 준비')); 
     expect((screen.getByRole('textbox', { name: '토끼에게 물어볼 말' }) as HTMLTextAreaElement).value).toBe('아빠 생신 편지를 도와줘');
     expect(screen.queryByText('AI 답변')).toBeNull();
+    expect(screen.getByText('토끼의 기본 답변')).toBeTruthy();
     expect(screen.getByRole('button', { name: '편지 토끼 움직임 다시 보기' }).getAttribute('data-speaking')).toBe('false');
   });
 
@@ -116,6 +117,19 @@ describe('letter bunny AI conversation', () => {
     fireEvent.change(openQuestion(), { target: { value: '새 질문' } });
     fireEvent.click(screen.getByRole('button', { name: '물어보기' }));
     await waitFor(() => expect(screen.getByRole('status').textContent).toBe('새 질문에 대한 답변이에요.'));
+  });
+
+  it('still gives a labelled prepared answer when the network is unavailable', async () => {
+    vi.stubGlobal('fetch', async () => { throw new TypeError('Failed to fetch'); });
+    render(<LetterBunny />);
+    const input = openQuestion();
+    fireEvent.change(input, { target: { value: '아빠한테 서운해' } });
+    fireEvent.keyDown(input, { key: 'Enter', shiftKey: true });
+    expect(screen.queryByText('토끼의 기본 답변')).toBeNull();
+    fireEvent.keyDown(input, { key: 'Enter' });
+    await waitFor(() => expect(screen.getByRole('status').textContent).toContain('서운'));
+    expect(screen.getByText('토끼의 기본 답변')).toBeTruthy();
+    expect(screen.queryByText('AI 답변')).toBeNull();
   });
 
   it('shows a deliberate external help link, stops nudging, and retains support-only context', async () => {

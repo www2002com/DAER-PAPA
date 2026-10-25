@@ -12,7 +12,7 @@ const out = path.join(root, 'out');
 const compiled = path.join(root, '.preview-api');
 if (existsSync(path.join(root, '.env.local'))) process.loadEnvFile(path.join(root, '.env.local'));
 await mkdir(compiled, { recursive: true });
-for (const name of ['facts', 'bunny-chat-server']) {
+for (const name of ['facts', 'bunny-prepared-reply', 'bunny-chat-server']) {
   const source = await readFile(path.join(root, 'lib', `${name}.ts`), 'utf8');
   const { outputText } = ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext } });
   await writeFile(path.join(compiled, `${name}.js`), outputText);

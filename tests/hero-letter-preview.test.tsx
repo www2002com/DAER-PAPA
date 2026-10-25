@@ -1,8 +1,8 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { Hero } from '@/components/home/Hero';
 
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => { vi.unstubAllGlobals(); vi.useRealTimers(); });
 
 describe('hero letter preview', () => {
   it('invites writing through the bunny, focuses the editor and pauses the nudge while writing', () => {
@@ -64,5 +64,64 @@ describe('hero letter preview', () => {
     fireEvent.click(screen.getByRole('button', { name: '일단 써봐라, 각 잡지 말고. 편지 쓰기' }));
     expect(input.value).toBe(message);
     expect(container.querySelector('[data-letter-preview]')?.textContent).toBe(message);
+  });
+
+  it('responds to a completed handwritten line without transmitting a draft or reacting to the initial example', () => {
+    vi.useFakeTimers();
+    const fetcher = vi.fn(); vi.stubGlobal('fetch', fetcher);
+    render(<Hero />);
+    act(() => vi.advanceTimersByTime(2000));
+    expect(screen.queryByText('토끼의 기본 답변')).toBeNull();
+    const input = screen.getByRole('textbox', { name: '사진 속 편지에 쓸 말' });
+    fireEvent.change(input, { target: { value: '아빠가 보고 싶어' } });
+    act(() => vi.advanceTimersByTime(800));
+    fireEvent.change(input, { target: { value: '아빠에게 서운해' } });
+    act(() => vi.advanceTimersByTime(1400));
+    expect(screen.getByRole('status').textContent).toContain('서운');
+    expect(screen.getByText('토끼의 기본 답변')).toBeTruthy();
+    expect(fetcher).not.toHaveBeenCalled();
+    fireEvent.change(input, { target: { value: ' ' } });
+    act(() => vi.advanceTimersByTime(2000));
+    expect(screen.queryByText('토끼의 기본 답변')).toBeNull();
+  });
+
+  it('submits the visible line with Enter, preserves Shift+Enter and ignores Korean composition', async () => {
+    const fetcher = vi.fn(async (_url: unknown, _init?: RequestInit) => Response.json({ ok: true, source: 'ai', answer: '서운했던 순간부터 한 가지만 이야기해 볼까요?', mode: 'support', action: null }));
+    vi.stubGlobal('fetch', fetcher);
+    render(<Hero />);
+    const input = screen.getByRole('textbox', { name: '사진 속 편지에 쓸 말' });
+    fireEvent.change(input, { target: { value: '아빠에게 서운해' } });
+    fireEvent.keyDown(input, { key: 'Enter', shiftKey: true });
+    fireEvent.compositionStart(input);
+    fireEvent.keyDown(input, { key: 'Enter', isComposing: true, keyCode: 229 });
+    expect(fetcher).not.toHaveBeenCalled();
+    fireEvent.compositionEnd(input);
+    fireEvent.keyDown(input, { key: 'Enter' });
+    await waitFor(() => expect(screen.getByText('AI 답변')).toBeTruthy());
+    expect(fetcher).toHaveBeenCalledOnce();
+    expect(Element.prototype.scrollIntoView).toHaveBeenCalledWith({ block: 'nearest', behavior: 'auto' });
+    expect(JSON.parse(fetcher.mock.calls[0][1]!.body as string)).toEqual({ messages: [{ role: 'user', content: '아빠에게 서운해' }] });
+    expect(screen.queryByRole('textbox', { name: '토끼에게 물어볼 말' })).toBeNull();
+  });
+
+  it('waits for composition to finish and prevents an old request replacing a newly edited line', async () => {
+    vi.useFakeTimers();
+    let finish!: (response: Response) => void;
+    let signal: AbortSignal | null | undefined;
+    vi.stubGlobal('fetch', (_url: unknown, init: RequestInit) => { signal = init.signal; return new Promise<Response>(resolve => { finish = resolve; }); });
+    render(<Hero />);
+    const input = screen.getByRole('textbox', { name: '사진 속 편지에 쓸 말' });
+    fireEvent.compositionStart(input);
+    fireEvent.change(input, { target: { value: '아빠에게 미안해' } });
+    act(() => vi.advanceTimersByTime(2000));
+    expect(screen.queryByText('토끼의 기본 답변')).toBeNull();
+    fireEvent.compositionEnd(input);
+    fireEvent.click(screen.getByRole('button', { name: '답변 듣기' }));
+    fireEvent.change(input, { target: { value: '아빠에게 고마워' } });
+    expect(signal?.aborted).toBe(true);
+    await act(async () => { finish(Response.json({ ok: true, answer: '이전 질문의 늦은 답변', source: 'ai' })); });
+    act(() => vi.advanceTimersByTime(1400));
+    expect(screen.queryByText('이전 질문의 늦은 답변')).toBeNull();
+    expect(screen.getByRole('status').textContent).toContain('아빠를 생각하는 마음');
   });
 });

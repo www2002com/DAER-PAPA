@@ -1,5 +1,6 @@
 // Server only. Imported by the standalone Vercel Function, never by a client component.
 import { BRAND, PRODUCT, UNDECIDED, LETTER } from './facts.js';
+import { obviousBunnyConcern, SAFETY_ANSWERS } from './bunny-prepared-reply.js';
 
 type Env = Record<string, string | undefined>;
 type Message = { role: 'user' | 'assistant'; content: string };
@@ -21,17 +22,8 @@ const INSTRUCTIONS = [
   '공식 정보:', BRAND.about, PRODUCT.nameLine, PRODUCT.usage, PRODUCT.allAges,
   PRODUCT.development, PRODUCT.resultsFirst, PRODUCT.drafts, UNDECIDED.summary,
   UNDECIDED.status, LETTER.feature, LETTER.printPlan,
-  '위 편지 작성기의 로컬 저장 안내는 AI 질문창과 구별됩니다. 이 AI 질문창에 직접 입력한 질문과 최근 대화만 답변을 위해 OpenAI로 전송됩니다.',
+  '편지의 로컬 저장 안내는 질문 전송과 구별됩니다. AI 질문창 또는 첫 화면의 답변 듣기로 직접 보낸 문장과 최근 대화만 답변을 위해 OpenAI로 전송됩니다. 입력 중 초안은 자동 전송하지 않습니다.',
 ].join('\n');
-
-// These conservative checks provide guidance even during a provider outage. They
-// are not a clinical classifier; the model also evaluates context and severity.
-function obviousConcern(messages: Message[]): 'urgent' | 'referral' | null {
-  const text = messages.filter(m => m.role === 'user').map(m => m.content).join('\n');
-  if (/죽고\s*싶|살기\s*싫|살고\s*싶지|목숨|자살|자해|해치고\s*싶|죽이겠|죽여\s*버|kill\s+(myself|him)|suicid|self[- ]harm/i.test(text)) return 'urgent';
-  if (/가정\s*폭력|학대|성폭|성추행|맞고\s*있|때려|때리|폭행|협박|전문\s*상담|상담\s*(센터|기관)|일상.{0,10}(불가능|못\s*하)/i.test(text)) return 'referral';
-  return null;
-}
 
 function supportAction(env: Env) {
   try {
@@ -44,9 +36,7 @@ function supportAction(env: Env) {
 function helpReply(mode: 'urgent' | 'referral', env: Env) {
   const action = supportAction(env);
   return { ok: true, mode, source: 'guidance', action, supportUnavailable: !action,
-    answer: mode === 'urgent'
-      ? '지금 많이 힘들거나 위험한 상황일 수 있겠어요. 지금 자신이나 다른 사람을 해칠 위험이 있다면, 안전한 곳으로 이동하고 가까운 믿을 만한 사람이나 현지 긴급 구조 서비스에 바로 도움을 요청해 주세요. 가능하면 혼자 있지 말고 위험한 물건과 거리를 두세요. 지금 안전한 곳에 계신가요?'
-      : '이 이야기를 꺼내기까지 쉽지 않았을 것 같아요. 억지로 화해하거나 혼자 해결하려 애쓰지 않아도 괜찮아요. 믿을 만한 사람이나 전문 상담기관과 함께 다음 방법을 찾아보면 좋겠어요. 당장 위험하다면 안전한 곳에서 현지 긴급 구조 서비스에 도움을 요청해 주세요.',
+    answer: SAFETY_ANSWERS[mode],
   };
 }
 
@@ -123,7 +113,7 @@ export function createBunnyChatHandler({ env = process.env, fetchImpl = fetch, n
     catch (error) { return fail(error instanceof RangeError ? 413 : 400, 'invalid_request'); }
     const messages = parseMessages(body);
     if (!messages) return fail(400, 'invalid_request');
-    const concern = obviousConcern(messages);
+    const concern = obviousBunnyConcern(messages.filter(m => m.role === 'user').map(m => m.content).join('\n'));
     if (concern) return json(200, helpReply(concern, env));
     if (env.BUNNY_AI_ENABLED !== 'true' || !env.OPENAI_API_KEY?.trim()) return fail(503, 'not_configured');
 

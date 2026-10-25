@@ -62,12 +62,12 @@ export function HeroLetterPreview() {
           width={1671} height={941} loading="eager" fetchPriority="high" />
         <svg className={styles.overlay} viewBox="0 0 1671 941" preserveAspectRatio="xMidYMid slice"
           role="img" aria-label={message ? `사진 속 편지: ${message}` : '사진 속 빈 편지'}>
-          {/* Same crop as the photograph; these axes follow the paper edges. */}
-          <g transform="matrix(.79 .363 -.677 .563 430 630)">
-            <foreignObject width="455" height="145">
+          {/* The whole photo coordinate space preserves the paper's perspective. */}
+          <foreignObject width="1671" height="941">
+            <div className={styles.paper}>
               <div ref={ink} className={styles.ink} data-letter-preview="">{message}</div>
-            </foreignObject>
-          </g>
+            </div>
+          </foreignObject>
         </svg>
       </div>
     </div>

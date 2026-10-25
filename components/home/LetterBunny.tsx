@@ -13,6 +13,7 @@ const greetings = [
 
 const writingAdvice = [
   ['일단 써봐라,', '각 잡지 말고.'],
+  ['공짜니까,', '어려워 말고', '써봐라.'],
   ['일단 한 줄.', '내가 봐줄게.'],
   ['고민은 짧게,', '마음은 길게.'],
   ['그 말이면 돼.', '얼른 써봐.'],
@@ -155,7 +156,7 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false }:
         <span key={isWriting ? 'writing' : adviceIndex}
           className={`${styles.label} ${onWriteLetter && !loading && !speaking ? `${styles.writePrompt} ${styles.adviceArrive}` : ''}`}>
           {loading ? '생각하고 있어요' : speaking ? '토끼가 말해요' : onWriteLetter
-            ? <><span>{advice[0]}</span><span>{advice[1]}</span></>
+            ? advice.map((line) => <span key={line}>{line}</span>)
             : replay ? '다시 인사하기' : '토끼에게 인사하기'}
         </span>
       </button>

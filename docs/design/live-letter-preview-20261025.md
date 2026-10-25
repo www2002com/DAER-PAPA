@@ -46,8 +46,11 @@ After the user's follow-up request for a Claude-like character that walks back
 and forth offering advice, the bunny now strolls left and right in a 7.6-second
 cycle. It pauses at each side, tilts its head and nods; travel is ±18 px on
 desktop and ±10 px on mobile. The two-line instruction and hit area stay still.
-Each completed stroll advances one of four prewritten, playful phrases. Child
+Each completed stroll advances one of five prewritten, playful phrases. Child
 animation events are ignored. These phrases are not represented as AI output.
+The second phrase is `공짜니까, 어려워 말고 써봐라.`, added at the user's request
+to encourage free letter writing. It uses three short lines; reserving caption
+height prevents the card from shifting when the phrases rotate.
 
 The stroll stops while the letter field is focused, the question panel is open,
 a response is loading or the bunny is speaking. Writing changes the caption to

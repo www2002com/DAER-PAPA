@@ -3,7 +3,7 @@
 .patrol { --bunny-travel: 18px; display: block; width: 100%; }
 .portraitWrap { position: relative; display: block; width: 100%; transform-origin: center bottom; }
 .label { padding: 6px 0; font-size: 12px; line-height: 1.5; text-align: center; }
-.label.writePrompt { font-family: var(--font-pen); font-size: 19px; line-height: 1.15; color: var(--ink); }
+.label.writePrompt { min-height: calc(3.45em + 12px); font-family: var(--font-pen); font-size: 19px; line-height: 1.15; color: var(--ink); }
 .writePrompt > span { display: block; white-space: nowrap; }
 .note { grid-column: 1; grid-row: 1; }
 .salutation { font-family: var(--font-pen); font-size: 21px; }

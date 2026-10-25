@@ -20,16 +20,16 @@ describe('letter bunny AI conversation', () => {
     const iterationEvent = 'AnimationEvent' in window ? 'animationiteration' : 'webkitAnimationIteration';
     const finishStroll = (element: Element) => fireEvent(element, new Event(iterationEvent, { bubbles: true }));
     finishStroll(stroll!);
-    expect(screen.getByRole('button', { name: '일단 한 줄. 내가 봐줄게. 편지 쓰기' })).toBe(bunny);
+    expect(screen.getByRole('button', { name: '공짜니까, 어려워 말고 써봐라. 편지 쓰기' })).toBe(bunny);
     // A nested body animation must not advance the dialogue.
     finishStroll(stroll!.firstElementChild!);
-    expect(bunny.getAttribute('aria-label')).toBe('일단 한 줄. 내가 봐줄게. 편지 쓰기');
+    expect(bunny.getAttribute('aria-label')).toBe('공짜니까, 어려워 말고 써봐라. 편지 쓰기');
     view.rerender(<LetterBunny onWriteLetter={onWriteLetter} isWriting />);
     expect(bunny.getAttribute('data-nudging')).toBe('false');
     expect(bunny.getAttribute('aria-label')).toBe('오, 쓰네. 기다려 줄게. 편지 쓰기');
     finishStroll(stroll!);
     view.rerender(<LetterBunny onWriteLetter={onWriteLetter} />);
-    expect(bunny.getAttribute('aria-label')).toBe('일단 한 줄. 내가 봐줄게. 편지 쓰기');
+    expect(bunny.getAttribute('aria-label')).toBe('공짜니까, 어려워 말고 써봐라. 편지 쓰기');
   });
 
   it('opens the inline question form, focuses it, and returns focus on Escape', () => {

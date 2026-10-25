@@ -9,6 +9,8 @@ import styles from './HeroLetterPreview.module.css';
 
 export function HeroLetterPreview() {
   const [message, setMessage] = useState('난 아빠가 행복해졌으면 좋겠어');
+  const [isWriting, setIsWriting] = useState(false);
+  const hasEdited = useRef(false);
   const editor = useRef<HTMLTextAreaElement>(null);
   const ink = useRef<HTMLDivElement>(null);
   const hintId = useId();
@@ -72,9 +74,14 @@ export function HeroLetterPreview() {
       </div>
     </div>
     <div className={hero.letterCard}>
-      <LetterBunny messageEditor={<div className={styles.editor}>
+      <LetterBunny isWriting={isWriting} onWriteLetter={() => {
+        editor.current?.focus();
+        if (!hasEdited.current) editor.current?.select();
+      }} messageEditor={<div className={styles.editor}>
         <textarea ref={editor} className={styles.input} aria-label="사진 속 편지에 쓸 말"
-          aria-describedby={hintId} value={message} onChange={(event) => setMessage(event.target.value)}
+          aria-describedby={hintId} value={message}
+          onFocus={() => setIsWriting(true)} onBlur={() => setIsWriting(false)}
+          onChange={(event) => { hasEdited.current = true; setMessage(event.target.value); }}
           maxLength={150} rows={1} placeholder="아빠에게 전하고 싶은 말을 써보세요" spellCheck={false} />
         <p id={hintId} className={styles.hint}>문장을 바꾸면 위 편지에도 나타나요.<span className={styles.count}>{message.length} / 150</span></p>
       </div>} />

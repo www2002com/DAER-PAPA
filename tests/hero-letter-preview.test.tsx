@@ -5,6 +5,24 @@ import { Hero } from '@/components/home/Hero';
 afterEach(() => vi.unstubAllGlobals());
 
 describe('hero letter preview', () => {
+  it('invites writing through the bunny, focuses the editor and pauses the nudge while writing', () => {
+    render(<Hero />);
+    const bunny = screen.getByRole('button', { name: '그냥 써봐라, 각 잡지 말고. 편지 쓰기' });
+    const input = screen.getByRole('textbox', { name: '사진 속 편지에 쓸 말' }) as HTMLTextAreaElement;
+    expect(bunny.getAttribute('data-nudging')).toBe('true');
+    fireEvent.click(bunny);
+    expect(document.activeElement).toBe(input);
+    expect(input.selectionStart).toBe(0);
+    expect(input.selectionEnd).toBe(input.value.length);
+    expect(bunny.getAttribute('data-nudging')).toBe('false');
+    fireEvent.change(input, { target: { value: '내가 직접 쓴 편지' } });
+    fireEvent.blur(input);
+    fireEvent.click(bunny);
+    expect(document.activeElement).toBe(input);
+    expect(input.value).toBe('내가 직접 쓴 편지');
+    expect(input.selectionStart).toBe(input.selectionEnd);
+  });
+
   it('updates the letter in the photograph immediately as the handwritten field is edited', () => {
     const request = vi.fn();
     vi.stubGlobal('fetch', request);
@@ -43,7 +61,7 @@ describe('hero letter preview', () => {
     expect(question.value).toBe('');
     fireEvent.change(question, { target: { value: '편지를 도와줘' } });
     fireEvent.click(screen.getByRole('button', { name: '질문창 닫기' }));
-    fireEvent.click(screen.getByRole('button', { name: '편지 토끼 움직임 다시 보기' }));
+    fireEvent.click(screen.getByRole('button', { name: '그냥 써봐라, 각 잡지 말고. 편지 쓰기' }));
     expect(input.value).toBe(message);
     expect(container.querySelector('[data-letter-preview]')?.textContent).toBe(message);
   });

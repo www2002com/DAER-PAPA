@@ -34,3 +34,19 @@ Evidence is in the parent workspace's `outputs/dearpapa-live-letter-20261025/`
 directory, including screenshots and measured fit results in `checks.json`.
 The `angle` subdirectory records the subsequent perspective correction.
 The review branch remains local; this change has not been deployed to production.
+
+## Bunny writing invitation
+
+The next user request replaces the hero bunny's greeting action with the playful
+copy `그냥 써봐라, 각 잡지 말고.`. Clicking or keyboard-activating the bunny focuses
+the live letter editor. The initial example is selected for easy replacement;
+once edited, the visitor's own text is retained without selecting it all.
+
+The bunny makes two small, impatient bounces in a 3.6-second cycle, with a long
+rest between them. Only the character moves; the two-line instruction stays
+still. The nudge stops while the letter field is focused, the question panel is
+open, a response is loading or the bunny is speaking. Reduced-motion preferences
+disable it. The existing standalone greeting and AI speaking motion still work.
+
+Focused behavior tests cover focus transfer, example selection, preserving the
+visitor's text and pausing while writing. The full suite now has 98 tests.

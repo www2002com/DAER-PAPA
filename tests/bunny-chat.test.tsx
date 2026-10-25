@@ -10,6 +10,20 @@ function openQuestion() {
 }
 
 describe('letter bunny AI conversation', () => {
+  it('opens the question from the handwritten invitation and returns keyboard focus to it', () => {
+    const request = vi.fn(); vi.stubGlobal('fetch', request);
+    render(<LetterBunny />);
+    const invitation = screen.getByRole('button', { name: '고민돼? 나에게 편하게 털어봐.' });
+    fireEvent.click(invitation);
+    const input = screen.getByRole('textbox', { name: '토끼에게 물어볼 말' });
+    expect(document.activeElement).toBe(input);
+    expect(invitation.getAttribute('aria-expanded')).toBe('true');
+    expect(request).not.toHaveBeenCalled();
+    fireEvent.keyDown(input, { key: 'Escape' });
+    expect(document.activeElement).toBe(invitation);
+    expect(invitation.getAttribute('aria-expanded')).toBe('false');
+  });
+
   it('changes its playful advice after a stroll and waits while the letter is being written', () => {
     const onWriteLetter = vi.fn();
     const view = render(<LetterBunny onWriteLetter={onWriteLetter} />);

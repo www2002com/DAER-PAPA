@@ -1,11 +1,18 @@
 .companion { display: grid; grid-template-columns: minmax(0, 1fr) 104px; align-items: center; gap: 16px; color: var(--ink); }
-.character { grid-column: 2; grid-row: 1; display: grid; justify-items: center; width: 100%; border-radius: 8px; touch-action: manipulation; color: var(--forest); }
+.invitation { grid-column: 1 / -1; grid-row: 1; position: relative; display: flex; justify-content: flex-end; min-height: 56px; }
+.inviteCopy { display: grid; align-content: center; min-height: 44px; max-width: calc(100% - 128px); margin-right: 128px; font-family: var(--font-pen); font-size: 24px; line-height: 1.08; text-align: center; color: var(--forest); transform: rotate(-3deg); cursor: pointer; touch-action: manipulation; }
+.inviteCopy > span { display: block; }
+.inviteCopy:focus-visible { outline: 2px solid var(--forest); outline-offset: 5px; border-radius: 3px; }
+.inviteCopy:active:not(:focus-visible) { transform: rotate(-3deg) scale(.97); }
+.inviteArrow { position: absolute; top: 1px; right: 8px; width: 120px; height: 64px; pointer-events: none; color: var(--forest); opacity: .72; }
+.inviteArrow path { stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.character { grid-column: 2; grid-row: 2; align-self: start; display: grid; justify-items: center; width: 100%; border-radius: 8px; touch-action: manipulation; color: var(--forest); }
 .patrol { --bunny-travel: 18px; display: block; width: 100%; }
 .portraitWrap { position: relative; display: block; width: 100%; transform-origin: center bottom; }
 .label { padding: 6px 0; font-size: 12px; line-height: 1.5; text-align: center; }
 .label.writePrompt { min-height: calc(3.45em + 12px); font-family: var(--font-pen); font-size: 19px; line-height: 1.15; color: var(--ink); }
 .writePrompt > span { display: block; white-space: nowrap; }
-.note { grid-column: 1; grid-row: 1; }
+.note { grid-column: 1; grid-row: 2; }
 .salutation { font-family: var(--font-pen); font-size: 21px; }
 .message { margin-top: 5px; font-family: var(--font-pen); font-size: clamp(24px, 4.8cqw, 32px); line-height: 1.3; }
 .reply { min-height: 56px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 13px; line-height: 1.6; word-break: keep-all; overflow-wrap: anywhere; color: var(--ink-2); }
@@ -18,8 +25,8 @@
 .voice { position: absolute; top: 54%; right: -4%; width: 18%; height: 24%; fill: none; stroke: var(--forest); stroke-width: 1.6; stroke-linecap: round; }
 .thinking { margin-top: 12px; color: var(--forest); }
 .thinking > span { margin-left: 4px; letter-spacing: 2px; }
-.response { grid-column: 1; grid-row: 2; min-width: 0; font-size: 13px; line-height: 1.65; word-break: keep-all; overflow-wrap: anywhere; color: var(--ink-2); }
-.companion:has(> .response) .character { grid-row: 1 / 3; }
+.response { grid-column: 1; grid-row: 3; min-width: 0; font-size: 13px; line-height: 1.65; word-break: keep-all; overflow-wrap: anywhere; color: var(--ink-2); }
+.companion:has(> .response) .character { grid-row: 2 / 4; }
 .responseLabel { display: block; margin-bottom: 5px; color: var(--forest); font-size: 11px; font-weight: 600; }
 .responseText { color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
 .answerAction { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
@@ -52,6 +59,7 @@
 .character:active .label { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 @media (hover: hover) { .character:hover .label { text-decoration: underline; text-underline-offset: 4px; } }
 @media (prefers-reduced-motion: no-preference) {
+  .inviteCopy { transition: transform 140ms cubic-bezier(.23, 1, .32, 1); }
   .patrolling { animation: bunny-patrol 7600ms ease-in-out 500ms infinite; }
   .nudge { animation: bunny-advice 7600ms ease-in-out 500ms infinite; }
   .adviceArrive { animation: reply-arrive 180ms ease-out; }
@@ -90,4 +98,5 @@
 @media (max-width: 1000px) { .companion { grid-template-columns: minmax(0, 1fr) 76px; gap: 12px; } .message { font-size: 26px; } }
 @media (max-width: 700px) { .companion { grid-template-columns: minmax(0, 1fr) 64px; gap: 10px; } .salutation { font-size: 16px; } .message { font-size: 24px; } .reply { font-size: 12px; min-height: 48px; margin-top: 8px; padding-top: 8px; } .label { font-size: 11px; } }
 @media (max-width: 700px) { .label.writePrompt { font-size: 17px; } .patrol { --bunny-travel: 10px; } }
-@media (max-width: 700px) { .response { grid-column: 1 / -1; padding-top: 10px; border-top: 1px solid var(--line); } .companion:has(> .response) .character { grid-row: 1; } }
+@media (max-width: 700px) { .response { grid-column: 1 / -1; padding-top: 10px; border-top: 1px solid var(--line); } .companion:has(> .response) .character { grid-row: 2; } .inviteCopy { max-width: calc(100% - 72px); margin-right: 72px; font-size: 21px; } .inviteArrow { right: 0; width: 74px; height: 60px; } }
+@media (hover: hover) { .inviteCopy:hover { text-decoration: underline; text-underline-offset: 4px; } }

@@ -63,6 +63,7 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
   const panelId = useId();
   const inputId = useId();
   const trigger = useRef<HTMLButtonElement>(null);
+  const questionOpener = useRef<HTMLButtonElement | null>(null);
   const input = useRef<HTMLTextAreaElement>(null);
   const controller = useRef<AbortController | null>(null);
   const revealTimer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -99,7 +100,12 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
     setSpeaking(false);
     setLoading(false);
     setOpen(false);
-    trigger.current?.focus();
+    (questionOpener.current ?? trigger.current)?.focus();
+  }
+
+  function toggleQuestion(opener: HTMLButtonElement) {
+    if (open) closeQuestion();
+    else { questionOpener.current = opener; setOpen(true); }
   }
 
   const revealAnswer = useCallback((text: string, immediate = false) => {
@@ -238,6 +244,18 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
 
   return (
     <div className={styles.companion}>
+      <div className={styles.invitation}>
+        <button type="button" className={styles.inviteCopy}
+          aria-label={supportOnly ? '편한 만큼 이야기해 줘.' : '고민돼? 나에게 편하게 털어봐.'}
+          aria-expanded={open} aria-controls={panelId}
+          onClick={(event) => toggleQuestion(event.currentTarget)}>
+          <span>{supportOnly ? '편한 만큼' : '고민돼?'}</span>
+          <span>{supportOnly ? '이야기해 줘.' : '나에게 편하게 털어봐.'}</span>
+        </button>
+        {!supportOnly && <svg className={styles.inviteArrow} viewBox="0 0 140 68" fill="none" aria-hidden="true" focusable="false">
+          <path d="M5 28C18 9 44 8 48 25C51 39 33 36 39 21C47 2 79 0 84 18C88 33 70 33 76 18C82 3 113 7 124 22C134 36 127 48 114 59M114 59L116 45M114 59L129 55" />
+        </svg>}
+      </div>
       <button type="button" className={styles.character}
         aria-label={onWriteLetter ? (loading ? '생각하고 있어요' : speaking ? '토끼가 말해요' : `${advice.join(' ')} 편지 쓰기`) : '편지 토끼 움직임 다시 보기'}
         title={onWriteLetter ? '눌러서 편지에 한 줄 써보세요' : '눌러서 편지 토끼와 인사해요'}
@@ -271,7 +289,7 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
             <span key={replay} className={replay > 0 ? styles.answer : undefined} aria-live="polite">{supportOnly ? '편한 만큼만 이야기해 주세요.' : answer ? '한 줄 잘 읽었어요. 더 이야기해 볼까요' : greeting.replace(/\?$/, '')}</span>
             <button ref={trigger} type="button" className={styles.questionTrigger}
               aria-label="토끼에게 질문하기" title="토끼에게 질문하기" aria-expanded={open} aria-controls={panelId}
-              onClick={() => { if (open) closeQuestion(); else setOpen(true); }}>
+              onClick={(event) => toggleQuestion(event.currentTarget)}>
               <span className={!open && !supportOnly ? styles.questionPulse : undefined} aria-hidden="true">?</span>
             </button>
           </p>

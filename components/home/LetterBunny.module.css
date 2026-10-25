@@ -1,13 +1,44 @@
 .companion { display: grid; grid-template-columns: minmax(0, 1fr) 104px; align-items: center; gap: 16px; color: var(--ink); }
 .character { grid-column: 2; grid-row: 1; display: grid; justify-items: center; width: 100%; border-radius: 8px; touch-action: manipulation; color: var(--forest); }
-.portraitWrap { display: block; width: 100%; transform-origin: center bottom; }
+.portraitWrap { position: relative; display: block; width: 100%; transform-origin: center bottom; }
 .portrait { display: block; width: 100%; height: auto; }
 .label { padding: 6px 0; font-size: 12px; line-height: 1.5; text-align: center; }
 .note { grid-column: 1; grid-row: 1; }
 .salutation { font-family: var(--font-pen); font-size: 21px; }
 .message { margin-top: 5px; font-family: var(--font-pen); font-size: clamp(24px, 4.8cqw, 32px); line-height: 1.3; }
 .reply { min-height: 56px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 13px; line-height: 1.6; word-break: keep-all; overflow-wrap: anywhere; color: var(--ink-2); }
-.reply span { display: block; }
+.greeting { display: block; }
+.questionTrigger { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: -10px -5px -10px 0; vertical-align: middle; border-radius: 50%; color: var(--forest); cursor: pointer; }
+.questionTrigger > span { display: grid; place-items: center; width: 22px; height: 22px; border: 1px solid var(--forest); border-radius: 50%; background: var(--ivory); font-size: 14px; font-weight: 650; line-height: 1; }
+.questionTrigger:hover > span, .questionTrigger[aria-expanded='true'] > span { background: var(--forest); color: var(--card); }
+.questionTrigger:focus-visible, .close:focus-visible, .suggestions button:focus-visible, .panelActions button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.character:disabled { cursor: default; }
+.voice { position: absolute; top: 54%; right: -4%; width: 18%; height: 24%; fill: none; stroke: var(--forest); stroke-width: 1.6; stroke-linecap: round; }
+.thinking { margin-top: 12px; color: var(--forest); }
+.thinking > span { margin-left: 4px; letter-spacing: 2px; }
+.response { margin-top: 14px; }
+.responseLabel { display: block; margin-bottom: 5px; color: var(--forest); font-size: 11px; font-weight: 600; }
+.responseText { color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
+.caret { display: inline-block; height: 1em; width: 1px; margin-left: 3px; vertical-align: -1px; background: var(--forest); }
+.questionPanel { grid-column: 1 / -1; min-width: 0; padding-top: 16px; border-top: 1px solid var(--line); }
+.panelHeading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.panelHeading label { font-size: 13px; font-weight: 600; }
+.close { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-width: 44px; min-height: 44px; margin-block: -10px; color: var(--ink-2); font-size: 12px; cursor: pointer; }
+.close > span { font-size: 20px; line-height: 1; }
+.questionPanel textarea { display: block; width: 100%; min-height: 88px; padding: 12px 14px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--paper); color: var(--ink); font-family: var(--font-sans); font-size: 16px; line-height: 1.6; resize: vertical; }
+.questionPanel textarea::placeholder { color: var(--placeholder); }
+.questionPanel textarea:focus { outline: 2px solid var(--forest); outline-offset: 2px; }
+.questionPanel textarea:disabled { opacity: .7; }
+.suggestions { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 8px; }
+.suggestions button { min-height: 36px; text-align: left; color: var(--ink-2); font-size: 12px; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.suggestions button:hover { color: var(--ink); }
+.panelActions { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 12px; }
+.panelActions > span { color: var(--ink-3); font-size: 11px; }
+.panelActions > button { display: inline-flex; align-items: center; justify-content: center; gap: 16px; min-height: 44px; padding: 0 18px; border-radius: 6px; background: var(--forest); color: var(--card); font-size: 13px; font-weight: 600; cursor: pointer; }
+.panelActions > button:hover { background: var(--night); }
+.panelActions > button:disabled { opacity: .45; cursor: default; }
+.privacy { max-width: 52ch; margin-top: 12px; color: var(--ink-3); font-size: 11px; line-height: 1.6; word-break: keep-all; overflow-wrap: anywhere; }
+.error { margin-top: 12px; color: var(--rose-ink); font-size: 13px; line-height: 1.6; }
 .character:focus-visible { outline: 2px solid var(--forest); outline-offset: 3px; }
 .character:active .label { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 @media (hover: hover) { .character:hover .label { text-decoration: underline; text-underline-offset: 4px; } }
@@ -15,7 +46,15 @@
   .replay { animation: bunny-greeting 420ms ease-out; }
   .replayAgain { animation: bunny-greeting-again 420ms ease-out; }
   .answer { animation: reply-arrive 220ms ease-out; }
+  .questionPulse { animation: question-pulse 1800ms ease-in-out 3; }
+  .speaking { animation: bunny-speaking 600ms ease-in-out infinite; }
+  .voice { animation: voice-speaking 600ms ease-in-out infinite; }
+  .caret { animation: reply-caret 900ms ease-in-out infinite; }
 }
+@keyframes question-pulse { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgb(54 86 107 / 0%); } 50% { opacity: .55; box-shadow: 0 0 0 5px rgb(54 86 107 / 10%); } }
+@keyframes bunny-speaking { 0%,100% { transform: translateY(0) rotate(0); } 25% { transform: translateY(-2px) rotate(-2deg); } 55% { transform: translateY(0) rotate(1.5deg); } 75% { transform: translateY(-1px) rotate(-.5deg); } }
+@keyframes voice-speaking { 0%,100% { opacity: .25; transform: scale(.85); } 50% { opacity: 1; transform: scale(1); } }
+@keyframes reply-caret { 0%,100% { opacity: .2; } 50% { opacity: 1; } }
 @keyframes bunny-greeting { 0%,100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(-7px) rotate(-4deg); } 70% { transform: translateY(0) rotate(3deg); } }
 @keyframes bunny-greeting-again { 0%,100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(-7px) rotate(-4deg); } 70% { transform: translateY(0) rotate(3deg); } }
 @keyframes reply-arrive { from { opacity: .3; } to { opacity: 1; } }

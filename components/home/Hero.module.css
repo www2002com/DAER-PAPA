@@ -1,20 +1,22 @@
 .hero { background: var(--ivory); }
-.layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 4%; align-items: center; padding-top: 64px; padding-bottom: 48px; }
-.copy { position: relative; z-index: 2; min-width: 0; }
-.category { margin-bottom: 18px; font-size: 16px; line-height: 1.6; color: var(--forest); }
-.title { font-size: clamp(42px, 4.3vw, 62px); font-weight: 650; line-height: 1.2; letter-spacing: -.04em; }
-.status { display: flex; align-items: center; gap: 8px; margin-top: 16px; font-size: 13px; color: var(--forest); }
+.layout { display: grid; grid-template-columns: 1fr 1.08fr; gap: 4%; align-items: center; padding-top: 36px; padding-bottom: 40px; }
+.copy { position: relative; z-index: 2; padding-block: 36px; }
+.title { font-size: clamp(42px, 5.25vw, 76px); font-weight: 650; line-height: 1.2; letter-spacing: -.04em; }
+/* Official description first, then the slogan. */
+.status { display: flex; align-items: center; gap: 8px; margin: 0 0 18px; font-size: 13px; font-weight: 600; color: var(--forest); }
 .status span { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
-.description { margin-top: 24px; font-size: 17px; line-height: 1.8; color: var(--ink-2); }
-.invitation { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 24px; }
-.cta, .secondary { display: inline-flex; justify-content: center; align-items: center; min-height: 54px; padding: 0 22px; border: 1px solid var(--ink); border-radius: 6px; font-size: 15px; font-weight: 600; text-decoration: none; transition: background-color 180ms ease; }
-.cta { background: var(--ink); color: var(--ink-inverse); }
+.description { margin-top: 28px; font-size: 17px; line-height: 1.9; color: var(--ink-2); }
+/* Two ways in: write a line (filled) or look at the product first (outlined). */
+.invitation { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 14px; margin-top: 32px; }
+.cta { display: inline-flex; justify-content: center; align-items: center; gap: 24px; min-height: 54px; padding: 0 24px; border-radius: 6px; font-size: 15px; font-weight: 600; background: var(--ink); color: var(--ink-inverse); text-decoration: none; transition: background-color 180ms ease; }
 .cta:hover { background: var(--forest); }
 .cta:active { background: var(--night); }
-.secondary { border-color: var(--line-strong); background: transparent; color: var(--ink); }
-.secondary:hover { background: var(--sand); }
+.secondary { display: inline-flex; align-items: center; min-height: 54px; padding: 0 22px; border: 1.5px solid var(--ink); border-radius: 6px; font-size: 15px; font-weight: 600; color: var(--ink); text-decoration: none; transition: background-color 180ms ease, color 180ms ease; }
+.secondary:hover { background: var(--ink); color: var(--ink-inverse); }
+.audience { margin-top: 18px; font-size: 14px; line-height: 1.75; color: var(--ink-2); }
+.audience a { font-weight: 600; color: var(--ink); text-underline-offset: 0.25em; }
+.visual { position: relative; display: grid; gap: 16px; min-width: 0; background: var(--ivory); isolation: isolate; container-type: inline-size; }
 .cta:focus-visible, .secondary:focus-visible { outline: 2px solid var(--forest); outline-offset: 4px; }
-.visual { position: relative; display: grid; gap: 12px; min-width: 0; background: var(--ivory); isolation: isolate; container-type: inline-size; }
 .productStage { position: relative; min-width: 0; }
 .visualTitle { display: flex; align-items: center; gap: 18px; padding-block: 0 12px; font-size: 12px; color: var(--ink-2); }
 .visualLogo { width: auto; height: 20px; color: var(--logo); }
@@ -36,12 +38,18 @@
   .letterCard { padding: 16px; }
 }
 @media (max-width: 700px) {
-  .layout { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 28px; padding-bottom: 28px; }
-  .category { margin-bottom: 12px; font-size: 14px; }
-  .title { font-size: 37px; }
-  .status { margin-top: 12px; font-size: 12px; }
-  .invitation { gap: 8px; margin-top: 18px; }
-  .cta, .secondary { min-height: 48px; padding-inline: 14px; font-size: 13px; }
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 18px; padding-top: 30px; padding-bottom: 32px; }
+  .copy { display: contents; }
+  /* Phone reading order: what it is → slogan → ways in → the product and letter → description → who can write.
+     The visual block also holds the Sodam card, so the buttons stay above it to remain in the first screen. */
+  .status { grid-row: 1; margin: 0; font-size: 12px; }
+  .title { grid-row: 2; font-size: clamp(37px, 10.2vw, 62px); line-height: 1.17; }
+  .invitation { grid-row: 3; gap: 12px; margin: 4px 0 0; }
+  .visual { grid-row: 4; margin-top: 0; }
+  .cta, .secondary { min-height: 50px; padding-inline: 18px; font-size: 14px; }
+  .cta { gap: 16px; }
+  .audience { grid-row: 6; margin-top: 0; font-size: 13px; }
+.cta:focus-visible, .secondary:focus-visible { outline: 2px solid var(--forest); outline-offset: 4px; }
   .visualTitle { gap: 14px; font-size: 11px; padding-bottom: 12px; }
   .visualLogo { height: 17px; }
   .letterCard { margin-left: 0; padding: 14px 16px; }

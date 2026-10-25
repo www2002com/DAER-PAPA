@@ -5,6 +5,8 @@ import { campaignForCurrentLocation } from './campaign-attribution';
 export const ACTIONS = [
   'letter_entry_clicked', 'letter_started', 'letter_card_exported', 'contact_email_copied', 'social_channel_opened',
   'product_details_after_letter_clicked', 'journal_product_box_clicked',
+  // Hero: the secondary way in (product first). Fixed name, no properties.
+  'hero_product_clicked',
   'campaign_landing',
   // 출시 알림 신청 conversion: form seen vs accepted submission, split by placement (home | product).
   'launch_notify_viewed', 'launch_notify_attempted', 'launch_notify_submitted', 'launch_notify_failed',

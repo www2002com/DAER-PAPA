@@ -11,6 +11,7 @@
 | letter_card_exported | 카드 내보내기 처리 | OS 저장이나 인쇄 확인 아님 |
 | product_details_after_letter_clicked | 카드 내보내기 요청 처리 후 선택형 제품 링크 클릭 | 구매·신청·공유 완료 아님 |
 | campaign_landing | 승인된 4개 캠페인 URL 조합으로 방문 | 탭 세션당 캠페인별 1회, 고유 고객 아님 |
+| hero_product_clicked | 첫 화면의 보조 버튼 「레터 올인원 알아보기」 클릭 | 제품 우선 경로 선택, 구매 아님 |
 | launch_notify_viewed | 폼이 50% 이상 보인 첫 시점 | 해당 마운트당 1회, 고유 방문자 아님 |
 | launch_notify_attempted | 클라이언트 이메일·동의 검증 후 API 요청 | 재시도 포함 |
 | launch_notify_submitted | API 성공 응답 | 접수 처리, 이메일 소유 확인·구매 아님 |

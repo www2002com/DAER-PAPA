@@ -103,7 +103,9 @@ describe('Kumar & Epley paragraph in the two journal pages', () => {
       expect(text).toContain('예상 2.95, 실제 1.95');
       expect(text).toContain('예상 3.11, 실제 4.12');
       expect(text).toContain('이 연구는 미국 성인을 대상으로 했고 아빠와 자녀만 따로 살펴본 것은 아니에요.');
-      expect(container.querySelector('a[href$="KumarEpley2018.pdf"]')).not.toBeNull();
+      expect(container.querySelector('a[href="https://doi.org/10.1177/0956797618772506"]')).not.toBeNull();
+      expect(container.querySelector('a[href*="webflow"]')).toBeNull();
+      expect(container.querySelector('a[href*="chicagobooth"]')).not.toBeNull();
       expect(getJournalEntry(slug).modified).toBe('2026-10-26');
     });
   }

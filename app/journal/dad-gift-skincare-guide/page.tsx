@@ -122,7 +122,7 @@ export default function DadGiftSkincareGuidePage() {
         예상했고(10점 만점에 예상 2.95, 실제 1.95), 받는 사람의 기분은 실제보다 낮게 예상했어요(−5~5점에서 예상 3.11, 실제 4.12). 이
         연구는 미국 성인을 대상으로 했고 아빠와 자녀만 따로 살펴본 것은 아니에요. 그래도 문장을 잘 다듬지 않아도 마음은 전해진다는 점을
         보여 줘요. 출처:{' '}
-        <a href="https://uploads-ssl.webflow.com/5c484e0f4aa6f839dc553c45/5c9a38dff7d06d3980dad2df_KumarEpley2018.pdf" target="_blank" rel="noopener noreferrer">
+        <a href="https://doi.org/10.1177/0956797618772506" target="_blank" rel="noopener noreferrer">
           Kumar, A., &amp; Epley, N. (2018). Undervaluing Gratitude: Expressers Misunderstand the Consequences of Showing
           Appreciation. Psychological Science, 29(9), 1423–1435.
         </a>{' '}

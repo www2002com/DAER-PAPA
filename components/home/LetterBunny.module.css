@@ -18,9 +18,16 @@
 .voice { position: absolute; top: 54%; right: -4%; width: 18%; height: 24%; fill: none; stroke: var(--forest); stroke-width: 1.6; stroke-linecap: round; }
 .thinking { margin-top: 12px; color: var(--forest); }
 .thinking > span { margin-left: 4px; letter-spacing: 2px; }
-.response { margin-top: 14px; }
+.response { grid-column: 1; grid-row: 2; min-width: 0; font-size: 13px; line-height: 1.65; word-break: keep-all; overflow-wrap: anywhere; color: var(--ink-2); }
+.companion:has(> .response) .character { grid-row: 1 / 3; }
 .responseLabel { display: block; margin-bottom: 5px; color: var(--forest); font-size: 11px; font-weight: 600; }
 .responseText { color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
+.answerAction { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+.answerAction > a, .answerAction > button { display: inline-flex; align-items: center; min-height: 44px; margin-top: 4px; color: var(--forest); font-weight: 600; text-decoration: underline; text-underline-offset: 4px; text-align: left; cursor: pointer; }
+.answerAction > a:focus-visible, .answerAction > button:focus-visible { outline: 2px solid var(--forest); outline-offset: 3px; }
+.helpNote { margin-top: 10px; font-size: 12px; color: var(--ink-2); }
+.scope { margin-bottom: 12px; font-size: 12px; line-height: 1.65; color: var(--ink-2); word-break: keep-all; overflow-wrap: anywhere; }
+.privacy a { text-decoration: underline; text-underline-offset: 3px; }
 .caret { display: inline-block; height: 1em; width: 1px; margin-left: 3px; vertical-align: -1px; background: var(--forest); }
 .questionPanel { grid-column: 1 / -1; min-width: 0; padding-top: 16px; border-top: 1px solid var(--line); }
 .panelHeading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
@@ -83,3 +90,4 @@
 @media (max-width: 1000px) { .companion { grid-template-columns: minmax(0, 1fr) 76px; gap: 12px; } .message { font-size: 26px; } }
 @media (max-width: 700px) { .companion { grid-template-columns: minmax(0, 1fr) 64px; gap: 10px; } .salutation { font-size: 16px; } .message { font-size: 24px; } .reply { font-size: 12px; min-height: 48px; margin-top: 8px; padding-top: 8px; } .label { font-size: 11px; } }
 @media (max-width: 700px) { .label.writePrompt { font-size: 17px; } .patrol { --bunny-travel: 10px; } }
+@media (max-width: 700px) { .response { grid-column: 1 / -1; padding-top: 10px; border-top: 1px solid var(--line); } .companion:has(> .response) .character { grid-row: 1; } }

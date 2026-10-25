@@ -117,4 +117,52 @@ describe('letter bunny AI conversation', () => {
     fireEvent.click(screen.getByRole('button', { name: '물어보기' }));
     await waitFor(() => expect(screen.getByRole('status').textContent).toBe('새 질문에 대한 답변이에요.'));
   });
+
+  it('shows a deliberate external help link, stops nudging, and retains support-only context', async () => {
+    const payloads: { supportOnly?: boolean }[] = [];
+    vi.stubGlobal('fetch', async (_url: unknown, init: RequestInit) => {
+      payloads.push(JSON.parse(init.body as string));
+      return Response.json({ ok: true, answer: '안전을 먼저 살펴주세요.', mode: 'referral', source: 'guidance', action: { kind: 'support', href: 'https://support.example/help', label: '도움 받을 곳 살펴보기' } });
+    });
+    render(<LetterBunny onWriteLetter={vi.fn()} />);
+    fireEvent.change(openQuestion(), { target: { value: '아빠와의 관계가 너무 힘들어' } });
+    fireEvent.click(screen.getByRole('button', { name: '물어보기' }));
+    const link = await screen.findByRole('link', { name: /도움 받을 곳 살펴보기/ });
+    expect(link.getAttribute('href')).toBe('https://support.example/help');
+    expect(link.getAttribute('rel')).toBe('noopener noreferrer');
+    expect(screen.getByText('도움 안내')).toBeTruthy();
+    expect(screen.queryByText('AI 답변')).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: '질문창 닫기' }));
+    const bunny = screen.getByRole('button', { name: /천천히 해도 괜찮아/ });
+    expect(bunny.getAttribute('data-nudging')).toBe('false');
+    fireEvent.change(openQuestion(), { target: { value: '이어서 말할게' } });
+    fireEvent.click(screen.getByRole('button', { name: '물어보기' }));
+    await waitFor(() => expect(payloads).toHaveLength(2));
+    expect(payloads[1].supportOnly).toBe(true);
+    expect(localStorage.length).toBe(0);
+  });
+
+  it('focuses the letter without replacing it and does not repeat a product invitation', async () => {
+    const onWriteLetter = vi.fn();
+    const payloads: { productShown?: boolean }[] = [];
+    vi.stubGlobal('fetch', async (_url: unknown, init: RequestInit) => {
+      payloads.push(JSON.parse(init.body as string));
+      return Response.json({ ok: true, answer: '짧은 말로 시작해 보세요.', source: 'ai', mode: payloads.length === 1 ? 'letter' : 'gift',
+        action: payloads.length === 1 ? { kind: 'letter', href: '/#letter', label: '내 말로 한 줄 써보기' }
+          : { kind: 'product', href: '/letter-all-in-one', label: 'DEAR PAPA에 담은 마음 보기', description: '안 사도 괜찮으니 편지부터 써보세요.' } });
+    });
+    render(<LetterBunny onWriteLetter={onWriteLetter} />);
+    fireEvent.change(openQuestion(), { target: { value: '아빠에게 편지 쓰고 싶어' } });
+    fireEvent.click(screen.getByRole('button', { name: '물어보기' }));
+    fireEvent.click(await screen.findByRole('button', { name: '내 말로 한 줄 써보기' }));
+    expect(onWriteLetter).toHaveBeenCalledOnce();
+    fireEvent.change(openQuestion(), { target: { value: '아빠 선물은?' } });
+    fireEvent.click(screen.getByRole('button', { name: '물어보기' }));
+    expect(await screen.findByRole('link', { name: 'DEAR PAPA에 담은 마음 보기' })).toBeTruthy();
+    expect(screen.getByText('브랜드 제안 · 선택사항')).toBeTruthy();
+    fireEvent.change(screen.getByRole('textbox', { name: '토끼에게 물어볼 말' }), { target: { value: '계속 얘기해 줘' } });
+    fireEvent.click(screen.getByRole('button', { name: '물어보기' }));
+    await waitFor(() => expect(payloads).toHaveLength(3));
+    expect(payloads[2].productShown).toBe(true);
+  });
 });

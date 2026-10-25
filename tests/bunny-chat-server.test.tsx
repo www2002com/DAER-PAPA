@@ -6,9 +6,9 @@ const question = { messages: [{ role: 'user', content: '아빠 생신 편지를 
 const post = (body: unknown = question, origin = 'https://dearpapa.kr') => new Request('https://dearpapa.kr/api/bunny-chat', {
   method: 'POST', headers: { origin, 'content-type': 'application/json', 'x-forwarded-for': '203.0.113.80' }, body: JSON.stringify(body),
 });
-const output = () => Response.json({ status: 'completed', output: [
+const output = (mode = 'letter', answer = '아빠, 생신 축하해요. 늘 고마워요.') => Response.json({ status: 'completed', output: [
   { type: 'reasoning', summary: [] },
-  { type: 'message', role: 'assistant', content: [{ type: 'output_text', text: '아빠, 생신 축하해요. 늘 고마워요.', annotations: [] }] },
+  { type: 'message', role: 'assistant', content: [{ type: 'output_text', text: JSON.stringify({ mode, answer }), annotations: [] }] },
 ] });
 
 describe('bunny chat server boundary', () => {
@@ -26,11 +26,12 @@ describe('bunny chat server boundary', () => {
     const handler = createBunnyChatHandler({ env, fetchImpl: async (url, init) => { observed = { url: String(url), init: init! }; return output(); } });
     const response = await handler(post());
     expect(response.status).toBe(200);
-    expect(await response.json()).toEqual({ ok: true, answer: '아빠, 생신 축하해요. 늘 고마워요.' });
+    expect(await response.json()).toMatchObject({ ok: true, answer: '아빠, 생신 축하해요. 늘 고마워요.', source: 'ai', mode: 'letter', action: { kind: 'letter' } });
     expect(observed?.url).toBe('https://api.openai.com/v1/responses');
     const sent = JSON.parse(observed!.init.body as string);
     expect(sent.store).toBe(false);
     expect(sent.input).toEqual(question.messages);
+    expect(sent.text.format).toMatchObject({ type: 'json_schema', strict: true });
     expect(sent.instructions).toContain('가격, 전성분, 출시일은 아직 확정되지 않았습니다.');
     expect(sent.max_output_tokens).toBeLessThanOrEqual(500);
     expect(response.headers.get('cache-control')).toBe('no-store');
@@ -78,5 +79,52 @@ describe('bunny chat server boundary', () => {
       const handler = createBunnyChatHandler({ env, fetchImpl: async () => Response.json(fixture) });
       expect((await handler(post())).status).toBe(502);
     }
+  });
+
+  it('shows a transparent optional product invitation only for explicit gift interest', async () => {
+    const handler = createBunnyChatHandler({ env, fetchImpl: async () => output('gift', '아빠가 평소 좋아하시는 것을 떠올려 보세요.') });
+    const send = async (content: string, extra = {}) => (await handler(post({ messages: [{ role: 'user', content }], ...extra }))).json();
+    const gift = await send('아빠 생신 선물로 뭐가 좋을까?');
+    expect(gift.action).toMatchObject({ kind: 'product', href: '/letter-all-in-one' });
+    expect(gift.action.description).toContain('안 사도');
+    expect(gift.action.description).toContain('출시 준비');
+    for (const content of ['아빠와 말하기가 어색해', '선물은 싫어. 아빠와 대화만 하고 싶어', '아빠가 돌아가셔서 선물을 드릴 수 없어']) {
+      expect((await send(content)).action).toBeNull();
+    }
+    expect((await send('아빠 선물 추천', { supportOnly: true })).action).toBeNull();
+    expect((await send('아빠 선물 추천', { productShown: true })).action).toBeNull();
+  });
+
+  it('offers immediate safety guidance without a key and never markets in serious conversation history', async () => {
+    const handler = createBunnyChatHandler({ env: {}, fetchImpl: async () => { throw new Error('must not call'); } });
+    const response = await handler(post({ messages: [{ role: 'user', content: '아빠 때문에 죽고 싶어' }] }));
+    expect(response.status).toBe(200);
+    expect(await response.json()).toMatchObject({ mode: 'urgent', source: 'guidance', action: null, supportUnavailable: true });
+    const history = [{ role: 'user', content: '아빠가 나를 때려요' }, { role: 'assistant', content: '안전이 우선이에요.' }, { role: 'user', content: '선물을 사면 괜찮아질까?' }];
+    const serious = await (await handler(post({ messages: history }))).json();
+    expect(serious.mode).toBe('referral');
+    expect(serious.action).toBeNull();
+    expect(serious.answer).not.toMatch(/DEAR PAPA|디어파파|구매/);
+  });
+
+  it('uses only the configured HTTPS referral destination and never includes conversation text in it', async () => {
+    const handler = createBunnyChatHandler({ env: { ...env, BUNNY_SUPPORT_URL: 'https://support.example/help', BUNNY_SUPPORT_LABEL: '전문가에게 이야기하기' }, fetchImpl: async () => output('referral', 'DEAR PAPA를 사면 해결됩니다. https://evil.example') });
+    const reply = await (await handler(post())).json();
+    expect(reply.action).toEqual({ kind: 'support', href: 'https://support.example/help', label: '전문가에게 이야기하기' });
+    expect(reply.answer).not.toMatch(/DEAR PAPA|evil/);
+    for (const url of ['', 'javascript:alert(1)', 'http://support.example', 'https://user:pass@support.example', 'https://localhost/help']) {
+      const invalid = createBunnyChatHandler({ env: { ...env, BUNNY_SUPPORT_URL: url }, fetchImpl: async () => output('referral') });
+      expect((await (await invalid(post())).json()).action).toBeNull();
+    }
+  });
+
+  it('redirects off-topic answers to father concerns and rejects invalid model routing', async () => {
+    const offTopic = createBunnyChatHandler({ env, fetchImpl: async () => output('off_topic', 'Here is your Python code') });
+    const reply = await (await offTopic(post())).json();
+    expect(reply.answer).toContain('아빠와의 관계');
+    expect(reply.answer).not.toContain('Python');
+    expect(reply.action).toBeNull();
+    const invalid = createBunnyChatHandler({ env, fetchImpl: async () => output('buy_now') });
+    expect((await invalid(post())).status).toBe(502);
   });
 });

@@ -237,7 +237,7 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
   }
 
   const greeting = greetings[replay === 0 ? 0 : 1 + ((replay - 1) % (greetings.length - 1))];
-  const nudging = Boolean(onWriteLetter) && !isWriting && !open && !loading && !speaking && !supportOnly;
+  const nudging = Boolean(onWriteLetter) && !isWriting && !open && !loading && !speaking && !answer && !supportOnly;
   const advice = supportOnly ? ['천천히 해도', '괜찮아.'] : answer ? ['내 답은', '바로 아래.'] : isWriting ? ['오, 쓰네.', '기다려 줄게.'] : writingAdvice[adviceIndex];
   const portraitMotion = speaking ? styles.speaking : nudging ? styles.nudge
     : !onWriteLetter && replay > 0 ? (replay % 2 ? styles.replay : styles.replayAgain) : '';

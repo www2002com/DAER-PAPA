@@ -70,6 +70,7 @@ describe('hero letter preview', () => {
     vi.useFakeTimers();
     const fetcher = vi.fn(); vi.stubGlobal('fetch', fetcher);
     render(<Hero />);
+    expect(screen.getByRole('button', { name: '일단 써봐라, 각 잡지 말고. 편지 쓰기' }).getAttribute('data-nudging')).toBe('true');
     act(() => vi.advanceTimersByTime(2000));
     expect(screen.queryByText('토끼의 기본 답변')).toBeNull();
     const input = screen.getByRole('textbox', { name: '사진 속 편지에 쓸 말' });
@@ -79,6 +80,7 @@ describe('hero letter preview', () => {
     act(() => vi.advanceTimersByTime(1400));
     expect(screen.getByRole('status').textContent).toContain('서운');
     expect(screen.getByText('토끼의 기본 답변')).toBeTruthy();
+    expect(screen.getByRole('button', { name: '내 답은 바로 아래. 편지 쓰기' }).getAttribute('data-nudging')).toBe('false');
     expect(fetcher).not.toHaveBeenCalled();
     fireEvent.change(input, { target: { value: ' ' } });
     act(() => vi.advanceTimersByTime(2000));

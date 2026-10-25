@@ -38,6 +38,13 @@
   gap: 14px;
 }
 
+.sodam {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  color: var(--ink);
+}
+
 .notes :global(.tag) {
   margin-top: 1px;
 }

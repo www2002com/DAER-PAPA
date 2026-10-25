@@ -1,0 +1,53 @@
+.page { background: var(--paper); }
+
+.hero { padding: clamp(40px, 6vw, 88px) 0 var(--section-y); background: var(--ivory); }
+.heroLayout { display: grid; grid-template-columns: 1.1fr minmax(300px, 0.9fr); align-items: center; gap: clamp(32px, 6vw, 96px); }
+.copy { display: grid; gap: 20px; max-width: 36rem; }
+.title { font-size: var(--fs-h2); font-weight: 650; line-height: 1.25; letter-spacing: -0.035em; color: var(--ink); word-break: keep-all; }
+.lead { font-size: var(--fs-lead); line-height: 1.75; color: var(--ink); word-break: keep-all; }
+.text { color: var(--ink-2); line-height: 1.8; word-break: keep-all; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 8px; }
+
+.profile { display: grid; grid-template-columns: 132px 1fr; gap: 20px; align-items: start; padding: 24px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 18px 40px -24px rgb(28 51 67 / 30%); }
+.profile img { width: 100%; height: auto; background: var(--sage); border-radius: 8px; }
+.profileBody { display: grid; gap: 10px; min-width: 0; }
+.profileTitle { font-size: var(--fs-micro); font-weight: 600; letter-spacing: 0.04em; color: var(--ink-3); }
+.profileIntro { font-size: 24px; line-height: 1.3; color: var(--ink); }
+.profileRows { display: grid; gap: 0; margin: 0; font-size: var(--fs-small); }
+.profileRows div { display: grid; grid-template-columns: 64px 1fr; gap: 12px; padding: 9px 0; border-top: 1px solid var(--line); }
+.profileRows dt { color: var(--ink-3); font-weight: 500; }
+.profileRows dd { margin: 0; color: var(--ink); word-break: keep-all; }
+.profileNote { font-size: var(--fs-micro); color: var(--ink-2); }
+
+.section { padding: clamp(48px, 6vw, 80px) 0; border-top: 1px solid var(--line); }
+.narrow { max-width: calc(var(--measure) + 2 * var(--gutter)); }
+.h2 { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: var(--fs-h3); font-weight: 650; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 18px; word-break: keep-all; }
+
+.tone { background: var(--surface-soft); }
+.toneList { display: grid; gap: 12px; margin: 22px 0; padding: 0; list-style: none; }
+.toneList blockquote { margin: 0; padding: 16px 22px; background: var(--card); color: var(--ink); font-size: clamp(24px, 2.4vw, 30px); line-height: 1.3; border-radius: 8px; box-shadow: 0 12px 32px -18px rgb(28 51 67 / 26%); }
+
+.steps { display: grid; gap: 10px; margin: 0 0 20px; padding-left: 1.4em; color: var(--ink); line-height: 1.7; word-break: keep-all; }
+.small, .notice { display: grid; grid-template-columns: auto 1fr; align-items: start; gap: 12px; font-size: var(--fs-small); color: var(--ink-2); line-height: 1.7; word-break: keep-all; }
+.notice { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--line); }
+
+.product { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+.productFigure { display: grid; gap: 10px; margin: 0; }
+.productFigure img { width: 100%; height: auto; border-radius: 8px; background: var(--sage); }
+.productFigure figcaption { font-size: var(--fs-micro); color: var(--ink-3); }
+.productBody { display: grid; gap: 8px; justify-items: start; }
+
+.faq { display: grid; gap: 0; margin: 0; }
+.faq div { padding: 18px 0; border-top: 1px solid var(--line); }
+.faq dt { font-weight: 600; color: var(--ink); margin-bottom: 6px; word-break: keep-all; }
+.faq dd { margin: 0; color: var(--ink-2); line-height: 1.75; word-break: keep-all; }
+
+@media (max-width: 860px) {
+  .heroLayout, .product { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .profile { grid-template-columns: 1fr; justify-items: center; text-align: left; }
+  .profile img { width: 160px; }
+  .profileBody { width: 100%; }
+  .actions .btn { width: 100%; white-space: normal; }
+}

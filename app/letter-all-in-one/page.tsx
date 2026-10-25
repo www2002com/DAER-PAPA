@@ -110,6 +110,7 @@ export default function LetterAllInOnePage() {
               { href: '/about/facts#preparing', label: 'DEAR PAPA(디어파파) 공식 정보' },
               { href: '/#product', label: '홈: 제품 소개' },
               { href: '/#letter', label: '아빠에게 편지 쓰기' },
+              { href: '/sodam', label: '토끼 Sodam 소개' },
             ]}
           />
         </div>

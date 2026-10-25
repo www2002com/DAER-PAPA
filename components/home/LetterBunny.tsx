@@ -268,7 +268,7 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
             }
           }}>
         <span className={`${styles.portraitWrap} ${portraitMotion}`}>
-          <BunnyPortrait earsActive={nudging} />
+          <BunnyPortrait nudging={nudging} />
           {speaking && <svg className={styles.voice} viewBox="0 0 24 32" aria-hidden="true"><path d="M4 12q5 4 0 8M11 7q9 9 0 18M18 2q13 14 0 28" /></svg>}
         </span>
         </span>

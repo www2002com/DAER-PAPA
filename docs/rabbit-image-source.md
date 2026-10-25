@@ -1,5 +1,19 @@
 # Rabbit image
 
+## Subtle arm and foot gestures — 2026-10-25
+
+The unchanged v3 illustration now supplies separate arm and foot clip layers.
+A body mask removes the resting copies, and small texture underlaps keep the
+shoulders and ankles connected. Arms make two quick, small beckoning gestures
+then rest; the feet alternate restrained toe taps. Movement is limited to
+8 degrees / 3 SVG units for arms and 2 degrees / 2 units for feet on the
+640-unit artwork (roughly 1–2 visible pixels for hands and under one for feet
+at the normal display size).
+
+The gestures share the current 400ms APT.-inspired beat, repeating every four
+beats. They run only while nudging, pause during writing, questions, responses
+and serious concerns, and respect reduced motion. The image file is unchanged.
+
 ## Animated eyes and ears — 2026-10-25
 
 The user requested blinking and alternating ear movement. `BunnyPortrait` now

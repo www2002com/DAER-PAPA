@@ -1,0 +1,27 @@
+.portrait { display: block; width: 100%; height: auto; overflow: visible; }
+.leftEar { transform-origin: 286px 288px; }
+.rightEar { transform-origin: 395px 282px; }
+.eye { fill: #1d3758; transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .eye { animation: bunny-blink 6200ms ease-in-out infinite; }
+  .awake .leftEar { animation: bunny-left-ear 7200ms ease-in-out infinite; }
+  .awake .rightEar { animation: bunny-right-ear 7200ms ease-in-out infinite; }
+}
+/* Brief natural blinks, with an occasional double blink. */
+@keyframes bunny-blink {
+  0%, 31%, 36%, 79%, 84%, 87%, 92%, 100% { transform: scaleY(1); }
+  33.5%, 81.5%, 89.5% { transform: scaleY(.08); }
+}
+/* The drooping ear answers first; the upright ear follows half a cycle later. */
+@keyframes bunny-left-ear {
+  0%, 9%, 31%, 100% { transform: rotate(0); }
+  16% { transform: rotate(-11deg); }
+  22% { transform: rotate(5deg); }
+  27% { transform: rotate(-3deg); }
+}
+@keyframes bunny-right-ear {
+  0%, 48%, 72%, 100% { transform: rotate(0); }
+  55% { transform: rotate(9deg); }
+  62% { transform: rotate(-5deg); }
+  67% { transform: rotate(3deg); }
+}

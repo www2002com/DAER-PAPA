@@ -2,7 +2,6 @@
 .character { grid-column: 2; grid-row: 1; display: grid; justify-items: center; width: 100%; border-radius: 8px; touch-action: manipulation; color: var(--forest); }
 .patrol { --bunny-travel: 18px; display: block; width: 100%; }
 .portraitWrap { position: relative; display: block; width: 100%; transform-origin: center bottom; }
-.portrait { display: block; width: 100%; height: auto; }
 .label { padding: 6px 0; font-size: 12px; line-height: 1.5; text-align: center; }
 .label.writePrompt { font-family: var(--font-pen); font-size: 19px; line-height: 1.15; color: var(--ink); }
 .writePrompt > span { display: block; white-space: nowrap; }

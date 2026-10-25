@@ -61,3 +61,10 @@ stroll. The full suite now has 99 tests.
 Browser evidence for the strolling version is in `bunny-patrol/`, including
 measured left/right transforms, mobile pause checks and `bunny-patrol.gif`, a
 13-second recording of the actual UI with original frame timing.
+
+The next request adds independent eye blinks and alternating ear twitches through
+`BunnyPortrait`; see `docs/rabbit-image-source.md`. Facial motion is separate
+from strolling, advice changes and AI speech. Ear animations stop while writing
+or using AI, and all facial animations respect reduced motion. Source raster
+assets remain unchanged. Enlarged comparison and actual-site motion evidence
+are recorded under `bunny-face/` in the same workspace output directory.

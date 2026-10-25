@@ -1,7 +1,7 @@
 'use client';
 
-import Image from 'next/image';
 import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react';
+import { BunnyPortrait } from './BunnyPortrait';
 import styles from './LetterBunny.module.css';
 
 const greetings = [
@@ -148,9 +148,7 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false }:
             }
           }}>
         <span className={`${styles.portraitWrap} ${portraitMotion}`}>
-        <Image src="/images/letter-bunny-fine-grid-v3.webp"
-          width={640} height={640} alt=""
-          className={styles.portrait} loading="eager" />
+          <BunnyPortrait earsActive={nudging} />
           {speaking && <svg className={styles.voice} viewBox="0 0 24 32" aria-hidden="true"><path d="M4 12q5 4 0 8M11 7q9 9 0 18M18 2q13 14 0 28" /></svg>}
         </span>
         </span>

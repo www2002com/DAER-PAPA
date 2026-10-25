@@ -1,5 +1,18 @@
 # Rabbit image
 
+## Animated eyes and ears — 2026-10-25
+
+The user requested blinking and alternating ear movement. `BunnyPortrait` now
+reuses the unchanged v3 WebP in SVG clip layers. Ear roots sit behind the head;
+each ear pivots independently. Cheek texture from the same image covers the
+painted eyes, with matching dark pupils that close vertically for a brief blink.
+No new raster illustration is generated and the source file remains unchanged.
+
+Blinking follows a 6.2-second pattern with an occasional double blink. The ears
+take turns in a 7.2-second cycle, left first and right later, independently of
+the 7.6-second stroll. Ears rest during writing or AI interaction; subtle blinks
+continue while waiting. Reduced-motion preferences disable all these motions.
+
 ## Current asset — finer internal grid, 2026-10-25
 
 The user then requested a more detailed graph-paper feel. Built-in imagegen

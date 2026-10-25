@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/next';
-import { ACTIONS, trackAction, type SiteAction } from '@/lib/analytics';
+import { ACTIONS, journalClickData, trackAction, type SiteAction } from '@/lib/analytics';
 import { CampaignAttribution } from './CampaignAttribution';
 
 export function SiteAnalytics() {
@@ -11,7 +11,10 @@ export function SiteAnalytics() {
     const onClick = (event: MouseEvent) => {
       if (!(event.target instanceof Element)) return;
       const action = event.target.closest<HTMLElement>('[data-track-action]')?.dataset.trackAction;
-      if (action && ACTIONS.includes(action as SiteAction)) trackAction(action as SiteAction);
+      if (!action || !ACTIONS.includes(action as SiteAction)) return;
+      const data = journalClickData(action as SiteAction, window.location.pathname);
+      if (data) trackAction(action as SiteAction, data);
+      else trackAction(action as SiteAction);
     };
     document.addEventListener('click', onClick);
     return () => document.removeEventListener('click', onClick);

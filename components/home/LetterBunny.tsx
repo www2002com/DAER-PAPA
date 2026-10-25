@@ -191,7 +191,7 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
       const data = await response.json();
       if (attempt !== requestNumber.current) return;
       if (!response.ok || !data.ok) {
-        if (data.error === 'not_configured') throw new Error('지금은 AI 연결을 준비하고 있어요. 잠시 후 다시 찾아 주세요.');
+        if (data.error === 'not_configured') throw new Error('지금은 Gemini 연결을 준비하고 있어요. 기본 답변을 먼저 드릴게요.');
         if (data.error === 'rate_limited') throw new Error('잠깐 쉬었다가 다시 물어봐 주세요.');
         throw new Error('답변을 불러오지 못했어요. 잠시 후 다시 물어봐 주세요.');
       }
@@ -316,7 +316,7 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
           <span>{question.length} / 300</span>
           <button type="submit" disabled={!question.trim() || loading || speaking}>{loading ? '답변 기다리는 중' : '물어보기'}<span aria-hidden="true">↗</span></button>
         </div>
-        <p id={`${inputId}-privacy`} className={styles.privacy}>AI 답변을 요청하면 여기 입력한 질문과 최근 대화만 OpenAI에 전송돼요. 이름·연락처 등 개인정보는 적지 마세요. AI 답변은 틀릴 수 있어요. <a href="/privacy">개인정보 처리 안내</a></p>
+        <p id={`${inputId}-privacy`} className={styles.privacy}>AI 답변을 요청하면 여기 입력한 질문과 최근 대화만 Google Gemini에 전송돼요. 이름·연락처 등 개인정보는 적지 마세요. AI 답변은 틀릴 수 있어요. <a href="/privacy">개인정보 처리 안내</a></p>
       </form>}
     </div>
   );

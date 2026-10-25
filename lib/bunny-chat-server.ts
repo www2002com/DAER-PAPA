@@ -22,7 +22,7 @@ const INSTRUCTIONS = [
   '공식 정보:', BRAND.about, PRODUCT.nameLine, PRODUCT.usage, PRODUCT.allAges,
   PRODUCT.development, PRODUCT.resultsFirst, PRODUCT.drafts, UNDECIDED.summary,
   UNDECIDED.status, LETTER.feature, LETTER.printPlan,
-  '편지의 로컬 저장 안내는 질문 전송과 구별됩니다. AI 질문창 또는 첫 화면의 답변 듣기로 직접 보낸 문장과 최근 대화만 답변을 위해 OpenAI로 전송됩니다. 입력 중 초안은 자동 전송하지 않습니다.',
+  '편지의 로컬 저장 안내는 질문 전송과 구별됩니다. AI 질문창 또는 첫 화면의 답변 듣기로 직접 보낸 문장과 최근 대화만 답변을 위해 Google Gemini로 전송됩니다. 입력 중 초안은 자동 전송하지 않습니다.',
 ].join('\n');
 
 function supportAction(env: Env) {
@@ -115,7 +115,8 @@ export function createBunnyChatHandler({ env = process.env, fetchImpl = fetch, n
     if (!messages) return fail(400, 'invalid_request');
     const concern = obviousBunnyConcern(messages.filter(m => m.role === 'user').map(m => m.content).join('\n'));
     if (concern) return json(200, helpReply(concern, env));
-    if (env.BUNNY_AI_ENABLED !== 'true' || !env.OPENAI_API_KEY?.trim()) return fail(503, 'not_configured');
+    const model = env.GEMINI_BUNNY_MODEL?.trim() || 'gemini-3.8-flash';
+    if (env.BUNNY_AI_ENABLED !== 'true' || !env.GEMINI_API_KEY?.trim() || !/^gemini-[a-z0-9.-]{1,80}$/.test(model)) return fail(503, 'not_configured');
 
     const time = now();
     for (const [key, value] of hits) if (value.expires <= time) hits.delete(key);
@@ -125,33 +126,34 @@ export function createBunnyChatHandler({ env = process.env, fetchImpl = fetch, n
     hits.set(ip, { count: (bucket?.count ?? 0) + 1, expires: bucket?.expires ?? time + WINDOW_MS });
 
     try {
-      const response = await fetchImpl('https://api.openai.com/v1/responses', {
+      const response = await fetchImpl(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
         method: 'POST',
-        headers: { Authorization: `Bearer ${env.OPENAI_API_KEY.trim()}`, 'Content-Type': 'application/json' },
+        headers: { 'x-goog-api-key': env.GEMINI_API_KEY.trim(), 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: env.OPENAI_BUNNY_MODEL?.trim() || 'gpt-5.4-mini',
-          instructions: INSTRUCTIONS + ((body as { supportOnly?: unknown }).supportOnly === true
-            ? '\n이 대화에는 앞서 심각한 고민이 있었습니다. 선물·제품·편지를 권하지 말고 사용자의 안전과 고민에 집중하세요.' : ''), input: messages, store: false,
-          max_output_tokens: 500, reasoning: { effort: 'none' },
-          text: { format: { type: 'json_schema', name: 'father_conversation', strict: true, schema: {
-            type: 'object', properties: { mode: { type: 'string', enum: [...MODES] }, answer: { type: 'string' } },
-            required: ['mode', 'answer'], additionalProperties: false,
-          } } },
+          systemInstruction: { parts: [{ text: INSTRUCTIONS + ((body as { supportOnly?: unknown }).supportOnly === true
+            ? '\n이 대화에는 앞서 심각한 고민이 있었습니다. 선물·제품·편지를 권하지 말고 사용자의 안전과 고민에 집중하세요.' : '') }] },
+          contents: messages.map(message => ({ role: message.role === 'assistant' ? 'model' : 'user', parts: [{ text: message.content }] })),
+          generationConfig: {
+            // Includes the reasoning allowance. The displayed answer stays bounded below.
+            maxOutputTokens: 2048, thinkingConfig: { thinkingLevel: 'low', includeThoughts: false },
+            responseFormat: { text: { mimeType: 'APPLICATION_JSON', schema: {
+              type: 'object', properties: { mode: { type: 'string', enum: [...MODES] }, answer: { type: 'string' } },
+              required: ['mode', 'answer'], additionalProperties: false,
+            } } },
+          },
         }),
         signal: AbortSignal.any([request.signal, AbortSignal.timeout(20000)]),
       });
       if (response.status === 429) return fail(429, 'rate_limited', { 'Retry-After': '60' });
       if (!response.ok) return fail(502, 'provider_error');
       const result = await response.json();
-      if (result.status !== 'completed' || !Array.isArray(result.output)) return fail(502, 'provider_error');
+      const candidate = Array.isArray(result.candidates) ? result.candidates[0] : undefined;
+      if (result.promptFeedback?.blockReason || candidate?.finishReason !== 'STOP' || candidate?.content?.role !== 'model' || !Array.isArray(candidate.content.parts)) return fail(502, 'provider_error');
       const parts: string[] = [];
-      for (const item of result.output) {
-        if (item.type !== 'message' || item.role !== 'assistant' || !Array.isArray(item.content)) continue;
-        for (const block of item.content) {
-          if (block.type === 'output_text' && typeof block.text === 'string') parts.push(block.text);
-        }
+      for (const part of candidate.content.parts) {
+        if (part && !part.thought && typeof part.text === 'string') parts.push(part.text);
       }
-      const parsed = JSON.parse(parts.join('\n')) as { mode?: unknown; answer?: unknown } | null;
+      const parsed = JSON.parse(parts.join('')) as { mode?: unknown; answer?: unknown } | null;
       if (!parsed || !MODES.includes(parsed.mode as Mode) || typeof parsed.answer !== 'string' || !parsed.answer.trim() || parsed.answer.length > 1200) return fail(502, 'provider_error');
       const mode = parsed.mode as Mode;
       if (mode === 'urgent' || mode === 'referral') return json(200, helpReply(mode, env));

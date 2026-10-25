@@ -39,7 +39,7 @@ describe('letter bunny AI conversation', () => {
     const input = openQuestion();
     expect(document.activeElement).toBe(input);
     expect(trigger.getAttribute('aria-expanded')).toBe('true');
-    expect(screen.getByText(/OpenAI/)).toBeTruthy();
+    expect(screen.getByText(/Google Gemini/)).toBeTruthy();
     fireEvent.keyDown(input, { key: 'Escape' });
     expect(screen.queryByRole('textbox', { name: '토끼에게 물어볼 말' })).toBeNull();
     expect(document.activeElement).toBe(trigger);

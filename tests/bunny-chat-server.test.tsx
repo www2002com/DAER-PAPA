@@ -1,19 +1,18 @@
 import { describe, expect, it } from 'vitest';
 import { createBunnyChatHandler } from '@/lib/bunny-chat-server';
 
-const env = { OPENAI_API_KEY: 'test-key-not-real', BUNNY_AI_ENABLED: 'true', NODE_ENV: 'production' };
+const env = { GEMINI_API_KEY: 'test-key-not-real', BUNNY_AI_ENABLED: 'true', NODE_ENV: 'production' };
 const question = { messages: [{ role: 'user', content: '아빠 생신 편지를 도와줘' }] };
 const post = (body: unknown = question, origin = 'https://dearpapa.kr') => new Request('https://dearpapa.kr/api/bunny-chat', {
   method: 'POST', headers: { origin, 'content-type': 'application/json', 'x-forwarded-for': '203.0.113.80' }, body: JSON.stringify(body),
 });
-const output = (mode = 'letter', answer = '아빠, 생신 축하해요. 늘 고마워요.') => Response.json({ status: 'completed', output: [
-  { type: 'reasoning', summary: [] },
-  { type: 'message', role: 'assistant', content: [{ type: 'output_text', text: JSON.stringify({ mode, answer }), annotations: [] }] },
+const output = (mode = 'letter', answer = '아빠, 생신 축하해요. 늘 고마워요.') => Response.json({ candidates: [
+  { finishReason: 'STOP', content: { role: 'model', parts: [{ thought: true, text: 'private reasoning' }, { text: JSON.stringify({ mode, answer }) }] } },
 ] });
 
 describe('bunny chat server boundary', () => {
   it('does not call a provider unless the API key and activation switch are present', async () => {
-    for (const config of [{}, { OPENAI_API_KEY: 'test' }, { BUNNY_AI_ENABLED: 'true' }]) {
+    for (const config of [{}, { GEMINI_API_KEY: 'test' }, { BUNNY_AI_ENABLED: 'true' }, { BUNNY_AI_ENABLED: 'true', OPENAI_API_KEY: 'old-provider-key' }]) {
       const handler = createBunnyChatHandler({ env: config, fetchImpl: async () => { throw new Error('must not call provider'); } });
       const response = await handler(post());
       expect(response.status).toBe(503);
@@ -21,19 +20,21 @@ describe('bunny chat server boundary', () => {
     }
   });
 
-  it('sends bounded context to Responses with storage disabled and returns only assistant text', async () => {
+  it('sends bounded context to Gemini with a server-only key and returns only the completed model answer', async () => {
     let observed: { url: string; init: RequestInit } | undefined;
     const handler = createBunnyChatHandler({ env, fetchImpl: async (url, init) => { observed = { url: String(url), init: init! }; return output(); } });
     const response = await handler(post());
     expect(response.status).toBe(200);
     expect(await response.json()).toMatchObject({ ok: true, answer: '아빠, 생신 축하해요. 늘 고마워요.', source: 'ai', mode: 'letter', action: { kind: 'letter' } });
-    expect(observed?.url).toBe('https://api.openai.com/v1/responses');
+    expect(observed?.url).toBe('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent');
+    expect(observed?.url).not.toContain(env.GEMINI_API_KEY);
+    expect(new Headers(observed!.init.headers).get('x-goog-api-key')).toBe(env.GEMINI_API_KEY);
     const sent = JSON.parse(observed!.init.body as string);
-    expect(sent.store).toBe(false);
-    expect(sent.input).toEqual(question.messages);
-    expect(sent.text.format).toMatchObject({ type: 'json_schema', strict: true });
-    expect(sent.instructions).toContain('가격, 전성분, 출시일은 아직 확정되지 않았습니다.');
-    expect(sent.max_output_tokens).toBeLessThanOrEqual(500);
+    expect(sent.contents).toEqual([{ role: 'user', parts: [{ text: question.messages[0].content }] }]);
+    expect(sent.generationConfig.responseFormat.text).toMatchObject({ mimeType: 'APPLICATION_JSON', schema: { required: ['mode', 'answer'] } });
+    expect(sent.systemInstruction.parts[0].text).toContain('가격, 전성분, 출시일은 아직 확정되지 않았습니다.');
+    expect(sent.generationConfig.thinkingConfig).toEqual({ thinkingLevel: 'low', includeThoughts: false });
+    expect(sent.generationConfig.maxOutputTokens).toBe(2048);
     expect(response.headers.get('cache-control')).toBe('no-store');
   });
 
@@ -74,11 +75,25 @@ describe('bunny chat server boundary', () => {
   });
 
   it('does not return incomplete, blank, or oversized provider answers as successful AI replies', async () => {
-    for (const fixture of [{ status: 'incomplete', output: [] }, { status: 'completed', output: [] },
-      { status: 'completed', output: [{ type: 'message', role: 'assistant', content: [{ type: 'output_text', text: 'x'.repeat(1201) }] }] }]) {
+    for (const fixture of [{ candidates: [] }, { promptFeedback: { blockReason: 'SAFETY' } },
+      ...['MAX_TOKENS', 'SAFETY', 'RECITATION'].map(finishReason => ({ candidates: [{ finishReason, content: { role: 'model', parts: [{ text: JSON.stringify({ mode: 'letter', answer: 'partial answer' }) }] } }] })),
+      { candidates: [{ finishReason: 'STOP', content: { role: 'user', parts: [{ text: '{}' }] } }] },
+      { candidates: [{ finishReason: 'STOP', content: { role: 'model', parts: [{ text: JSON.stringify({ mode: 'letter', answer: 'x'.repeat(1201) }) }] } }] }]) {
       const handler = createBunnyChatHandler({ env, fetchImpl: async () => Response.json(fixture) });
       expect((await handler(post())).status).toBe(502);
     }
+  });
+
+  it('maps prior assistant turns to Gemini model turns and validates a configured model identifier', async () => {
+    let payload: { contents: unknown[] } | undefined;
+    let endpoint = '';
+    const handler = createBunnyChatHandler({ env: { ...env, GEMINI_BUNNY_MODEL: 'gemini-3.6-flash' }, fetchImpl: async (url, init) => { endpoint = String(url); payload = JSON.parse(init!.body as string); return output(); } });
+    const messages = [...question.messages, { role: 'assistant', content: '어떤 마음을 담을까요?' }, { role: 'user', content: '고마운 마음' }];
+    expect((await handler(post({ messages }))).status).toBe(200);
+    expect(endpoint).toContain('/gemini-3.6-flash:generateContent');
+    expect(payload?.contents).toEqual(messages.map(m => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] })));
+    const invalid = createBunnyChatHandler({ env: { ...env, GEMINI_BUNNY_MODEL: '../other?key=secret' }, fetchImpl: async () => { throw new Error('must not call'); } });
+    expect((await invalid(post())).status).toBe(503);
   });
 
   it('shows a transparent optional product invitation only for explicit gift interest', async () => {

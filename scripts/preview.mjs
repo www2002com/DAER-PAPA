@@ -57,5 +57,5 @@ http.createServer(async (req, res) => {
   } catch { if (!res.headersSent) res.writeHead(500); res.end('Preview request failed'); }
 }).listen(port, '127.0.0.1', () => {
   console.log(`Preview: ${base}`);
-  console.log(`OpenAI configured: ${process.env.BUNNY_AI_ENABLED === 'true' && Boolean(process.env.OPENAI_API_KEY?.trim())}`);
+  console.log(`Gemini configured: ${process.env.BUNNY_AI_ENABLED === 'true' && Boolean(process.env.GEMINI_API_KEY?.trim())}`);
 });

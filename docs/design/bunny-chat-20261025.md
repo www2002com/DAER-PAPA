@@ -1,5 +1,29 @@
 # 편지 토끼 AI 질문 · 2026-10-25
 
+## 현재 제공자: Google Gemini
+
+사용자의 “답변모델은 제미나이로 한다” 요청에 따라 OpenAI 연결을 Gemini로 교체했다. 아래의 이전 구현 기록에서 OpenAI 설정과 데이터 처리 설명은 현재 설정으로 사용하지 않는다.
+
+- 기본 모델: `gemini-3.8-flash`. 서버 변수 `GEMINI_BUNNY_MODEL`로 호환되는 Gemini 모델을 지정할 수 있다.
+- 키: `GEMINI_API_KEY`. 활성화 스위치: `BUNNY_AI_ENABLED=true`. 키는 서버에서만 읽고 `x-goog-api-key` 헤더로 전달한다. URL·브라우저·로그에 키를 넣지 않는다. 기존 OpenAI 키로 대체 호출하지 않는다.
+- API: `https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent`. 시스템 지시와 사용자/모델 역할의 최근 대화를 전송한다. 도구·파일·서버 대화 저장 기능은 사용하지 않는다.
+- `generationConfig.responseFormat.text`의 JSON schema로 `mode`와 `answer`를 받는다. `thinkingLevel=low`, `includeThoughts=false`, 생각 토큰을 포함해 최대 2,048토큰. 답변 본문은 기존 1,200자 상한과 프롬프트의 300자 목표를 유지한다.
+- `STOP`으로 완료된 첫 후보의 일반 텍스트만 해석한다. 사고 과정, 잘린 응답, 안전 차단 응답, 형식 오류를 성공한 답변으로 표시하지 않는다. Google의 기본 안전 설정을 낮추지 않는다.
+- 한 줄 자동 첫 답변, 오류 시 준비된 답변, 상담 범위·심각한 고민 안내·선물 맥락에서만 하는 선택적 브랜드 소개는 유지한다.
+- 화면과 개인정보 안내를 Gemini로 변경했다. Google의 무료·유료 서비스는 입력/응답의 데이터 사용 조건이 다르므로 실제 활성화 시 사용하는 프로젝트의 조건을 확인한다. OpenAI의 `store:false`나 30일 보관 설명을 Gemini에 그대로 적용하지 않는다.
+- `.env.local`에 Gemini 설정 자리를 준비했다. 현재 키가 없으며 실제 모델 호출·생성 품질 검증은 하지 않았다. 키와 외부 도움 사이트 주소의 후속 설정은 사용자가 미룬 상태다. 운영 배포는 하지 않았다.
+
+검증: Gemini 요청·대화 역할 매핑, 키 노출 방지, 완료/차단/잘림 응답 처리, 이전 OpenAI 키 미사용을 포함한 테스트 113개와 빌드·보존 검사.
+
+공식 참고: [모델](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash),
+[구조화 출력 REST](https://ai.google.dev/gemini-api/docs/generate-content/structured-output),
+[생각 수준과 토큰 제한](https://ai.google.dev/gemini-api/docs/generate-content/thinking),
+[Google 데이터 처리 조건](https://ai.google.dev/gemini-api/terms).
+
+---
+
+아래는 Gemini 전환 전의 구현·검증 기록이다.
+
 ## 후속 적용: 한 줄에 답하기
 
 사용자는 첫 화면에 한 줄을 쓰면 답변해야 한다고 요청했다. 손글씨 칸과 질문창의 분리를 해소했다.

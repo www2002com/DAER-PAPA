@@ -96,7 +96,7 @@ export function HeroLetterPreview() {
         <p className={styles.hint}>잠시 멈추면 토끼가 먼저 답해요. Enter로 질문 · Shift+Enter로 줄바꿈</p>
         <button type="button" className={styles.ask} disabled={!message.trim() || busy || composing}
           onClick={() => replyTo(message)}>{busy ? '답변을 듣는 중' : '답변 듣기'} <span aria-hidden="true">↗</span></button>
-        <p className={styles.sendNotice}>질문을 보내면 이 문장과 최근 대화가 OpenAI로 전송될 수 있어요. <a href="/privacy#ai-questions">개인정보 안내</a></p>
+        <p className={styles.sendNotice}>질문을 보내면 이 문장과 최근 대화가 Google Gemini로 전송될 수 있어요. <a href="/privacy#ai-questions">개인정보 안내</a></p>
       </div>} />
     </div>
   </>;

@@ -18,7 +18,7 @@ export function preparedBunnyReply(content: string, supportOnly = false) {
   if (concern) return { mode: concern, source: 'guidance' as const, answer: SAFETY_ANSWERS[concern] };
   const reply = (answer: string, mode = 'support') => ({ mode, source: 'prepared' as const, answer });
   if (supportOnly) return reply('편한 만큼만 이야기해 주세요. 지금 혼자 감당하기 어려운 일은 믿을 만한 사람과 함께 살펴봐도 괜찮아요. 지금 가장 필요한 것은 누군가 들어주는 일인가요, 안전하게 도움을 받을 곳을 찾는 일인가요?');
-  if (/코딩|코드|파이썬|프로그래밍|주식|코인|날씨|맛집|여행\s*추천/i.test(text)) return reply('저는 아빠와의 관계 고민과 아빠에게 전할 말을 함께 정리하는 토끼예요. 아빠와 이야기하면서 요즘 가장 마음에 걸리는 일이 있나요?', 'off_topic');
+  if (/코딩|코드|파이썬|프로그래밍|주식|코인|날씨|맛집|여행\s*추천/i.test(text)) return reply('저는 아빠와의 관계 고민과 아빠에게 전할 말을 함께 정리하는 Sodam이에요. 아빠와 이야기하면서 요즘 가장 마음에 걸리는 일이 있나요?', 'off_topic');
   if (/돌아가|사별|장례|하늘나라/.test(text)) return reply('아빠를 떠올리며 꺼낸 말이군요. 마음을 서둘러 정리하거나 괜찮은 척하지 않아도 돼요. 괜찮다면 오늘 특히 떠오른 아빠의 모습을 하나만 들려주실래요?');
   if (/서운|속상|상처|섭섭|실망/.test(text)) return reply('아빠에게 서운한 마음이 있었군요. 그 마음을 바로 접어 두지 않아도 괜찮아요. 대화가 안전하고 편한 때라면 “그때 나는 이런 마음이었어”로 시작해 볼 수 있어요. 어떤 순간이 가장 마음에 남았나요?');
   if (/싸웠|싸우|다퉜|다투|화가|화나|갈등|짜증/.test(text)) return reply('아빠와 부딪히는 일이 마음에 걸리나 봐요. 바로 결론을 내기보다 잠시 쉬고, 내가 전하고 싶은 말 하나를 골라봐도 좋아요. 이번 대화에서 아빠가 알아줬으면 하는 건 무엇인가요?');

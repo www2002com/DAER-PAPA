@@ -32,8 +32,8 @@ describe('hero letter preview', () => {
     const message = '아빠, 늘 내 편이 되어 줘서 고마워요.\n오늘도 행복하세요!';
     fireEvent.change(input, { target: { value: message } });
     expect(container.querySelector('[data-letter-preview]')?.textContent).toBe(message);
-    expect(screen.getByRole('img', { name: `사진 속 편지: ${message}, 소담이가` })).toBeTruthy();
-    expect(container.querySelector('[data-letter-signature]')?.textContent).toBe('소담이가');
+    expect(screen.getByRole('img', { name: `사진 속 편지: ${message}, Sodam` })).toBeTruthy();
+    expect(container.querySelector('[data-letter-signature]')?.textContent).toBe('Sodam');
     expect(request).not.toHaveBeenCalled();
     expect(localStorage.length).toBe(0);
   });
@@ -58,8 +58,8 @@ describe('hero letter preview', () => {
     expect(input.maxLength).toBe(150);
     const message = '고마워요 '.repeat(30).slice(0, 150);
     fireEvent.change(input, { target: { value: message } });
-    fireEvent.click(screen.getByRole('button', { name: '토끼에게 질문하기' }));
-    const question = screen.getByRole('textbox', { name: '토끼에게 물어볼 말' }) as HTMLTextAreaElement;
+    fireEvent.click(screen.getByRole('button', { name: 'Sodam에게 질문하기' }));
+    const question = screen.getByRole('textbox', { name: 'Sodam에게 물어볼 말' }) as HTMLTextAreaElement;
     expect(question.value).toBe('');
     fireEvent.change(question, { target: { value: '편지를 도와줘' } });
     fireEvent.click(screen.getByRole('button', { name: '질문창 닫기' }));
@@ -74,19 +74,19 @@ describe('hero letter preview', () => {
     render(<Hero />);
     expect(screen.getByRole('button', { name: '일단 써봐라, 각 잡지 말고. 편지 쓰기' }).getAttribute('data-nudging')).toBe('true');
     act(() => vi.advanceTimersByTime(2000));
-    expect(screen.queryByText('토끼의 기본 답변')).toBeNull();
+    expect(screen.queryByText('Sodam의 기본 답변')).toBeNull();
     const input = screen.getByRole('textbox', { name: '사진 속 편지에 쓸 말' });
     fireEvent.change(input, { target: { value: '아빠가 보고 싶어' } });
     act(() => vi.advanceTimersByTime(800));
     fireEvent.change(input, { target: { value: '아빠에게 서운해' } });
     act(() => vi.advanceTimersByTime(1400));
     expect(screen.getByRole('status').textContent).toContain('서운');
-    expect(screen.getByText('토끼의 기본 답변')).toBeTruthy();
+    expect(screen.getByText('Sodam의 기본 답변')).toBeTruthy();
     expect(screen.getByRole('button', { name: '내 답은 바로 아래. 편지 쓰기' }).getAttribute('data-nudging')).toBe('false');
     expect(fetcher).not.toHaveBeenCalled();
     fireEvent.change(input, { target: { value: ' ' } });
     act(() => vi.advanceTimersByTime(2000));
-    expect(screen.queryByText('토끼의 기본 답변')).toBeNull();
+    expect(screen.queryByText('Sodam의 기본 답변')).toBeNull();
   });
 
   it('submits the visible line with Enter, preserves Shift+Enter and ignores Korean composition', async () => {
@@ -105,7 +105,7 @@ describe('hero letter preview', () => {
     expect(fetcher).toHaveBeenCalledOnce();
     await waitFor(() => expect(Element.prototype.scrollIntoView).toHaveBeenCalledWith({ block: 'nearest', behavior: 'auto' }));
     expect(JSON.parse(fetcher.mock.calls[0][1]!.body as string)).toEqual({ messages: [{ role: 'user', content: '아빠에게 서운해' }] });
-    expect(screen.queryByRole('textbox', { name: '토끼에게 물어볼 말' })).toBeNull();
+    expect(screen.queryByRole('textbox', { name: 'Sodam에게 물어볼 말' })).toBeNull();
   });
 
   it('waits for composition to finish and prevents an old request replacing a newly edited line', async () => {
@@ -118,7 +118,7 @@ describe('hero letter preview', () => {
     fireEvent.compositionStart(input);
     fireEvent.change(input, { target: { value: '아빠에게 미안해' } });
     act(() => vi.advanceTimersByTime(2000));
-    expect(screen.queryByText('토끼의 기본 답변')).toBeNull();
+    expect(screen.queryByText('Sodam의 기본 답변')).toBeNull();
     fireEvent.compositionEnd(input);
     fireEvent.click(screen.getByRole('button', { name: '답변 듣기' }));
     fireEvent.change(input, { target: { value: '아빠에게 고마워' } });

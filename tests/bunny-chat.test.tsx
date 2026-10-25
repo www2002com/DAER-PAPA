@@ -5,8 +5,8 @@ import { LetterBunny } from '@/components/home/LetterBunny';
 afterEach(() => { vi.unstubAllGlobals(); vi.useRealTimers(); });
 
 function openQuestion() {
-  fireEvent.click(screen.getByRole('button', { name: '토끼에게 질문하기' }));
-  return screen.getByRole('textbox', { name: '토끼에게 물어볼 말' });
+  fireEvent.click(screen.getByRole('button', { name: 'Sodam에게 질문하기' }));
+  return screen.getByRole('textbox', { name: 'Sodam에게 물어볼 말' });
 }
 
 describe('letter bunny AI conversation', () => {
@@ -15,7 +15,7 @@ describe('letter bunny AI conversation', () => {
     render(<LetterBunny />);
     const invitation = screen.getByRole('button', { name: '고민돼? 나에게 편하게 털어봐.' });
     fireEvent.click(invitation);
-    const input = screen.getByRole('textbox', { name: '토끼에게 물어볼 말' });
+    const input = screen.getByRole('textbox', { name: 'Sodam에게 물어볼 말' });
     expect(document.activeElement).toBe(input);
     expect(invitation.getAttribute('aria-expanded')).toBe('true');
     expect(request).not.toHaveBeenCalled();
@@ -48,14 +48,14 @@ describe('letter bunny AI conversation', () => {
 
   it('opens the inline question form, focuses it, and returns focus on Escape', () => {
     render(<LetterBunny />);
-    const trigger = screen.getByRole('button', { name: '토끼에게 질문하기' });
+    const trigger = screen.getByRole('button', { name: 'Sodam에게 질문하기' });
     expect(trigger.getAttribute('aria-expanded')).toBe('false');
     const input = openQuestion();
     expect(document.activeElement).toBe(input);
     expect(trigger.getAttribute('aria-expanded')).toBe('true');
     expect(screen.getByText(/Google Gemini/)).toBeTruthy();
     fireEvent.keyDown(input, { key: 'Escape' });
-    expect(screen.queryByRole('textbox', { name: '토끼에게 물어볼 말' })).toBeNull();
+    expect(screen.queryByRole('textbox', { name: 'Sodam에게 물어볼 말' })).toBeNull();
     expect(document.activeElement).toBe(trigger);
   });
 
@@ -81,10 +81,10 @@ describe('letter bunny AI conversation', () => {
     fireEvent.change(openQuestion(), { target: { value: '아빠 생신 편지를 도와줘' } });
     fireEvent.click(screen.getByRole('button', { name: '물어보기' }));
     await waitFor(() => expect(screen.getByRole('alert').textContent).toContain('연결을 준비')); 
-    expect((screen.getByRole('textbox', { name: '토끼에게 물어볼 말' }) as HTMLTextAreaElement).value).toBe('아빠 생신 편지를 도와줘');
+    expect((screen.getByRole('textbox', { name: 'Sodam에게 물어볼 말' }) as HTMLTextAreaElement).value).toBe('아빠 생신 편지를 도와줘');
     expect(screen.queryByText('AI 답변')).toBeNull();
-    expect(screen.getByText('토끼의 기본 답변')).toBeTruthy();
-    expect(screen.getByRole('button', { name: '편지 토끼 움직임 다시 보기' }).getAttribute('data-speaking')).toBe('false');
+    expect(screen.getByText('Sodam의 기본 답변')).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Sodam 움직임 다시 보기' }).getAttribute('data-speaking')).toBe('false');
   });
 
   it('aborts a pending request on close and ignores its late result', async () => {
@@ -101,7 +101,7 @@ describe('letter bunny AI conversation', () => {
     expect(signal?.aborted).toBe(true);
     await act(async () => { finish(Response.json({ ok: true, answer: '늦게 온 답변' })); });
     expect(screen.queryByText('늦게 온 답변')).toBeNull();
-    expect(screen.getByRole('button', { name: '편지 토끼 움직임 다시 보기' }).getAttribute('data-speaking')).toBe('false');
+    expect(screen.getByRole('button', { name: 'Sodam 움직임 다시 보기' }).getAttribute('data-speaking')).toBe('false');
   });
 
   it('animates speaking only while revealing an answer and stops after completion', async () => {
@@ -111,7 +111,7 @@ describe('letter bunny AI conversation', () => {
     render(<LetterBunny />);
     fireEvent.change(openQuestion(), { target: { value: '한 줄 추천' } });
     await act(async () => { fireEvent.click(screen.getByRole('button', { name: '물어보기' })); });
-    const bunny = screen.getByRole('button', { name: '편지 토끼 움직임 다시 보기' });
+    const bunny = screen.getByRole('button', { name: 'Sodam 움직임 다시 보기' });
     expect(bunny.getAttribute('data-speaking')).toBe('true');
     act(() => { vi.advanceTimersByTime(10000); });
     expect(bunny.getAttribute('data-speaking')).toBe('false');
@@ -139,10 +139,10 @@ describe('letter bunny AI conversation', () => {
     const input = openQuestion();
     fireEvent.change(input, { target: { value: '아빠한테 서운해' } });
     fireEvent.keyDown(input, { key: 'Enter', shiftKey: true });
-    expect(screen.queryByText('토끼의 기본 답변')).toBeNull();
+    expect(screen.queryByText('Sodam의 기본 답변')).toBeNull();
     fireEvent.keyDown(input, { key: 'Enter' });
     await waitFor(() => expect(screen.getByRole('status').textContent).toContain('서운'));
-    expect(screen.getByText('토끼의 기본 답변')).toBeTruthy();
+    expect(screen.getByText('Sodam의 기본 답변')).toBeTruthy();
     expect(screen.queryByText('AI 답변')).toBeNull();
   });
 
@@ -188,7 +188,7 @@ describe('letter bunny AI conversation', () => {
     fireEvent.click(screen.getByRole('button', { name: '물어보기' }));
     expect(await screen.findByRole('link', { name: 'DEAR PAPA에 담은 마음 보기' })).toBeTruthy();
     expect(screen.getByText('브랜드 제안 · 선택사항')).toBeTruthy();
-    fireEvent.change(screen.getByRole('textbox', { name: '토끼에게 물어볼 말' }), { target: { value: '계속 얘기해 줘' } });
+    fireEvent.change(screen.getByRole('textbox', { name: 'Sodam에게 물어볼 말' }), { target: { value: '계속 얘기해 줘' } });
     fireEvent.click(screen.getByRole('button', { name: '물어보기' }));
     await waitFor(() => expect(payloads).toHaveLength(3));
     expect(payloads[2].productShown).toBe(true);

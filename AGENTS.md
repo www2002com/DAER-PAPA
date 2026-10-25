@@ -21,3 +21,11 @@ the user explicitly requests production deployment. The user authorized saving
 the approved work to GitHub and deploying production on 2026-10-21.
 `npm run build` must pass the production preservation checks; do not weaken the
 checks or change their baseline to make an unintended change pass.
+
+## Character name
+
+The user named the character **Sodam** on 2026-10-25 and requires its name to
+always appear in English as `Sodam`. Use this spelling in visible copy,
+illustration signatures, accessible labels and AI self-introductions. Do not
+replace it with a Korean spelling or a different capitalization. Historical
+records of earlier user quotations may remain unchanged.

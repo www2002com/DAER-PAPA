@@ -34,7 +34,7 @@ const dotted = (iso: string) => iso.replaceAll('-', '. ') + '.';
 
 function AiPrivacyNotice() {
   return <>
-    <h3 id="ai-questions">AI 토끼 질문 기능</h3>
+    <h3 id="ai-questions">AI Sodam 질문 기능</h3>
     <p>첫 화면의 손글씨를 입력하고 잠시 멈추면 브라우저 안에서 준비된 기본 답변을 표시합니다. 이 자동 반응은 입력 내용을 서버로 보내지 않습니다. Enter 또는 ‘답변 듣기’를 눌러 질문을 보내면 현재 문장과 최근 대화가 AI 답변을 위해 전송될 수 있습니다.</p>
     <p>
       AI 질문창은 위 편지 작성기와 별도 기능입니다. 이용자가 질문을 보내면 질문창의 현재 질문과 최근 대화 최대 3쌍을

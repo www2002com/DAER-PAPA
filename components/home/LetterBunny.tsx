@@ -257,8 +257,8 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
         </svg>}
       </div>
       <button type="button" className={styles.character}
-        aria-label={onWriteLetter ? (loading ? '생각하고 있어요' : speaking ? '토끼가 말해요' : `${advice.join(' ')} 편지 쓰기`) : '편지 토끼 움직임 다시 보기'}
-        title={onWriteLetter ? '눌러서 편지에 한 줄 써보세요' : '눌러서 편지 토끼와 인사해요'}
+        aria-label={onWriteLetter ? (loading ? '생각하고 있어요' : speaking ? 'Sodam이 말해요' : `${advice.join(' ')} 편지 쓰기`) : 'Sodam 움직임 다시 보기'}
+        title={onWriteLetter ? '눌러서 편지에 한 줄 써보세요' : '눌러서 Sodam과 인사해요'}
         data-speaking={speaking} data-nudging={nudging} disabled={loading || speaking}
         onClick={() => { if (onWriteLetter) onWriteLetter(); else setReplay((value) => value + 1); }}>
         <span className={`${styles.patrol} ${nudging ? styles.patrolling : ''}`} data-bunny-patrol=""
@@ -274,9 +274,9 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
         </span>
         <span key={isWriting ? 'writing' : adviceIndex}
           className={`${styles.label} ${onWriteLetter && !loading && !speaking ? `${styles.writePrompt} ${styles.adviceArrive}` : ''}`}>
-          {loading ? '생각하고 있어요' : speaking ? '토끼가 말해요' : onWriteLetter
+          {loading ? '생각하고 있어요' : speaking ? 'Sodam이 말해요' : onWriteLetter
             ? advice.map((line) => <span key={line}>{line}</span>)
-            : replay ? '다시 인사하기' : '토끼에게 인사하기'}
+            : replay ? '다시 인사하기' : 'Sodam에게 인사하기'}
         </span>
       </button>
       <div className={styles.note}>
@@ -288,7 +288,7 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
           <p className={styles.greeting}>
             <span key={replay} className={replay > 0 ? styles.answer : undefined} aria-live="polite">{supportOnly ? '편한 만큼만 이야기해 주세요.' : answer ? '한 줄 잘 읽었어요. 더 이야기해 볼까요' : greeting.replace(/\?$/, '')}</span>
             <button ref={trigger} type="button" className={styles.questionTrigger}
-              aria-label="토끼에게 질문하기" title="토끼에게 질문하기" aria-expanded={open} aria-controls={panelId}
+              aria-label="Sodam에게 질문하기" title="Sodam에게 질문하기" aria-expanded={open} aria-controls={panelId}
               onClick={(event) => toggleQuestion(event.currentTarget)}>
               <span className={!open && !supportOnly ? styles.questionPulse : undefined} aria-hidden="true">?</span>
             </button>
@@ -297,9 +297,9 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
         </div>
       </div>
       {answer && <div ref={responseElement} className={styles.response}>
-            <span className={styles.responseLabel}>{guidance ? '도움 안내' : prepared ? '토끼의 기본 답변' : 'AI 답변'}</span>
+            <span className={styles.responseLabel}>{guidance ? '도움 안내' : prepared ? 'Sodam의 기본 답변' : 'AI 답변'}</span>
             <p className={styles.responseText} aria-hidden="true">{displayed}<span className={speaking ? styles.caret : undefined} /></p>
-            <p className="sr-only" role="status" aria-atomic="true">{speaking ? '토끼가 답변하고 있어요.' : answer}</p>
+            <p className="sr-only" role="status" aria-atomic="true">{speaking ? 'Sodam이 답변하고 있어요.' : answer}</p>
             {prepared && <p className={styles.helpNote}>미리 준비한 답변이에요. AI가 생성한 답변은 아니에요.</p>}
             {!speaking && answerAction && <div className={styles.answerAction}>
               {answerAction.kind === 'product' && <><span className={styles.responseLabel}>브랜드 제안 · 선택사항</span><p>{answerAction.description}</p></>}
@@ -313,7 +313,7 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
       {open && <form id={panelId} className={styles.questionPanel} onSubmit={ask}
         onKeyDown={(event) => { if (event.key === 'Escape') { event.preventDefault(); closeQuestion(); } }}>
         <div className={styles.panelHeading}>
-          <label htmlFor={inputId}>토끼에게 물어볼 말</label>
+          <label htmlFor={inputId}>Sodam에게 물어볼 말</label>
           <button type="button" className={styles.close} aria-label="질문창 닫기" onClick={closeQuestion}>닫기 <span aria-hidden="true">×</span></button>
         </div>
         <p className={styles.scope}>아빠와의 고민, 여기서 편하게 풀어봐요. DEAR PAPA가 제공하는 무료 AI예요. 전문 상담을 대신하지 않아요.</p>

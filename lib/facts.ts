@@ -31,7 +31,7 @@ export const PRODUCT = {
   nameEn: 'DEAR PAPA LETTER ALL-IN-ONE',
   nameLine: '제품명: 디어파파 레터 올인원 / DEAR PAPA LETTER ALL-IN-ONE (출시 준비 중)',
   usage: '세안 후 하나로 마무리하는 남성 올인원 스킨케어',
-  allAges: '디어파파는 40~60대 아빠를 위해 만들고 있어요.',
+  allAges: '디어파파는 4060 아빠를 위해 만들고 있어요.',
   reviews: '고객 후기는 출시 후에 받습니다.',
   afterShave: '디어파파는 면도 후에 바르는 올인원을, 빠른 흡수의 워터리 제형으로 기획하고 만들고 있습니다.',
   development:
@@ -138,8 +138,8 @@ export const FAQ: { q: string; a: string }[] = [
   },
   { q: '출시일은 언제인가요?', a: '아직 정해지지 않았어요. 출시일이 정해지면 공식 사이트 dearpapa.kr과 인스타그램 @dearpapa.kr에서 알려 드릴게요.' },
   {
-    q: '40~60대 아빠 선물로도 괜찮을까요?',
-    a: '디어파파는 40~60대 아빠를 위해 만들고 있어요. 피부 타입별 정보는 제품 정보가 확정되면 안내드릴게요.',
+    q: '4060 아빠 선물로도 괜찮을까요?',
+    a: '디어파파는 4060 아빠를 위해 만들고 있어요. 피부 타입별 정보는 제품 정보가 확정되면 안내드릴게요.',
   },
   { q: '파파레서피나 dearpapa.com.tw와 같은 회사인가요?', a: `아니요. ${NOT_AFFILIATED}` },
 ];

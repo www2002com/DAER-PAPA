@@ -10,6 +10,28 @@ function openQuestion() {
 }
 
 describe('letter bunny AI conversation', () => {
+  it('changes its playful advice after a stroll and waits while the letter is being written', () => {
+    const onWriteLetter = vi.fn();
+    const view = render(<LetterBunny onWriteLetter={onWriteLetter} />);
+    const bunny = screen.getByRole('button', { name: '그냥 써봐라, 각 잡지 말고. 편지 쓰기' });
+    const stroll = bunny.querySelector('[data-bunny-patrol]');
+    expect(stroll).not.toBeNull();
+    // jsdom lacks AnimationEvent; React then listens for the WebKit event.
+    const iterationEvent = 'AnimationEvent' in window ? 'animationiteration' : 'webkitAnimationIteration';
+    const finishStroll = (element: Element) => fireEvent(element, new Event(iterationEvent, { bubbles: true }));
+    finishStroll(stroll!);
+    expect(screen.getByRole('button', { name: '일단 한 줄. 내가 봐줄게. 편지 쓰기' })).toBe(bunny);
+    // A nested body animation must not advance the dialogue.
+    finishStroll(stroll!.firstElementChild!);
+    expect(bunny.getAttribute('aria-label')).toBe('일단 한 줄. 내가 봐줄게. 편지 쓰기');
+    view.rerender(<LetterBunny onWriteLetter={onWriteLetter} isWriting />);
+    expect(bunny.getAttribute('data-nudging')).toBe('false');
+    expect(bunny.getAttribute('aria-label')).toBe('오, 쓰네. 기다려 줄게. 편지 쓰기');
+    finishStroll(stroll!);
+    view.rerender(<LetterBunny onWriteLetter={onWriteLetter} />);
+    expect(bunny.getAttribute('aria-label')).toBe('일단 한 줄. 내가 봐줄게. 편지 쓰기');
+  });
+
   it('opens the inline question form, focuses it, and returns focus on Escape', () => {
     render(<LetterBunny />);
     const trigger = screen.getByRole('button', { name: '토끼에게 질문하기' });

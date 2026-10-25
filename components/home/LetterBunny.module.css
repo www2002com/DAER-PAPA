@@ -1,5 +1,6 @@
 .companion { display: grid; grid-template-columns: minmax(0, 1fr) 104px; align-items: center; gap: 16px; color: var(--ink); }
 .character { grid-column: 2; grid-row: 1; display: grid; justify-items: center; width: 100%; border-radius: 8px; touch-action: manipulation; color: var(--forest); }
+.patrol { --bunny-travel: 18px; display: block; width: 100%; }
 .portraitWrap { position: relative; display: block; width: 100%; transform-origin: center bottom; }
 .portrait { display: block; width: 100%; height: auto; }
 .label { padding: 6px 0; font-size: 12px; line-height: 1.5; text-align: center; }
@@ -45,7 +46,9 @@
 .character:active .label { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 @media (hover: hover) { .character:hover .label { text-decoration: underline; text-underline-offset: 4px; } }
 @media (prefers-reduced-motion: no-preference) {
-  .nudge { animation: bunny-nudge 3600ms ease-in-out 900ms infinite; }
+  .patrolling { animation: bunny-patrol 7600ms ease-in-out 500ms infinite; }
+  .nudge { animation: bunny-advice 7600ms ease-in-out 500ms infinite; }
+  .adviceArrive { animation: reply-arrive 180ms ease-out; }
   .replay { animation: bunny-greeting 420ms ease-out; }
   .replayAgain { animation: bunny-greeting-again 420ms ease-out; }
   .answer { animation: reply-arrive 220ms ease-out; }
@@ -54,13 +57,22 @@
   .voice { animation: voice-speaking 600ms ease-in-out infinite; }
   .caret { animation: reply-caret 900ms ease-in-out infinite; }
 }
-/* Two impatient little bounces, then a long pause. Stop while either field is in use. */
-@keyframes bunny-nudge {
-  0%, 6%, 32%, 100% { transform: translate(0, 0) rotate(0); }
-  11% { transform: translate(-3px, -5px) rotate(-6deg); }
-  16% { transform: translate(2px, 0) rotate(4deg); }
-  21% { transform: translate(-2px, -4px) rotate(-5deg); }
-  26% { transform: translate(1px, 0) rotate(2deg); }
+/* Stroll, stop to offer advice, turn around. Keep the text and hit area still. */
+@keyframes bunny-patrol {
+  0%, 92%, 100% { transform: translateX(0); }
+  20%, 32% { transform: translateX(calc(-1 * var(--bunny-travel))); }
+  60%, 72% { transform: translateX(var(--bunny-travel)); }
+}
+@keyframes bunny-advice {
+  0%, 92%, 100% { transform: translateY(0) rotate(0); }
+  10% { transform: translateY(-3px) rotate(-6deg); }
+  20%, 32% { transform: translateY(0) rotate(-6deg); }
+  26% { transform: translateY(-2px) rotate(-2deg); }
+  43% { transform: translateY(-3px) rotate(5deg); }
+  50% { transform: translateY(0) rotate(2deg); }
+  60%, 72% { transform: translateY(0) rotate(6deg); }
+  66% { transform: translateY(-2px) rotate(2deg); }
+  82% { transform: translateY(-3px) rotate(-5deg); }
 }
 @keyframes question-pulse { 0%,100% { opacity: 1; } 50% { opacity: .22; } }
 @keyframes bunny-speaking { 0%,100% { transform: translateY(0) rotate(0); } 25% { transform: translateY(-2px) rotate(-2deg); } 55% { transform: translateY(0) rotate(1.5deg); } 75% { transform: translateY(-1px) rotate(-.5deg); } }
@@ -71,4 +83,4 @@
 @keyframes reply-arrive { from { opacity: .3; } to { opacity: 1; } }
 @media (max-width: 1000px) { .companion { grid-template-columns: minmax(0, 1fr) 76px; gap: 12px; } .message { font-size: 26px; } }
 @media (max-width: 700px) { .companion { grid-template-columns: minmax(0, 1fr) 64px; gap: 10px; } .salutation { font-size: 16px; } .message { font-size: 24px; } .reply { font-size: 12px; min-height: 48px; margin-top: 8px; padding-top: 8px; } .label { font-size: 11px; } }
-@media (max-width: 700px) { .label.writePrompt { font-size: 17px; } }
+@media (max-width: 700px) { .label.writePrompt { font-size: 17px; } .patrol { --bunny-travel: 10px; } }

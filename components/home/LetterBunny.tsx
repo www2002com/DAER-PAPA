@@ -11,12 +11,20 @@ const greetings = [
   '잘 쓰려 애쓰지 않아도 괜찮아요. 내 말투 그대로요.',
 ];
 
+const writingAdvice = [
+  ['그냥 써봐라,', '각 잡지 말고.'],
+  ['일단 한 줄.', '내가 봐줄게.'],
+  ['고민은 짧게,', '마음은 길게.'],
+  ['그 말이면 돼.', '얼른 써봐.'],
+];
+
 export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false }: {
   messageEditor?: ReactNode;
   onWriteLetter?: () => void;
   isWriting?: boolean;
 }) {
   const [replay, setReplay] = useState(0);
+  const [adviceIndex, setAdviceIndex] = useState(0);
   const [open, setOpen] = useState(false);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
@@ -122,25 +130,34 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false }:
 
   const greeting = greetings[replay === 0 ? 0 : 1 + ((replay - 1) % (greetings.length - 1))];
   const nudging = Boolean(onWriteLetter) && !isWriting && !open && !loading && !speaking;
+  const advice = isWriting ? ['오, 쓰네.', '기다려 줄게.'] : writingAdvice[adviceIndex];
   const portraitMotion = speaking ? styles.speaking : nudging ? styles.nudge
     : !onWriteLetter && replay > 0 ? (replay % 2 ? styles.replay : styles.replayAgain) : '';
 
   return (
     <div className={styles.companion}>
       <button type="button" className={styles.character}
-        aria-label={onWriteLetter ? '그냥 써봐라, 각 잡지 말고. 편지 쓰기' : '편지 토끼 움직임 다시 보기'}
+        aria-label={onWriteLetter ? (loading ? '생각하고 있어요' : speaking ? '토끼가 말해요' : `${advice.join(' ')} 편지 쓰기`) : '편지 토끼 움직임 다시 보기'}
         title={onWriteLetter ? '눌러서 편지에 한 줄 써보세요' : '눌러서 편지 토끼와 인사해요'}
         data-speaking={speaking} data-nudging={nudging} disabled={loading || speaking}
         onClick={() => { if (onWriteLetter) onWriteLetter(); else setReplay((value) => value + 1); }}>
+        <span className={`${styles.patrol} ${nudging ? styles.patrolling : ''}`} data-bunny-patrol=""
+          onAnimationIteration={(event) => {
+            if (event.target === event.currentTarget && nudging) {
+              setAdviceIndex((index) => (index + 1) % writingAdvice.length);
+            }
+          }}>
         <span className={`${styles.portraitWrap} ${portraitMotion}`}>
         <Image src="/images/letter-bunny-fine-grid-v3.webp"
           width={640} height={640} alt=""
           className={styles.portrait} loading="eager" />
           {speaking && <svg className={styles.voice} viewBox="0 0 24 32" aria-hidden="true"><path d="M4 12q5 4 0 8M11 7q9 9 0 18M18 2q13 14 0 28" /></svg>}
         </span>
-        <span className={`${styles.label} ${onWriteLetter && !loading && !speaking ? styles.writePrompt : ''}`}>
+        </span>
+        <span key={isWriting ? 'writing' : adviceIndex}
+          className={`${styles.label} ${onWriteLetter && !loading && !speaking ? `${styles.writePrompt} ${styles.adviceArrive}` : ''}`}>
           {loading ? '생각하고 있어요' : speaking ? '토끼가 말해요' : onWriteLetter
-            ? <><span>그냥 써봐라,</span><span>각 잡지 말고.</span></>
+            ? <><span>{advice[0]}</span><span>{advice[1]}</span></>
             : replay ? '다시 인사하기' : '토끼에게 인사하기'}
         </span>
       </button>

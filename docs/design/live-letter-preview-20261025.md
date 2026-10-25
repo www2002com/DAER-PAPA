@@ -42,11 +42,22 @@ copy `그냥 써봐라, 각 잡지 말고.`. Clicking or keyboard-activating the
 the live letter editor. The initial example is selected for easy replacement;
 once edited, the visitor's own text is retained without selecting it all.
 
-The bunny makes two small, impatient bounces in a 3.6-second cycle, with a long
-rest between them. Only the character moves; the two-line instruction stays
-still. The nudge stops while the letter field is focused, the question panel is
-open, a response is loading or the bunny is speaking. Reduced-motion preferences
-disable it. The existing standalone greeting and AI speaking motion still work.
+After the user's follow-up request for a Claude-like character that walks back
+and forth offering advice, the bunny now strolls left and right in a 7.6-second
+cycle. It pauses at each side, tilts its head and nods; travel is ±18 px on
+desktop and ±10 px on mobile. The two-line instruction and hit area stay still.
+Each completed stroll advances one of four prewritten, playful phrases. Child
+animation events are ignored. These phrases are not represented as AI output.
+
+The stroll stops while the letter field is focused, the question panel is open,
+a response is loading or the bunny is speaking. Writing changes the caption to
+`오, 쓰네. 기다려 줄게.`. Reduced-motion preferences disable the animation and
+therefore automatic phrase rotation. No JavaScript interval is needed. The
+existing standalone greeting and AI speaking motion still work.
 
 Focused behavior tests cover focus transfer, example selection, preserving the
-visitor's text and pausing while writing. The full suite now has 98 tests.
+visitor's text, pausing while writing and cycling advice only after a completed
+stroll. The full suite now has 99 tests.
+Browser evidence for the strolling version is in `bunny-patrol/`, including
+measured left/right transforms, mobile pause checks and `bunny-patrol.gif`, a
+13-second recording of the actual UI with original frame timing.

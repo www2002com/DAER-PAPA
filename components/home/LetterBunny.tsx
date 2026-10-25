@@ -14,7 +14,6 @@ const greetings = [
 export function LetterBunny() {
   const [replay, setReplay] = useState(0);
   const [open, setOpen] = useState(false);
-  const [visited, setVisited] = useState(false);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [displayed, setDisplayed] = useState('');
@@ -141,8 +140,8 @@ export function LetterBunny() {
             <span key={replay} className={replay > 0 ? styles.answer : undefined} aria-live="polite">{greeting.replace(/\?$/, '')}</span>
             <button ref={trigger} type="button" className={styles.questionTrigger}
               aria-label="토끼에게 질문하기" title="토끼에게 질문하기" aria-expanded={open} aria-controls={panelId}
-              onClick={() => { if (open) closeQuestion(); else { setVisited(true); setOpen(true); } }}>
-              <span className={!visited ? styles.questionPulse : undefined} aria-hidden="true">?</span>
+              onClick={() => { if (open) closeQuestion(); else setOpen(true); }}>
+              <span className={!open ? styles.questionPulse : undefined} aria-hidden="true">?</span>
             </button>
           </p>
           {loading && <p className={styles.thinking} role="status">어떤 말을 건넬지 생각하고 있어요<span aria-hidden="true">···</span></p>}

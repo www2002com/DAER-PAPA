@@ -4,7 +4,7 @@ import { campaignForCurrentLocation } from './campaign-attribution';
 
 export const ACTIONS = [
   'letter_entry_clicked', 'letter_started', 'letter_card_exported', 'contact_email_copied', 'social_channel_opened',
-  'product_details_after_letter_clicked', 'journal_product_box_clicked',
+  'product_details_after_letter_clicked', 'journal_product_box_clicked', 'journal_letter_link_clicked',
   'campaign_landing',
   // 출시 알림 신청 conversion: form seen vs accepted submission, split by placement (home | product).
   'launch_notify_viewed', 'launch_notify_attempted', 'launch_notify_submitted', 'launch_notify_failed',
@@ -16,7 +16,29 @@ export type ActionData = {
   placement?: 'home' | 'product';
   reason?: LaunchNotifyErrorCode;
   campaign?: 'ig_letter' | 'ig_product' | 'yt_letter' | 'naver_product';
+  /** Journal click counts: fixed page slug and link name only (no URL, referrer or ids). */
+  page?: JournalCountedPage;
+  link?: 'product_box' | 'letter';
 };
+
+export const JOURNAL_COUNTED_PAGES = [
+  'dad-gift-skincare-guide', 'after-shave-gift', 'dad-allinone-how-to-choose',
+] as const;
+export type JournalCountedPage = (typeof JOURNAL_COUNTED_PAGES)[number];
+
+const JOURNAL_LINK_FOR_ACTION: Partial<Record<SiteAction, 'product_box' | 'letter'>> = {
+  journal_product_box_clicked: 'product_box',
+  journal_letter_link_clicked: 'letter',
+};
+
+/** Returns {page, link} only for the three counted journal pages; otherwise null. */
+export function journalClickData(action: SiteAction, pathname: string): ActionData | null {
+  const link = JOURNAL_LINK_FOR_ACTION[action];
+  if (!link) return null;
+  const slug = pathname.replace(/^\/journal\//, '').replace(/\/$/, '');
+  if (!pathname.startsWith('/journal/') || !(JOURNAL_COUNTED_PAGES as readonly string[]).includes(slug)) return null;
+  return { page: slug as JournalCountedPage, link };
+}
 
 const CAMPAIGN_SCOPED_ACTIONS: ReadonlySet<SiteAction> = new Set([
   'campaign_landing', 'letter_entry_clicked', 'letter_started', 'letter_card_exported',

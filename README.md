@@ -67,7 +67,7 @@ main 변경은 연결된 Vercel 프로젝트 `dearpapa`의 운영 배포를 실�
 
 문의는 `/#contact`로 연결하며 전체 메뉴와 푸터에서 같은 이메일 복사 기능을 제공합니다. 메뉴의 복사 안내도 선택한 언어에 맞춥니다.
 
-Vercel Web Analytics는 페이지 조회와 고정된 행동 이름만 측정합니다: `letter_entry_clicked`, `letter_started`, `letter_card_exported`, `contact_email_copied`, `social_channel_opened`. 편지 내용·보내는 사람·메일 내용은 전송하지 않으며 URL의 검색 조건과 해시는 제거합니다. Custom Events는 연결된 Pro/Enterprise 요금제에서 확인합니다.
+Vercel Web Analytics는 페이지 조회와 고정된 행동 이름만 측정합니다: `letter_entry_clicked`, `letter_started`, `letter_card_exported`, `contact_email_copied`, `social_channel_opened`. 편지 내용·보내는 사람·메일 내용은 전송하지 않으며 URL의 검색 조건과 해시는 제거합니다. 저널 세 글(`dad-gift-skincare-guide`, `after-shave-gift`, `dad-allinone-how-to-choose`)의 `journal_product_box_clicked`·`journal_letter_link_clicked`는 `{page, link}`만 보냅니다(쿠키·저장소·식별자 없음). Custom Events는 연결된 Pro/Enterprise 요금제에서 확인합니다.
 
 주소 이동 검증은 배포 후 `node scripts/verify-legacy-redirects.mjs --url https://dearpapa.kr`로 실행합니다. Vercel이 `.html`과 끝 슬래시를 301로 정리하며 `/product/`도 최종 제품 주소로 바로 보냅니다.
 

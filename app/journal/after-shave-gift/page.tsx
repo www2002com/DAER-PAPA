@@ -77,7 +77,7 @@ export default function AfterShaveGiftPage() {
       <p>
         멀리 사는 아빠께 선물을 휴대폰으로 보내면 마음이 덜 전해질까 걱정될 수 있어요. 선물과 함께 아빠께 하고 싶은 말을 한 줄로
         적어 보내 보세요. 디어파파는 dearpapa.kr에서 아빠께 보낼 한 줄 편지를 쓸 수 있게 하고 있어요.{' '}
-        <Link href="/#letter">한 줄 편지 쓰기</Link>
+        <Link href="/#letter" data-track-action="journal_letter_link_clicked">한 줄 편지 쓰기</Link>
       </p>
 
       <h2>디어파파가 만들고 있는 제품</h2>

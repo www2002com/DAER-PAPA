@@ -26,7 +26,7 @@ describe('bunny chat server boundary', () => {
     const response = await handler(post());
     expect(response.status).toBe(200);
     expect(await response.json()).toMatchObject({ ok: true, answer: '아빠, 생신 축하해요. 늘 고마워요.', source: 'ai', mode: 'letter', action: { kind: 'letter' } });
-    expect(observed?.url).toBe('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent');
+    expect(observed?.url).toBe('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent');
     expect(observed?.url).not.toContain(env.GEMINI_API_KEY);
     expect(new Headers(observed!.init.headers).get('x-goog-api-key')).toBe(env.GEMINI_API_KEY);
     const sent = JSON.parse(observed!.init.body as string);

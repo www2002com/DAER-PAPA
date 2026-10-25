@@ -115,7 +115,7 @@ export function createBunnyChatHandler({ env = process.env, fetchImpl = fetch, n
     if (!messages) return fail(400, 'invalid_request');
     const concern = obviousBunnyConcern(messages.filter(m => m.role === 'user').map(m => m.content).join('\n'));
     if (concern) return json(200, helpReply(concern, env));
-    const model = env.GEMINI_BUNNY_MODEL?.trim() || 'gemini-3.8-flash';
+    const model = env.GEMINI_BUNNY_MODEL?.trim() || 'gemini-3.5-flash-lite';
     if (env.BUNNY_AI_ENABLED !== 'true' || !env.GEMINI_API_KEY?.trim() || !/^gemini-[a-z0-9.-]{1,80}$/.test(model)) return fail(503, 'not_configured');
 
     const time = now();

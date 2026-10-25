@@ -101,7 +101,7 @@ describe('hero letter preview', () => {
     fireEvent.keyDown(input, { key: 'Enter' });
     await waitFor(() => expect(screen.getByText('AI 답변')).toBeTruthy());
     expect(fetcher).toHaveBeenCalledOnce();
-    expect(Element.prototype.scrollIntoView).toHaveBeenCalledWith({ block: 'nearest', behavior: 'auto' });
+    await waitFor(() => expect(Element.prototype.scrollIntoView).toHaveBeenCalledWith({ block: 'nearest', behavior: 'auto' }));
     expect(JSON.parse(fetcher.mock.calls[0][1]!.body as string)).toEqual({ messages: [{ role: 'user', content: '아빠에게 서운해' }] });
     expect(screen.queryByRole('textbox', { name: '토끼에게 물어볼 말' })).toBeNull();
   });

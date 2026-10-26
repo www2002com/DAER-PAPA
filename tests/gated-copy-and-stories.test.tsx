@@ -94,6 +94,17 @@ describe('letter example lines', () => {
   });
 });
 
+describe('content bot letter lines (10/26)', () => {
+  it('adds the new lines to the gratitude and daily tabs', () => {
+    const thanks = STARTERS.find((s) => s.id === 'thanks')!;
+    const daily = STARTERS.find((s) => s.id === 'daily')!;
+    expect(thanks.label).toBe('고마운 마음');
+    expect(daily.label).toBe('일상의 안부');
+    expect(thanks.lines).toContain('언제나 든든한 아빠 딸이라 참 행복해요. 말로 다 못한 마음을 이 편지에 담아요.');
+    expect(daily.lines).toContain('아빠의 매일을 늘 응원해요. 오늘도 거울 앞에서 한 번 웃고 시작해요!');
+  });
+});
+
 describe('Kumar & Epley paragraph in the two journal pages', () => {
   for (const [slug, Page] of [['dad-gift-skincare-guide', SkincareGuide], ['after-shave-gift', AfterShave]] as const) {
     it(slug, () => {

@@ -22,7 +22,7 @@ export default function LetterAllInOnePage() {
         lead={<p>제품명: 디어파파 레터 올인원 / DEAR&nbsp;PAPA LETTER ALL-IN-ONE (출시 준비 중)</p>}
         meta={
           <p>
-            최종 업데이트: <time dateTime="2026-10-23">2026년 10월 23일</time>
+            최종 업데이트: <time dateTime="2026-10-26">2026년 10월 26일</time>
           </p>
         }
         footer={

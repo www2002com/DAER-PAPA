@@ -236,6 +236,13 @@ facts 기준일과 가격·출시일·확정 상태는 바꾸지 않습니다.
 두 글의 `modified`와 `sitemap.xml` lastmod를 2026-10-26으로 바꿉니다. 이에 따라 루트 파일 1개(sitemap.xml) 해시만 갱신합니다.
 보존 대상 라우트의 메타·JSON-LD·facts 본문은 바꾸지 않습니다.
 
+### 2026-10-26 편지 카드 「출시 후 제공 예정」 표기
+
+2026-10-26 요청에 따라 `/journal/dad-gift-guide`의 「주문 시 확인한 편지를 … 보낼 예정입니다.」 문단에 「(출시 후 제공 예정)」을 붙입니다.
+facts 문장 「디어파파 레터 올인원은 선물과 편지를 함께 건네는 구조로 기획하고 만들고 있습니다.」는 후속 요청에 따라 표기 없이 원문을 유지합니다.
+정보 기준일(FACTS_UPDATED, dateModified, 최종 업데이트, `/about/facts`·`/letter-all-in-one` lastmod)은 2026-10-26으로 바꾸고,
+`factsBodyHtml`, JSON-LD 원문, 해당 문단, 루트 파일 해시(llm.md·facts.json·answer.json·schema.jsonld·citation.txt·sitemap.xml)를 갱신합니다. 가격·출시일·확정 상태는 바꾸지 않습니다.
+
 ## 기준 원본
 
 - 운영 사이트: https://dearpapa.kr

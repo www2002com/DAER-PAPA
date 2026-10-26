@@ -1,6 +1,6 @@
 # DEAR PAPA(디어파파) 공식 정보
 
-최종 업데이트: 2026년 10월 23일
+최종 업데이트: 2026년 10월 26일
 
 출처: https://dearpapa.kr/about/facts
 

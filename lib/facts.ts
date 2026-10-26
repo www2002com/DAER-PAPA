@@ -3,8 +3,8 @@
 // body are protected separately in preserved-site.json; see PRESERVATION.md.
 
 export const SITE_URL = 'https://dearpapa.kr';
-export const FACTS_UPDATED = '2026-10-23';
-export const FACTS_UPDATED_KO = '2026년 10월 23일';
+export const FACTS_UPDATED = '2026-10-26';
+export const FACTS_UPDATED_KO = '2026년 10월 26일';
 
 export const BRAND = {
   name: 'DEAR PAPA',

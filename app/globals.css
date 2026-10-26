@@ -12,6 +12,29 @@
   unicode-range: U+002C;
 }
 
+/* Metric-matched stand-ins for Pretendard while its slices load (font-display: swap), so the swap
+   does not move text. Hangul advance 1770/2048 em, ascent 1950, descent 494, line gap 0 (upm 2048).
+   unicode-range = the glyphs Pretendard actually has, so characters it lacks fall through as before. */
+@font-face {
+  font-family: 'Pretendard Fallback Apple';
+  src: local('Apple SD Gothic Neo'), local('AppleSDGothicNeo-Regular');
+  size-adjust: 99.96%;
+  ascent-override: 95.25%;
+  descent-override: 24.13%;
+  line-gap-override: 0%;
+  unicode-range: U+20-7e, U+a0-a5, U+a7-ae, U+b0-b4, U+b6-c0, U+c2, U+c6-cb, U+ce-d0, U+d4, U+d7-d9, U+db-dc, U+de-e0, U+e2, U+e6-eb, U+ee-f0, U+f4, U+f7-f9, U+fb-fc, U+fe-ff, U+111, U+126-127, U+131-133, U+138, U+13f-142, U+14a-14b, U+152-153, U+166-167, U+2bc, U+2c7, U+2d0, U+2d8-2dd, U+391-3a1, U+3a3-3a9, U+3b1-3c1, U+3c3-3c9, U+2010, U+2013-2016, U+2018-2019, U+201b-201d, U+201f-2022, U+2025-2026, U+2030, U+2032-2036, U+2039-203c, U+203e, U+2042, U+2074, U+207a-207f, U+2081-2084, U+20a9, U+20ac, U+2103, U+2109, U+2113, U+2116, U+2121-2122, U+2126, U+212b, U+2153, U+215b-215e, U+2160-2169, U+2170-2179, U+2190-2199, U+21b0-21b1, U+21b3-21b4, U+21d0, U+21d2, U+21d4, U+21e7, U+2202, U+2206, U+220f, U+2211, U+221a, U+221e, U+222b, U+2248, U+2260, U+2264-2265, U+226a-226b, U+22ef, U+2460-2473, U+24b6-24cf, U+24eb-24f4, U+25a0-25a1, U+25b2-25b3, U+25b6-25b7, U+25bc-25bd, U+25c0-25c1, U+25c6-25c7, U+25ca-25cb, U+25cf, U+25e6, U+25ef, U+2605-2606, U+2661, U+2665, U+266a, U+2756, U+2776-277f, U+3000-3003, U+3008-3011, U+3014-3019, U+301c, U+301e-301f, U+3041-3093, U+30a1-30f6, U+30fb-30fc, U+3131-3164, U+318d, U+321c, U+3380-3384, U+3388-33ca, U+33cf-33d0, U+33d3, U+33d6, U+33d8, U+33db-33dd, U+ac00-d7a3, U+ff01-ff5e, U+ffe0-ffe1, U+ffe5-ffe6;
+}
+
+@font-face {
+  font-family: 'Pretendard Fallback Noto';
+  src: local('Noto Sans KR'), local('NotoSansKR-Regular'), local('Noto Sans CJK KR'), local('NotoSansCJKkr-Regular');
+  size-adjust: 93.94%;
+  ascent-override: 101.36%;
+  descent-override: 25.68%;
+  line-gap-override: 0%;
+  unicode-range: U+20-7e, U+a0-a5, U+a7-ae, U+b0-b4, U+b6-c0, U+c2, U+c6-cb, U+ce-d0, U+d4, U+d7-d9, U+db-dc, U+de-e0, U+e2, U+e6-eb, U+ee-f0, U+f4, U+f7-f9, U+fb-fc, U+fe-ff, U+111, U+126-127, U+131-133, U+138, U+13f-142, U+14a-14b, U+152-153, U+166-167, U+2bc, U+2c7, U+2d0, U+2d8-2dd, U+391-3a1, U+3a3-3a9, U+3b1-3c1, U+3c3-3c9, U+2010, U+2013-2016, U+2018-2019, U+201b-201d, U+201f-2022, U+2025-2026, U+2030, U+2032-2036, U+2039-203c, U+203e, U+2042, U+2074, U+207a-207f, U+2081-2084, U+20a9, U+20ac, U+2103, U+2109, U+2113, U+2116, U+2121-2122, U+2126, U+212b, U+2153, U+215b-215e, U+2160-2169, U+2170-2179, U+2190-2199, U+21b0-21b1, U+21b3-21b4, U+21d0, U+21d2, U+21d4, U+21e7, U+2202, U+2206, U+220f, U+2211, U+221a, U+221e, U+222b, U+2248, U+2260, U+2264-2265, U+226a-226b, U+22ef, U+2460-2473, U+24b6-24cf, U+24eb-24f4, U+25a0-25a1, U+25b2-25b3, U+25b6-25b7, U+25bc-25bd, U+25c0-25c1, U+25c6-25c7, U+25ca-25cb, U+25cf, U+25e6, U+25ef, U+2605-2606, U+2661, U+2665, U+266a, U+2756, U+2776-277f, U+3000-3003, U+3008-3011, U+3014-3019, U+301c, U+301e-301f, U+3041-3093, U+30a1-30f6, U+30fb-30fc, U+3131-3164, U+318d, U+321c, U+3380-3384, U+3388-33ca, U+33cf-33d0, U+33d3, U+33d6, U+33d8, U+33db-33dd, U+ac00-d7a3, U+ff01-ff5e, U+ffe0-ffe1, U+ffe5-ffe6;
+}
+
 :root {
   color-scheme: light;
 
@@ -44,7 +67,7 @@
 
   /* Type */
   --font-sans:
-    'Dear Papa Comma', 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo',
+    'Dear Papa Comma', 'Pretendard Variable', Pretendard, 'Pretendard Fallback Apple', 'Pretendard Fallback Noto', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo',
     'Noto Sans KR', 'Malgun Gothic', sans-serif;
   --font-pen: var(--font-nanum-pen), 'Nanum Pen Script', cursive;
 

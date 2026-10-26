@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from 'next';
 import { Nanum_Pen_Script } from 'next/font/google';
-import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
 import './globals.css';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { RevealObserver } from '@/components/RevealObserver';
 import { SiteAnalytics } from '@/components/SiteAnalytics';
 import { BRAND, SITE_URL, UNDECIDED, PRODUCT } from '@/lib/facts';
+import { PRETENDARD_CSS_HREF, PRETENDARD_LOADER } from '@/lib/fonts';
 
 // Handwriting face for letters. Korean glyphs arrive as unicode-range slices on demand.
 const pen = Nanum_Pen_Script({
@@ -64,6 +64,12 @@ export default function RootLayout({ children, structuredData }: {
   return (
     <html lang="ko" className={pen.variable} data-scroll-behavior="smooth">
       <head>
+        {/* Pretendard (body face): fetched early, applied without blocking first paint. */}
+        <link rel="preload" href={PRETENDARD_CSS_HREF} as="style" />
+        <script dangerouslySetInnerHTML={{ __html: PRETENDARD_LOADER }} />
+        <noscript>
+          <link rel="stylesheet" href={PRETENDARD_CSS_HREF} />
+        </noscript>
         {structuredData}
         <link rel="describedby" href="/llms.txt" type="text/plain" />
         <link rel="alternate" type="text/markdown" title="LLM Markdown" href="/llm.md" />

@@ -318,3 +318,8 @@ npm run verify:preservation -- --url http://127.0.0.1:3130
 
 - 보존 대상 외 새 글. 콘텐츠 원문 guide-02 v6(content/guide/guide-02-dad-skincare-gift-types-v6.md)의 붙여넣기용 본문을 옮김(해시태그·내부 메모 제외). 첫 브랜드 언급은 「디어파파(DEAR PAPA)는」, 150ml 문장은 「디어파파는」으로 맞춤. Article·BreadcrumbList JSON-LD(Q&A 글이 아니라 FAQPage 없음).
 - sitemap.xml, llms.txt, rss.xml에 추가하고 sitemap·llms 해시만 갱신.
+
+## 2026-10-26 새 저널 /journal/dad-first-allinone
+
+- 보존 대상 외 새 글. 콘텐츠 원문 v2(content/journal/journal-dad-first-allinone-v2-2026-10-26.md, 써니 검수 통과) 본문을 그대로 옮김(헤더·출처 메모 주석 제외, 본문 안 출처 문장은 그대로). 제목(메타)은 확정본 「출시 전 디어파파, 4060 아빠에게 건네는 첫 올인원: 자녀가 골라 드리는 이유 | 디어파파 DEAR PAPA」, H1은 접미사 제외. Article·BreadcrumbList JSON-LD.
+- sitemap.xml, llms.txt, rss.xml에 추가하고 sitemap·llms 해시만 갱신.

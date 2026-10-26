@@ -12,6 +12,14 @@ const validSearches: Array<[string, CampaignId]> = [
   ['?utm_source=instagram&utm_content=reel_product_b&utm_medium=organic_social&utm_campaign=prelaunch_202610', 'ig_product'],
   ['?utm_campaign=prelaunch_202610&utm_source=youtube&utm_medium=organic_social&utm_content=short_letter_a', 'yt_letter'],
   ['?utm_campaign=prelaunch_202610&utm_source=naver&utm_medium=blog&utm_content=blog_product_questions', 'naver_product'],
+  // docs/utm-links.md (2026-10-26)
+  ['?utm_source=instagram&utm_medium=social_profile&utm_campaign=prelaunch_202610&utm_content=bio_link', 'ig_bio'],
+  ['?utm_source=instagram&utm_medium=organic_social&utm_campaign=prelaunch_202610&utm_content=feed_post', 'ig_post'],
+  ['?utm_source=instagram&utm_medium=organic_social&utm_campaign=prelaunch_202610&utm_content=story_link', 'ig_story'],
+  ['?utm_source=youtube&utm_medium=video_description&utm_campaign=prelaunch_202610&utm_content=desc_link', 'yt_desc'],
+  ['?utm_source=naver&utm_medium=blog&utm_campaign=prelaunch_202610&utm_content=blog_post', 'naver_blog'],
+  ['?utm_source=tistory&utm_medium=blog&utm_campaign=prelaunch_202610&utm_content=blog_post', 'tistory_blog'],
+  ['?utm_source=authonnews&utm_medium=referral&utm_campaign=prelaunch_202610&utm_content=article_link', 'authon_article'],
 ];
 
 beforeEach(() => {
@@ -39,6 +47,10 @@ describe('campaignFromSearch', () => {
     '?utm_campaign=other&utm_source=instagram&utm_medium=organic_social&utm_content=reel_letter_a',
     '?utm_campaign=prelaunch_202610&utm_source=instagram&utm_medium=organic_social&utm_content=unknown',
     '?utm_campaign=prelaunch_202610&utm_source=instagram&utm_medium=organic_social',
+    // A valid source/content pair with the wrong medium is still rejected (tuples are exact).
+    '?utm_campaign=prelaunch_202610&utm_source=instagram&utm_medium=organic_social&utm_content=bio_link',
+    '?utm_campaign=prelaunch_202610&utm_source=tistory&utm_medium=blog&utm_content=blog_product_questions',
+    '?utm_campaign=prelaunch_202610&utm_source=Instagram&utm_medium=social_profile&utm_content=bio_link',
   ])('rejects an unapproved or incomplete query %s', (search) => {
     expect(campaignFromSearch(search)).toBeNull();
   });
@@ -67,6 +79,16 @@ describe('CampaignAttribution', () => {
     expect(trackAction).toHaveBeenCalledWith('campaign_landing', { campaign: 'ig_letter' });
     expect(JSON.stringify(vi.mocked(trackAction).mock.calls)).not.toContain('fbclid');
     expect(JSON.stringify(vi.mocked(trackAction).mock.calls)).not.toContain('personal-looking-value');
+  });
+
+  it('never forwards extra UTM keys such as utm_term, even when they carry personal-looking values', () => {
+    window.history.replaceState({}, '', '/about/facts?utm_source=authonnews&utm_medium=referral&utm_campaign=prelaunch_202610&utm_content=article_link&utm_term=hong@example.com&utm_id=123');
+    render(<CampaignAttribution />);
+    expect(trackAction).toHaveBeenCalledWith('campaign_landing', { campaign: 'authon_article' });
+    const sent = JSON.stringify(vi.mocked(trackAction).mock.calls);
+    expect(sent).not.toContain('hong@example.com');
+    expect(sent).not.toContain('utm_');
+    expect(sent).not.toContain('authonnews');
   });
 
   it('deduplicates the same campaign across component mounts but records another valid campaign', () => {

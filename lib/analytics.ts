@@ -1,6 +1,6 @@
 import { track } from '@vercel/analytics';
 import type { LaunchNotifyErrorCode } from './launch-notify';
-import { campaignForCurrentLocation } from './campaign-attribution';
+import { campaignForCurrentLocation, type CampaignId } from './campaign-attribution';
 
 export const ACTIONS = [
   'letter_entry_clicked', 'letter_started', 'letter_card_exported', 'contact_email_copied', 'social_channel_opened',
@@ -17,7 +17,7 @@ export type SiteAction = (typeof ACTIONS)[number];
 export type ActionData = {
   placement?: 'home' | 'product';
   reason?: LaunchNotifyErrorCode;
-  campaign?: 'ig_letter' | 'ig_product' | 'yt_letter' | 'naver_product';
+  campaign?: CampaignId;
 };
 
 const CAMPAIGN_SCOPED_ACTIONS: ReadonlySet<SiteAction> = new Set([

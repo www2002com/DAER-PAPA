@@ -10,7 +10,7 @@
 | letter_started | 편지 입력 시작 | 작성 활동 |
 | letter_card_exported | 카드 내보내기 처리 | OS 저장이나 인쇄 확인 아님 |
 | product_details_after_letter_clicked | 카드 내보내기 요청 처리 후 선택형 제품 링크 클릭 | 구매·신청·공유 완료 아님 |
-| campaign_landing | 승인된 4개 캠페인 URL 조합으로 방문 | 탭 세션당 캠페인별 1회, 고유 고객 아님 |
+| campaign_landing | 승인된 캠페인 URL 조합(docs/utm-links.md)으로 방문 | 탭 세션당 캠페인별 1회, 고유 고객 아님 |
 | launch_notify_viewed | 폼이 50% 이상 보인 첫 시점 | 해당 마운트당 1회, 고유 방문자 아님 |
 | launch_notify_attempted | 클라이언트 이메일·동의 검증 후 API 요청 | 재시도 포함 |
 | launch_notify_submitted | API 성공 응답 | 접수 처리, 이메일 소유 확인·구매 아님 |
@@ -20,7 +20,7 @@
 
 ## 지표
 
-캠페인 도착은 `campaign` 고정 코드 4개(`ig_letter`, `ig_product`, `yt_letter`, `naver_product`)만 전송한다. 승인된 source/medium/campaign/content 조합을 모두 만족해야 하며, 누락·중복·알 수 없는 값은 기록하지 않는다. 원시 URL 쿼리·해시는 기존과 같이 분석 전송 전에 제거한다.
+캠페인 도착은 허용 목록의 `campaign` 고정 코드만 전송한다. 2026-10-24의 4개(`ig_letter`, `ig_product`, `yt_letter`, `naver_product`)에 2026-10-26 채널 링크 7개(`ig_bio`, `ig_post`, `ig_story`, `yt_desc`, `naver_blog`, `tistory_blog`, `authon_article`)를 더했다. 링크별 UTM 값의 정본은 `docs/utm-links.md`이다. 승인된 source/medium/campaign/content 조합을 모두 만족해야 하며, 누락·중복·알 수 없는 값은 기록하지 않는다. 원시 URL 쿼리·해시는 기존과 같이 분석 전송 전에 제거한다.
 
 같은 탭에 보관된 승인 코드로 편지 진입·작성 시작·내보내기·체험 후 제품 탐색·공식 채널 클릭을 캠페인별로 분류한다. 개인 식별자는 추가하지 않으므로 고유 사용자나 구매 퍼널 전환율은 계산하지 않는다. 현재 URL의 승인 코드가 우선하고, 잘못된 UTM은 이전 코드로 대체하지 않는다. 내부 이동은 이어가되 외부·직접 유입으로 판단되는 경우 이전 코드를 지운다. 저장소 차단·리퍼러 누락·SDK 지연으로 분류나 이벤트가 누락될 수 있다. 이는 활동 분류이며 구매·매출 귀속 증명이 아니다.
 

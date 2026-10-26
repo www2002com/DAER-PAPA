@@ -4,31 +4,22 @@ import styles from './Hero.module.css';
 export function Hero() {
   return (
     <section className={styles.hero} aria-labelledby="hero-title">
-      <div className={`container ${styles.layout}`}>
+      <HeroLetterPreview>
         <div className={styles.copy}>
+          <p className={styles.category}>아빠를 위한 올인원 스킨케어 · 레터 올인원</p>
           <h1 id="hero-title" className={styles.title} data-reveal data-reveal-delay="50">아빠의 매일에,<br />딸의 마음을.</h1>
-          <p className={styles.status}><span aria-hidden="true" />아빠를 위한 스킨케어, 출시 준비 중</p>
           <p className={styles.description} data-reveal data-reveal-delay="100">
             매일 쓰는 스킨케어 하나.<br />
             평소에 하지 못했던 말 한 줄.<br />
             마음까지 전하는 아빠 선물을 준비합니다.
           </p>
+          <p className={styles.status}><span aria-hidden="true" />아빠를 위한 스킨케어, 출시 준비 중</p>
           <div className={styles.invitation}>
-          <a className={styles.cta} href="/#letter" data-letter-entry data-track-action="letter_entry_clicked">
-            한 줄 편지 써보기 <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg>
-          </a>
-          <a className={`link-arrow ${styles.secondary}`} href="/#product">제품 알아보기</a>
+            <a className={styles.cta} href="/#product">제품 알아보기</a>
+            <a className={styles.secondary} href="/#letter" data-letter-entry data-track-action="letter_entry_clicked">한 줄 편지 써보기</a>
           </div>
         </div>
-        <figure className={styles.visual} data-reveal="visual" data-reveal-delay="80">
-          <HeroLetterPreview />
-          <figcaption className={styles.caption}>
-            <span>선물 경험 기획 이미지 · 편지 문구 예시</span>
-            <span>용기와 단상자는 개발 중인 디자인 시안입니다.</span>
-            <span>최종 판매 구성은 확정 전입니다.</span>
-          </figcaption>
-        </figure>
-      </div>
+      </HeroLetterPreview>
       <div className={styles.introBand}><div className={`container ${styles.intro}`}>
         <p data-reveal>좋은 선물은,<br /><strong>매일의 안부가 되니까.</strong></p>
         <div data-reveal data-reveal-delay="50">

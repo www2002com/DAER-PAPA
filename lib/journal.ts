@@ -116,6 +116,15 @@ export const JOURNAL: readonly JournalEntry[] = [
     published: '2026-10-23',
     modified: '2026-10-23',
   },
+  {
+    slug: 'dad-first-allinone',
+    href: '/journal/dad-first-allinone',
+    category: '선물 이야기',
+    title: '출시 전 디어파파, 4060 아빠에게 건네는 첫 올인원: 자녀가 골라 드리는 이유',
+    summary: '관심은 있어도 무엇을 골라야 할지 정할 계기가 없어 화장품을 직접 고르지 않는 아빠가 많아요. 그런 아빠에게 필요한 화장품을 자녀가 골라 한 줄 편지와 함께 건네면, 그 선물이 아빠의 매일에 자리 잡는 시작이 될 수 있어요.',
+    published: '2026-10-26',
+    modified: '2026-10-26',
+  },
 ];
 
 /** guide-04 meta/og description and lead (longer than the list summary). */
@@ -219,3 +228,8 @@ export const FRAGRANCE_FREE_FAQ = [
 export const DAD_SKINCARE_GIFT_TYPES_META_TITLE = '아빠 선물 화장품 종류별 비교: 피부 타입·향·사용 단계 | 디어파파 DEAR PAPA';
 export const DAD_SKINCARE_GIFT_TYPES_DESCRIPTION =
   '아빠가 평소 몇 단계를 바르시는지, 피부가 번들거리는 편인지 당기는 편인지, 향을 좋아하시는지 세 가지만 먼저 확인하면 선물 종류가 거의 정해져요.';
+
+/** dad-first-allinone (journal column B v2): meta title is the confirmed title verbatim; description is the 한 줄 답. */
+export const DAD_FIRST_ALLINONE_META_TITLE = '출시 전 디어파파, 4060 아빠에게 건네는 첫 올인원: 자녀가 골라 드리는 이유 | 디어파파 DEAR PAPA';
+export const DAD_FIRST_ALLINONE_DESCRIPTION =
+  '관심은 있어도 무엇을 골라야 할지 정할 계기가 없어 화장품을 직접 고르지 않는 아빠가 많아요. 그런 아빠에게 필요한 화장품을 자녀가 골라 한 줄 편지와 함께 건네면, 그 선물이 아빠의 매일에 자리 잡는 시작이 될 수 있어요.';

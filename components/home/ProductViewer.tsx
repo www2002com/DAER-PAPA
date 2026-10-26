@@ -31,13 +31,16 @@ const VIEWS = [
 type ViewId = (typeof VIEWS)[number]['id'];
 
 function ViewArt({ id, small = false }: { id: ViewId; small?: boolean }) {
-  if (id === 'box') return <Image src="/images/campaign-blue/carton.webp" alt={small ? '' : '레터 올인원 용기와 색상·로고를 맞춘 차분한 블루 슬림 단상자 디자인 시안'} width={1024} height={1536} className={styles.vBox} />;
+  if (id === 'box') return <Image src="/images/campaign-blue/carton.webp" alt={small ? '' : '레터 올인원 용기와 색상·로고를 맞춘 차분한 블루 슬림 단상자 디자인 시안'} width={1024} height={1536} className={styles.vBox}
+    sizes={small ? '64px' : '(max-width: 800px) min(63vw, 380px), min(30vw, 372px)'} />;
   const art = {
     bottle: { file: 'bottle', alt: '파우더블루 배경 위 레터 올인원 블루 용기의 정면 디자인 시안' },
     cap: { file: 'cap', alt: '닫힌 투명 캡과 앞쪽 노즐을 낮은 시점에서 본 레터 올인원 디자인 시안' },
     together: { file: 'packaging', alt: '레터 올인원 용기와 단상자를 나란히 놓고 위에서 본 디자인 시안' },
   }[id];
-  return <Image src={`/images/campaign-blue/${art.file}.webp`} alt={small ? '' : art.alt} width={1672} height={941} className={styles.vCampaign} />;
+  return <Image src={`/images/campaign-blue/${art.file}.webp`} alt={small ? '' : art.alt} width={1672} height={941} className={styles.vCampaign}
+    // object-fit: cover in a near-square frame shows the photo about 1.7-1.9x wider than the frame.
+    sizes={small ? '96px' : '(max-width: 800px) min(169vw - 74px, 1014px), min(83vw, 1134px)'} />;
 }
 
 // Design drafts of the packaging, one at a time. Captions are the brand's own descriptions.

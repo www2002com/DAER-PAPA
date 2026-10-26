@@ -63,7 +63,8 @@ export function HeroLetterPreview() {
       <div className={styles.scene}>
         <Image className={hero.campaign} src="/images/campaign-blue/letter-gift.webp"
           alt="차분한 블루 레터 올인원 용기·단상자와 편지를 함께 놓은 선물 경험 디자인 시안"
-          width={1671} height={941} loading="eager" fetchPriority="high" />
+          width={1671} height={941} preload fetchPriority="high"
+          sizes="(max-width: 700px) calc(100vw - 44px), (max-width: 1360px) 50vw, 660px" />
         <svg className={styles.overlay} viewBox="0 0 1671 941" preserveAspectRatio="xMidYMid slice"
           role="img" aria-label={message.trim() ? `사진 속 편지: ${message}, Sodam` : '사진 속 빈 편지'}>
           {/* The whole photo coordinate space preserves the paper's perspective. */}

@@ -1,0 +1,35 @@
+{
+  "/images/campaign-blue/bottle.webp": [
+    256,
+    640,
+    828,
+    1080,
+    1280
+  ],
+  "/images/campaign-blue/cap.webp": [
+    256,
+    640,
+    828,
+    1080,
+    1280
+  ],
+  "/images/campaign-blue/carton.webp": [
+    256,
+    640,
+    828
+  ],
+  "/images/campaign-blue/letter-gift.webp": [
+    256,
+    640,
+    828,
+    1080,
+    1280
+  ],
+  "/images/campaign-blue/packaging.webp": [
+    256,
+    640,
+    828,
+    1080,
+    1280
+  ]
+}

@@ -6,7 +6,13 @@ const nextConfig: NextConfig = {
   output: 'export',
   // Vercel owns canonical redirects, including legacy aliases with a trailing slash.
   skipTrailingSlashRedirect: true,
-  images: { unoptimized: true },
+  // No image server in a static export: a custom loader maps srcset widths to pre-made WebP copies.
+  images: {
+    loader: 'custom',
+    loaderFile: './lib/image-loader.ts',
+    deviceSizes: [640, 828, 1080, 1280, 1672],
+    imageSizes: [128, 256],
+  },
   reactStrictMode: true,
 };
 

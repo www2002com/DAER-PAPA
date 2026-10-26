@@ -19,7 +19,7 @@ export default function LetterAllInOnePage() {
       <ArticleLayout
         eyebrow="THE PRODUCT"
         title="우리가 준비하고 있는 것"
-        lead={<p>제품명: 디어파파 레터 올인원 / DEAR&nbsp;PAPA LETTER ALL-IN-ONE (출시 준비 중)</p>}
+        lead={<><p>제품명: 디어파파 레터 올인원 / DEAR&nbsp;PAPA LETTER ALL-IN-ONE (출시 준비 중)</p><p>디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요. 가격과 출시일은 아직 정해지지 않았어요.</p></>}
         meta={
           <p>
             최종 업데이트: <time dateTime="2026-10-26">2026년 10월 26일</time>

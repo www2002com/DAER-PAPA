@@ -14,6 +14,7 @@ export function Hero() {
             평소에 하지 못했던 말 한 줄.<br />
             마음까지 전하는 아빠 선물을 준비합니다.
           </p>
+          <p className={styles.fixedSentence}>디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요. 가격과 출시일은 아직 정해지지 않았어요.</p>
           <div className={styles.invitation}>
           <a className={styles.cta} href="/#letter" data-letter-entry data-track-action="letter_entry_clicked">
             한 줄 편지 써보기 <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg>

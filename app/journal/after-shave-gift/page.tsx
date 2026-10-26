@@ -120,6 +120,7 @@ export default function AfterShaveGiftPage() {
         links={[
           { href: '/journal/gift-without-routine', label: '아빠가 뭘 쓰시는지 몰라도 괜찮아요: 스킨케어 선물 고르는 기준' },
           { href: '/journal/fathers-gift-guide', label: '아빠 선물 스킨케어, 일상에 맞게 고르는 법' },
+          { href: '/when-to-use', label: '언제 바르나요: 세안 후, 면도 후, 그리고 선물하는 날' },
           { href: '/about/facts', label: '디어파파 공식 정보' },
           { href: '/#letter', label: '아빠에게 편지 쓰기' },
         ]}

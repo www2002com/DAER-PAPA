@@ -323,3 +323,9 @@ npm run verify:preservation -- --url http://127.0.0.1:3130
 
 - 보존 대상 외 새 글. 콘텐츠 원문 v2(content/journal/journal-dad-first-allinone-v2-2026-10-26.md, 써니 검수 통과) 본문을 그대로 옮김(헤더·출처 메모 주석 제외, 본문 안 출처 문장은 그대로). 제목(메타)은 확정본 「출시 전 디어파파, 4060 아빠에게 건네는 첫 올인원: 자녀가 골라 드리는 이유 | 디어파파 DEAR PAPA」, H1은 접미사 제외. Article·BreadcrumbList JSON-LD.
 - sitemap.xml, llms.txt, rss.xml에 추가하고 sitemap·llms 해시만 갱신.
+
+## 2026-10-26 새 페이지 /when-to-use
+
+- 보존 대상 외 새 페이지 「언제 바르나요」. 공식 사용 장면 두 가지(세안 후 하나로 마무리, 면도 후 바르는)와 선물하는 날(생신·어버이날·명절) 질문을 라이브 문장(`lib/facts.ts`, `lib/product-fit.ts`, 홈 FAQ, `/journal/fathers-gift-guide`, `/journal/dad-first-allinone`)만으로 답함(`lib/when-to-use.ts`). WebPage·FAQPage·BreadcrumbList JSON-LD.
+- sitemap.xml, llms.txt에 추가하고 sitemap·llms 해시만 갱신. 저널 글이 아니라 rss.xml에는 넣지 않음.
+- 내부 링크: `/letter-all-in-one` 하단 「함께 보기」에 링크 한 줄 추가(보존 문단·메타데이터·JSON-LD 변경 없음), `/journal/after-shave-gift`(보존 대상 외) 「함께 확인할 자료」에 한 줄 추가.

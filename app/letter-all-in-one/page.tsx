@@ -111,6 +111,7 @@ export default function LetterAllInOnePage() {
             links={[
               { href: '/about/facts#preparing', label: 'DEAR PAPA(디어파파) 공식 정보' },
               { href: '/#product', label: '홈: 제품 소개' },
+              { href: '/when-to-use', label: '언제 바르나요: 세안 후, 면도 후, 그리고 선물하는 날' },
               { href: '/#letter', label: '아빠에게 편지 쓰기' },
             ]}
           />

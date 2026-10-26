@@ -4,6 +4,7 @@ import { useCallback, useEffect, useId, useRef, useState, type FormEvent, type R
 import { preparedBunnyReply } from '@/lib/bunny-prepared-reply';
 import { BunnyPortrait } from './BunnyPortrait';
 import styles from './LetterBunny.module.css';
+import '@/lib/pen-font'; // ships the Nanum Pen @font-face only with pen-using routes
 
 const greetings = [
   '말로 하기 쑥스러운 마음, 한 줄이면 충분해요.',

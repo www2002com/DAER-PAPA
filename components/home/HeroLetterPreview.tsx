@@ -6,6 +6,7 @@ import { HeroLogo } from './HeroLogo';
 import { LetterBunny } from './LetterBunny';
 import hero from './Hero.module.css';
 import styles from './HeroLetterPreview.module.css';
+import '@/lib/pen-font'; // ships the Nanum Pen @font-face only with pen-using routes
 
 export function HeroLetterPreview() {
   const [message, setMessage] = useState('난 아빠가 행복해졌으면 좋겠어');

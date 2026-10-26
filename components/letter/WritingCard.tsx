@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { LetterCard } from './LetterCard';
 import { ensureGlyphs, layoutLetter, type Layout } from './card';
+import '@/lib/pen-font'; // ships the Nanum Pen @font-face only with pen-using routes
 
 type Props = {
   text: string;

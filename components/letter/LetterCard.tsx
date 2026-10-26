@@ -1,6 +1,7 @@
 import { Logo, LogoMark } from '@/components/Logo';
 import { CARD, TIERS, INK, INK_SOFT, PAPER, FRAME, LOGO_INK, BACK_PAPER, type Layout } from './card';
 import styles from './LetterCard.module.css';
+import '@/lib/pen-font'; // ships the Nanum Pen @font-face only with pen-using routes
 
 type Props = {
   text: string;

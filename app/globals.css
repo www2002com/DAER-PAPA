@@ -46,6 +46,8 @@
   --font-sans:
     'Dear Papa Comma', 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo',
     'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  /* Same family list next/font generates for lib/pen-font.ts; its @font-face rules ship only with pen-using routes. */
+  --font-nanum-pen: 'Nanum Pen Script', 'Nanum Pen Script Fallback';
   --font-pen: var(--font-nanum-pen), 'Nanum Pen Script', cursive;
 
   --fs-display: clamp(2.6rem, 1.55rem + 4.9vw, 6.25rem);

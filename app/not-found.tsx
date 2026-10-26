@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import NotFoundPenLine from '@/components/NotFoundPenLine';
 
 export const metadata = { title: { absolute: '페이지를 찾을 수 없어요 | DEAR PAPA 디어파파' } };
 
@@ -9,9 +10,7 @@ export default function NotFound() {
         404
       </p>
       <h1 style={{ marginTop: 20, fontSize: 'var(--fs-h2)' }}>찾으시는 페이지가 없어요.</h1>
-      <p className="pen" style={{ marginTop: 24, fontSize: '2rem', color: 'var(--ink-2)' }}>
-        대신, 아빠에게 한 줄 써 보는 건 어때요?
-      </p>
+      <NotFoundPenLine />
       <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', marginTop: 40 }}>
         <a href="/#letter" className="btn">
           편지 쓰기

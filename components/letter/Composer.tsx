@@ -26,6 +26,7 @@ import {
 import { STARTERS } from './starters';
 import { trackAction } from '@/lib/analytics';
 import styles from './Composer.module.css';
+import '@/lib/pen-font'; // ships the Nanum Pen @font-face only with pen-using routes
 
 /** Helper line under the letter label; always visible (not tied to launch-notify). */
 export const LETTER_REASSURE = '잘 쓰지 않아도 괜찮아요. 아빠는 문장보다 마음을 먼저 읽어요.';

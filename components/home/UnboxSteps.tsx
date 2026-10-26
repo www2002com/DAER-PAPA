@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import styles from './Product.module.css';
+import '@/lib/pen-font'; // ships the Nanum Pen @font-face only with pen-using routes
 
 const STEPS = [
   { id: 'card', label: '편지 카드' },

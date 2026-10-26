@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import { Nanum_Pen_Script } from 'next/font/google';
 import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
 import './globals.css';
 import { SiteHeader } from '@/components/SiteHeader';
@@ -7,15 +6,6 @@ import { SiteFooter } from '@/components/SiteFooter';
 import { RevealObserver } from '@/components/RevealObserver';
 import { SiteAnalytics } from '@/components/SiteAnalytics';
 import { BRAND, SITE_URL, UNDECIDED, PRODUCT } from '@/lib/facts';
-
-// Handwriting face for letters. Korean glyphs arrive as unicode-range slices on demand.
-const pen = Nanum_Pen_Script({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-  preload: false,
-  variable: '--font-nanum-pen',
-});
 
 const DESCRIPTION = `${BRAND.definition} ${UNDECIDED.status} 제품명: ${PRODUCT.name}. ${UNDECIDED.sizeLine}`;
 
@@ -62,7 +52,7 @@ export default function RootLayout({ children, structuredData }: {
   structuredData: React.ReactNode;
 }) {
   return (
-    <html lang="ko" className={pen.variable} data-scroll-behavior="smooth">
+    <html lang="ko" data-scroll-behavior="smooth">
       <head>
         {structuredData}
         <link rel="describedby" href="/llms.txt" type="text/plain" />

@@ -323,3 +323,9 @@ npm run verify:preservation -- --url http://127.0.0.1:3130
 
 - 보존 대상 외 새 글. 콘텐츠 원문 v2(content/journal/journal-dad-first-allinone-v2-2026-10-26.md, 써니 검수 통과) 본문을 그대로 옮김(헤더·출처 메모 주석 제외, 본문 안 출처 문장은 그대로). 제목(메타)은 확정본 「출시 전 디어파파, 4060 아빠에게 건네는 첫 올인원: 자녀가 골라 드리는 이유 | 디어파파 DEAR PAPA」, H1은 접미사 제외. Article·BreadcrumbList JSON-LD.
 - sitemap.xml, llms.txt, rss.xml에 추가하고 sitemap·llms 해시만 갱신.
+
+## 2026-10-26 새 페이지 /about/making
+
+- 보존 대상 외 새 페이지 「디어파파 만드는 기록」. 사이트에 이미 공개한 사실만 처음 올린 날짜(main 이력, KST) 순으로 정리. 문장은 `lib/facts.ts` 원문 그대로(`lib/making.ts`), 창업·가족 이야기와 브랜드 시작 이야기·로고 이야기는 제외. 상단에 「출시 전」「가격·전성분·출시일 미정」 안내. WebPage(dateModified)·ItemList·BreadcrumbList JSON-LD.
+- sitemap.xml, llms.txt에 추가하고 sitemap·llms 해시만 갱신. 저널 글이 아니라 rss.xml에는 넣지 않음.
+- 내부 링크: `/journal/dad-first-allinone`(보존 대상 외) 「함께 확인할 자료」에 한 줄 추가. `/about/facts`(보존 대상)는 손대지 않음.

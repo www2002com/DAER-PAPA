@@ -145,8 +145,8 @@ export const DAD_ALLINONE_HOW_TO_CHOOSE_DESCRIPTION =
 
 /** dad-allinone-how-to-choose visible FAQ; the FAQPage JSON-LD is built from this, so both match exactly. */
 export const DAD_ALLINONE_HOW_TO_CHOOSE_FAQ = [
-  { q: '50대 아빠에게 올인원 하나면 충분한가요?', a: '여러 단계를 챙기지 않는 아빠라면 세안 후 한 가지로 마무리하는 올인원이 쓰기 편합니다. 낮에는 자외선 차단제를 따로 바르세요.' },
-  { q: '60대 아빠도 같은 기준으로 고르면 되나요?', a: '네. 나이보다 피부 타입, 향료, 에탄올, 단계 수, 전성분을 기준으로 보면 됩니다.' },
+  { q: '아빠에게 올인원 하나면 충분한가요?', a: '여러 단계를 챙기지 않는 아빠라면 세안 후 한 가지로 마무리하는 올인원이 쓰기 편합니다. 낮에는 자외선 차단제를 따로 바르세요.' },
+  { q: '아빠 나이에 따라 기준이 달라지나요?', a: '아니요. 나이보다 피부 타입, 향료, 에탄올, 단계 수, 전성분을 기준으로 보면 됩니다.' },
   { q: '올인원과 스킨로션 세트 중 무엇이 나을까요?', a: '한 단계만 바르고 싶다면 올인원, 단계별로 나눠 바르는 데 익숙하다면 스킨·로션이 맞습니다.' },
   { q: '디어파파 레터 올인원의 전성분은 무엇인가요?', a: '아직 확정되지 않았습니다. 정확한 전성분은 제조사 샘플이 나온 뒤 공개합니다.' },
   { q: '레터 올인원의 가격과 출시일은요?', a: '아직 확정되지 않았습니다.' },
@@ -176,10 +176,10 @@ export const AFTER_SHAVE_GIFT_META_DESCRIPTION =
   '면도 후 바르는 아빠 스킨케어는 향이 있는지, 에탄올이 들어 있는지, 한 단계로 바르기 쉬운지부터 보세요. 애프터셰이브·로션과 올인원의 차이도 정리했습니다.';
 export const DAD_GIFT_SKINCARE_GUIDE_META_TITLE = '아빠 선물 화장품 고르는 법 7가지 | 디어파파 DEAR PAPA';
 export const DAD_GIFT_SKINCARE_GUIDE_META_DESCRIPTION =
-  '50대·60대 아빠 생신이나 어버이날 화장품 선물은 피부 타입(지성·건성·민감), 향, 에탄올, 바르는 단계 수, 용량, 전성분 순서로 보면 고르기 쉽습니다.';
-export const DAD_ALLINONE_HOW_TO_CHOOSE_META_TITLE = '50대 남자 올인원 고르는 법 | 디어파파 DEAR PAPA';
+  '아빠 생신이나 어버이날 화장품 선물은 피부 타입(지성·건성·민감), 향, 에탄올, 바르는 단계 수, 용량, 전성분 순서로 보면 고르기 쉽습니다.';
+export const DAD_ALLINONE_HOW_TO_CHOOSE_META_TITLE = '남자 올인원 고르는 법 | 디어파파 DEAR PAPA';
 export const DAD_ALLINONE_HOW_TO_CHOOSE_META_DESCRIPTION =
-  '50대·60대 남자 올인원은 지성·건성·민감 피부 타입, 무향인지, 에탄올이 들어 있는지, 몇 단계로 바르는지, 면도 후 바르기 편한지, 전성분 순서로 확인하면 고르기 쉽습니다.';
+  '남자 올인원은 지성·건성·민감 피부 타입, 무향인지, 에탄올이 들어 있는지, 몇 단계로 바르는지, 면도 후 바르기 편한지, 전성분 순서로 확인하면 고르기 쉽습니다.';
 
 /** after-shave-gift FAQ: the visible Q&A and the FAQPage JSON-LD both render from this array. */
 export const AFTER_SHAVE_GIFT_FAQ = [

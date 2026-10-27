@@ -31,6 +31,10 @@ export function LetterSection() {
             {LETTER.printPlan}
           </p>
         </div>
+
+        <p className={styles.sodam}>
+          <a className="link-arrow" href="/sodam">토끼 Sodam 소개 보기</a>
+        </p>
       </div>
     </section>
   );

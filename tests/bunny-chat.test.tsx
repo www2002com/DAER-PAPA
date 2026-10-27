@@ -72,7 +72,7 @@ describe('letter bunny AI conversation', () => {
     await waitFor(() => expect(screen.getByRole('status').textContent).toBe('아빠, 오늘도 고마워요. 제 마음이 전해졌으면 좋겠어요.'));
     expect(payload).toEqual({ messages: [{ role: 'user', content: '고마움을 담은 한 줄을 추천해 줘' }] });
     expect(JSON.stringify(payload)).not.toContain('PRIVATE SAVED LETTER');
-    expect(screen.getByText('Sodam의 답변')).toBeTruthy();
+    expect(screen.getByText('AI 답변')).toBeTruthy();
   });
 
   it('keeps failed input for retry and does not present connection errors as AI answers', async () => {
@@ -82,7 +82,7 @@ describe('letter bunny AI conversation', () => {
     fireEvent.click(screen.getByRole('button', { name: '물어보기' }));
     await waitFor(() => expect(screen.getByRole('alert').textContent).toContain('연결을 준비')); 
     expect((screen.getByRole('textbox', { name: 'Sodam에게 물어볼 말' }) as HTMLTextAreaElement).value).toBe('아빠 생신 편지를 도와줘');
-    expect(screen.queryByText('Sodam의 답변')).toBeNull();
+    expect(screen.queryByText('AI 답변')).toBeNull();
     expect(screen.getByText('Sodam의 기본 답변')).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Sodam 움직임 다시 보기' }).getAttribute('data-speaking')).toBe('false');
   });
@@ -143,7 +143,7 @@ describe('letter bunny AI conversation', () => {
     fireEvent.keyDown(input, { key: 'Enter' });
     await waitFor(() => expect(screen.getByRole('status').textContent).toContain('서운'));
     expect(screen.getByText('Sodam의 기본 답변')).toBeTruthy();
-    expect(screen.queryByText('Sodam의 답변')).toBeNull();
+    expect(screen.queryByText('AI 답변')).toBeNull();
   });
 
   it('shows a deliberate external help link, stops nudging, and retains support-only context', async () => {
@@ -159,7 +159,7 @@ describe('letter bunny AI conversation', () => {
     expect(link.getAttribute('href')).toBe('https://support.example/help');
     expect(link.getAttribute('rel')).toBe('noopener noreferrer');
     expect(screen.getByText('도움 안내')).toBeTruthy();
-    expect(screen.queryByText('Sodam의 답변')).toBeNull();
+    expect(screen.queryByText('AI 답변')).toBeNull();
     fireEvent.click(screen.getByRole('button', { name: '질문창 닫기' }));
     const bunny = screen.getByRole('button', { name: /천천히 해도 괜찮아/ });
     expect(bunny.getAttribute('data-nudging')).toBe('false');

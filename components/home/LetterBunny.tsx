@@ -305,7 +305,7 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
         </div>
       </div>
       {answer && <div ref={responseElement} className={styles.response}>
-            <span className={styles.responseLabel}>{guidance ? '도움 안내' : prepared ? 'Sodam의 기본 답변' : 'Sodam의 답변'}</span>
+            <span className={styles.responseLabel}>{guidance ? '도움 안내' : prepared ? 'Sodam의 기본 답변' : 'AI 답변'}</span>
             <p className={styles.responseText} aria-hidden="true">{displayed}<span className={speaking ? styles.caret : undefined} /></p>
             <p className="sr-only" role="status" aria-atomic="true">{speaking ? 'Sodam이 답변하고 있어요.' : answer}</p>
             {prepared && <p className={styles.helpNote}>미리 준비한 답변이에요. AI가 생성한 답변은 아니에요.</p>}
@@ -324,7 +324,7 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
           <label htmlFor={inputId}>Sodam에게 물어볼 말</label>
           <button type="button" className={styles.close} aria-label="질문창 닫기" onClick={closeQuestion}>닫기 <span aria-hidden="true">×</span></button>
         </div>
-        <p className={styles.scope}>Sodam은 디어파파의 토끼 캐릭터예요. 아빠에게 쓸 한 줄 편지를 곁에서 거들어 줘요. 전문 상담을 대신하지 않아요.</p>
+        <p className={styles.scope}>아빠에게 하고 싶은 말, 여기서 편하게 정리해 봐요. 답변은 DEAR PAPA가 제공하는 무료 AI가 해요. 전문 상담을 대신하지 않아요.</p>
         <textarea ref={input} id={inputId} value={question} onChange={(event) => setQuestion(event.target.value)}
           onKeyDown={(event) => {
             if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing && event.keyCode !== 229) {
@@ -342,7 +342,7 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
           <span>{question.length} / 300</span>
           <button type="submit" disabled={!question.trim() || loading || speaking}>{loading ? '답변 기다리는 중' : '물어보기'}<span aria-hidden="true">↗</span></button>
         </div>
-        <p id={`${inputId}-privacy`} className={styles.privacy}>물어보면 여기 입력한 질문과 최근 대화만 Google Gemini에 전송돼요. 이름·연락처 등 개인정보는 적지 마세요. 답변은 틀릴 수 있어요. <a href="/privacy">개인정보 처리 안내</a></p>
+        <p id={`${inputId}-privacy`} className={styles.privacy}>AI 답변을 요청하면 여기 입력한 질문과 최근 대화만 Google Gemini에 전송돼요. 이름·연락처 등 개인정보는 적지 마세요. AI 답변은 틀릴 수 있어요. <a href="/privacy">개인정보 처리 안내</a></p>
       </form>}
     </div>
   );

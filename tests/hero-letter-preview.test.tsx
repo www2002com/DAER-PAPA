@@ -119,7 +119,7 @@ describe('hero letter preview', () => {
     expect(fetcher).not.toHaveBeenCalled();
     fireEvent.compositionEnd(input);
     fireEvent.keyDown(input, { key: 'Enter' });
-    await waitFor(() => expect(screen.getByText('Sodam의 답변')).toBeTruthy());
+    await waitFor(() => expect(screen.getByText('AI 답변')).toBeTruthy());
     expect(fetcher).toHaveBeenCalledOnce();
     await waitFor(() => expect(Element.prototype.scrollIntoView).toHaveBeenCalledWith({ block: 'nearest', behavior: 'auto' }));
     expect(JSON.parse(fetcher.mock.calls[0][1]!.body as string)).toEqual({ messages: [{ role: 'user', content: '아빠에게 서운해' }] });

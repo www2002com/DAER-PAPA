@@ -41,3 +41,10 @@
 .notes :global(.tag) {
   margin-top: 1px;
 }
+
+.sodam {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  color: var(--ink);
+}

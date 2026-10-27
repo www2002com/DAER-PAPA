@@ -1,5 +1,21 @@
 # Rabbit image
 
+## Current asset — Sodam v2 official cut, 2026-10-27
+
+대표님 confirmed Sodam v2 (DESIGN SHEET 01, 2026-10-27). The site now uses the
+official basic-character cut `brand/character/sodam-v2-basic.png` (465×585,
+ivory #FAF7F0 paper background) as `public/images/sodam-v2/sodam-v2-basic.webp`
+(WebP quality 90, 30,102 bytes). Only the encoding changed: no re-cropping,
+recoloring or new art, and C2PA/EXIF/XMP metadata are not carried over.
+
+The v2 sheet rules are no grid background and no bold outline, so the previous
+fine-grid v3 clip layers no longer fit. `BunnyPortrait` now shows the whole cut
+unchanged and keeps only the blink (cheek texture from the same image behind
+ink lids at the v2 eye positions). Ear, arm and foot part motions are removed
+because the opaque cut cannot be split without new art; the whole-character
+stroll, bounce, speaking and greeting motions in `LetterBunny` are unchanged.
+Earlier assets stay in `public/images/` untouched.
+
 ## Subtle arm and foot gestures — 2026-10-25
 
 The unchanged v3 illustration now supplies separate arm and foot clip layers.

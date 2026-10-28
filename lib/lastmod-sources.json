@@ -1,0 +1,92 @@
+{
+  "$schema_comment": "Page-specific sources for sitemap lastmod. Shared chrome is intentionally omitted so layout/header/footer/globals/menu edits do not bump every URL.",
+  "omitShared": [
+    "app/layout.tsx",
+    "app/globals.css",
+    "components/SiteHeader.tsx",
+    "components/SiteFooter.tsx",
+    "lib/menu.ts",
+    "lib/preserved-site.json",
+    "lib/preserved-metadata.ts",
+    "vercel.json"
+  ],
+  "omitSharedNote": "lib/preserved-site.json holds factsBodyHtml and per-page metadata baselines; it is omitted as a global source because unrelated page baseline edits would bump every mapped URL. /about/facts tracks public/facts.json (and the facts route files) instead. After editing factsBodyHtml, also update public/facts.json or bump /about/facts in lib/lastmod.json when running scripts/update-lastmod.mjs.",
+  "pages": {
+    "/": [
+      "app/page.tsx",
+      "app/@structuredData/page.tsx",
+      "components/home",
+      "lib/facts.ts"
+    ],
+    "/journal": [
+      "app/journal/page.tsx",
+      "app/@structuredData/journal/page.tsx",
+      "lib/journal.ts"
+    ],
+    "/journal/brand-identity": [
+      "app/journal/brand-identity",
+      "app/@structuredData/journal/brand-identity"
+    ],
+    "/journal/development-principles": [
+      "app/journal/development-principles",
+      "app/@structuredData/journal/development-principles"
+    ],
+    "/journal/fathers-gift-guide": [
+      "app/journal/fathers-gift-guide",
+      "app/@structuredData/journal/fathers-gift-guide"
+    ],
+    "/journal/dad-gift-guide": [
+      "app/journal/dad-gift-guide",
+      "app/@structuredData/journal/dad-gift-guide"
+    ],
+    "/journal/gift-without-routine": [
+      "app/journal/gift-without-routine",
+      "app/@structuredData/journal/gift-without-routine"
+    ],
+    "/journal/after-shave-gift": [
+      "app/journal/after-shave-gift",
+      "app/@structuredData/journal/after-shave-gift"
+    ],
+    "/journal/dad-gift-skincare-guide": [
+      "app/journal/dad-gift-skincare-guide",
+      "app/@structuredData/journal/dad-gift-skincare-guide"
+    ],
+    "/journal/dad-allinone-how-to-choose": [
+      "app/journal/dad-allinone-how-to-choose",
+      "app/@structuredData/journal/dad-allinone-how-to-choose",
+      "lib/journal.ts"
+    ],
+    "/journal/allinone-3-questions": [
+      "app/journal/allinone-3-questions",
+      "app/@structuredData/journal/allinone-3-questions"
+    ],
+    "/journal/fragrance-alcohol-free-allinone": [
+      "app/journal/fragrance-alcohol-free-allinone",
+      "app/@structuredData/journal/fragrance-alcohol-free-allinone"
+    ],
+    "/journal/dad-skincare-gift-types": [
+      "app/journal/dad-skincare-gift-types",
+      "app/@structuredData/journal/dad-skincare-gift-types"
+    ],
+    "/journal/dad-first-allinone": [
+      "app/journal/dad-first-allinone",
+      "app/@structuredData/journal/dad-first-allinone"
+    ],
+    "/letter-all-in-one": [
+      "app/letter-all-in-one",
+      "app/@structuredData/letter-all-in-one",
+      "lib/product-fit.ts",
+      "lib/facts.ts"
+    ],
+    "/about/facts": [
+      "app/about/facts",
+      "app/@structuredData/about/facts",
+      "public/facts.json",
+      "lib/facts.ts"
+    ],
+    "/press": [
+      "app/press",
+      "app/@structuredData/press"
+    ]
+  }
+}

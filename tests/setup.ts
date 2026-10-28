@@ -1,7 +1,10 @@
 import { afterEach, beforeEach, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
 
+const isDom = typeof localStorage !== 'undefined' && typeof window !== 'undefined';
+
 beforeEach(() => {
+  if (!isDom) return;
   localStorage.clear();
   // jsdom has no canvas renderer or media preferences; persistence tests do not need either.
   vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(null);
@@ -12,4 +15,7 @@ beforeEach(() => {
   Element.prototype.scrollIntoView = vi.fn();
 });
 
-afterEach(() => { cleanup(); vi.restoreAllMocks(); });
+afterEach(() => {
+  if (isDom) cleanup();
+  vi.restoreAllMocks();
+});

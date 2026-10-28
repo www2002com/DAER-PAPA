@@ -37,7 +37,9 @@ export function Product() {
               <summary>현재 기획과 준비 상태<span aria-hidden="true" /></summary>
               <dl className={styles.specs}>{DETAILS.map(([k,v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
               <p className={styles.notice}>용기: {PRODUCT.container}</p>
-              <p className={styles.notice}>미백·주름 개선 2중 기능성화장품 심사를 준비하고 있습니다. {PRODUCT.resultsFirst} {UNDECIDED.status}</p>
+              <p className={styles.notice}>미백·주름 개선 2중 기능성화장품 심사를 준비하고 있습니다.{'\u0020'}</p>
+              <p className={styles.notice}>{PRODUCT.resultsFirst}{'\u0020'}</p>
+              <p className={styles.notice}>{UNDECIDED.status}</p>
             </details>
             <details className={styles.details}>
               <summary>편지와 함께 건네는 선물 구성<span aria-hidden="true" /></summary>

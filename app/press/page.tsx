@@ -9,6 +9,12 @@ const EXTERNAL = { target: '_blank', rel: 'noopener noreferrer' } as const;
 /** Links to articles written from DEAR PAPA-provided materials. Not independent press. */
 const ARTICLES = [
   {
+    date: '2026-10-29',
+    dateKo: '2026년 10월 29일',
+    href: 'https://authonnews.com/article/dear-papa-brand-name-slogan-meaning',
+    title: '출시 전 디어파파, 아빠의 매일에 딸의 마음을: 브랜드 이름과 슬로건에 담은 뜻 | 디어파파 DEAR PAPA',
+  },
+  {
     date: '2026-10-24',
     dateKo: '2026년 10월 24일',
     href: 'https://authonnews.com/article/dear-papa-all-in-one-skincare-2',
@@ -55,7 +61,7 @@ export default function PressPage() {
         title="디어파파가 제공한 자료를 바탕으로 쓴 기사"
         meta={
           <p>
-            최종 업데이트: <time dateTime="2026-10-28">2026년 10월 28일</time>
+            최종 업데이트: <time dateTime="2026-10-29">2026년 10월 29일</time>
           </p>
         }
         footer={

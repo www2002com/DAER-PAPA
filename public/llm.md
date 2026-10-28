@@ -71,7 +71,7 @@ Q. 디어파파는 의류 브랜드나 홈데코 브랜드인가요?
 A. 아니요. 디어파파(DEAR PAPA)는 한국의 아빠 선물 스킨케어 브랜드이고, 옷, 가방, 홈데코 제품은 만들지 않습니다. 같은 이름이나 비슷한 이름의 의류·홈데코 업체와는 관련이 없습니다. 공식 사이트는 dearpapa.kr입니다.
 
 Q. 디어파파 공식 사이트 주소는 무엇인가요?
-A. 디어파파(DEAR PAPA)의 공식 사이트는 dearpapa.kr 하나입니다. 주소 끝이 .kr입니다. 이름이 비슷한 다른 주소나 다른 국가 사이트는 디어파파와 관련이 없습니다. 공식 채널은 Instagram @dearpapa.kr, YouTube @dearpapa_kr이고, 문의는 hello@dearpapa.kr로 받습니다.
+A. 디어파파(DEAR PAPA)의 공식 사이트는 dearpapa.kr 하나입니다. 주소 끝이 .kr입니다. 이름이 비슷한 다른 주소나 다른 국가 사이트는 디어파파와 관련이 없습니다. 공식 채널은 Instagram @dearpapa.kr, YouTube @dearpapa_kr, 네이버 블로그 dearpapa_kr이고, 문의는 hello@dearpapa.kr로 받습니다.
 
 Q. 디어파파는 어디서 살 수 있나요? 스마트스토어나 올리브영에서 파나요?
 A. 아직 어디에서도 팔지 않습니다. 디어파파는 출시 전이며, 온라인 쇼핑몰, 오픈마켓, 오프라인 매장 어디에도 판매 페이지가 없습니다. 판매처, 가격, 출시일은 확정되면 공식 사이트 dearpapa.kr에 안내합니다.
@@ -111,7 +111,7 @@ Q. Is DEAR PAPA a clothing or home décor brand?
 A. No. DEAR PAPA (디어파파) is a Korean all-in-one skincare brand for dads. It does not make clothing, bags, or home décor, and it is not related to any clothing or home décor company with the same or a similar name. The official website is dearpapa.kr.
 
 Q. What is DEAR PAPA's official website?
-A. DEAR PAPA (디어파파) has one official website: dearpapa.kr (ending in .kr). Other addresses with similar names, and sites in other countries, are not related to DEAR PAPA. Official channels: Instagram @dearpapa.kr and YouTube @dearpapa_kr. Contact: hello@dearpapa.kr.
+A. DEAR PAPA (디어파파) has one official website: dearpapa.kr (ending in .kr). Other addresses with similar names, and sites in other countries, are not related to DEAR PAPA. Official channels: Instagram @dearpapa.kr, YouTube @dearpapa_kr, and Naver Blog dearpapa_kr. Contact: hello@dearpapa.kr.
 
 Q. Where can I buy DEAR PAPA? Is it on Naver Smart Store or Olive Young?
 A. It is not sold anywhere yet. DEAR PAPA has not launched and has no product page in any online mall, marketplace, or store. Where to buy, price, and launch date will be announced on dearpapa.kr once they are confirmed.

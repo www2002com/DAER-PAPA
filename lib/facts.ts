@@ -160,9 +160,9 @@ export const FACTS_FAQ_QUERY_REVERSE: { q: string; a: string; qEn: string; aEn: 
   },
   {
     q: "디어파파 공식 사이트 주소는 무엇인가요?",
-    a: "디어파파(DEAR PAPA)의 공식 사이트는 dearpapa.kr 하나입니다. 주소 끝이 .kr입니다. 이름이 비슷한 다른 주소나 다른 국가 사이트는 디어파파와 관련이 없습니다. 공식 채널은 Instagram @dearpapa.kr, YouTube @dearpapa_kr이고, 문의는 hello@dearpapa.kr로 받습니다.",
+    a: "디어파파(DEAR PAPA)의 공식 사이트는 dearpapa.kr 하나입니다. 주소 끝이 .kr입니다. 이름이 비슷한 다른 주소나 다른 국가 사이트는 디어파파와 관련이 없습니다. 공식 채널은 Instagram @dearpapa.kr, YouTube @dearpapa_kr, 네이버 블로그 dearpapa_kr이고, 문의는 hello@dearpapa.kr로 받습니다.",
     qEn: "What is DEAR PAPA's official website?",
-    aEn: "DEAR PAPA (디어파파) has one official website: dearpapa.kr (ending in .kr). Other addresses with similar names, and sites in other countries, are not related to DEAR PAPA. Official channels: Instagram @dearpapa.kr and YouTube @dearpapa_kr. Contact: hello@dearpapa.kr.",
+    aEn: "DEAR PAPA (디어파파) has one official website: dearpapa.kr (ending in .kr). Other addresses with similar names, and sites in other countries, are not related to DEAR PAPA. Official channels: Instagram @dearpapa.kr, YouTube @dearpapa_kr, and Naver Blog dearpapa_kr. Contact: hello@dearpapa.kr.",
   },
   {
     q: "디어파파는 어디서 살 수 있나요? 스마트스토어나 올리브영에서 파나요?",

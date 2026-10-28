@@ -12,6 +12,17 @@
   unicode-range: U+002C;
 }
 
+/* Critical first-screen Pretendard (variable). Glyphs from home + /letter-all-in-one
+   first viewport only — see public/fonts/pretendard-critical-chars.txt.
+   Full Hangul slices load non-blocking via PretendardFullLoader. */
+@font-face {
+  font-family: 'Pretendard Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 45 920;
+  src: url('/fonts/pretendard-critical.woff2') format('woff2-variations');
+}
+
 /* Metric-matched stand-ins while Pretendard slices load (font-display: swap already in official CSS).
    Keeps swap from shifting layout. unicode-range matches Pretendard's cmap coverage. */
 @font-face {

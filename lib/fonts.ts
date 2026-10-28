@@ -1,19 +1,21 @@
 /**
- * Pretendard is imported from app/layout.tsx
- * (`pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css`).
- * Next emits unicode-range slices under `/_next/static/media`. Official CSS uses font-display: swap.
+ * Pretendard loading strategy (2026-10-28 font-subset PR):
  *
- * First-viewport Hangul/Latin slices (variable face): 81, 84, 85, 87, 88, 89, 90, 91.
+ * 1. Critical subset — `public/fonts/pretendard-critical.woff2` (~60KB variable),
+ *    glyphs from home + /letter-all-in-one first viewport (see pretendard-critical-chars.txt).
+ *    Declared in globals.css; preloaded from app/layout.tsx.
+ * 2. Full dynamic-subset CSS — copied to public/fonts by scripts/prepare-fonts.mjs and
+ *    injected non-blocking by PretendardFullLoader (media=print→all). Letter input can
+ *    request any Hangul unicode-range slice after this CSS applies.
+ * 3. Metric fallbacks in globals.css (Apple / Noto size-adjust) keep swap from shifting layout.
  *
- * Local Lighthouse 12.8.2 mobile/simulate (5-run median, `npx serve` of `out/`) — LCP element is
- * the hero campaign image:
- * - Preloading those 8 woff2 files: LCP regressed (bandwidth vs image).
- * - public/fonts + root <head> <link>: App Router duplicated links; RB/LCP regressed.
- * - Idle-deferring the CSS import: LCP similar, but TBT median jumped (~60→185ms).
+ * Earlier attempts on this branch (preload of official slices 81/84/85/87–91 as 8 files;
+ * idle-deferred Next CSS import) regressed LCP or TBT under simulate — documented below.
  *
- * Shipped: keep the Next CSS import; add metric-matched Apple/Noto fallbacks in globals.css so
- * font-display:swap does not shift layout. Unused dynamic-subset files are kept — letter input
- * can need any Hangul slice.
+ * Official dynamic-subset ids that cover typical first-viewport Hangul/Latin (reference only):
+ * 81, 84, 85, 87, 88, 89, 90, 91.
  */
 export const PRETENDARD_VERSION = '1.3.9';
 export const PRETENDARD_CRITICAL_SUBSETS = [81, 84, 85, 87, 88, 89, 90, 91] as const;
+export const PRETENDARD_CRITICAL_HREF = '/fonts/pretendard-critical.woff2';
+export const PRETENDARD_FULL_CSS_HREF = '/fonts/pretendardvariable-dynamic-subset.css';

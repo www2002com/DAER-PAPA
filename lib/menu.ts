@@ -87,7 +87,7 @@ export const MENU_COPY: Record<MenuLanguage, MenuCopy> = {
       productDetail: 'Explore the product', principles: 'Development principles',
       identity: 'Our brand & logo', giftMeaning: 'Why skincare with a letter?',
       writeLetter: 'Write to Dad', questions: 'Frequently asked questions', officialFacts: 'Official facts',
-      dadGuide: 'Gifts for Dad', fatherGuide: 'A guide to gifts for fathers', press: 'Media coverage', contact: 'Email us',
+      dadGuide: 'Gifts for Dad', fatherGuide: 'A guide to gifts for fathers', press: 'Articles from DEAR PAPA materials', contact: 'Email us',
     },
   },
   zh: {
@@ -109,7 +109,7 @@ export const MENU_COPY: Record<MenuLanguage, MenuCopy> = {
       productDetail: '了解产品', principles: '产品研发原则',
       identity: '品牌与标志', giftMeaning: '为什么将护肤品与信件相结合？',
       writeLetter: '给爸爸写一封信', questions: '常见问题解答', officialFacts: '官方信息',
-      dadGuide: '送给爸爸的礼物指南', fatherGuide: '父亲礼物选购指南', press: '媒体报道', contact: '邮件咨询',
+      dadGuide: '送给爸爸的礼物指南', fatherGuide: '父亲礼物选购指南', press: '基于 DEAR PAPA 提供资料撰写的文章', contact: '邮件咨询',
     },
   },
   ja: {
@@ -131,7 +131,7 @@ export const MENU_COPY: Record<MenuLanguage, MenuCopy> = {
       productDetail: '製品について詳しく', principles: '製品開発の方針',
       identity: 'ブランドとロゴ', giftMeaning: 'スキンケアに手紙を添える理由',
       writeLetter: 'お父さんに手紙を書く', questions: 'よくあるご質問', officialFacts: '公式情報',
-      dadGuide: 'お父さんへのギフトガイド', fatherGuide: '父親への贈り物の選び方', press: '紹介記事', contact: 'メールでのお問い合わせ',
+      dadGuide: 'お父さんへのギフトガイド', fatherGuide: '父親への贈り物の選び方', press: 'DEAR PAPA提供資料に基づく記事', contact: 'メールでのお問い合わせ',
     },
   },
 };

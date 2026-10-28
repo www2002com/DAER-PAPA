@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { SectionLogo } from '@/components/SectionLogo';
-import { FACTS_UPDATED, FACTS_UPDATED_KO, FAQ, UNDECIDED, PRODUCT } from '@/lib/facts';
+import { FAQ } from '@/lib/facts';
 import styles from './Facts.module.css';
 
 export function Facts() {
@@ -12,12 +12,6 @@ export function Facts() {
           <h2 id="faq-title" data-reveal>궁금한 이야기를<br />모았습니다.</h2>
           <p data-reveal data-reveal-delay="50">준비하는 과정도, 지금 정해진 정보도<br />있는 그대로 전합니다.</p>
           <Link href="/about/facts" className="link-arrow" data-reveal="cue" data-reveal-delay="100">디어파파 공식 정보 보기</Link>
-          <div className={styles.status} data-reveal>
-            <span className="tag" data-tone="soft">출시 준비 중</span>
-            <p>{UNDECIDED.tbd}</p>
-            <p>{PRODUCT.reviews}</p>
-            <small>공식 정보 기준 <time dateTime={FACTS_UPDATED}>{FACTS_UPDATED_KO}</time></small>
-          </div>
         </div>
         <div className={styles.questions}>
           {FAQ.map((item) => (

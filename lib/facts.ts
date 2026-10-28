@@ -112,6 +112,7 @@ export const CONTACT_EMAIL = 'hello@dearpapa.kr';
 
 export const SAME_AS = [
   'https://www.instagram.com/dearpapa.kr/',
+  'https://www.facebook.com/profile.php?id=61594835806301',
   'https://blog.naver.com/dearpapa_kr',
   'https://www.youtube.com/channel/UCUPHFagfIAnbp1QK6DZfDmg',
   'https://www.youtube.com/@dearpapa_kr',

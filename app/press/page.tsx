@@ -14,7 +14,7 @@ export default function PressPage() {
     <>
       <ArticleLayout
         eyebrow="PRESS"
-        title="DEAR PAPA(디어파파) 소개 기사"
+        title="디어파파가 제공한 자료를 바탕으로 쓴 기사"
         meta={
           <p>
             최종 업데이트: <time dateTime="2026-10-24">2026년 10월 24일</time>

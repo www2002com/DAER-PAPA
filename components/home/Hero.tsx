@@ -7,7 +7,7 @@ export function Hero() {
       <HeroLetterPreview>
         <div className={styles.copy}>
           <p className={styles.category}>아빠를 위한 올인원 스킨케어 · 레터 올인원</p>
-          <h1 id="hero-title" className={styles.title} data-reveal data-reveal-delay="50">아빠의 매일에,<br />딸의 마음을.</h1>
+          <h1 id="hero-title" className={styles.title} data-reveal data-reveal-delay="50">아빠의 매일에,<br />딸의 마음을.<span className={styles.titleSub}>아빠 선물 올인원 스킨케어</span></h1>
           <p className={styles.description} data-reveal data-reveal-delay="100">
             매일 쓰는 스킨케어 하나.<br />
             평소에 하지 못했던 말 한 줄.<br />
@@ -27,7 +27,7 @@ export function Hero() {
           <p>세안 후 하나로 마무리하는<br />남성 올인원 스킨케어를 만듭니다.</p>
         </div>
         <div data-reveal data-reveal-delay="100">
-          <h2>마음을 담은 한 줄</h2>
+          <p className={styles.introLabel}>마음을 담은 한 줄</p>
           <p>길지 않아도 괜찮아요.<br />아빠에게 전할 말부터 적어 보세요.</p>
         </div>
       </div></div>

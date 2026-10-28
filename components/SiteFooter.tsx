@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FooterLogo } from './FooterLogo';
 import { ContactEmail } from './ContactEmail';
-import { BRAND, CHANNELS, FACTS_UPDATED, FACTS_UPDATED_KO, UNDECIDED } from '@/lib/facts';
+import { BRAND, CHANNELS, FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
 import { businessLines } from '@/lib/business';
 import styles from './SiteFooter.module.css';
 
@@ -17,7 +17,7 @@ const ARCHIVE = [
   { href: '/about/facts', label: '공식 정보 (Official facts)' },
   { href: '/journal', label: '브랜드 자료실' },
   { href: '/journal/dad-gift-guide', label: '아빠 선물 추천, 편지와 함께 건네는 스킨케어' },
-  { href: '/press', label: '소개 기사' },
+  { href: '/press', label: '디어파파가 제공한 자료를 바탕으로 쓴 기사' },
 ];
 
 const CHANNEL_LOGOS = {
@@ -45,7 +45,7 @@ export function SiteFooter() {
           </div>
 
           <nav className={styles.col} aria-label="사이트 둘러보기" data-reveal>
-            <h2 className={styles.colTitle}>둘러보기</h2>
+            <p className={styles.colTitle}>둘러보기</p>
             <ul>
               {EXPLORE.map((l) => (
                 <li key={l.href}>
@@ -56,7 +56,7 @@ export function SiteFooter() {
           </nav>
 
           <nav className={styles.col} aria-label="자료" data-reveal data-reveal-delay="50">
-            <h2 className={styles.colTitle}>자료</h2>
+            <p className={styles.colTitle}>자료</p>
             <ul>
               {ARCHIVE.map((l) => (
                 <li key={l.href}>
@@ -67,7 +67,7 @@ export function SiteFooter() {
           </nav>
 
           <div className={styles.col} data-reveal data-reveal-delay="100">
-            <h2 className={styles.colTitle}>공식 채널</h2>
+            <p className={styles.colTitle}>공식 채널</p>
             <ul className={styles.socialLinks} aria-label="디어파파 공식 소셜 채널">
               {CHANNELS.map((c) => (
                 <li key={c.key}>
@@ -92,7 +92,7 @@ export function SiteFooter() {
                 </li>
               ))}
             </ul>
-            <h2 id="contact" className={`${styles.colTitle} ${styles.spaced}`}>문의</h2>
+            <p id="contact" className={`${styles.colTitle} ${styles.spaced}`}>문의</p>
             <ContactEmail />
           </div>
         </div>
@@ -103,7 +103,7 @@ export function SiteFooter() {
               <span className={styles.dot} aria-hidden="true" />
               출시 준비 중
             </span>
-            · 정보 기준일 <time dateTime={FACTS_UPDATED}>{FACTS_UPDATED_KO}</time> · 출시일 미정 · {UNDECIDED.status}
+            · 정보 기준일 <time dateTime={FACTS_UPDATED}>{FACTS_UPDATED_KO}</time>
           </p>
           <p className={styles.muted}>
             출시 전 브랜드 소개용 페이지입니다. 제품 이미지는 개발 중인 디자인 시안이며, 제품 정보는 확정 후 공개합니다.

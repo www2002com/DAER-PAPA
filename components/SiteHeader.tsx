@@ -109,7 +109,7 @@ export function SiteHeader() {
         onClose={() => { if (!dialogRef.current?.open) setOpen(false); }}>
         <div className={`container ${styles.sheetBar}`}>
           <Link href="/#main" className={styles.brand} aria-label={copy.home} onClick={close}><Logo className={styles.logo} /></Link>
-          <h2 id="site-menu-title" className="sr-only">{copy.title}</h2>
+          <p id="site-menu-title" className="sr-only">{copy.title}</p>
           <button ref={closeBtn} type="button" className={styles.menuBtn} onClick={close} aria-label={copy.close}>
             <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
               <path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" strokeWidth="1.4" />

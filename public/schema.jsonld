@@ -24,13 +24,14 @@
       },
       "sameAs": [
         "https://www.instagram.com/dearpapa.kr/",
-        "https://www.facebook.com/profile.php?id=61594835806301",
         "https://blog.naver.com/dearpapa_kr",
         "https://www.youtube.com/channel/UCUPHFagfIAnbp1QK6DZfDmg",
-        "https://www.youtube.com/@dearpapa_kr",
-        "https://authonnews.com/entity/dear-papa"
+        "https://www.youtube.com/@dearpapa_kr"
       ],
-      "disambiguatingDescription": "DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 같은 이름의 의류 브랜드, 영화·영화제 작품, 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다. 제과 브랜드 비어드파파, 해외 사이트 dearpapa.in·dearpapa.de, 인스타그램 계정 @dearpapa.co, Dear Papa Premium Decor, 소설 《Dear Papa》, 뮤지컬 〈디어 파파, 마이 파이어맨〉과도 관련이 없습니다. 국내 브랜드 디어도어, 디퍼앤디퍼, 아이디어스의 젠틀파파와도 관련이 없습니다."
+      "disambiguatingDescription": "DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 같은 이름의 의류 브랜드, 영화·영화제 작품, 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다. 제과 브랜드 비어드파파, 해외 사이트 dearpapa.in·dearpapa.de, 인스타그램 계정 @dearpapa.co, Dear Papa Premium Decor, 소설 《Dear Papa》, 뮤지컬 〈디어 파파, 마이 파이어맨〉과도 관련이 없습니다. 국내 브랜드 디어도어, 디퍼앤디퍼, 아이디어스의 젠틀파파와도 관련이 없습니다.",
+      "brand": {
+        "@id": "https://dearpapa.kr/#brand"
+      }
     },
     {
       "@type": "Brand",
@@ -71,11 +72,20 @@
     },
     {
       "@type": "WebPage",
-      "@id": "https://dearpapa.kr/about/facts",
-      "url": "https://dearpapa.kr/about/facts",
-      "name": "DEAR PAPA(디어파파) 공식 정보",
+      "@id": "https://dearpapa.kr/#webpage",
+      "url": "https://dearpapa.kr/",
+      "name": "DEAR PAPA 디어파파",
       "dateModified": "2026-10-26",
-      "description": "현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다. DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 가격, 전성분, 출시일은 아직 확정되지 않았습니다. 정확한 전성분은 제조사 샘플이 나온 뒤 공개합니다."
+      "description": "현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다. DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 가격, 전성분, 출시일은 아직 확정되지 않았습니다. 정확한 전성분은 제조사 샘플이 나온 뒤 공개합니다.",
+      "mainEntity": {
+        "@id": "https://dearpapa.kr/#product"
+      },
+      "isPartOf": {
+        "@id": "https://dearpapa.kr/#website"
+      },
+      "about": {
+        "@id": "https://dearpapa.kr/#organization"
+      }
     }
   ]
 }

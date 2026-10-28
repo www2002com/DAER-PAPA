@@ -23,7 +23,6 @@ export function Product() {
         <div className={styles.split}>
           <ProductViewer />
           <div className={styles.info} data-reveal="from-right" data-reveal-delay="60">
-            <span className="tag" data-tone="soft">출시 준비 중</span>
             <h3 className={styles.name}>{PRODUCT.name}</h3>
             <p className={styles.nameEn}>Letter All-in-One</p>
             <p className={styles.description}>4060 아빠의 매일을 생각한<br />올인원 스킨케어와 한 줄 편지.</p>
@@ -39,7 +38,6 @@ export function Product() {
               <p className={styles.notice}>용기: {PRODUCT.container}</p>
               <p className={styles.notice}>미백·주름 개선 2중 기능성화장품 심사를 준비하고 있습니다.{'\u0020'}</p>
               <p className={styles.notice}>{PRODUCT.resultsFirst}{'\u0020'}</p>
-              <p className={styles.notice}>{UNDECIDED.status}</p>
             </details>
             <details className={styles.details}>
               <summary>편지와 함께 건네는 선물 구성<span aria-hidden="true" /></summary>

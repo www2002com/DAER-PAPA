@@ -59,13 +59,13 @@ export const MENU_COPY: Record<MenuLanguage, MenuCopy> = {
       letter: { title: '편지 쓰기', description: '아빠에게 전하고 싶은 말을 쓰고, 카드 이미지로 간직하세요.' },
       faq: { title: '궁금한 이야기', description: '준비하는 과정과 지금까지 정해진 정보를 확인하세요.' },
       journal: { title: '저널', description: '아빠 선물을 고르는 기준과 마음을 전하는 방법을 모았습니다.' },
-      news: { title: '소식과 문의', description: '디어파파의 새 소식, 소개 기사와 연락처를 만나보세요.' },
+      news: { title: '소식과 문의', description: '디어파파의 새 소식, 디어파파가 제공한 자료를 바탕으로 쓴 기사와 연락처를 만나보세요.' },
     },
     links: {
       productDetail: '제품 자세히 보기', principles: '제품 개발 원칙',
       identity: '브랜드와 로고', giftMeaning: '올인원에 편지를 더하는 이유',
       writeLetter: '아빠에게 편지 쓰기', questions: '자주 묻는 질문', officialFacts: '공식 정보',
-      dadGuide: '아빠 선물 가이드', fatherGuide: '아버지 선물 가이드', press: '소개 기사', contact: '이메일 문의',
+      dadGuide: '아빠 선물 가이드', fatherGuide: '아버지 선물 가이드', press: '디어파파가 제공한 자료를 바탕으로 쓴 기사', contact: '이메일 문의',
     },
   },
   en: {

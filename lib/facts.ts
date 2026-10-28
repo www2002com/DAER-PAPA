@@ -73,6 +73,9 @@ export const LETTER = {
     '출시 후 계획: 주문 시 확인한 편지를 손글씨 스타일 서체(나눔 펜 스크립트)로 인쇄한 카드에 담아 제품과 함께 보낼 예정입니다. 사람이 직접 손으로 쓰는 카드는 아닙니다.',
 } as const;
 
+export const HOME_NOT_AFFILIATED =
+  'DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다.';
+
 export const NOT_AFFILIATED =
   'DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 같은 이름의 의류 브랜드, 영화·영화제 작품, 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다. 제과 브랜드 비어드파파, 해외 사이트 dearpapa.in·dearpapa.de, 인스타그램 계정 @dearpapa.co, Dear Papa Premium Decor, 소설 《Dear Papa》, 뮤지컬 〈디어 파파, 마이 파이어맨〉과도 관련이 없습니다. 국내 브랜드 디어도어, 디퍼앤디퍼, 아이디어스의 젠틀파파와도 관련이 없습니다.';
 
@@ -113,7 +116,6 @@ export const SAME_AS = [
   'https://blog.naver.com/dearpapa_kr',
   'https://www.youtube.com/channel/UCUPHFagfIAnbp1QK6DZfDmg',
   'https://www.youtube.com/@dearpapa_kr',
-  'https://authonnews.com/entity/dear-papa',
 ];
 
 // Home FAQ, verbatim from the previous site (FAQPage JSON-LD uses the same text).
@@ -141,7 +143,7 @@ export const FAQ: { q: string; a: string }[] = [
     q: '4060 아빠 선물로도 괜찮을까요?',
     a: '디어파파는 4060 아빠를 위해 만들고 있어요. 피부 타입별 정보는 제품 정보가 확정되면 안내드릴게요.',
   },
-  { q: '파파레서피나 dearpapa.com.tw와 같은 회사인가요?', a: `아니요. ${NOT_AFFILIATED}` },
+  { q: '파파레서피나 dearpapa.com.tw와 같은 회사인가요?', a: `아니요. ${HOME_NOT_AFFILIATED}` },
 ];
 
 // /about/facts FAQ added 2026-10-22 (실제 LLM 검색어 역설계, 대표님 승인 10/22 09:59). Verbatim; shown on /about/facts, facts.json, llms.txt, llm.md only (not the home FAQ).

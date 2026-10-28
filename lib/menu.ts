@@ -59,13 +59,13 @@ export const MENU_COPY: Record<MenuLanguage, MenuCopy> = {
       letter: { title: '편지 쓰기', description: '아빠에게 전하고 싶은 말을 쓰고, 카드 이미지로 간직하세요.' },
       faq: { title: '궁금한 이야기', description: '준비하는 과정과 지금까지 정해진 정보를 확인하세요.' },
       journal: { title: '저널', description: '아빠 선물을 고르는 기준과 마음을 전하는 방법을 모았습니다.' },
-      news: { title: '소식과 문의', description: '디어파파의 새 소식, 소개 기사와 연락처를 만나보세요.' },
+      news: { title: '소식과 문의', description: '디어파파의 새 소식, 디어파파가 제공한 자료를 바탕으로 쓴 기사와 연락처를 만나보세요.' },
     },
     links: {
       productDetail: '제품 자세히 보기', principles: '제품 개발 원칙',
       identity: '브랜드와 로고', giftMeaning: '올인원에 편지를 더하는 이유',
       writeLetter: '아빠에게 편지 쓰기', questions: '자주 묻는 질문', officialFacts: '공식 정보',
-      dadGuide: '아빠 선물 가이드', fatherGuide: '아버지 선물 가이드', press: '소개 기사', contact: '이메일 문의',
+      dadGuide: '아빠 선물 가이드', fatherGuide: '아버지 선물 가이드', press: '디어파파가 제공한 자료를 바탕으로 쓴 기사', contact: '이메일 문의',
     },
   },
   en: {
@@ -87,7 +87,7 @@ export const MENU_COPY: Record<MenuLanguage, MenuCopy> = {
       productDetail: 'Explore the product', principles: 'Development principles',
       identity: 'Our brand & logo', giftMeaning: 'Why skincare with a letter?',
       writeLetter: 'Write to Dad', questions: 'Frequently asked questions', officialFacts: 'Official facts',
-      dadGuide: 'Gifts for Dad', fatherGuide: 'A guide to gifts for fathers', press: 'Media coverage', contact: 'Email us',
+      dadGuide: 'Gifts for Dad', fatherGuide: 'A guide to gifts for fathers', press: 'Articles from DEAR PAPA materials', contact: 'Email us',
     },
   },
   zh: {
@@ -109,7 +109,7 @@ export const MENU_COPY: Record<MenuLanguage, MenuCopy> = {
       productDetail: '了解产品', principles: '产品研发原则',
       identity: '品牌与标志', giftMeaning: '为什么将护肤品与信件相结合？',
       writeLetter: '给爸爸写一封信', questions: '常见问题解答', officialFacts: '官方信息',
-      dadGuide: '送给爸爸的礼物指南', fatherGuide: '父亲礼物选购指南', press: '媒体报道', contact: '邮件咨询',
+      dadGuide: '送给爸爸的礼物指南', fatherGuide: '父亲礼物选购指南', press: '基于 DEAR PAPA 提供资料撰写的文章', contact: '邮件咨询',
     },
   },
   ja: {
@@ -131,7 +131,7 @@ export const MENU_COPY: Record<MenuLanguage, MenuCopy> = {
       productDetail: '製品について詳しく', principles: '製品開発の方針',
       identity: 'ブランドとロゴ', giftMeaning: 'スキンケアに手紙を添える理由',
       writeLetter: 'お父さんに手紙を書く', questions: 'よくあるご質問', officialFacts: '公式情報',
-      dadGuide: 'お父さんへのギフトガイド', fatherGuide: '父親への贈り物の選び方', press: '紹介記事', contact: 'メールでのお問い合わせ',
+      dadGuide: 'お父さんへのギフトガイド', fatherGuide: '父親への贈り物の選び方', press: 'DEAR PAPA提供資料に基づく記事', contact: 'メールでのお問い合わせ',
     },
   },
 };

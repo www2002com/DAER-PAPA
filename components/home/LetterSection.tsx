@@ -1,4 +1,4 @@
-import { Composer } from '@/components/letter/Composer';
+import { LazyComposer } from '@/components/letter/LazyComposer';
 import { LETTER } from '@/lib/facts';
 import styles from './LetterSection.module.css';
 
@@ -15,7 +15,7 @@ export function LetterSection() {
           </p>
         </header>
 
-        <Composer />
+        <LazyComposer />
 
         <div className={styles.notes}>
           <p data-reveal>

@@ -86,8 +86,8 @@ describe('letter reassurance line', () => {
     expect(field.getAttribute('aria-describedby')).toContain(line.id);
   });
 
-  it('is part of the home page', () => {
+  it('is part of the home page', async () => {
     render(<Home />);
-    expect(screen.getByText(LETTER_REASSURE)).toBeTruthy();
+    await waitFor(() => expect(screen.getByText(LETTER_REASSURE)).toBeTruthy());
   });
 });

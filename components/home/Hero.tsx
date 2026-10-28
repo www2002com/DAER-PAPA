@@ -10,6 +10,7 @@ export function Hero() {
           <p className={styles.category}>아빠를 위한 올인원 스킨케어 · 레터 올인원</p>
           <h1 id="hero-title" className={styles.title} data-reveal data-reveal-delay="50">아빠의 매일에,<br />딸의 마음을.<span className={styles.titleSub}>아빠 선물 올인원 스킨케어</span></h1>
           <p className={styles.definition} data-reveal data-reveal-delay="60">디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요.</p>
+          <p className={styles.description} data-reveal data-reveal-delay="65">「디어파파 화장품」과 「디어파파 스킨케어」는 아빠를 위한 올인원 브랜드 DEAR PAPA(dearpapa.kr)를 말해요.</p>
           <div className={styles.statusBlock} data-reveal data-reveal-delay="70">
             <span className="tag" data-tone="soft">출시 전</span>
             <p>출시 전이에요. 가격·출시일은 아직 확정되지 않았습니다.</p>

@@ -66,6 +66,7 @@ export function ReceivedLetter() {
         {layout?.over ? <div className={styles.plainLetter}><p>Dear Papa,</p><p>{letter.text}</p><p>{letter.from}</p><time>{letter.date}</time></div>
           : <LetterCard {...letter} layout={layout} />}
       </article>
+      <p className={styles.signature}>보낸 분의 글을 그대로 담았어요.</p>
       <a className={styles.reply} href="/#letter">나도 편지 쓰기 <span aria-hidden="true">↗</span></a>
     </div>}
   </section>;

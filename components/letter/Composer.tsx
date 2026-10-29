@@ -93,9 +93,15 @@ export function Composer() {
   const [download, setDownload] = useState<Busy>('idle');
   const [hasExported, setHasExported] = useState(false);
   const [greeted, setGreeted] = useState(false);
-  const [handoffUrl, setHandoffUrl] = useState('');
+  const [handoffLetter, setHandoffLetter] = useState<LetterInput | null>(null);
   // Load the Kakao SDK as soon as the visitor starts, so the share tap can open KakaoTalk directly.
   const kakao = useKakaoSend(greeted || !!text.trim());
+  const resetKakao = kakao.reset;
+  const handoffUrl = handoffLetter ? createLetterShareUrl(handoffLetter) : '';
+  useEffect(() => {
+    resetKakao();
+    setHandoffLetter(null);
+  }, [text, from, resetKakao]);
   const [shareLetter, setShareLetter] = useState<LetterInput | null>(null);
   const [toast, setToast] = useState<Toast | null>(null);
   const [tab, setTab] = useState<(typeof STARTERS)[number]['id']>('examples');
@@ -467,7 +473,7 @@ export function Composer() {
     if (!guard()) return;
     const letter = currentLetter();
     if (kakao.sdk === 'ready') {
-      setHandoffUrl(createLetterShareUrl(letter));
+      setHandoffLetter(letter);
       kakao.send(letter);
     } else {
       setShareLetter(letter);
@@ -752,10 +758,11 @@ export function Composer() {
             </button>
             {kakao.handoff !== 'idle' && handoffUrl && <div className={styles.handoff}>
               <KakaoHandoff sdk={kakao.sdk} handoff={kakao.handoff} shareUrl={handoffUrl}
-                onSendAgain={() => { if (guard()) kakao.send(currentLetter()); }}
-                onSendWeb={() => { if (guard()) kakao.send(currentLetter(), { web: true }); }}
+                onSendAgain={() => { if (handoffLetter && guard()) kakao.send(handoffLetter); }}
+                onSendWeb={() => { if (handoffLetter && guard()) kakao.send(handoffLetter, { web: true }); }}
                 onReconnect={kakao.retry} onDismiss={kakao.reset} />
             </div>}
+            <p className={styles.sharePrivacy}>편지와 이름이 링크에 담겨요. 링크를 받은 사람은 누구나 읽을 수 있어요.</p>
             <button type="button" className={styles.otherShare} onClick={share}>
               다른 방법으로 보내기 <span aria-hidden="true">·</span> Instagram <span aria-hidden="true">·</span> 링크 복사
             </button>

@@ -98,7 +98,7 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
     } }}>
     <div className={styles.inner}>
       <header className={styles.header}>
-        <div><p className={styles.eyebrow}>A LETTER FOR YOU</p><h2 id={`${id}-title`}>편지 공유하기</h2></div>
+        <h2 id={`${id}-title`}>편지 공유하기</h2>
         <button type="button" className={styles.close} aria-label="공유창 닫기" onClick={onClose}>×</button>
       </header>
       <div role="tablist" aria-label="공유 방법" className={styles.tabs}>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { KakaoHandoff as Handoff, KakaoSdkState } from './useKakaoSend';
 import { copyLetterLink } from './useKakaoSend';
 import styles from './KakaoHandoff.module.css';
@@ -20,6 +20,9 @@ export function KakaoHandoff({ sdk, handoff, shareUrl, onSendAgain, onSendWeb, o
   onDismiss?: () => void;
 }) {
   const [copy, setCopy] = useState<'idle' | 'copied' | 'manual'>('idle');
+  const [shareError, setShareError] = useState('');
+  const [sharing, setSharing] = useState(false);
+  const shareBusy = useRef(false);
   const canShare = typeof navigator !== 'undefined' && typeof navigator.share === 'function';
   const unavailable = sdk === 'unavailable';
   if (handoff === 'idle' && !unavailable) return null;
@@ -29,15 +32,21 @@ export function KakaoHandoff({ sdk, handoff, shareUrl, onSendAgain, onSendWeb, o
     : handoff === 'opening'
       ? '카카오톡을 여는 중이에요…'
       : handoff === 'opened'
-        ? '카카오톡에서 받을 분을 고른 뒤 보내기를 눌러 주세요. 보낸 다음 이 화면으로 돌아오면 돼요.'
+        ? '카카오톡이 열렸다면 받을 분을 고른 뒤 보내기를 눌러 주세요. 열리지 않았다면 아래에서 다른 방법을 선택해 주세요.'
         : '카카오톡이 열리지 않았다면 웹에서 카카오 계정으로 보내거나, 편지 링크를 복사해 카카오톡 대화방에 붙여 넣어 주세요.';
 
   async function copyLink() {
     setCopy((await copyLetterLink(shareUrl)) ? 'copied' : 'manual');
   }
   async function shareSheet() {
+    if (shareBusy.current) return;
+    shareBusy.current = true;
+    setSharing(true);
+    setShareError('');
     try { await navigator.share({ title: '편지가 도착했어요', url: shareUrl }); }
-    catch { /* The visitor closed the sheet or the browser refused; the other options stay. */ }
+    catch (error) {
+      if ((error as DOMException)?.name !== 'AbortError') setShareError('기기 공유창을 열 수 없었어요. 웹에서 보내거나 편지 링크를 복사해 주세요.');
+    } finally { shareBusy.current = false; setSharing(false); }
   }
 
   return (
@@ -47,16 +56,17 @@ export function KakaoHandoff({ sdk, handoff, shareUrl, onSendAgain, onSendWeb, o
         {unavailable
           ? <button type="button" onClick={onReconnect}>카카오톡 다시 연결</button>
           : <>
-            {handoff === 'notOpened' && <button type="button" onClick={onSendWeb}>웹에서 카카오톡으로 보내기</button>}
+            <button type="button" onClick={onSendWeb}>웹에서 카카오톡으로 보내기</button>
             <button type="button" onClick={onSendAgain}>카카오톡 다시 열기</button>
           </>}
         <button type="button" onClick={copyLink}>{copy === 'copied' ? '링크를 복사했어요' : '편지 링크 복사'}</button>
-        {canShare && <button type="button" onClick={shareSheet}>공유창으로 보내기</button>}
+        {canShare && <button type="button" onClick={shareSheet} disabled={sharing}>공유창으로 보내기</button>}
         {onDismiss && <button type="button" className={styles.dismiss} onClick={onDismiss} aria-label="안내 닫기">닫기</button>}
       </div>}
       {copy === 'copied' && <p className={styles.hint}>카카오톡 대화방에 붙여 넣으면 받는 분이 편지를 열 수 있어요.</p>}
-      {copy === 'manual' && <input className={styles.copyInput} aria-label="복사할 편지 링크" readOnly value={shareUrl}
-        onFocus={(event) => event.currentTarget.select()} />}
+      {shareError && <p className={styles.hint} role="status">{shareError}</p>}
+      {copy === 'manual' && <><p className={styles.hint} role="status">아래 링크를 길게 누르거나 선택해서 복사해 주세요.</p><input className={styles.copyInput} aria-label="복사할 편지 링크" readOnly value={shareUrl}
+        onFocus={(event) => event.currentTarget.select()} /></>}
     </div>
   );
 }

@@ -39,8 +39,8 @@ export function useKakaoSend(active = true) {
     stopWatching.current();
     if (!isKakaoReady()) { setSdk('unavailable'); setHandoff('notOpened'); return false; }
 
-    // The app taking over hides this page; the PC share window takes focus. Listen before
-    // calling the SDK, because the PC window can open synchronously inside the call.
+    // Focus/visibility are only hints: a browser permission prompt or an unrelated tab can
+    // produce them too. The UI must retain recovery options after either signal.
     let opened = false;
     const markOpened = () => { opened = true; setHandoff('opened'); };
     const onVisibility = () => { if (document.hidden) markOpened(); };

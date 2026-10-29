@@ -2,7 +2,8 @@ import { act, fireEvent, render, screen, waitFor, within } from '@testing-librar
 import { beforeEach, expect, it, vi } from 'vitest';
 import { Composer } from '@/components/letter/Composer';
 import { ReceivedLetter } from '@/components/letter/ReceivedLetter';
-import { createLetterShareUrl } from '@/components/letter/share-link';
+import { createLetterShareUrl, readSharedLetter } from '@/components/letter/share-link';
+import { KakaoHandoff } from '@/components/letter/KakaoHandoff';
 import { prepareKakaoShare, sendLetterToKakao } from '@/components/letter/kakao-share';
 import { DRAFT_KEY } from '@/components/letter/storage';
 import { LetterShareDialog } from '@/components/letter/LetterShareDialog';
@@ -41,7 +42,7 @@ it('opens KakaoTalk in one tap once the SDK is ready and only gives guidance, ne
   expect(screen.queryByRole('dialog')).toBeNull();
   expect(await screen.findByText('카카오톡을 여는 중이에요…')).toBeTruthy();
   act(() => { window.dispatchEvent(new Event('blur')); });
-  expect(await screen.findByText(/카카오톡에서 받을 분을 고른 뒤 보내기를 눌러 주세요/)).toBeTruthy();
+  expect(await screen.findByText(/카카오톡이 열렸다면 받을 분을 고른 뒤 보내기를 눌러 주세요/)).toBeTruthy();
   expect(screen.queryByText(/보냈어요|전송했어요|전달됐어요/)).toBeNull();
   expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).text).toBe(letter.text);
 });
@@ -62,6 +63,56 @@ it('offers the web share page and link copy when KakaoTalk shows no sign of open
   fireEvent.click(screen.getByRole('button', { name: '웹에서 카카오톡으로 보내기' }));
   expect(sendLetterToKakao).toHaveBeenLastCalledWith(expect.objectContaining({ text: letter.text }), { web: true });
   expect(screen.getByText('카카오톡을 여는 중이에요…')).toBeTruthy();
+});
+
+it('keeps web recovery available after focus leaves because a permission prompt is not proof of app launch', async () => {
+  render(<Composer />);
+  fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: letter.text } });
+  const button = screen.getByRole('button', { name: /카카오톡으로 편지 보내기/ });
+  await waitFor(() => expect(button.getAttribute('data-kakao')).toBe('ready'));
+  fireEvent.click(button);
+  act(() => { window.dispatchEvent(new Event('blur')); });
+  fireEvent.click(screen.getByRole('button', { name: '웹에서 카카오톡으로 보내기' }));
+  expect(sendLetterToKakao).toHaveBeenLastCalledWith(expect.objectContaining({ text: letter.text }), { web: true });
+});
+
+it('discards the previous handoff when the author edits and copies only the new letter after another send', async () => {
+  const copy = vi.fn().mockResolvedValue(undefined);
+  Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: copy } });
+  render(<Composer />);
+  const input = screen.getByLabelText('편지 내용');
+  fireEvent.change(input, { target: { value: letter.text } });
+  const button = screen.getByRole('button', { name: /카카오톡으로 편지 보내기/ });
+  await waitFor(() => expect(button.getAttribute('data-kakao')).toBe('ready'));
+  fireEvent.click(button);
+  act(() => { window.dispatchEvent(new Event('blur')); });
+  fireEvent.change(input, { target: { value: '새로 고친 편지예요.' } });
+  expect(screen.queryByRole('button', { name: '편지 링크 복사' })).toBeNull();
+  fireEvent.click(button);
+  act(() => { window.dispatchEvent(new Event('blur')); });
+  fireEvent.click(screen.getByRole('button', { name: '편지 링크 복사' }));
+  await waitFor(() => expect(copy).toHaveBeenCalledTimes(1));
+  expect(readSharedLetter(new URL(copy.mock.calls[0][0]).hash)?.text).toBe('새로 고친 편지예요.');
+  fireEvent.change(screen.getByPlaceholderText('이름이나 애칭'), { target: { value: '바뀐 이름' } });
+  expect(screen.queryByRole('button', { name: '카카오톡 다시 열기' })).toBeNull();
+});
+
+it('explains a device-share failure while keeping a cancelled share quiet', async () => {
+  const oldShare = Object.getOwnPropertyDescriptor(navigator, 'share');
+  const share = vi.fn().mockRejectedValueOnce(new DOMException('blocked', 'NotAllowedError'))
+    .mockRejectedValueOnce(new DOMException('cancelled', 'AbortError'));
+  Object.defineProperty(navigator, 'share', { configurable: true, value: share });
+  try {
+    render(<KakaoHandoff sdk="ready" handoff="notOpened" shareUrl={createLetterShareUrl(letter)}
+      onSendAgain={() => {}} onSendWeb={() => {}} onReconnect={() => {}} />);
+    fireEvent.click(screen.getByRole('button', { name: '공유창으로 보내기' }));
+    expect(await screen.findByText(/기기 공유창을 열 수 없었어요/)).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: '공유창으로 보내기' }));
+    await waitFor(() => expect(share).toHaveBeenCalledTimes(2));
+    expect(screen.queryByText(/기기 공유창을 열 수 없었어요/)).toBeNull();
+  } finally {
+    if (oldShare) Object.defineProperty(navigator, 'share', oldShare); else Reflect.deleteProperty(navigator, 'share');
+  }
 });
 
 it('opens every other way to send from the composer, with the KakaoTalk message preview', async () => {

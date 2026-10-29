@@ -55,7 +55,6 @@ export function ReceivedLetter() {
       <p>링크가 일부만 전달된 것 같아요.<br />보낸 분에게 「편지 링크 복사」로 받은 주소를 다시 보내 달라고 해 주세요.</p>
       <a className="btn" href="/#letter">나도 편지 쓰기</a>
     </div> : !opened ? <div className={styles.arrival}>
-      <p className={styles.eyebrow}>DEAR PAPA · A LETTER FOR YOU</p>
       <div className={styles.sticker}>
         <BunnyPortrait pose="welcome" motion={paused ? null : 'welcome'} priority large label="눈웃음으로 봉투를 들고 인사하는 Sodam" />
       </div>
@@ -67,7 +66,6 @@ export function ReceivedLetter() {
         편지 열어보기
       </button>
     </div> : <div className={styles.opened}>
-      <p className={styles.eyebrow}>DEAR PAPA · JUST FOR YOU</p>
       <h1 ref={title} tabIndex={-1}>{letter.from ? `${letter.from}의 마음을 전해요.` : '당신을 생각하며 쓴 편지예요.'}</h1>
       <article className={styles.card} aria-label="받은 편지">
         {/* A crafted link can contain valid text that does not fit a card. Keep it readable instead of clipping it. */}

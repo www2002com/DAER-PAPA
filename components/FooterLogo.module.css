@@ -1,53 +1,116 @@
-.button {
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-  min-height: 44px;
-  margin-bottom: 6px;
+.finale {
+  display: grid;
+  justify-items: center;
+  padding: clamp(32px, 6vw, 80px) 0 clamp(44px, 6vw, 72px);
   color: var(--logo);
+  text-align: center;
+  scroll-margin-top: 96px;
 }
 
+.stage { width: 100%; }
 .logo {
   display: block;
-  width: auto;
-  height: 28px;
+  width: min(100%, 660px);
+  height: auto;
+  aspect-ratio: 818.69 / 238;
+  margin: 0 auto;
   overflow: visible;
 }
 
-.turn {
-  transform-box: view-box;
-  transform-origin: 128px 128px;
+.turn { transform: rotate(180deg); }
+.turn, .ring { transform-origin: 0 0; }
+
+.slogan {
+  margin-top: clamp(22px, 3vw, 36px);
+  font-size: clamp(1.6rem, 4vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -.045em;
+  line-height: 1.35;
+  text-wrap: balance;
 }
 
-.restoreDear {
-  opacity: 0;
+.definition {
+  max-width: 35rem;
+  margin-top: 24px;
+  color: var(--ink-2);
+  font-size: clamp(.875rem, 1.35vw, 1rem);
+  line-height: 1.9;
+  text-wrap: balance;
 }
 
+.explanation {
+  max-width: 37rem;
+  margin-top: 18px;
+  color: var(--ink-3);
+  font-size: .8125rem;
+  line-height: 1.85;
+  text-wrap: balance;
+}
+
+.replay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-top: 20px;
+  padding: 8px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-2);
+  font: inherit;
+  font-size: .75rem;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .replay:hover { background: var(--paper); color: var(--ink); }
+}
+.replay:focus-visible { outline: 2px solid var(--logo); outline-offset: 4px; }
+
+/* One 2.8-second phrase: turn, reunite, wordmark, signature. Static styles are final. */
 @media (prefers-reduced-motion: no-preference) {
-  .button[data-playing] .turn {
-    animation: dearToPapa 3.8s cubic-bezier(.65, 0, .35, 1) both;
+  .finale[data-playing="true"] .travel {
+    animation: takePlace 2800ms cubic-bezier(.65, 0, .35, 1) both;
+    will-change: transform;
   }
-
-  .button[data-playing] .papa {
-    animation: revealDear 3.8s ease both;
-  }
-
-  .button[data-playing] .restoreDear {
-    animation: reunite 3.8s ease both;
-  }
+  .finale[data-playing="true"] .turn { animation: dearToPapa 2800ms cubic-bezier(.65, 0, .35, 1) both; }
+  .finale[data-playing="true"] .reunite { animation: joinDear 2800ms ease both; }
+  .finale[data-playing="true"] .ring { animation: sharedCircle 2800ms ease both; }
+  .finale[data-playing="true"] .wordmark { animation: wordmarkPlace 400ms 2000ms cubic-bezier(.23, 1, .32, 1) both; }
+  .finale[data-playing="true"] .wordmark > path { animation: letterIn 400ms 2000ms ease-out both; }
+  .finale[data-playing="true"] .wordmark > path:nth-child(2) { animation-delay: 2040ms; }
+  .finale[data-playing="true"] .wordmark > path:nth-child(3),
+  .finale[data-playing="true"] .wordmark > path:nth-child(4) { animation-delay: 2080ms; }
+  .finale[data-playing="true"] .wordmark > path:nth-child(5),
+  .finale[data-playing="true"] .wordmark > path:nth-child(6) { animation-delay: 2120ms; }
+  .finale[data-playing="true"] .wordmark > path:nth-child(7) { animation-delay: 2160ms; }
+  .finale[data-playing="true"] .wordmark > path:nth-child(8),
+  .finale[data-playing="true"] .wordmark > path:nth-child(9) { animation-delay: 2200ms; }
+  .finale[data-playing="true"] .wordmark > path:nth-child(10) { animation-delay: 2240ms; }
+  .finale[data-playing="true"] .slogan { animation: signature 400ms 2400ms cubic-bezier(.23, 1, .32, 1) both; }
 }
 
+@keyframes takePlace {
+  0%, 57.14% { transform: translateX(339px); }
+  71.43%, 100% { transform: translateX(0); }
+}
 @keyframes dearToPapa {
-  0%, 26% { transform: rotate(0deg); }
-  68%, 100% { transform: rotate(180deg); }
+  0%, 14.28% { transform: rotate(0); }
+  50%, 100% { transform: rotate(180deg); }
 }
+@keyframes joinDear {
+  0%, 50% { opacity: 0; }
+  64.28%, 100% { opacity: 1; }
+}
+@keyframes sharedCircle {
+  0%, 50%, 64.28%, 100% { transform: scale(1); }
+  57.14% { transform: scale(1.06); }
+}
+@keyframes wordmarkPlace { from { transform: translateX(16px); } to { transform: translateX(0); } }
+@keyframes letterIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes signature { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-@keyframes revealDear {
-  0%, 8% { opacity: 1; }
-  22%, 100% { opacity: 0; }
-}
-
-@keyframes reunite {
-  0%, 78% { opacity: 0; }
-  94%, 100% { opacity: 1; }
-}
+@media (prefers-reduced-motion: reduce) { .replay { display: none; } }

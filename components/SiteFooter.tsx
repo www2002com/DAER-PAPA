@@ -31,19 +31,13 @@ export function SiteFooter() {
   return (
     <footer className={styles.footer}>
       <div className="container">
-        <p className={styles.sign} data-reveal>
-          {BRAND.slogan}
-        </p>
+        <FooterLogo
+          slogan={BRAND.slogan}
+          definition={BRAND.definitionShort}
+          explanation="로고 · d(Dear)를 180° 돌리면 p(Papa)가 됩니다. 딸과 아빠가 가운데의 원 하나를 함께 쥔 모양입니다."
+        />
 
         <div className={styles.grid}>
-          <div className={styles.about}>
-            <FooterLogo />
-            <p>{BRAND.definitionShort}</p>
-            <p className={styles.muted}>
-              로고 · d(Dear)를 180° 돌리면 p(Papa)가 됩니다. 딸과 아빠가 가운데의 원 하나를 함께 쥔 모양입니다.
-            </p>
-          </div>
-
           <nav className={styles.col} aria-label="사이트 둘러보기" data-reveal>
             <p className={styles.colTitle}>둘러보기</p>
             <ul>

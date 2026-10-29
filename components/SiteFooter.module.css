@@ -1,5 +1,5 @@
 .footer {
-  padding: 60px 0 calc(28px + env(safe-area-inset-bottom));
+  padding: 24px 0 calc(28px + env(safe-area-inset-bottom));
   background: var(--ivory);
   border-radius: var(--radius-m);
   color: var(--ink);
@@ -7,28 +7,11 @@
   line-height: 1.7;
 }
 
-.sign {
-  margin-bottom: 38px;
-  font-size: clamp(1.9rem, 3.5vw, 3.4rem);
-  font-weight: 800;
-  letter-spacing: -.04em;
-  line-height: 1.35;
-  color: var(--logo);
-  text-wrap: balance;
-}
-
 .grid {
   display: grid;
   gap: 40px 32px;
   padding-top: 40px;
   border-top: 1px solid var(--line-strong);
-}
-
-.about {
-  display: grid;
-  gap: 14px;
-  max-width: 22rem;
-  color: var(--ink-2);
 }
 
 .col ul {
@@ -230,7 +213,7 @@
 
 @media (min-width: 1080px) {
   .grid {
-    grid-template-columns: 1.4fr 1fr 1.3fr minmax(200px, 1fr);
+    grid-template-columns: 1fr 1.3fr minmax(200px, 1fr);
   }
 }
 

@@ -324,7 +324,7 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
           <label htmlFor={inputId}>Sodam에게 물어볼 말</label>
           <button type="button" className={styles.close} aria-label="질문창 닫기" onClick={closeQuestion}>닫기 <span aria-hidden="true">×</span></button>
         </div>
-        <p className={styles.scope}>아빠와의 고민, 여기서 편하게 풀어봐요. DEAR PAPA가 제공하는 무료 AI예요. 전문 상담을 대신하지 않아요.</p>
+        <p className={styles.scope}>아빠에게 하고 싶은 말, 여기서 편하게 정리해 봐요. 답변은 DEAR PAPA가 제공하는 무료 AI가 해요. 전문 상담을 대신하지 않아요.</p>
         <textarea ref={input} id={inputId} value={question} onChange={(event) => setQuestion(event.target.value)}
           onKeyDown={(event) => {
             if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing && event.keyCode !== 229) {

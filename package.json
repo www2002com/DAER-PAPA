@@ -6,11 +6,13 @@
   "description": "DEAR PAPA(디어파파) 공식 사이트 — 아빠의 매일에, 딸의 마음을.",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npm run verify:preservation",
+    "build": "next build && npm run verify:preservation && npm run verify:icons",
     "start": "npx serve out",
     "preview": "node scripts/preview.mjs",
     "typecheck": "tsc --noEmit",
     "verify:preservation": "node scripts/verify-preservation.mjs",
+    "icons:generate": "node scripts/generate-brand-icons.mjs",
+    "verify:icons": "node scripts/verify-brand-icons.mjs",
     "lastmod": "node scripts/update-lastmod.mjs",
     "test": "node scripts/run-tests.mjs",
     "prebuild": "node scripts/prepare-fonts.mjs && npm test"

@@ -1,0 +1,15 @@
+.figure {
+  display: inline-block;
+  flex: none;
+  width: var(--sodam-size, 88px);
+  aspect-ratio: 1;
+}
+
+/* The drawn pose carries the expression; the cutout itself is never moved, tilted or stretched. */
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+}

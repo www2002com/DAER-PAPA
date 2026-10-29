@@ -27,13 +27,15 @@ import {
 } from './storage';
 import { STARTERS } from './starters';
 import { trackAction } from '@/lib/analytics';
+import { composerPose, preloadSodamPoses, type SodamPose as Pose } from '@/lib/sodam-poses';
+import { SodamPose } from '@/components/SodamPose';
 import styles from './Composer.module.css';
 
 /** Helper line under the letter label; always visible (not tied to launch-notify). */
 export const LETTER_REASSURE = '잘 쓰지 않아도 괜찮아요. 아빠는 문장보다 마음을 먼저 읽어요.';
 
 type View = 'write' | 'box';
-type Toast = { id: number; msg: string; action?: { label: string; run: () => void } };
+type Toast = { id: number; msg: string; action?: { label: string; run: () => void }; pose?: Pose };
 type Busy = 'idle' | 'busy' | 'done';
 
 const prefersReduced = () =>
@@ -87,6 +89,7 @@ export function Composer() {
   const [flip, setFlip] = useState(false);
   const [download, setDownload] = useState<Busy>('idle');
   const [hasExported, setHasExported] = useState(false);
+  const [greeted, setGreeted] = useState(false);
   const [shareLetter, setShareLetter] = useState<LetterInput | null>(null);
   const [toast, setToast] = useState<Toast | null>(null);
   const [tab, setTab] = useState<(typeof STARTERS)[number]['id']>('examples');
@@ -121,7 +124,7 @@ export function Composer() {
       reset(draft.text, 'd');
       setStagger(true);
       later(() => setStagger(false), 2000);
-      if (draft.text) showToast('쓰던 편지를 이어서 쓸 수 있어요.');
+      if (draft.text) showToast('쓰던 편지를 이어서 쓸 수 있어요.', undefined, 'welcome');
     }
     setMounted(true);
     const t = timers.current;
@@ -193,9 +196,9 @@ export function Composer() {
   }, [over, text, warn, letters.length]);
 
   // ── Helpers ─────────────────────────────────────────────────
-  function showToast(msg: string, action?: Toast['action']) {
+  function showToast(msg: string, action?: Toast['action'], pose?: Pose) {
     const id = Date.now() + Math.random();
-    setToast({ id, msg, action });
+    setToast({ id, msg, action, pose });
     later(() => setToast((t) => (t && t.id === id ? null : t)), action ? 6500 : 3200);
   }
 
@@ -278,7 +281,7 @@ export function Composer() {
     const done = () => {
       setInserting(false);
       focusText();
-      showToast('문장을 넣었어요.', { label: '되돌리기', run: () => setText(before) });
+      showToast('문장을 넣었어요.', { label: '되돌리기', run: () => setText(before) }, 'writing');
     };
     if (prefersReduced()) {
       setText(target);
@@ -310,7 +313,7 @@ export function Composer() {
         setFrom(snap.from);
         setEditingId(snap.editingId);
       },
-    });
+    }, 'rest');
   }
 
   function startNew() {
@@ -350,7 +353,7 @@ export function Composer() {
     setBump((b) => b + 1);
     setFlip(true);
     later(() => setFlip(false), 1700);
-    showToast(note);
+    showToast(note, undefined, 'thanks');
   }
 
   function continueLetter(l: Letter) {
@@ -362,7 +365,7 @@ export function Composer() {
     later(() => setStagger(false), 2000);
     setView('write');
     later(() => focusText(), 60);
-    showToast('보관함에서 불러왔어요.');
+    showToast('보관함에서 불러왔어요.', undefined, 'writing');
   }
 
   function removeLetter(l: Letter) {
@@ -384,7 +387,7 @@ export function Composer() {
           return restored;
         });
       },
-    });
+    }, 'rest');
   }
 
   function selectLetter(l: Letter) {
@@ -437,7 +440,7 @@ export function Composer() {
       trackAction('letter_card_exported');
       setHasExported(true);
       setDownload('done');
-      showToast('카드 이미지를 만들었어요. 다운로드를 확인해 주세요.');
+      showToast('카드 이미지를 만들었어요. 다운로드를 확인해 주세요.', undefined, 'smallWin');
       if (downloadResetTimer.current !== null) window.clearTimeout(downloadResetTimer.current);
       downloadResetTimer.current = later(() => {
         downloadResetTimer.current = null;
@@ -445,7 +448,7 @@ export function Composer() {
       }, 2200);
     } catch {
       setDownload('idle');
-      showToast('이미지를 만들 수 없었어요. 잠시 후 다시 시도해 주세요.');
+      showToast('이미지를 만들 수 없었어요. 잠시 후 다시 시도해 주세요.', undefined, 'oops');
     } finally {
       downloadBusyRef.current = false;
     }
@@ -502,6 +505,17 @@ export function Composer() {
           ? '자동 저장을 할 수 없어요. 카드 이미지로 저장해 주세요.'
           : '쓰는 동안 이 기기에 자동 저장돼요';
 
+  const sodamPose = composerPose({
+    view,
+    greeted,
+    focused,
+    hasText: !!text.trim(),
+    problem: warn !== null || over || saved === 'error',
+    exporting: download === 'busy',
+    delivered: hasExported,
+    archiveEmpty: letters.length === 0,
+  });
+
   return (
     <>
     <div className={styles.entry} data-reveal="soft-cue" data-reveal-delay="150">
@@ -510,7 +524,7 @@ export function Composer() {
       </button>
       <p>편지는 지금 쓸 수 있어요. 가입 없이, 이 기기에만.</p>
     </div>
-    <div className={styles.composer} data-view={view}>
+    <div className={styles.composer} data-view={view} onFocusCapture={preloadSodamPoses} onPointerDownCapture={preloadSodamPoses}>
       {/* Card stage */}
       <div className={styles.stageCol} data-reveal="visual">
         <div className={styles.stageSticky}>
@@ -541,13 +555,16 @@ export function Composer() {
             />
             <span className={styles.sheen} aria-hidden="true" />
           </div>
-          <p className={styles.stageNote} aria-live="polite">
-            {showingSaved
-              ? `${selected!.date}에 보관한 편지`
-              : isSample
-                ? '예시 문장이에요. 직접 써 보세요.'
-                : '쓰는 대로 카드에 손글씨 스타일로 담겨요.'}
-          </p>
+          <div className={styles.stageFoot}>
+            {!(view === 'box' && letters.length === 0) && <SodamPose pose={sodamPose} className={styles.sodam} />}
+            <p className={styles.stageNote} aria-live="polite">
+              {showingSaved
+                ? `${selected!.date}에 보관한 편지`
+                : isSample
+                  ? '예시 문장이에요. 직접 써 보세요.'
+                  : '쓰는 대로 카드에 손글씨 스타일로 담겨요.'}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -665,7 +682,7 @@ export function Composer() {
                 composing.current = false;
                 setText(cleanText(e.currentTarget.value));
               }}
-              onFocus={() => setFocused(true)}
+              onFocus={() => { setFocused(true); setGreeted(true); }}
               onBlur={() => setFocused(false)}
               aria-describedby={`${reassureId} ${countId} ${warnId}`}
               aria-invalid={over || warn === 'empty' || undefined}
@@ -761,6 +778,7 @@ export function Composer() {
         >
           {letters.length === 0 ? (
             <div className={styles.empty}>
+              <SodamPose pose="rest" size={152} />
               <p className={`pen ${styles.emptyPen}`}>아직 보관한 편지가 없어요.</p>
               <p>쓴 편지를 보관함에 담아 두면, 이 기기에서 언제든 다시 꺼내 볼 수 있어요.</p>
               <button type="button" className="btn" onClick={startNew}>
@@ -823,7 +841,8 @@ export function Composer() {
       {shareLetter && <LetterShareDialog letter={shareLetter} onClose={() => setShareLetter(null)} />}
       <div className={styles.toastWrap} role="status" aria-live="polite">
         {toast && (
-          <div key={toast.id} className={styles.toast}>
+          <div key={toast.id} className={styles.toast} data-sodam={toast.pose ? '' : undefined}>
+            {toast.pose && <SodamPose pose={toast.pose} eager className={styles.toastSodam} />}
             <span>{toast.msg}</span>
             {toast.action && (
               <button

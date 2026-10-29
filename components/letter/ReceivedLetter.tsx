@@ -4,7 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import { LetterCard } from './LetterCard';
 import { ensureGlyphs, layoutLetter, type Layout, type LetterInput } from './card';
 import { readSharedLetter } from './share-link';
-import { SODAM_LETTER_STICKER } from './share-assets';
+import { BunnyPortrait } from '../home/BunnyPortrait';
+import { SodamControls } from '../home/SodamControls';
+import { useSodamSound } from '../home/useSodamSound';
 import styles from './ReceivedLetter.module.css';
 
 export function ReceivedLetter() {
@@ -13,6 +15,9 @@ export function ReceivedLetter() {
   const [opened, setOpened] = useState(false);
   const [layout, setLayout] = useState<Layout | null>(null);
   const title = useRef<HTMLHeadingElement>(null);
+  const arrival = useRef<HTMLElement>(null);
+  const [paused, setPaused] = useState(false);
+  const sound = useSodamSound(opened || !letter, arrival);
   useEffect(() => {
     const read = () => { setLetter(readSharedLetter(window.location.hash)); setOpened(false); setReady(true); setLayout(null); };
     // Site-wide skip/back-to-top anchors must not replace the fragment carrying
@@ -42,15 +47,17 @@ export function ReceivedLetter() {
     title.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
   }, [opened]);
 
-  return <section className={styles.section} aria-label="도착한 편지">
+  return <section ref={arrival} className={styles.section} aria-label="도착한 편지">
     {!ready ? <p role="status">편지를 확인하고 있어요.</p> : !letter ? <div className={styles.empty}>
       <h1>편지 링크를 확인해 주세요.</h1>
       <p>링크가 빠졌거나 온전히 전달되지 않았어요.<br />보낸 분에게 편지 링크를 다시 받아 주세요.</p>
       <a className="btn" href="/#letter">나도 편지 쓰기</a>
     </div> : !opened ? <div className={styles.arrival}>
       <p className={styles.eyebrow}>DEAR PAPA · A LETTER FOR YOU</p>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={styles.sticker} src={SODAM_LETTER_STICKER} width="400" height="400" alt="눈웃음으로 봉투를 들고 인사하는 Sodam" fetchPriority="high" />
+      <div className={styles.sticker}>
+        <BunnyPortrait pose="welcome" motion={paused ? null : 'welcome'} priority large label="눈웃음으로 봉투를 들고 인사하는 Sodam" />
+      </div>
+      <SodamControls paused={paused} onPause={() => setPaused(value => !value)} sound={sound.enabled} onSound={sound.toggle} />
       <h1>{letter.from ? `${letter.from}의 편지가 도착했어요.` : '당신에게 도착한 편지예요.'}</h1>
       <p>작은 봉투에 담긴 마음을 열어보세요.</p>
       <button type="button" className={styles.openButton} onClick={() => setOpened(true)}>

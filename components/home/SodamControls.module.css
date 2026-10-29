@@ -1,0 +1,6 @@
+.controls { display: flex; justify-content: center; gap: 0; color: var(--ink-2); }
+.controls button { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; }
+.controls button:hover, .controls button[aria-pressed='true'] { color: var(--forest); background: var(--paper); }
+.controls button:focus-visible { outline: 2px solid var(--forest); outline-offset: 2px; }
+.controls button:disabled { opacity: .4; cursor: default; background: transparent; }
+@media (prefers-reduced-motion: reduce) { .motion { display: none !important; } }

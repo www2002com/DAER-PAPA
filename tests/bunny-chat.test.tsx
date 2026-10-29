@@ -159,7 +159,7 @@ describe('letter bunny AI conversation', () => {
     fireEvent.click(screen.getByRole('button', { name: '질문창 닫기' }));
     const bunny = screen.getByRole('button', { name: 'Sodam과 편지 쓰기' });
     expect(bunny.getAttribute('data-nudging')).toBe('false');
-    expect(bunny.querySelector('img')?.getAttribute('data-sodam-pose')).toBe('listen');
+    expect(bunny.querySelector('img')?.getAttribute('data-sodam-pose')).toBe('listening');
     fireEvent.change(openQuestion(), { target: { value: '이어서 말할게' } });
     fireEvent.click(screen.getByRole('button', { name: '물어보기' }));
     await waitFor(() => expect(payloads).toHaveLength(2));

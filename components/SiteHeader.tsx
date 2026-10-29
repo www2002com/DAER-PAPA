@@ -88,7 +88,7 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className={styles.header} data-scrolled={scrolled || undefined}>
+      <header className={styles.header} data-scrolled={scrolled || undefined} data-site-chrome="">
         <div className={`container ${styles.bar}`}>
           <Link href="/#main" className={styles.brand} aria-label={copy.home}><Logo className={styles.logo} /></Link>
           <nav className={styles.nav} aria-label={copy.primaryNav} lang={lang}>

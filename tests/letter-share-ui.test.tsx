@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { beforeEach, expect, it, vi } from 'vitest';
 import { Composer } from '@/components/letter/Composer';
 import { ReceivedLetter } from '@/components/letter/ReceivedLetter';
@@ -6,53 +6,104 @@ import { createLetterShareUrl } from '@/components/letter/share-link';
 import { prepareKakaoShare, sendLetterToKakao } from '@/components/letter/kakao-share';
 import { DRAFT_KEY } from '@/components/letter/storage';
 import { LetterShareDialog } from '@/components/letter/LetterShareDialog';
+import ReceivedLetterPage from '@/app/letter/received/page';
 
-vi.mock('@/components/letter/kakao-share', () => ({ prepareKakaoShare: vi.fn().mockResolvedValue(true), sendLetterToKakao: vi.fn() }));
+let kakaoReady = false;
+vi.mock('@/components/letter/kakao-share', () => ({
+  prepareKakaoShare: vi.fn(),
+  isKakaoReady: vi.fn(() => kakaoReady),
+  sendLetterToKakao: vi.fn(),
+}));
 vi.mock('@/components/letter/share-story', () => ({ createLetterStory: vi.fn().mockResolvedValue(new Blob(['png'], { type: 'image/png' })) }));
 const letter = { text: '아빠, 건강하게 오래 함께해요.', from: '딸', date: '2026.10.29' };
+const wait = (ms: number) => act(async () => { await new Promise(resolve => setTimeout(resolve, ms)); });
 beforeEach(() => {
+  kakaoReady = false;
   window.history.replaceState(null, '', '/');
-  vi.mocked(prepareKakaoShare).mockResolvedValue(true);
-  vi.mocked(sendLetterToKakao).mockClear();
+  vi.mocked(prepareKakaoShare).mockReset().mockImplementation(async () => { kakaoReady = true; return true; });
+  vi.mocked(sendLetterToKakao).mockReset();
   HTMLDialogElement.prototype.showModal = function () { this.open = true; };
   HTMLDialogElement.prototype.close = function () { this.open = false; };
   URL.createObjectURL = vi.fn().mockReturnValue('blob:story');
   URL.revokeObjectURL = vi.fn();
 });
 
-it('always exposes sharing, guards an empty draft, then opens Kakao first without sending', async () => {
+it('opens KakaoTalk in one tap once the SDK is ready and only gives guidance, never a sent claim', async () => {
   render(<Composer />);
-  const button = screen.getByRole('button', { name: /편지 공유하기/ });
+  const button = screen.getByRole('button', { name: /카카오톡으로 편지 보내기/ });
   fireEvent.click(button);
-  expect(screen.queryByRole('dialog')).toBeNull();
+  expect(sendLetterToKakao).not.toHaveBeenCalled();
   expect(document.activeElement).toBe(screen.getByLabelText('편지 내용'));
   fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: letter.text } });
-  button.focus();
+  await waitFor(() => expect(button.getAttribute('data-kakao')).toBe('ready'));
   fireEvent.click(button);
-  const dialog = screen.getByRole('dialog');
-  expect(within(dialog).getAllByRole('tab').map(t => t.textContent)).toEqual(['카카오톡', 'Instagram']);
-  expect(within(dialog).getByRole('tab', { name: '카카오톡' }).getAttribute('aria-selected')).toBe('true');
-  await waitFor(() => expect(within(dialog).getByRole('button', { name: '카카오톡으로 보내기' }).hasAttribute('disabled')).toBe(false));
-  expect(sendLetterToKakao).not.toHaveBeenCalled();
-  fireEvent.click(within(dialog).getByRole('button', { name: '카카오톡으로 보내기' }));
-  expect(sendLetterToKakao).toHaveBeenCalledWith(expect.objectContaining({ text: letter.text }));
-  fireEvent.click(within(dialog).getByRole('button', { name: '공유창 닫기' }));
-  expect(document.activeElement).toBe(button);
+  expect(sendLetterToKakao).toHaveBeenCalledWith(expect.objectContaining({ text: letter.text }), {});
+  expect(screen.queryByRole('dialog')).toBeNull();
+  expect(await screen.findByText('카카오톡을 여는 중이에요…')).toBeTruthy();
+  act(() => { window.dispatchEvent(new Event('blur')); });
+  expect(await screen.findByText(/카카오톡에서 받을 분을 고른 뒤 보내기를 눌러 주세요/)).toBeTruthy();
+  expect(screen.queryByText(/보냈어요|전송했어요|전달됐어요/)).toBeNull();
   expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!).text).toBe(letter.text);
 });
 
-it('falls back honestly when Kakao SDK is unavailable and copies a recipient link', async () => {
+it('offers the web share page and link copy when KakaoTalk shows no sign of opening', async () => {
+  const copy = vi.fn().mockResolvedValue(undefined);
+  Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: copy } });
+  render(<Composer />);
+  fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: letter.text } });
+  const button = screen.getByRole('button', { name: /카카오톡으로 편지 보내기/ });
+  await waitFor(() => expect(button.getAttribute('data-kakao')).toBe('ready'));
+  fireEvent.click(button);
+  await wait(3100);
+  expect(screen.getByText(/카카오톡이 열리지 않았다면/)).toBeTruthy();
+  fireEvent.click(screen.getByRole('button', { name: '편지 링크 복사' }));
+  expect(await screen.findByText('링크를 복사했어요')).toBeTruthy();
+  expect(copy.mock.calls[0][0]).toMatch(/^https:\/\/dearpapa.kr\/letter\/received#letter=/);
+  fireEvent.click(screen.getByRole('button', { name: '웹에서 카카오톡으로 보내기' }));
+  expect(sendLetterToKakao).toHaveBeenLastCalledWith(expect.objectContaining({ text: letter.text }), { web: true });
+  expect(screen.getByText('카카오톡을 여는 중이에요…')).toBeTruthy();
+});
+
+it('opens every other way to send from the composer, with the KakaoTalk message preview', async () => {
+  render(<Composer />);
+  fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: letter.text } });
+  fireEvent.change(screen.getByPlaceholderText('이름이나 애칭'), { target: { value: letter.from } });
+  const other = screen.getByRole('button', { name: /다른 방법으로 보내기/ });
+  other.focus();
+  fireEvent.click(other);
+  const dialog = screen.getByRole('dialog');
+  expect(within(dialog).getAllByRole('tab').map(t => t.textContent)).toEqual(['카카오톡', 'Instagram']);
+  const preview = within(dialog).getByText('카카오톡에는 이렇게 보여요').closest('figure')!;
+  expect(preview.textContent).toContain('딸의 편지가 도착했어요');
+  expect(preview.textContent).not.toContain(letter.text);
+  const send = await within(dialog).findByRole('button', { name: '카카오톡으로 편지 보내기' });
+  await waitFor(() => expect(send.hasAttribute('disabled')).toBe(false));
+  fireEvent.click(send);
+  expect(sendLetterToKakao).toHaveBeenCalledWith(expect.objectContaining({ from: letter.from }), {});
+  fireEvent.click(within(dialog).getByRole('button', { name: '공유창 닫기' }));
+  expect(document.activeElement).toBe(other);
+});
+
+it('falls back honestly when the Kakao SDK cannot load and still copies a recipient link', async () => {
   vi.mocked(prepareKakaoShare).mockResolvedValue(false);
   const copy = vi.fn().mockResolvedValue(undefined);
   Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: copy } });
   render(<Composer />);
   fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: letter.text } });
-  fireEvent.click(screen.getByRole('button', { name: /편지 공유하기/ }));
-  await screen.findByText(/카카오톡 연결을 사용할 수 없어요/);
-  fireEvent.click(screen.getByRole('button', { name: '편지 링크 복사' }));
-  await screen.findByText('편지 링크를 복사했어요.');
+  fireEvent.click(screen.getByRole('button', { name: /카카오톡으로 편지 보내기/ }));
+  const dialog = screen.getByRole('dialog');
+  expect(await within(dialog).findByText(/카카오톡 연결을 불러오지 못했어요/)).toBeTruthy();
+  expect(within(dialog).getByRole('button', { name: '카카오톡 다시 연결' })).toBeTruthy();
+  fireEvent.click(within(dialog).getByRole('button', { name: '편지 링크 복사' }));
+  expect(await within(dialog).findByText('링크를 복사했어요')).toBeTruthy();
   expect(copy.mock.calls[0][0]).toMatch(/^https:\/\/dearpapa.kr\/letter\/received#letter=/);
   expect(sendLetterToKakao).not.toHaveBeenCalled();
+});
+
+it('shows the received letter without the site header and footer around it', () => {
+  const { container } = render(<ReceivedLetterPage />);
+  expect(container.querySelector('style')?.textContent).toContain('[data-site-chrome]');
+  expect(screen.getByRole('link', { name: 'DEAR PAPA 홈으로' }).getAttribute('href')).toBe('/');
 });
 
 it('keeps letter contents closed until the recipient opens it and preserves their own draft', async () => {

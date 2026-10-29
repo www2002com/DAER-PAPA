@@ -7,6 +7,7 @@ import { readSharedLetter } from './share-link';
 import { BunnyPortrait } from '../home/BunnyPortrait';
 import { SodamControls } from '../home/SodamControls';
 import { useSodamSound } from '../home/useSodamSound';
+import { Logo } from '../Logo';
 import styles from './ReceivedLetter.module.css';
 
 export function ReceivedLetter() {
@@ -48,9 +49,10 @@ export function ReceivedLetter() {
   }, [opened]);
 
   return <section ref={arrival} className={styles.section} aria-label="도착한 편지">
+    <a className={styles.brand} href="/" aria-label="DEAR PAPA 홈으로"><Logo className={styles.brandLogo} /></a>
     {!ready ? <p role="status">편지를 확인하고 있어요.</p> : !letter ? <div className={styles.empty}>
       <h1>편지 링크를 확인해 주세요.</h1>
-      <p>링크가 빠졌거나 온전히 전달되지 않았어요.<br />보낸 분에게 편지 링크를 다시 받아 주세요.</p>
+      <p>링크가 일부만 전달된 것 같아요.<br />보낸 분에게 「편지 링크 복사」로 받은 주소를 다시 보내 달라고 해 주세요.</p>
       <a className="btn" href="/#letter">나도 편지 쓰기</a>
     </div> : !opened ? <div className={styles.arrival}>
       <p className={styles.eyebrow}>DEAR PAPA · A LETTER FOR YOU</p>

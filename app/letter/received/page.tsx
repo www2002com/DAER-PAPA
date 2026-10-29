@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { ReceivedLetter } from '@/components/letter/ReceivedLetter';
-import { SODAM_LETTER_STICKER_PNG } from '@/components/letter/share-assets';
+import { LETTER_SHARE_CARD } from '@/components/letter/share-assets';
 
 export const metadata: Metadata = {
   title: { absolute: '당신에게 도착한 편지 | DEAR PAPA' },
@@ -11,9 +11,16 @@ export const metadata: Metadata = {
   openGraph: {
     title: '당신에게 도착한 편지', description: '작은 봉투에 담긴 마음을 열어보세요.',
     url: 'https://dearpapa.kr/letter/received', type: 'website',
-    images: [{ url: `https://dearpapa.kr${SODAM_LETTER_STICKER_PNG}`, width: 1254, height: 1254, alt: '눈웃음으로 봉투를 들고 인사하는 Sodam' }],
+    images: [{ url: `https://dearpapa.kr${LETTER_SHARE_CARD}`, width: 800, height: 800, alt: '봉투 위에서 편지를 든 Sodam과 DEAR PAPA' }],
   },
-  twitter: { card: 'summary_large_image', title: '당신에게 도착한 편지', description: '작은 봉투에 담긴 마음을 열어보세요.', images: [`https://dearpapa.kr${SODAM_LETTER_STICKER_PNG}`] },
+  twitter: { card: 'summary_large_image', title: '당신에게 도착한 편지', description: '작은 봉투에 담긴 마음을 열어보세요.', images: [`https://dearpapa.kr${LETTER_SHARE_CARD}`] },
 };
 
-export default function ReceivedLetterPage() { return <ReceivedLetter />; }
+// A personal letter reads best without the shop around it: hide the site header and footer here,
+// in the server HTML, so they never flash before the letter.
+export default function ReceivedLetterPage() {
+  return <>
+    <style>{'[data-site-chrome],.skip-link{display:none!important}'}</style>
+    <ReceivedLetter />
+  </>;
+}

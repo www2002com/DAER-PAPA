@@ -3,9 +3,10 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react';
 import type { LetterInput } from './card';
 import { createLetterShareUrl } from './share-link';
-import { prepareKakaoShare, sendLetterToKakao } from './kakao-share';
 import { createLetterStory } from './share-story';
-import { SODAM_LETTER_STICKER } from './share-assets';
+import { LETTER_SHARE_CARD } from './share-assets';
+import { KakaoHandoff } from './KakaoHandoff';
+import { useKakaoSend } from './useKakaoSend';
 import styles from './LetterShareDialog.module.css';
 
 export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; onClose: () => void }) {
@@ -14,7 +15,7 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
   const alive = useRef(false);
   const busyRef = useRef(false);
   const [tab, setTab] = useState<'kakao' | 'instagram'>('kakao');
-  const [kakao, setKakao] = useState<'loading' | 'ready' | 'fallback'>('loading');
+  const kakao = useKakaoSend(true);
   const [status, setStatus] = useState('');
   const [busy, setBusy] = useState(false);
   const [manualCopy, setManualCopy] = useState(false);
@@ -34,12 +35,6 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
       el.close();
       previous?.focus({ preventScroll: true });
     };
-  }, []);
-
-  useEffect(() => {
-    let active = true;
-    prepareKakaoShare().then(ready => active && setKakao(ready ? 'ready' : 'fallback')).catch(() => active && setKakao('fallback'));
-    return () => { active = false; };
   }, []);
 
   useEffect(() => {
@@ -83,8 +78,7 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
   }
   function shareKakao() {
     setStatus('');
-    try { sendLetterToKakao(letter); }
-    catch { setKakao('fallback'); setStatus('카카오톡 공유창을 열 수 없었어요. 편지 링크를 복사해 보내 주세요.'); }
+    kakao.send(letter);
   }
   async function copyLink() {
     try {
@@ -114,21 +108,30 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
       </div>
       <div role="tabpanel" id={`${id}-panel`} aria-labelledby={`${id}-${tab}`} tabIndex={0}>
         {tab === 'kakao' ? <>
-          <div className={styles.kakaoPreview}>
-            {/* A generic arrival preview; the personal letter appears only after opening the recipient link. */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className={styles.sticker} src={SODAM_LETTER_STICKER} width="240" height="240" alt="눈웃음으로 봉투를 들고 인사하는 Sodam" />
-            <p className={styles.previewTitle}>{letter.from ? `${letter.from}의 편지가 도착했어요.` : '마음을 담아 보낸 편지'}</p>
-            <a className={styles.previewLink} href={previewUrl} target="_blank" rel="noopener noreferrer">받는 화면 미리보기 <span aria-hidden="true">↗</span></a>
-          </div>
-          <p className={styles.privacy}>편지와 이름이 링크에 담겨요. 링크를 받은 사람은 누구나 읽을 수 있어요.</p>
-          {kakao === 'fallback' && <p className={styles.note}>카카오톡 연결을 사용할 수 없어요. {typeof navigator.share === 'function' ? '기기 공유창에서 카카오톡을 선택하거나 편지 링크를 복사해 주세요.' : '편지 링크를 복사해 카카오톡으로 보내 주세요.'}</p>}
-          {kakao !== 'fallback' ? <button type="button" className={styles.kakaoButton} disabled={kakao === 'loading'} onClick={shareKakao}>
+          {kakao.sdk !== 'unavailable' && <button type="button" className={styles.kakaoButton} disabled={kakao.sdk === 'loading'} onClick={shareKakao}>
             <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.3 4.7 6.7l-.9 3.3c-.1.3.2.5.5.3l4-2.6 1.7.1c5.5 0 10-3.5 10-7.8S17.5 3 12 3Z"/></svg>
-            {kakao === 'loading' ? '카카오톡 연결 중…' : '카카오톡으로 보내기'}</button>
-            : typeof navigator.share === 'function' && <button type="button" className={styles.kakaoButton} disabled={busy} onClick={() => nativeShare({ title: '당신에게 도착한 편지', url: shareUrl })}>공유창에서 카카오톡 선택</button>}
-          <button type="button" className={styles.secondary} onClick={copyLink}>편지 링크 복사</button>
+            {kakao.sdk === 'loading' ? '카카오톡 연결 중…' : '카카오톡으로 편지 보내기'}</button>}
+          <KakaoHandoff sdk={kakao.sdk} handoff={kakao.handoff} shareUrl={shareUrl}
+            onSendAgain={shareKakao} onSendWeb={() => { setStatus(''); kakao.send(letter, { web: true }); }} onReconnect={kakao.retry} />
+          {kakao.handoff === 'idle' && kakao.sdk !== 'unavailable' && <button type="button" className={styles.secondary} onClick={copyLink}>편지 링크 복사</button>}
           {manualCopy && <input className={styles.copyInput} aria-label="복사할 편지 링크" readOnly value={shareUrl} onFocus={e => e.currentTarget.select()} />}
+          <figure className={styles.kakaoMessage}>
+            <figcaption>카카오톡에는 이렇게 보여요</figcaption>
+            <div className={styles.kakaoCard}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={LETTER_SHARE_CARD} width="800" height="800" alt="" />
+              <div>
+                <p className={styles.kakaoTitle}>{letter.from ? `${letter.from}의 편지가 도착했어요` : '편지가 도착했어요'}</p>
+                <p className={styles.kakaoDesc}>봉투를 열면 마음을 담은 한 줄이 있어요.</p>
+                <dl className={styles.kakaoItems}>
+                  {letter.from && <><dt>보낸 사람</dt><dd>{letter.from}</dd></>}
+                  <dt>쓴 날</dt><dd>{letter.date}</dd>
+                </dl>
+              </div>
+            </div>
+            <div className={styles.kakaoButtons} aria-hidden="true"><span>편지 열어보기</span><span>나도 편지 쓰기</span></div>
+          </figure>
+          <p className={styles.privacy}>편지 내용은 카카오톡 메시지에 보이지 않고, 받는 분이 열어야 보여요. 편지와 이름은 링크에 담기므로 링크를 받은 사람은 누구나 읽을 수 있어요. <a className={styles.previewLink} href={previewUrl} target="_blank" rel="noopener noreferrer">받는 화면 미리보기 <span aria-hidden="true">↗</span></a></p>
         </> : <>
           <p className={styles.intro}>Sodam과 편지를 한 장에 담았어요.</p>
           <div className={styles.storyPreview}>

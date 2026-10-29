@@ -29,7 +29,7 @@ const CHANNEL_LOGOS = {
 
 export function SiteFooter() {
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} data-site-chrome="">
       <div className="container">
         <FooterLogo
           slogan={BRAND.slogan}

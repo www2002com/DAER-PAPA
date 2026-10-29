@@ -1,8 +1,11 @@
-.section { min-height: calc(100svh - var(--header-h)); padding: 56px 20px 72px; display: grid; place-items: center; background: #e9f1f5; color: #203e50; text-align: center; }
+.section { position: relative; min-height: 100svh; padding: 76px 20px 72px; display: grid; place-items: center; background: #e9f1f5; color: #203e50; text-align: center; }
+.brand { position: absolute; top: calc(18px + env(safe-area-inset-top, 0px)); left: 50%; transform: translateX(-50%); display: inline-flex; min-height: 44px; align-items: center; color: var(--logo); }
+.brandLogo { width: 116px; height: auto; }
+.brand:focus-visible { outline: 2px solid var(--forest); outline-offset: 4px; border-radius: 4px; }
 .arrival, .opened, .empty { width: min(100%, 520px); margin: auto; }
 .eyebrow { font-size: 11px; letter-spacing: .14em; margin: 0 0 16px; color: #587184; }
 .sticker { display: block; width: min(340px, 100%); height: auto; margin: 0 auto 10px; }
-.section h1 { margin: 0; font-size: clamp(22px, 4.8vw, 28px); letter-spacing: -.04em; line-height: 1.5; word-break: keep-all; overflow-wrap: anywhere; scroll-margin-top: calc(var(--header-h) + 24px); }
+.section h1 { margin: 0; font-size: clamp(22px, 4.8vw, 28px); letter-spacing: -.04em; line-height: 1.5; word-break: keep-all; overflow-wrap: anywhere; scroll-margin-top: 24px; }
 .arrival > p:not(.eyebrow), .empty p { margin: 12px 0 24px; color: #587184; font-size: 15px; line-height: 1.8; }
 .openButton { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-width: 220px; min-height: 58px; padding: 14px 24px; border-radius: 14px; background: #34566a; color: #fff; font-size: 16px; font-weight: 600; box-shadow: 0 8px 24px #34566a20; transition: background-color .18s; }
 .openButton:hover { background: #234456; }

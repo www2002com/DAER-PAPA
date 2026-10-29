@@ -3,6 +3,9 @@
 import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { LetterCard } from './LetterCard';
 import { LetterShareDialog } from './LetterShareDialog';
+import { KakaoHandoff } from './KakaoHandoff';
+import { useKakaoSend } from './useKakaoSend';
+import { createLetterShareUrl } from './share-link';
 import {
   MAX_CHARS,
   MAX_FROM,
@@ -90,6 +93,9 @@ export function Composer() {
   const [download, setDownload] = useState<Busy>('idle');
   const [hasExported, setHasExported] = useState(false);
   const [greeted, setGreeted] = useState(false);
+  const [handoffUrl, setHandoffUrl] = useState('');
+  // Load the Kakao SDK as soon as the visitor starts, so the share tap can open KakaoTalk directly.
+  const kakao = useKakaoSend(greeted || !!text.trim());
   const [shareLetter, setShareLetter] = useState<LetterInput | null>(null);
   const [toast, setToast] = useState<Toast | null>(null);
   const [tab, setTab] = useState<(typeof STARTERS)[number]['id']>('examples');
@@ -454,9 +460,23 @@ export function Composer() {
     }
   }
 
+  const currentLetter = (): LetterInput => ({ text: text.trim(), from: from.trim(), date: todayStamp() });
+
+  /** One tap: hand the letter straight to KakaoTalk once the SDK is ready; otherwise show every way to send it. */
+  function shareKakao() {
+    if (!guard()) return;
+    const letter = currentLetter();
+    if (kakao.sdk === 'ready') {
+      setHandoffUrl(createLetterShareUrl(letter));
+      kakao.send(letter);
+    } else {
+      setShareLetter(letter);
+    }
+  }
+
   function share() {
     if (!guard()) return;
-    setShareLetter({ text: text.trim(), from: from.trim(), date: todayStamp() });
+    setShareLetter(currentLetter());
   }
 
   // ── Gentle tilt on fine pointers ────────────────────────────
@@ -725,10 +745,19 @@ export function Composer() {
           </div>
 
           <div className={styles.actions}>
-            <button type="button" className={styles.shareButton} onClick={share}>
-              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
-              <span><strong>편지 공유하기</strong><small>카카오톡 · Instagram</small></span>
+            <button type="button" className={styles.shareButton} onClick={shareKakao} data-kakao={kakao.sdk}>
+              <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.3 4.7 6.7l-.9 3.3c-.1.3.2.5.5.3l4-2.6 1.7.1c5.5 0 10-3.5 10-7.8S17.5 3 12 3Z"/></svg>
+              <span><strong>카카오톡으로 편지 보내기</strong><small>{kakao.sdk === 'loading' && (greeted || text.trim()) ? '카카오톡 연결을 준비하고 있어요' : '받을 분을 고르면 편지가 링크로 전해져요'}</small></span>
               <span className={styles.shareArrow} aria-hidden="true">↗</span>
+            </button>
+            {kakao.handoff !== 'idle' && handoffUrl && <div className={styles.handoff}>
+              <KakaoHandoff sdk={kakao.sdk} handoff={kakao.handoff} shareUrl={handoffUrl}
+                onSendAgain={() => { if (guard()) kakao.send(currentLetter()); }}
+                onSendWeb={() => { if (guard()) kakao.send(currentLetter(), { web: true }); }}
+                onReconnect={kakao.retry} onDismiss={kakao.reset} />
+            </div>}
+            <button type="button" className={styles.otherShare} onClick={share}>
+              다른 방법으로 보내기 <span aria-hidden="true">·</span> Instagram <span aria-hidden="true">·</span> 링크 복사
             </button>
             <button
               type="button"

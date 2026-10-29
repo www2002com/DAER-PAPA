@@ -78,6 +78,11 @@
       "lib/product-fit.ts",
       "lib/facts.ts"
     ],
+    "/sodam": [
+      "app/sodam",
+      "app/@structuredData/sodam",
+      "lib/sodam-page.ts"
+    ],
     "/about/facts": [
       "app/about/facts",
       "app/@structuredData/about/facts",

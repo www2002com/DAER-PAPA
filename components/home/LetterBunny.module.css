@@ -1,4 +1,4 @@
-.companion { --bunny-beat: 400ms; --bunny-start: 400ms; display: grid; grid-template-columns: minmax(0, 1fr) 104px; align-items: center; gap: 16px; color: var(--ink); }
+.companion { --bunny-beat: 402.684564ms; display: grid; grid-template-columns: minmax(0, 1fr) 104px; align-items: center; gap: 16px; color: var(--ink); }
 .invitation { grid-column: 1 / -1; grid-row: 1; position: relative; display: flex; justify-content: flex-end; min-height: 56px; }
 .inviteCopy { display: grid; align-content: center; min-height: 44px; max-width: calc(100% - 128px); margin-right: 128px; font-family: var(--font-pen); font-size: 24px; line-height: 1.08; text-align: center; color: var(--forest); transform: rotate(-3deg); cursor: pointer; touch-action: manipulation; }
 .inviteCopy > span { display: block; }
@@ -6,9 +6,14 @@
 .inviteCopy:active:not(:focus-visible) { transform: rotate(-3deg) scale(.97); }
 .inviteArrow { position: absolute; top: 1px; right: 8px; width: 120px; height: 64px; pointer-events: none; color: var(--forest); opacity: .72; }
 .inviteArrow path { stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-.character { grid-column: 2; grid-row: 2; align-self: start; display: grid; justify-items: center; width: 100%; border-radius: 8px; touch-action: manipulation; color: var(--forest); }
-.patrol { --bunny-travel: 10px; --bunny-hop: 6px; display: block; width: 100%; }
-.portraitWrap { position: relative; display: block; width: 100%; transform-origin: center bottom; }
+.characterArea { grid-column: 2; grid-row: 2; align-self: start; display: grid; justify-items: center; }
+.character { display: grid; justify-items: center; width: 100%; border-radius: 8px; touch-action: manipulation; color: var(--forest); }
+.patrol { display: block; width: 100%; }
+.portraitWrap { position: relative; display: block; width: 100%; }
+.motionToggle { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 44px; padding: 4px; font-size: 10px; white-space: nowrap; color: var(--ink-2); cursor: pointer; }
+.motionToggle:disabled { opacity: .5; cursor: default; }
+.motionToggle:focus-visible { outline: 2px solid var(--forest); outline-offset: 2px; border-radius: 3px; }
+@media (prefers-reduced-motion: reduce) { .motionToggle { display: none; } }
 .label { padding: 6px 0; font-size: 12px; line-height: 1.5; text-align: center; }
 .label.writePrompt { min-height: calc(3.45em + 12px); font-family: var(--font-pen); font-size: 19px; line-height: 1.15; color: var(--ink); }
 .writePrompt > span { display: block; white-space: nowrap; }
@@ -60,40 +65,22 @@
 @media (hover: hover) { .character:hover .label { text-decoration: underline; text-underline-offset: 4px; } }
 @media (prefers-reduced-motion: no-preference) {
   .inviteCopy { transition: transform 140ms cubic-bezier(.23, 1, .32, 1); }
-  .patrolling { animation: bunny-apt-step calc(var(--bunny-beat) * 16) ease-in-out var(--bunny-start) infinite; }
-  .nudge { animation: bunny-apt-bounce calc(var(--bunny-beat) * 2) cubic-bezier(.37, 0, .63, 1) var(--bunny-start) infinite; }
+  .patrolling { animation: bunny-advice-clock calc(var(--bunny-beat) * 16) linear infinite; }
   .adviceArrive { animation: reply-arrive 180ms ease-out; }
-  .replay { animation: bunny-greeting 420ms ease-out; }
-  .replayAgain { animation: bunny-greeting-again 420ms ease-out; }
   .answer { animation: reply-arrive 220ms ease-out; }
   .questionPulse { animation: question-pulse 1600ms ease-in-out infinite; }
-  .speaking { animation: bunny-speaking 600ms ease-in-out infinite; }
   .voice { animation: voice-speaking 600ms ease-in-out infinite; }
   .caret { animation: reply-caret 900ms ease-in-out infinite; }
 }
-/* APT.-inspired ~150 BPM: 400 ms per beat. Sixteen beats keep copy changes calm.
-   Only artwork moves; the caption and clickable area stay still. */
-@keyframes bunny-apt-step {
-  0%, 12.5%, 25%, 37.5%, 50%, 62.5%, 75%, 87.5%, 100% { transform: translateX(0); }
-  6.25%, 31.25%, 56.25%, 81.25% { transform: translateX(calc(-1 * var(--bunny-travel))); }
-  18.75%, 43.75%, 68.75%, 93.75% { transform: translateX(var(--bunny-travel)); }
-}
-@keyframes bunny-apt-bounce {
-  0%, 50%, 100% { transform: translateY(0) rotate(0) scale(1.025, .975); }
-  20% { transform: translateY(calc(-1 * var(--bunny-hop))) rotate(-8deg) scale(.985, 1.015); }
-  35% { transform: translateY(calc(-.5 * var(--bunny-hop))) rotate(-4deg); }
-  70% { transform: translateY(calc(-1 * var(--bunny-hop))) rotate(8deg) scale(.985, 1.015); }
-  85% { transform: translateY(calc(-.5 * var(--bunny-hop))) rotate(4deg); }
-}
+/* 149 BPM, sixteen beats. This clock advances copy without moving the cutout;
+   the rendered 3D asset supplies all body and foot motion. */
+@keyframes bunny-advice-clock { from { opacity: 1; } to { opacity: 1; } }
 @keyframes question-pulse { 0%,100% { opacity: 1; } 50% { opacity: .22; } }
-@keyframes bunny-speaking { 0%,100% { transform: translateY(0) rotate(0); } 25% { transform: translateY(-2px) rotate(-2deg); } 55% { transform: translateY(0) rotate(1.5deg); } 75% { transform: translateY(-1px) rotate(-.5deg); } }
 @keyframes voice-speaking { 0%,100% { opacity: .25; transform: scale(.85); } 50% { opacity: 1; transform: scale(1); } }
 @keyframes reply-caret { 0%,100% { opacity: .2; } 50% { opacity: 1; } }
-@keyframes bunny-greeting { 0%,100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(-7px) rotate(-4deg); } 70% { transform: translateY(0) rotate(3deg); } }
-@keyframes bunny-greeting-again { 0%,100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(-7px) rotate(-4deg); } 70% { transform: translateY(0) rotate(3deg); } }
 @keyframes reply-arrive { from { opacity: .3; } to { opacity: 1; } }
 @media (max-width: 1000px) { .companion { grid-template-columns: minmax(0, 1fr) 76px; gap: 12px; } .message { font-size: 26px; } }
 @media (max-width: 700px) { .companion { grid-template-columns: minmax(0, 1fr) 64px; gap: 10px; } .salutation { font-size: 16px; } .message { font-size: 24px; } .reply { font-size: 12px; min-height: 48px; margin-top: 8px; padding-top: 8px; } .label { font-size: 11px; } }
-@media (max-width: 700px) { .label.writePrompt { font-size: 17px; } .patrol { --bunny-travel: 6px; --bunny-hop: 4px; } }
-@media (max-width: 700px) { .response { grid-column: 1 / -1; padding-top: 10px; border-top: 1px solid var(--line); } .companion:has(> .response) .character { grid-row: 2; } .inviteCopy { max-width: calc(100% - 72px); margin-right: 72px; font-size: 21px; } .inviteArrow { right: 0; width: 74px; height: 60px; } }
+@media (max-width: 700px) { .label.writePrompt { font-size: 17px; } }
+@media (max-width: 700px) { .response { grid-column: 1 / -1; padding-top: 10px; border-top: 1px solid var(--line); } .companion:has(> .response) .characterArea { grid-row: 2; } .inviteCopy { max-width: calc(100% - 72px); margin-right: 72px; font-size: 21px; } .inviteArrow { right: 0; width: 74px; height: 60px; } }
 @media (hover: hover) { .inviteCopy:hover { text-decoration: underline; text-underline-offset: 4px; } }

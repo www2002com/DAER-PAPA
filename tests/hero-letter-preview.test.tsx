@@ -4,10 +4,23 @@ import { Hero } from '@/components/home/Hero';
 
 afterEach(() => { vi.unstubAllGlobals(); vi.useRealTimers(); });
 
+async function waitForBunny(name = '일단 써봐라, 각 잡지 말고. 편지 쓰기') {
+  // LazyLetterBunny resolves via dynamic import (microtasks). Under fake timers, poll by flushing promises.
+  for (let i = 0; i < 80; i += 1) {
+    const found = screen.queryByRole('button', { name });
+    if (found) return found;
+    await act(async () => {
+      await Promise.resolve();
+      await Promise.resolve();
+    });
+  }
+  return waitFor(() => screen.getByRole('button', { name }));
+}
+
 describe('hero letter preview', () => {
-  it('invites writing through the bunny, focuses the editor and pauses the nudge while writing', () => {
+  it('invites writing through the bunny, focuses the editor and pauses the nudge while writing', async () => {
     render(<Hero />);
-    const bunny = screen.getByRole('button', { name: '일단 써봐라, 각 잡지 말고. 편지 쓰기' });
+    const bunny = await waitForBunny();
     const input = screen.getByRole('textbox', { name: '사진 속 편지에 쓸 말' }) as HTMLTextAreaElement;
     expect(bunny.getAttribute('data-nudging')).toBe('true');
     fireEvent.click(bunny);
@@ -23,10 +36,11 @@ describe('hero letter preview', () => {
     expect(input.selectionStart).toBe(input.selectionEnd);
   });
 
-  it('updates the letter in the photograph immediately as the handwritten field is edited', () => {
+  it('updates the letter in the photograph immediately as the handwritten field is edited', async () => {
     const request = vi.fn();
     vi.stubGlobal('fetch', request);
     const { container } = render(<Hero />);
+    await waitForBunny();
     const input = screen.getByRole('textbox', { name: '사진 속 편지에 쓸 말' }) as HTMLTextAreaElement;
     expect(input.value).toBe('난 아빠가 행복해졌으면 좋겠어');
     const message = '아빠, 늘 내 편이 되어 줘서 고마워요.\n오늘도 행복하세요!';
@@ -38,8 +52,9 @@ describe('hero letter preview', () => {
     expect(localStorage.length).toBe(0);
   });
 
-  it('clears the photographed message and renders pasted markup only as text', () => {
+  it('clears the photographed message and renders pasted markup only as text', async () => {
     const { container } = render(<Hero />);
+    await waitForBunny();
     const input = screen.getByRole('textbox', { name: '사진 속 편지에 쓸 말' });
     fireEvent.change(input, { target: { value: '' } });
     expect(container.querySelector('[data-letter-preview]')?.textContent).toBe('');
@@ -52,8 +67,9 @@ describe('hero letter preview', () => {
     expect(preview?.querySelector('img')).toBeNull();
   });
 
-  it('keeps the live letter independent of the bunny question and greeting', () => {
+  it('keeps the live letter independent of the bunny question and greeting', async () => {
     const { container } = render(<Hero />);
+    await waitForBunny();
     const input = screen.getByRole('textbox', { name: '사진 속 편지에 쓸 말' }) as HTMLTextAreaElement;
     expect(input.maxLength).toBe(150);
     const message = '고마워요 '.repeat(30).slice(0, 150);
@@ -68,11 +84,12 @@ describe('hero letter preview', () => {
     expect(container.querySelector('[data-letter-preview]')?.textContent).toBe(message);
   });
 
-  it('responds to a completed handwritten line without transmitting a draft or reacting to the initial example', () => {
+  it('responds to a completed handwritten line without transmitting a draft or reacting to the initial example', async () => {
     vi.useFakeTimers();
     const fetcher = vi.fn(); vi.stubGlobal('fetch', fetcher);
     render(<Hero />);
-    expect(screen.getByRole('button', { name: '일단 써봐라, 각 잡지 말고. 편지 쓰기' }).getAttribute('data-nudging')).toBe('true');
+    const bunny = await waitForBunny();
+    expect(bunny.getAttribute('data-nudging')).toBe('true');
     act(() => vi.advanceTimersByTime(2000));
     expect(screen.queryByText('Sodam의 기본 답변')).toBeNull();
     const input = screen.getByRole('textbox', { name: '사진 속 편지에 쓸 말' });
@@ -93,6 +110,7 @@ describe('hero letter preview', () => {
     const fetcher = vi.fn(async (_url: unknown, _init?: RequestInit) => Response.json({ ok: true, source: 'ai', answer: '서운했던 순간부터 한 가지만 이야기해 볼까요?', mode: 'support', action: null }));
     vi.stubGlobal('fetch', fetcher);
     render(<Hero />);
+    await waitForBunny();
     const input = screen.getByRole('textbox', { name: '사진 속 편지에 쓸 말' });
     fireEvent.change(input, { target: { value: '아빠에게 서운해' } });
     fireEvent.keyDown(input, { key: 'Enter', shiftKey: true });
@@ -114,6 +132,7 @@ describe('hero letter preview', () => {
     let signal: AbortSignal | null | undefined;
     vi.stubGlobal('fetch', (_url: unknown, init: RequestInit) => { signal = init.signal; return new Promise<Response>(resolve => { finish = resolve; }); });
     render(<Hero />);
+    await waitForBunny();
     const input = screen.getByRole('textbox', { name: '사진 속 편지에 쓸 말' });
     fireEvent.compositionStart(input);
     fireEvent.change(input, { target: { value: '아빠에게 미안해' } });

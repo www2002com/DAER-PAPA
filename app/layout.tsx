@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from 'next';
 import { Nanum_Pen_Script } from 'next/font/google';
-import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
 import './globals.css';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { RevealObserver } from '@/components/RevealObserver';
 import { SiteAnalytics } from '@/components/SiteAnalytics';
+import { PretendardFullLoader } from '@/components/PretendardFullLoader';
 import { BRAND, SITE_URL, UNDECIDED, PRODUCT } from '@/lib/facts';
 
 // Handwriting face for letters. Korean glyphs arrive as unicode-range slices on demand.
@@ -65,6 +65,13 @@ export default function RootLayout({ children, structuredData }: {
     <html lang="ko" className={pen.variable} data-scroll-behavior="smooth">
       <head>
         {structuredData}
+        <link
+          rel="preload"
+          href="/fonts/pretendard-critical.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         <link rel="describedby" href="/llms.txt" type="text/plain" />
         <link rel="alternate" type="text/markdown" title="LLM Markdown" href="/llm.md" />
         <link rel="alternate" type="application/json" title="Facts JSON" href="/facts.json" />
@@ -76,6 +83,7 @@ export default function RootLayout({ children, structuredData }: {
         </a>
         <SiteHeader />
         <noscript>
+          <link rel="stylesheet" href="/fonts/pretendardvariable-dynamic-subset.css" />
           <nav className="no-script-nav container" aria-label="자바스크립트 없이 사용하는 메뉴">
             <a href="/#product">레터 올인원</a>
             <a href="/#story">브랜드 이야기</a>
@@ -87,6 +95,7 @@ export default function RootLayout({ children, structuredData }: {
         <main id="main">{children}</main>
         <SiteFooter />
         <RevealObserver />
+        <PretendardFullLoader />
         <SiteAnalytics />
       </body>
     </html>

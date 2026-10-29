@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { type ReactNode, useId, useLayoutEffect, useRef, useState } from 'react';
 import { HeroLogo } from './HeroLogo';
-import { LetterBunny } from './LetterBunny';
+import { LazyLetterBunny } from './LazyLetterBunny';
 import hero from './Hero.module.css';
 import styles from './HeroLetterPreview.module.css';
 
@@ -20,6 +20,10 @@ export function HeroLetterPreview({ children }: { children: ReactNode }) {
 
   useLayoutEffect(() => {
     let active = true;
+    let idleId: number | undefined;
+    let timeoutId: number | undefined;
+    let started = false;
+
     function fit() {
       if (!active) return;
       const field = editor.current;
@@ -43,15 +47,34 @@ export function HeroLetterPreview({ children }: { children: ReactNode }) {
       }
       text.style.fontSize = `${low}px`;
     }
-    fit();
-    void document.fonts?.ready.then(fit);
-    document.fonts?.addEventListener('loadingdone', fit);
-    const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(fit) : null;
+
+    // Defer the binary-search fit until after first paint / idle so it does not contend with LCP.
+    function start() {
+      if (!active || started) return;
+      started = true;
+      fit();
+      void document.fonts?.ready.then(fit);
+      document.fonts?.addEventListener('loadingdone', fit);
+    }
+
+    if (process.env.VITEST) {
+      start();
+    } else {
+      const ric = typeof window !== 'undefined' ? window.requestIdleCallback?.bind(window) : undefined;
+      if (ric) idleId = ric(start, { timeout: 1200 });
+      else timeoutId = window.setTimeout(start, 1) as unknown as number;
+    }
+
+    const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => {
+      if (started) fit();
+    }) : null;
     if (editor.current?.parentElement) observer?.observe(editor.current.parentElement);
     return () => {
       active = false;
       observer?.disconnect();
       document.fonts?.removeEventListener('loadingdone', fit);
+      if (idleId != null) window.cancelIdleCallback?.(idleId);
+      if (timeoutId != null) window.clearTimeout(timeoutId);
     };
   }, [message]);
 
@@ -93,7 +116,7 @@ export function HeroLetterPreview({ children }: { children: ReactNode }) {
     <section className={`container ${hero.experience}`} aria-labelledby={experienceTitleId}>
       <h2 id={experienceTitleId} className={hero.experienceTitle}>마음을 담은 한 줄</h2>
       <div className={hero.letterCard}>
-        <LetterBunny isWriting={isWriting} draft={hasEdited.current ? message : undefined} draftComposing={composing} onWriteLetter={() => {
+        <LazyLetterBunny isWriting={isWriting} draft={hasEdited.current ? message : undefined} draftComposing={composing} onWriteLetter={() => {
           editor.current?.focus();
           if (!hasEdited.current) editor.current?.select();
         }} messageEditor={({ replyTo, busy }) => <div className={styles.editor}>

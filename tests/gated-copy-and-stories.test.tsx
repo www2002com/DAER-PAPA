@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Home from '@/app/page';
 import Privacy from '@/app/privacy/page';
 import SkincareGuide from '@/app/journal/dad-gift-skincare-guide/page';
@@ -81,7 +81,7 @@ describe('letter story privacy section (own flag, off until retention is confirm
 });
 
 describe('letter example lines', () => {
-  it('shows the approved example lines first in the composer', () => {
+  it('shows the approved example lines first in the composer', async () => {
     off();
     expect(STARTERS[0].lines).toEqual([
       '아빠, 말은 잘 못 해도 늘 고마워요.',
@@ -90,7 +90,9 @@ describe('letter example lines', () => {
       '아빠라는 직함이 제일 멋있어요.',
     ]);
     render(<Home />);
-    for (const line of STARTERS[0].lines) expect(screen.getByRole('button', { name: line })).toBeTruthy();
+    for (const line of STARTERS[0].lines) {
+      await waitFor(() => expect(screen.getByRole('button', { name: line })).toBeTruthy());
+    }
   });
 });
 

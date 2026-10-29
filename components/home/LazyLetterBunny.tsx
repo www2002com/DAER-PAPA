@@ -3,6 +3,8 @@
 import { useEffect, useState, type ComponentProps } from 'react';
 import type { LetterBunny as LetterBunnyComponent } from './LetterBunny';
 import styles from './LetterBunny.module.css';
+import { SODAM_GESTURES } from '@/lib/sodam-gestures';
+import { SodamCue } from './SodamCue';
 
 type Props = ComponentProps<typeof LetterBunnyComponent>;
 type Bunny = typeof LetterBunnyComponent;
@@ -36,19 +38,10 @@ function scheduleIdle(run: () => void): () => void {
 function LetterBunnyShell({ messageEditor }: Pick<Props, 'messageEditor'>) {
   return (
     <div className={styles.companion} aria-busy="true" data-lazy-bunny-shell="">
-      <div className={styles.invitation}>
-        <span className={styles.inviteCopy}>
-          <span>고민돼?</span>
-          <span>나에게 편하게 털어봐.</span>
-        </span>
-      </div>
-      <div className={styles.character} aria-hidden="true">
-        <span className={styles.patrol}>
-          <span className={styles.portraitWrap} />
-        </span>
-        <span className={`${styles.label} ${styles.writePrompt}`}>
-          <span>일단 써봐라,</span>
-          <span>각 잡지 말고.</span>
+      <div className={styles.characterArea} aria-hidden="true">
+        <span className={styles.character}>
+          <img className={styles.shellPortrait} src={SODAM_GESTURES.invite} width="256" height="256" alt="" />
+          <span className={styles.gestureBadge}><SodamCue kind="letter" /></span>
         </span>
       </div>
       <div className={styles.note}>
@@ -56,11 +49,7 @@ function LetterBunnyShell({ messageEditor }: Pick<Props, 'messageEditor'>) {
         {typeof messageEditor === 'function'
           ? messageEditor({ replyTo: () => {}, busy: true })
           : messageEditor ?? <p className={styles.message}>난 아빠가 행복해졌으면 좋겠어</p>}
-        <div className={styles.reply}>
-          <p className={styles.greeting}>
-            <span>말로 하기 쑥스러운 마음, 한 줄이면 충분해요</span>
-          </p>
-        </div>
+        <div className={styles.reply} aria-hidden="true"><span className={styles.questionTrigger}><SodamCue kind="conversation" /></span></div>
       </div>
     </div>
   );

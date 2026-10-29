@@ -1,2 +1,4 @@
-export const SODAM_LETTER_STICKER = '/media/sodam-letter-share-r1/Sodam-letter-arrived-r2.webp';
-export const SODAM_LETTER_STICKER_PNG = '/media/sodam-letter-share-r1/Sodam-letter-arrived-r2.png';
+import { SODAM_GESTURES } from '@/lib/sodam-gestures';
+
+export const SODAM_LETTER_STICKER = SODAM_GESTURES.invite;
+export const SODAM_LETTER_STICKER_PNG = '/media/sodam-nonverbal-r1/Sodam-letter-wave-r1.png';

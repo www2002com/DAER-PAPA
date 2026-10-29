@@ -10,10 +10,11 @@ function openQuestion() {
 }
 
 describe('letter bunny AI conversation', () => {
-  it('opens the question from the handwritten invitation and returns keyboard focus to it', () => {
+  it('opens the question from its named nonverbal control and returns keyboard focus to it', () => {
     const request = vi.fn(); vi.stubGlobal('fetch', request);
     render(<LetterBunny />);
-    const invitation = screen.getByRole('button', { name: '고민돼? 나에게 편하게 털어봐.' });
+    const invitation = screen.getByRole('button', { name: 'Sodam에게 질문하기' });
+    expect(invitation.textContent).toBe('');
     fireEvent.click(invitation);
     const input = screen.getByRole('textbox', { name: 'Sodam에게 물어볼 말' });
     expect(document.activeElement).toBe(input);
@@ -24,26 +25,21 @@ describe('letter bunny AI conversation', () => {
     expect(invitation.getAttribute('aria-expanded')).toBe('false');
   });
 
-  it('changes its playful advice after a stroll and waits while the letter is being written', () => {
+  it('invites without words and changes to a listening pose while the letter is written', () => {
     const onWriteLetter = vi.fn();
     const view = render(<LetterBunny onWriteLetter={onWriteLetter} />);
-    const bunny = screen.getByRole('button', { name: '일단 써봐라, 각 잡지 말고. 편지 쓰기' });
-    const stroll = bunny.querySelector('[data-bunny-patrol]');
-    expect(stroll).not.toBeNull();
-    // jsdom lacks AnimationEvent; React then listens for the WebKit event.
-    const iterationEvent = 'AnimationEvent' in window ? 'animationiteration' : 'webkitAnimationIteration';
-    const finishStroll = (element: Element) => fireEvent(element, new Event(iterationEvent, { bubbles: true }));
-    finishStroll(stroll!);
-    expect(screen.getByRole('button', { name: '공짜니까, 어려워 말고 써봐라. 편지 쓰기' })).toBe(bunny);
-    // A nested body animation must not advance the dialogue.
-    finishStroll(stroll!.firstElementChild!);
-    expect(bunny.getAttribute('aria-label')).toBe('공짜니까, 어려워 말고 써봐라. 편지 쓰기');
+    const bunny = screen.getByRole('button', { name: 'Sodam과 편지 쓰기' });
+    const picture = bunny.querySelector('img')!;
+    const invitation = picture.getAttribute('src');
+    expect(bunny.textContent).toBe('');
+    fireEvent.click(bunny);
+    expect(onWriteLetter).toHaveBeenCalledOnce();
     view.rerender(<LetterBunny onWriteLetter={onWriteLetter} isWriting />);
     expect(bunny.getAttribute('data-nudging')).toBe('false');
-    expect(bunny.getAttribute('aria-label')).toBe('오, 쓰네. 기다려 줄게. 편지 쓰기');
-    finishStroll(stroll!);
+    expect(picture.getAttribute('src')).not.toBe(invitation);
+    expect(bunny.textContent).toBe('');
     view.rerender(<LetterBunny onWriteLetter={onWriteLetter} />);
-    expect(bunny.getAttribute('aria-label')).toBe('공짜니까, 어려워 말고 써봐라. 편지 쓰기');
+    expect(picture.getAttribute('src')).toBe(invitation);
   });
 
   it('opens the inline question form, focuses it, and returns focus on Escape', () => {
@@ -161,8 +157,9 @@ describe('letter bunny AI conversation', () => {
     expect(screen.getByText('도움 안내')).toBeTruthy();
     expect(screen.queryByText('AI 답변')).toBeNull();
     fireEvent.click(screen.getByRole('button', { name: '질문창 닫기' }));
-    const bunny = screen.getByRole('button', { name: /천천히 해도 괜찮아/ });
+    const bunny = screen.getByRole('button', { name: 'Sodam과 편지 쓰기' });
     expect(bunny.getAttribute('data-nudging')).toBe('false');
+    expect(bunny.querySelector('img')?.getAttribute('data-sodam-pose')).toBe('listen');
     fireEvent.change(openQuestion(), { target: { value: '이어서 말할게' } });
     fireEvent.click(screen.getByRole('button', { name: '물어보기' }));
     await waitFor(() => expect(payloads).toHaveLength(2));

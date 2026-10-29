@@ -17,8 +17,8 @@ export function kakaoLetterTemplate(letter: LetterInput) {
   return {
     objectType: 'feed' as const,
     content: {
-      title: '편지 왔어요!!',
-      description: `${letter.from ? `${letter.from}의 편지가 도착했어요.` : '마음을 담아 보낸 편지예요.'} Sodam과 함께 열어보세요.`,
+      title: '당신에게 도착한 편지',
+      description: letter.from ? `${letter.from}의 마음을 담은 편지예요.` : '마음을 담아 보낸 편지예요.',
       imageUrl: `https://dearpapa.kr${SODAM_LETTER_STICKER_PNG}`,
       imageWidth: 1254, imageHeight: 1254, link,
     },

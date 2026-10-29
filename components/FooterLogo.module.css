@@ -17,7 +17,6 @@
   overflow: visible;
 }
 
-.turn { transform: rotate(180deg); }
 .turn, .ring { transform-origin: 0 0; }
 
 .slogan {

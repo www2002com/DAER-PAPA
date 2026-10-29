@@ -12,17 +12,24 @@ export function FooterLogo({ slogan, definition, explanation }: Props) {
   const keyboardRef = useRef(false);
   const [playing, setPlaying] = useState(false);
   const [replay, setReplay] = useState(0);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const stage = stageRef.current;
     if (!stage) return;
+    setReady(true);
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
     let seen = false;
     let observer: IntersectionObserver | undefined;
     const stop = () => setPlaying(false);
     const onPreference = () => { if (preference.matches) stop(); };
     const onVisibility = () => { if (document.hidden) stop(); };
-    const onKey = () => { keyboardRef.current = true; stop(); };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.target instanceof Element && event.target.closest('input, textarea, [contenteditable="true"]')) return;
+      if (!['Tab', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) return;
+      keyboardRef.current = true;
+      stop();
+    };
     const onPointer = () => { keyboardRef.current = false; };
     preference.addEventListener('change', onPreference);
     document.addEventListener('visibilitychange', onVisibility);
@@ -68,7 +75,7 @@ export function FooterLogo({ slogan, definition, explanation }: Props) {
                   <g className={styles.ring}>
                     <path transform="translate(-128 -128)" fillRule="evenodd" d="M68 128a60 60 0 1 0 120 0a60 60 0 1 0 -120 0zM88 128a40 42 0 1 0 80 0a40 42 0 1 0 -80 0z" />
                   </g>
-                  <g className={styles.turn}><path d="M40 -104h20v162h-20z" /></g>
+                  <g className={styles.turn} transform="rotate(180)"><path d="M40 -104h20v162h-20z" /></g>
                   <path className={styles.reunite} d="M40 -104h20v162h-20z" />
                 </g>
               </g>
@@ -81,12 +88,12 @@ export function FooterLogo({ slogan, definition, explanation }: Props) {
       </div>
       <p className={styles.definition}>{definition}</p>
       <p className={styles.explanation}>{explanation}</p>
-      <button
+      {ready && <button
         type="button"
         className={styles.replay}
-        aria-label="디어파파 로고 모션 다시 보기"
-        onClick={(event) => {
-          if (event.detail === 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        aria-label="로고 모션 한 번 더 보기"
+        onClick={() => {
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             setPlaying(false);
             return;
           }
@@ -98,7 +105,7 @@ export function FooterLogo({ slogan, definition, explanation }: Props) {
           <path d="M4 9a8 8 0 1 1 0 6M4 4v5h5" />
         </svg>
         <span>한 번 더 보기</span>
-      </button>
+      </button>}
     </div>
   );
 }

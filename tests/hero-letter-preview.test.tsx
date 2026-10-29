@@ -4,7 +4,7 @@ import { Hero } from '@/components/home/Hero';
 
 afterEach(() => { vi.unstubAllGlobals(); vi.useRealTimers(); });
 
-async function waitForBunny(name = '일단 써봐라, 각 잡지 말고. 편지 쓰기') {
+async function waitForBunny(name = 'Sodam과 편지 쓰기') {
   // LazyLetterBunny resolves via dynamic import (microtasks). Under fake timers, poll by flushing promises.
   for (let i = 0; i < 80; i += 1) {
     const found = screen.queryByRole('button', { name });
@@ -79,7 +79,7 @@ describe('hero letter preview', () => {
     expect(question.value).toBe('');
     fireEvent.change(question, { target: { value: '편지를 도와줘' } });
     fireEvent.click(screen.getByRole('button', { name: '질문창 닫기' }));
-    fireEvent.click(screen.getByRole('button', { name: '일단 써봐라, 각 잡지 말고. 편지 쓰기' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Sodam과 편지 쓰기' }));
     expect(input.value).toBe(message);
     expect(container.querySelector('[data-letter-preview]')?.textContent).toBe(message);
   });
@@ -99,7 +99,7 @@ describe('hero letter preview', () => {
     act(() => vi.advanceTimersByTime(1400));
     expect(screen.getByRole('status').textContent).toContain('서운');
     expect(screen.getByText('Sodam의 기본 답변')).toBeTruthy();
-    expect(screen.getByRole('button', { name: '내 답은 바로 아래. 편지 쓰기' }).getAttribute('data-nudging')).toBe('false');
+    expect(screen.getByRole('button', { name: 'Sodam과 편지 쓰기' }).getAttribute('data-nudging')).toBe('false');
     expect(fetcher).not.toHaveBeenCalled();
     fireEvent.change(input, { target: { value: ' ' } });
     act(() => vi.advanceTimersByTime(2000));

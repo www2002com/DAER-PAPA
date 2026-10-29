@@ -117,9 +117,8 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
           <div className={styles.kakaoPreview}>
             {/* A generic arrival preview; the personal letter appears only after opening the recipient link. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className={styles.sticker} src={SODAM_LETTER_STICKER} width="240" height="240" alt="편지 왔어요!! 봉투를 들고 손을 흔드는 Sodam" />
+            <img className={styles.sticker} src={SODAM_LETTER_STICKER} width="240" height="240" alt="봉투를 들고 손으로 인사하는 Sodam" />
             <p className={styles.previewTitle}>{letter.from ? `${letter.from}의 편지가 도착했어요.` : '마음을 담아 보낸 편지'}</p>
-            <p className={styles.previewCopy}>Sodam과 함께 열어보세요.</p>
             <a className={styles.previewLink} href={previewUrl} target="_blank" rel="noopener noreferrer">받는 화면 미리보기 <span aria-hidden="true">↗</span></a>
           </div>
           <p className={styles.privacy}>편지와 이름이 링크에 담겨요. 링크를 받은 사람은 누구나 읽을 수 있어요.</p>
@@ -127,7 +126,7 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
           {kakao !== 'fallback' ? <button type="button" className={styles.kakaoButton} disabled={kakao === 'loading'} onClick={shareKakao}>
             <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.3 4.7 6.7l-.9 3.3c-.1.3.2.5.5.3l4-2.6 1.7.1c5.5 0 10-3.5 10-7.8S17.5 3 12 3Z"/></svg>
             {kakao === 'loading' ? '카카오톡 연결 중…' : '카카오톡으로 보내기'}</button>
-            : typeof navigator.share === 'function' && <button type="button" className={styles.kakaoButton} disabled={busy} onClick={() => nativeShare({ title: '편지 왔어요!!', url: shareUrl })}>공유창에서 카카오톡 선택</button>}
+            : typeof navigator.share === 'function' && <button type="button" className={styles.kakaoButton} disabled={busy} onClick={() => nativeShare({ title: '당신에게 도착한 편지', url: shareUrl })}>공유창에서 카카오톡 선택</button>}
           <button type="button" className={styles.secondary} onClick={copyLink}>편지 링크 복사</button>
           {manualCopy && <input className={styles.copyInput} aria-label="복사할 편지 링크" readOnly value={shareUrl} onFocus={e => e.currentTarget.select()} />}
         </> : <>
@@ -137,7 +136,7 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
             {story ? <img src={story.url} width="1080" height="1920" alt="Instagram에 공유할 Sodam과 내 편지 이미지" /> : <p role="status">{storyError ? '이미지를 만들지 못했어요.' : '편지 이미지를 만드는 중…'}</p>}
           </div>
           <p className={styles.privacy}>이미지에는 편지 내용과 이름이 보여요. 올리기 전에 공개 범위를 확인해 주세요.</p>
-          {story?.canShare && <><button type="button" className={styles.instagramButton} disabled={busy} onClick={() => nativeShare({ files: [story.file], title: '편지 왔어요!!' })}>이미지 공유창 열기</button><p className={styles.note}>공유창에서 Instagram을 선택해 주세요.</p></>}
+          {story?.canShare && <><button type="button" className={styles.instagramButton} disabled={busy} onClick={() => nativeShare({ files: [story.file], title: '당신에게 도착한 편지' })}>이미지 공유창 열기</button><p className={styles.note}>공유창에서 Instagram을 선택해 주세요.</p></>}
           {story && <a className={styles.secondary} href={story.url} download="DEAR-PAPA-letter-story.png">Instagram용 이미지 저장</a>}
           {storyError && <button type="button" className={styles.secondary} onClick={() => setStoryAttempt(v => v + 1)}>이미지 다시 만들기</button>}
           <p className={styles.note}>저장한 이미지를 Instagram 스토리나 게시물에 올릴 수 있어요.</p>

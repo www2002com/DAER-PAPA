@@ -50,14 +50,13 @@ export function ReceivedLetter() {
     </div> : !opened ? <div className={styles.arrival}>
       <p className={styles.eyebrow}>DEAR PAPA · A LETTER FOR YOU</p>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={styles.sticker} src={SODAM_LETTER_STICKER} width="400" height="400" alt="편지 왔어요!! 봉투를 들고 손을 흔드는 Sodam" fetchPriority="high" />
+      <img className={styles.sticker} src={SODAM_LETTER_STICKER} width="400" height="400" alt="봉투를 들고 손으로 인사하는 Sodam" fetchPriority="high" />
       <h1>{letter.from ? `${letter.from}의 편지가 도착했어요.` : '당신에게 도착한 편지예요.'}</h1>
       <p>작은 봉투에 담긴 마음을 열어보세요.</p>
       <button type="button" className={styles.openButton} onClick={() => setOpened(true)}>
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
         편지 열어보기
       </button>
-      <span className={styles.signature}>Sodam이 마음을 전해요.</span>
     </div> : <div className={styles.opened}>
       <p className={styles.eyebrow}>DEAR PAPA · JUST FOR YOU</p>
       <h1 ref={title} tabIndex={-1}>{letter.from ? `${letter.from}의 마음을 전해요.` : '당신을 생각하며 쓴 편지예요.'}</h1>

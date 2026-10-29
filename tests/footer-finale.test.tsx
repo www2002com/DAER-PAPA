@@ -28,13 +28,15 @@ afterEach(() => { vi.useRealTimers(); vi.unstubAllGlobals(); });
 
 function mount() {
   const view = render(<FooterLogo {...props} />);
-  return { ...view, stage: view.container.querySelector('#brand-finale')!, replay: screen.getByRole('button', { name: '디어파파 로고 모션 다시 보기' }) };
+  return { ...view, stage: view.container.querySelector('#brand-finale')!, replay: screen.getByRole('button', { name: '로고 모션 한 번 더 보기' }) };
 }
 
 describe('footer finale playback', () => {
   it('ships the complete brand and copy in the server HTML without requiring animation', () => {
     const html = renderToString(<FooterLogo {...props} />);
     expect(html).toContain('data-playing="false"');
+    expect(html).toContain('transform="rotate(180)"');
+    expect(html).not.toContain('<button');
     Object.values(props).forEach((copy) => expect(html).toContain(copy));
   });
 
@@ -63,17 +65,24 @@ describe('footer finale playback', () => {
     expect(stage.getAttribute('data-playing')).toBe('false');
   });
 
-  it('shows the final lockup for keyboard navigation and can replay again with a pointer', () => {
+  it('skips automatic motion for keyboard navigation but permits explicit keyboard replay', () => {
     const { stage, replay } = mount();
     fireEvent.keyDown(document, { key: 'Tab' });
     act(() => intersect(0.8));
-    fireEvent.click(replay, { detail: 0 });
     expect(stage.getAttribute('data-playing')).toBe('false');
-    fireEvent.pointerDown(replay);
-    fireEvent.click(replay, { detail: 1 });
+    fireEvent.click(replay, { detail: 0 });
     expect(stage.getAttribute('data-playing')).toBe('true');
     fireEvent.keyDown(document, { key: 'Tab' });
     expect(stage.getAttribute('data-playing')).toBe('false');
+  });
+
+  it('does not suppress the finale after typing in the letter editor', () => {
+    const { stage, container } = mount();
+    const editor = document.createElement('textarea');
+    container.appendChild(editor);
+    fireEvent.keyDown(editor, { key: ' ' });
+    act(() => intersect(0.8));
+    expect(stage.getAttribute('data-playing')).toBe('true');
   });
 
   it('restarts the finish timer on replay and settles when the tab is hidden', () => {

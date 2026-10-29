@@ -23,7 +23,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     summary:
       'DEAR PAPA의 공식 표기와 브랜드 방향, 현재 준비 상황을 소개합니다. 아빠의 매일에 딸의 마음이 남는 선물을 준비합니다.',
     published: '2026-10-11',
-    modified: '2026-10-22',
+    modified: '2026-10-28',
   },
   {
     slug: 'development-principles',
@@ -32,7 +32,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     title: '매일 쓰는 제품을 준비하는 기준',
     summary: '디어파파의 올인원 스킨케어 개발 방향과 아직 확정되지 않은 제품 정보를 구분해 안내합니다.',
     published: '2026-10-11',
-    modified: '2026-10-19',
+    modified: '2026-10-21',
   },
   {
     slug: 'fathers-gift-guide',
@@ -42,7 +42,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     summary:
       '아빠에게 스킨케어를 선물하기 전 살펴볼 취향과 생활 습관, 함께 전할 짧은 편지에 관한 디어파파의 제안입니다.',
     published: '2026-10-11',
-    modified: '2026-10-16',
+    modified: '2026-10-21',
   },
   {
     slug: 'dad-gift-guide',
@@ -51,7 +51,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     title: '아빠 선물 추천, 편지와 함께 건네는 스킨케어',
     summary: '편지와 함께 건네는 아빠 선물, DEAR PAPA(디어파파). 아빠를 위한 올인원 스킨케어.',
     published: '2026-10-17',
-    modified: '2026-10-17',
+    modified: '2026-10-29',
   },
   {
     slug: 'gift-without-routine',
@@ -60,7 +60,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     title: '아빠가 뭘 쓰시는지 몰라도 괜찮아요: 스킨케어 선물 고르는 기준',
     summary: '아빠의 스킨케어 루틴을 몰라도 고를 수 있는 선물 기준. 단계는 하나로, 향료는 빼는 쪽으로, 면도 후 바로 쓰기 편한지 살펴보세요.',
     published: '2026-10-21',
-    modified: '2026-10-21',
+    modified: '2026-10-23',
   },
   {
     slug: 'after-shave-gift',
@@ -87,7 +87,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     title: '4060 아빠 올인원 고르는 법, 피부 타입·향료·단계 수로 보는 기준',
     summary: '4060 아빠의 올인원은 피부 타입, 향료가 들어 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 면도 후에 쓰기 편한지, 전성분 순서로 확인하면 고르기 쉽습니다.',
     published: '2026-10-22',
-    modified: '2026-10-28',
+    modified: '2026-10-29',
   },
   {
     slug: 'allinone-3-questions',
@@ -96,7 +96,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     title: '올인원 사기 전에 많이 묻는 3가지 (겨울 보습·면도 후·가격)',
     summary: "보습은 피부 상태와 계절을, 면도 후 사용은 용도와 전성분을, 가격은 용량과 사용 기간을 보면 됩니다.",
     published: '2026-10-23',
-    modified: '2026-10-23',
+    modified: '2026-10-25',
   },
   {
     slug: 'fragrance-alcohol-free-allinone',
@@ -114,7 +114,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     title: '아빠 선물 추천 화장품, 4060 아빠 스킨케어 선물 종류별 비교: 피부 타입·향·사용 단계',
     summary: '아빠가 평소 몇 단계를 바르시는지, 피부가 번들거리는 편인지 당기는 편인지, 향을 좋아하시는지 세 가지만 먼저 확인하면 선물 종류가 거의 정해져요.',
     published: '2026-10-23',
-    modified: '2026-10-23',
+    modified: '2026-10-25',
   },
   {
     slug: 'dad-first-allinone',

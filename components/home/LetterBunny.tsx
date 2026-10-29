@@ -47,6 +47,7 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
 }) {
   const [replay, setReplay] = useState(0);
   const [adviceIndex, setAdviceIndex] = useState(0);
+  const [dancePaused, setDancePaused] = useState(false);
   const [open, setOpen] = useState(false);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
@@ -239,8 +240,6 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
   const greeting = greetings[replay === 0 ? 0 : 1 + ((replay - 1) % (greetings.length - 1))];
   const nudging = Boolean(onWriteLetter) && !isWriting && !open && !loading && !speaking && !answer && !supportOnly;
   const advice = supportOnly ? ['천천히 해도', '괜찮아.'] : answer ? ['내 답은', '바로 아래.'] : isWriting ? ['오, 쓰네.', '기다려 줄게.'] : writingAdvice[adviceIndex];
-  const portraitMotion = speaking ? styles.speaking : nudging ? styles.nudge
-    : !onWriteLetter && replay > 0 ? (replay % 2 ? styles.replay : styles.replayAgain) : '';
 
   return (
     <div className={styles.companion}>
@@ -256,19 +255,20 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
           <path d="M5 28C18 9 44 8 48 25C51 39 33 36 39 21C47 2 79 0 84 18C88 33 70 33 76 18C82 3 113 7 124 22C134 36 127 48 114 59M114 59L116 45M114 59L129 55" />
         </svg>}
       </div>
+      <div className={styles.characterArea}>
       <button type="button" className={styles.character}
         aria-label={onWriteLetter ? (loading ? '생각하고 있어요' : speaking ? 'Sodam이 말해요' : `${advice.join(' ')} 편지 쓰기`) : 'Sodam 움직임 다시 보기'}
         title={onWriteLetter ? '눌러서 편지에 한 줄 써보세요' : '눌러서 Sodam과 인사해요'}
         data-speaking={speaking} data-nudging={nudging} disabled={loading || speaking}
         onClick={() => { if (onWriteLetter) onWriteLetter(); else setReplay((value) => value + 1); }}>
-        <span className={`${styles.patrol} ${nudging ? styles.patrolling : ''}`} data-bunny-patrol=""
+        <span className={`${styles.patrol} ${nudging && !dancePaused ? styles.patrolling : ''}`} data-bunny-patrol=""
           onAnimationIteration={(event) => {
-            if (event.target === event.currentTarget && nudging) {
+            if (event.target === event.currentTarget && nudging && !dancePaused) {
               setAdviceIndex((index) => (index + 1) % writingAdvice.length);
             }
           }}>
-        <span className={`${styles.portraitWrap} ${portraitMotion}`}>
-          <BunnyPortrait nudging={nudging} />
+        <span className={styles.portraitWrap}>
+          <BunnyPortrait nudging={nudging && !dancePaused} />
           {speaking && <svg className={styles.voice} viewBox="0 0 24 32" aria-hidden="true"><path d="M4 12q5 4 0 8M11 7q9 9 0 18M18 2q13 14 0 28" /></svg>}
         </span>
         </span>
@@ -279,6 +279,14 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
             : replay ? '다시 인사하기' : 'Sodam에게 인사하기'}
         </span>
       </button>
+      {onWriteLetter && <button type="button" className={styles.motionToggle}
+        aria-label={dancePaused ? 'Sodam 춤 재생하기' : 'Sodam 춤 멈추기'}
+        aria-pressed={dancePaused} disabled={!nudging}
+        onClick={() => setDancePaused(value => !value)}>
+        <span aria-hidden="true">{dancePaused ? '▶' : 'Ⅱ'}</span>
+        {dancePaused ? '춤 재생' : '춤 멈춤'}
+      </button>}
+      </div>
       <div className={styles.note}>
         <span className={styles.salutation}>Dear Papa,</span>
         {typeof messageEditor === 'function'

@@ -1,51 +1,7 @@
-.portrait { display: block; width: 100%; height: auto; overflow: visible; }
-.leftEar { transform-origin: 286px 288px; }
-.rightEar { transform-origin: 395px 282px; }
-.leftArm { transform-origin: 220px 477px; }
-.rightArm { transform-origin: 435px 480px; }
-.leftFoot { transform-origin: 268px 552px; }
-.rightFoot { transform-origin: 375px 552px; }
-.eye { fill: #1d3758; transform-box: fill-box; transform-origin: center; }
-@media (prefers-reduced-motion: no-preference) {
-  .eye { animation: bunny-blink 6400ms ease-in-out infinite; }
-  .awake .leftEar { animation: bunny-left-ear calc(var(--bunny-beat, 400ms) * 2) ease-in-out var(--bunny-start, 400ms) infinite; }
-  .awake .rightEar { animation: bunny-right-ear calc(var(--bunny-beat, 400ms) * 2) ease-in-out var(--bunny-start, 400ms) infinite; }
-  .awake .leftArm { animation: bunny-left-arm calc(var(--bunny-beat, 400ms) * 4) cubic-bezier(.37, 0, .63, 1) var(--bunny-start, 400ms) infinite; }
-  .awake .rightArm { animation: bunny-right-arm calc(var(--bunny-beat, 400ms) * 4) cubic-bezier(.37, 0, .63, 1) var(--bunny-start, 400ms) infinite; }
-  .awake .leftFoot { animation: bunny-left-foot calc(var(--bunny-beat, 400ms) * 4) ease-in-out var(--bunny-start, 400ms) infinite; }
-  .awake .rightFoot { animation: bunny-right-foot calc(var(--bunny-beat, 400ms) * 4) ease-in-out var(--bunny-start, 400ms) infinite; }
-}
-/* Brief natural blinks, with an occasional double blink. */
-@keyframes bunny-blink {
-  0%, 31%, 36%, 79%, 84%, 87%, 92%, 100% { transform: scaleY(1); }
-  33.5%, 81.5%, 89.5% { transform: scaleY(.08); }
-}
-/* Alternate left/right on the same two-beat clock as the body bounce. */
-@keyframes bunny-left-ear {
-  0%, 40%, 100% { transform: rotate(0); }
-  12.5% { transform: rotate(-12deg); }
-  25% { transform: rotate(4deg); }
-}
-@keyframes bunny-right-ear {
-  0%, 50%, 90%, 100% { transform: rotate(0); }
-  62.5% { transform: rotate(10deg); }
-  75% { transform: rotate(-4deg); }
-}
-/* Two small "go on, write" gestures, then rest for the remaining two beats. */
-@keyframes bunny-left-arm {
-  0%, 18%, 38%, 100% { transform: translateY(0) rotate(0); }
-  9%, 29% { transform: translateY(-3px) rotate(-8deg); }
-}
-@keyframes bunny-right-arm {
-  0%, 9%, 28%, 48%, 100% { transform: translateY(0) rotate(0); }
-  18%, 38% { transform: translateY(-2px) rotate(6deg); }
-}
-/* Almost imperceptible toe taps, alternating with the same four-beat phrase. */
-@keyframes bunny-left-foot {
-  0%, 25%, 100% { transform: translateY(0) rotate(0); }
-  12.5% { transform: translateY(-2px) rotate(2deg); }
-}
-@keyframes bunny-right-foot {
-  0%, 50%, 75%, 100% { transform: translateY(0) rotate(0); }
-  62.5% { transform: translateY(-2px) rotate(-2deg); }
+.portrait {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
 }

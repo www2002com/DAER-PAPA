@@ -1,29 +1,51 @@
 import { KAKAO_JAVASCRIPT_KEY } from '@/lib/kakao-share-config';
-import { SODAM_LETTER_STICKER_PNG } from './share-assets';
+import { LETTER_SHARE_CARD } from './share-assets';
 import { createLetterShareUrl } from './share-link';
 import type { LetterInput } from './card';
 
 type KakaoSDK = {
   init(key: string): void;
   isInitialized(): boolean;
-  Share: { sendDefault(template: ReturnType<typeof kakaoLetterTemplate>): void };
+  Share: { sendDefault(settings: ReturnType<typeof kakaoLetterTemplate> & { throughTalk?: boolean }): void };
 };
 declare global { interface Window { Kakao?: KakaoSDK } }
 let pending: Promise<boolean> | null = null;
 
+const SITE = 'https://dearpapa.kr';
+
+/**
+ * The KakaoTalk card. It names the sender and the date but never carries the letter itself,
+ * so the chat list and notifications do not reveal it; the letter opens from the link.
+ */
 export function kakaoLetterTemplate(letter: LetterInput) {
   const url = createLetterShareUrl(letter);
   const link = { mobileWebUrl: url, webUrl: url };
+  const write = { mobileWebUrl: `${SITE}/#letter`, webUrl: `${SITE}/#letter` };
+  const from = letter.from.trim();
   return {
     objectType: 'feed' as const,
     content: {
-      title: '당신에게 도착한 편지',
-      description: letter.from ? `${letter.from}의 마음을 담은 편지예요.` : '마음을 담아 보낸 편지예요.',
-      imageUrl: `https://dearpapa.kr${SODAM_LETTER_STICKER_PNG}`,
-      imageWidth: 1254, imageHeight: 1254, link,
+      title: from ? `${from}의 편지가 도착했어요` : '편지가 도착했어요',
+      description: '봉투를 열면 마음을 담은 한 줄이 있어요.',
+      imageUrl: `${SITE}${LETTER_SHARE_CARD}`,
+      imageWidth: 800, imageHeight: 800, link,
     },
-    buttons: [{ title: '편지 읽기', link }],
+    itemContent: {
+      profileText: 'DEAR PAPA',
+      items: [
+        ...(from ? [{ item: '보낸 사람', itemOp: from }] : []),
+        { item: '쓴 날', itemOp: letter.date },
+      ],
+    },
+    buttons: [
+      { title: '편지 열어보기', link },
+      { title: '나도 편지 쓰기', link: write },
+    ],
   };
+}
+
+export function isKakaoReady(): boolean {
+  return typeof window !== 'undefined' && !!window.Kakao?.isInitialized();
 }
 
 export function prepareKakaoShare(): Promise<boolean> {
@@ -61,8 +83,12 @@ export function prepareKakaoShare(): Promise<boolean> {
   return pending;
 }
 
-/** Invoke synchronously in the click handler after preloading the SDK. */
-export function sendLetterToKakao(letter: LetterInput) {
+/**
+ * Invoke synchronously in the click handler after preloading the SDK. `web` asks the pinned SDK
+ * (2.8.4 `throughTalk`) to use Kakao's web share page instead of launching the KakaoTalk app,
+ * for phones where the app does not open; it is only ever chosen by the visitor.
+ */
+export function sendLetterToKakao(letter: LetterInput, { web = false }: { web?: boolean } = {}) {
   if (!window.Kakao?.isInitialized()) throw new Error('카카오톡 공유 연결을 다시 확인해 주세요.');
-  window.Kakao.Share.sendDefault(kakaoLetterTemplate(letter));
+  window.Kakao.Share.sendDefault({ ...kakaoLetterTemplate(letter), ...(web ? { throughTalk: false } : {}) });
 }

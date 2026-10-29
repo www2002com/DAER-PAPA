@@ -1,0 +1,66 @@
+.notice {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--card, #fff);
+  color: var(--ink);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+.notice[data-handoff='notOpened'],
+.notice[data-handoff='unavailable'] {
+  border-color: var(--forest);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.actions button {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.actions button:first-child {
+  border-color: transparent;
+  background: #fee500;
+  color: #191919;
+}
+
+.actions .dismiss {
+  margin-left: auto;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.actions button:focus-visible {
+  outline: 2px solid var(--forest);
+  outline-offset: 2px;
+}
+
+.hint {
+  color: var(--ink-2);
+  font-size: 0.8125rem;
+}
+
+.copyInput {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  font-size: 13px;
+}

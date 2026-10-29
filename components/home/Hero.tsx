@@ -1,6 +1,9 @@
 import { HeroLetterPreview } from './HeroLetterPreview';
 import { FACTS_UPDATED, FACTS_UPDATED_KO, UNDECIDED } from '@/lib/facts';
+import type { CSSProperties } from 'react';
 import styles from './Hero.module.css';
+
+const titleLines = ['아빠의 매일에,', '딸의 마음을.'];
 
 export function Hero() {
   return (
@@ -8,7 +11,20 @@ export function Hero() {
       <HeroLetterPreview>
         <div className={styles.copy}>
           <p className={styles.category}>아빠를 위한 올인원 스킨케어 · 레터 올인원</p>
-          <h1 id="hero-title" className={styles.title} data-reveal data-reveal-delay="50">아빠의 매일에,<br />딸의 마음을.<span className={styles.titleSub}>아빠 선물 올인원 스킨케어</span></h1>
+          <h1 id="hero-title" className={styles.title} data-reveal="letters"
+            aria-label="아빠의 매일에, 딸의 마음을. 아빠 선물 올인원 스킨케어">
+            {titleLines.map((line, lineIndex) => (
+              <span key={line} className={styles.titleLine} aria-hidden="true">
+                {Array.from(line).map((letter, index) => letter === ' ' ? ' ' : (
+                  <span key={index} className={styles.titleLetter}
+                    style={{ '--letter-delay': `${lineIndex * 850 + index * 85}ms` } as CSSProperties}>
+                    {letter}
+                  </span>
+                ))}
+              </span>
+            ))}
+            <span className={styles.titleSub} aria-hidden="true">아빠 선물 올인원 스킨케어</span>
+          </h1>
           <p className={styles.definition} data-reveal data-reveal-delay="60">디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요.</p>
           <p className={styles.description} data-reveal data-reveal-delay="65">「디어파파 화장품」과 「디어파파 스킨케어」는 아빠를 위한 올인원 브랜드 DEAR PAPA(dearpapa.kr)를 말해요.</p>
           <div className={styles.statusBlock} data-reveal data-reveal-delay="70">

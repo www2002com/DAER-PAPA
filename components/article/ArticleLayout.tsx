@@ -3,18 +3,54 @@ import styles from './Article.module.css';
 
 type Crumb = { href: string; label: string };
 
+export type TocItem = { id: string; label: string };
+
 type Props = {
   eyebrow?: string;
   title: React.ReactNode;
   lead?: React.ReactNode;
   meta?: React.ReactNode;
   crumbs?: Crumb[];
+  /** Jump-link table of contents (SISTRIX: pages with a TOC are cited more often). */
+  toc?: readonly TocItem[];
+  /** Default: question-style title when every label ends with ?, otherwise a neutral title. */
+  tocTitle?: string;
   children: React.ReactNode;
   footer?: React.ReactNode;
 };
 
 // Shared shell for text pages (official facts, journal, press …): narrow measure, quiet header.
-export function ArticleLayout({ eyebrow, title, lead, meta, crumbs, children, footer }: Props) {
+function defaultTocTitle(items: readonly TocItem[]): string {
+  return items.length > 0 && items.every((i) => i.label.trim().endsWith('?'))
+    ? '이 글에서 다루는 질문'
+    : '이 글에서 다루는 내용';
+}
+
+// Jump-link TOC. Prefer question-style H2 labels in the items when the article uses them.
+export function ArticleToc({
+  items,
+  title,
+}: {
+  items: readonly TocItem[];
+  title?: string;
+}) {
+  if (!items.length) return null;
+  const heading = title ?? defaultTocTitle(items);
+  return (
+    <nav className={styles.toc} aria-label={heading}>
+      <p className={styles.tocTitle}>{heading}</p>
+      <ol>
+        {items.map((item) => (
+          <li key={item.id}>
+            <a href={`#${item.id}`}>{item.label}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+}
+
+export function ArticleLayout({ eyebrow, title, lead, meta, crumbs, toc, tocTitle, children, footer }: Props) {
   return (
     <article className={styles.article}>
       <header className={`container ${styles.head}`}>
@@ -35,7 +71,10 @@ export function ArticleLayout({ eyebrow, title, lead, meta, crumbs, children, fo
         {meta && <div className={styles.meta}>{meta}</div>}
       </header>
       <div className={`container ${styles.bodyWrap}`}>
-        <div className={styles.prose}>{children}</div>
+        <div className={styles.prose}>
+          {toc && toc.length > 0 && <ArticleToc items={toc} title={tocTitle} />}
+          {children}
+        </div>
         {footer && <div className={styles.foot}>{footer}</div>}
       </div>
     </article>

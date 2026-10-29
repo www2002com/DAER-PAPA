@@ -43,6 +43,11 @@ export default function AllInOneThreeQuestionsPage() {
           </span>
         </>
       }
+      toc={[
+        { id: 'summary', label: '한 줄로 정리하면?' },
+        ...ALLINONE_3_QUESTIONS_FAQ.map((item, i) => ({ id: `q-${i}`, label: item.q })),
+        { id: 'preparing', label: '디어파파가 준비하고 있는 것' },
+      ]}
       footer={
         <nav aria-label="글 하단 메뉴" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 24px' }}>
           <Link href="/journal">자료실 목록으로</Link>
@@ -50,12 +55,12 @@ export default function AllInOneThreeQuestionsPage() {
         </nav>
       }
     >
-      <h2>한 줄로 정리하면?</h2>
+      <h2 id="summary">한 줄로 정리하면?</h2>
       <p>{ALLINONE_3_QUESTIONS_DESCRIPTION}</p>
 
-      {ALLINONE_3_QUESTIONS_FAQ.map(({ q, points }) => (
+      {ALLINONE_3_QUESTIONS_FAQ.map(({ q, points }, i) => (
         <section key={q}>
-          <h2>{q}</h2>
+          <h2 id={`q-${i}`}>{q}</h2>
           <ul>
             {points.map((p) => (
               <li key={p}>{p}</li>
@@ -64,7 +69,7 @@ export default function AllInOneThreeQuestionsPage() {
         </section>
       ))}
 
-      <h2>디어파파가 준비하고 있는 것</h2>
+      <h2 id="preparing">디어파파가 준비하고 있는 것</h2>
       <p>디어파파(DEAR PAPA)는 지금 디어파파 레터 올인원을 준비하고 있어요.</p>
       <ul>
         <li>「세안 후 하나로 마무리하는 남성 올인원 스킨케어」</li>

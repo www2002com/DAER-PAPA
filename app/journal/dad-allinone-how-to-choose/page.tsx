@@ -45,6 +45,14 @@ export default function DadAllInOneHowToChoosePage() {
           </span>
         </>
       }
+      toc={[
+        { id: 'one-line', label: '한 줄 답' },
+        ...DAD_ALLINONE_HOW_TO_CHOOSE_FAQ.map((item, i) => ({ id: `q-${i}`, label: item.q })),
+        { id: 'compare', label: '제품 유형 비교' },
+        { id: 'fit', label: '이런 분께 맞아요' },
+        { id: 'product', label: '디어파파가 만들고 있는 레터 올인원' },
+      ]}
+      tocTitle="이 글에서 다루는 질문"
       footer={
         <nav aria-label="글 하단 메뉴" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 24px' }}>
           <Link href="/journal">자료실 목록으로</Link>
@@ -52,17 +60,17 @@ export default function DadAllInOneHowToChoosePage() {
         </nav>
       }
     >
-      <h2>한 줄 답</h2>
+      <h2 id="one-line">한 줄 답</h2>
       <p>{DAD_ALLINONE_HOW_TO_CHOOSE_DESCRIPTION}</p>
 
-      {DAD_ALLINONE_HOW_TO_CHOOSE_FAQ.map(({ q, a }) => (
+      {DAD_ALLINONE_HOW_TO_CHOOSE_FAQ.map(({ q, a }, i) => (
         <section key={q}>
-          <h2>{q}</h2>
+          <h2 id={`q-${i}`}>{q}</h2>
           <p>{a}</p>
         </section>
       ))}
 
-      <h2>제품 유형 비교</h2>
+      <h2 id="compare">제품 유형 비교</h2>
       <p>올인원·스킨·에센스·크림·애프터셰이브의 일반적인 차이를 정리했어요. 특정 제품이나 다른 브랜드를 비교한 표가 아니에요.</p>
       <table>
         <thead>
@@ -78,7 +86,7 @@ export default function DadAllInOneHowToChoosePage() {
 
       <ProductBox />
 
-      <h2>이런 분께 맞아요</h2>
+      <h2 id="fit">이런 분께 맞아요</h2>
       <ul>
         <li>세안 후 하나로 마무리하고 싶은 4060 아빠</li>
         <li>면도 후 바르는 한 단계를 원하는 아빠</li>
@@ -87,7 +95,7 @@ export default function DadAllInOneHowToChoosePage() {
         <li>아빠께 매일 쓰는 선물과 한 줄 편지를 함께 건네고 싶은 딸·아들·가족</li>
       </ul>
 
-      <h2>디어파파가 만들고 있는 레터 올인원</h2>
+      <h2 id="product">디어파파가 만들고 있는 레터 올인원</h2>
       <p>
         디어파파는 면도 후 바르는 올인원, 레터 올인원을 빠른 흡수의 워터리 제형으로 기획하고 만들고 있습니다. 디어파파는 150ml 올인원
         한 가지를 기획하고 만들고 있으며, 변성알코올(에탄올)을 넣지 않고 향료를 넣지 않는 방향으로 기획하고 만들고 있습니다. 공식

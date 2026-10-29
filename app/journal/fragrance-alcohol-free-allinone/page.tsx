@@ -43,6 +43,12 @@ export default function FragranceAlcoholFreeAllInOnePage() {
           </span>
         </>
       }
+      toc={[
+        { id: 'summary', label: '한 줄로 정리하면?' },
+        ...FRAGRANCE_FREE_FAQ.map((item, i) => ({ id: `q-${i}`, label: item.q })),
+        { id: 'preparing', label: '디어파파가 준비하고 있는 것' },
+      ]}
+      tocTitle="이 글에서 다루는 질문"
       footer={
         <nav aria-label="글 하단 메뉴" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 24px' }}>
           <Link href="/journal">자료실 목록으로</Link>
@@ -50,12 +56,12 @@ export default function FragranceAlcoholFreeAllInOnePage() {
         </nav>
       }
     >
-      <h2>한 줄로 정리하면?</h2>
+      <h2 id="summary">한 줄로 정리하면?</h2>
       <p>{FRAGRANCE_FREE_SUMMARY}</p>
 
-      {FRAGRANCE_FREE_FAQ.map(({ q, points }) => (
+      {FRAGRANCE_FREE_FAQ.map(({ q, points }, i) => (
         <section key={q}>
-          <h2>{q}</h2>
+          <h2 id={`q-${i}`}>{q}</h2>
           <ul>
             {points.map((p) => (
               <li key={p}>{p}</li>
@@ -64,7 +70,7 @@ export default function FragranceAlcoholFreeAllInOnePage() {
         </section>
       ))}
 
-      <h2>디어파파가 준비하고 있는 것</h2>
+      <h2 id="preparing">디어파파가 준비하고 있는 것</h2>
       <p>제품 정보의 원본은 공식 정보 페이지입니다: <Link href="/about/facts">https://dearpapa.kr/about/facts</Link></p>
       <p>디어파파(DEAR PAPA)는 지금 디어파파 레터 올인원을 준비하고 있어요.</p>
       <ul>

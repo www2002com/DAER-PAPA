@@ -34,6 +34,12 @@ export default function DevelopmentPrinciplesPage() {
             </span>
           </>
         }
+      toc={[
+        { id: 'simple', label: '일상에서 손이 가는 간단한 관리' },
+        { id: 'feel', label: '사용감은 목표와 결과를 나누어 설명합니다' },
+        { id: 'public', label: '현재 공개할 수 있는 정보' },
+        { id: 'evidence', label: '확정된 정보에 근거를 더하겠습니다' },
+      ]}
         footer={
           <nav aria-label="글 하단 메뉴" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 24px' }}>
             <Link href="/journal">자료실 목록으로</Link>
@@ -41,7 +47,7 @@ export default function DevelopmentPrinciplesPage() {
           </nav>
         }
       >
-        <h2>일상에서 손이 가는 간단한 관리</h2>
+        <h2 id="simple">일상에서 손이 가는 간단한 관리</h2>
         <p>
           선물한 제품이 아빠의 생활 속에서 쓰이려면 사용 과정부터 이해하기 쉬워야 한다고 생각합니다. 디어파파의 제품
           개발 방향은 세안 후 하나로 마무리하는 남성 올인원 스킨케어입니다.
@@ -51,7 +57,7 @@ export default function DevelopmentPrinciplesPage() {
           관리가 필요 없다는 의미로 사용하지 않습니다.
         </p>
 
-        <h2>사용감은 목표와 결과를 나누어 설명합니다</h2>
+        <h2 id="feel">사용감은 목표와 결과를 나누어 설명합니다</h2>
         <p>
           매일 사용하는 제품인 만큼 바르는 과정과 사용 후의 느낌을 중요하게 생각합니다. 다만 사용감은 표현만으로 확인할
           수 있는 정보가 아닙니다.
@@ -62,7 +68,7 @@ export default function DevelopmentPrinciplesPage() {
           방향으로 기획하고 만들고 있습니다.
         </p>
 
-        <h2>현재 공개할 수 있는 정보</h2>
+        <h2 id="public">현재 공개할 수 있는 정보</h2>
         <p>개발 방향과 판매 제품의 확정 사양은 구분해서 확인해 주세요. 아래 상태는 이 글의 수정일을 기준으로 합니다.</p>
         <FactList
           rows={[
@@ -75,7 +81,7 @@ export default function DevelopmentPrinciplesPage() {
           ]}
         />
 
-        <h2>확정된 정보에 근거를 더하겠습니다</h2>
+        <h2 id="evidence">확정된 정보에 근거를 더하겠습니다</h2>
         <p>
           향후 성분과 사용법을 공개할 때에는 실제 판매 제품의 정보와 일치하도록 정리하겠습니다. 시험 결과를 공개하게
           되면 시험 대상, 방법, 조건과 결과의 적용 범위도 함께 설명하겠습니다.

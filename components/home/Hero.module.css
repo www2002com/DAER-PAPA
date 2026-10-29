@@ -3,6 +3,28 @@
 .copy { position: relative; z-index: 2; min-width: 0; }
 .category { margin-bottom: 18px; font-size: 16px; line-height: 1.6; color: var(--forest); }
 .title { font-size: clamp(42px, 4.3vw, 62px); font-weight: 650; line-height: 1.2; letter-spacing: -.04em; }
+.titleLine { display: block; white-space: nowrap; }
+.titleLetter { display: inline-block; }
+/* A short phrase, a breath, then the answer. Text stays in the server HTML,
+   and transforms reserve its final position throughout the one-time entrance. */
+@media (prefers-reduced-motion: no-preference) {
+  /* The existing reveal observer finishes this stationary parent clock once,
+     including on keyboard use or a reduced-motion preference change. */
+  .title[data-motion-state='entering'] {
+    --enter-y: 0px;
+    --enter-opacity: 1;
+    animation-duration: 1920ms;
+  }
+  .title[data-motion-state='entering'] .titleLetter {
+    animation: title-letter-drop 560ms cubic-bezier(.22, 1, .36, 1) both;
+    animation-delay: var(--letter-delay, 0ms);
+  }
+}
+@keyframes title-letter-drop {
+  0% { opacity: 0; transform: translate3d(0, -.65em, 0); }
+  70% { opacity: 1; transform: translate3d(0, .035em, 0); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0); }
+}
 .titleSub { display: block; margin-top: 12px; font-size: clamp(15px, 1.6vw, 18px); font-weight: 500; line-height: 1.45; letter-spacing: -.02em; color: var(--ink-2); }
 .definition { margin-top: 14px; font-size: clamp(15px, 1.55vw, 17px); line-height: 1.65; color: var(--ink); font-weight: 500; }
 .statusBlock { margin-top: 14px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); max-width: 28rem; }

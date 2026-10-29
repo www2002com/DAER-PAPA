@@ -1,6 +1,7 @@
 // Server only. Imported by the standalone Vercel Function, never by a client component.
 import { BRAND, PRODUCT, UNDECIDED, LETTER } from './facts.js';
 import { obviousBunnyConcern, SAFETY_ANSWERS } from './bunny-prepared-reply.js';
+import { SODAM_PRODUCT_CLAIM_FALLBACK, sodamOutputViolations } from './sodam-output-guard.js';
 
 type Env = Record<string, string | undefined>;
 type Message = { role: 'user' | 'assistant'; content: string };
@@ -160,6 +161,11 @@ export function createBunnyChatHandler({ env = process.env, fetchImpl = fetch, n
       if (mode === 'off_topic') return json(200, { ok: true, mode, source: 'guidance', action: null,
         answer: '저는 아빠와의 관계 고민과 아빠에게 전할 말을 함께 정리하는 AI예요. 아빠와 이야기하면서 요즘 가장 마음에 걸리는 일이 있나요?',
       });
+      // Last check before anything reaches the page: product claims the brand cannot make before launch.
+      // Only the fixed reason codes are known here; the answer text is never logged.
+      if (sodamOutputViolations(parsed.answer).length) {
+        return json(200, { ok: true, mode, source: 'guidance', answer: SODAM_PRODUCT_CLAIM_FALLBACK, action: null });
+      }
       const supportOnly = (body as { supportOnly?: unknown }).supportOnly === true;
       const action = mode === 'gift' && productEligible(messages, body)
         ? { kind: 'product', href: '/letter-all-in-one', label: 'DEAR PAPA에 담은 마음 보기',

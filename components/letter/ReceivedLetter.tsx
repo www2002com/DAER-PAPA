@@ -36,7 +36,11 @@ export function ReceivedLetter() {
     ensureGlyphs(`Dear Papa, ${letter.text} ${letter.from}`).then(() => active && setLayout(layoutLetter(letter.text)));
     return () => { active = false; };
   }, [letter]);
-  useEffect(() => { if (opened) title.current?.focus({ preventScroll: true }); }, [opened]);
+  useEffect(() => {
+    if (!opened) return;
+    title.current?.focus({ preventScroll: true });
+    title.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
+  }, [opened]);
 
   return <section className={styles.section} aria-label="도착한 편지">
     {!ready ? <p role="status">편지를 확인하고 있어요.</p> : !letter ? <div className={styles.empty}>

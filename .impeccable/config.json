@@ -1,3 +1,21 @@
 {
-  "buildPath": "code"
+  "buildPath": "code",
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "pretendard fallback apple",
+        "createdAt": "2026-10-29T10:36:12.525Z",
+        "reason": "Codex review: existing production commit c4fdadc defines this as a metric-adjusted local Apple SD Gothic Neo fallback for Pretendard, not a new brand font."
+      },
+      {
+        "rule": "design-system-font",
+        "value": "pretendard fallback noto",
+        "createdAt": "2026-10-29T10:36:12.560Z",
+        "reason": "Codex review: existing production commit c4fdadc defines this as a metric-adjusted local Noto Sans KR fallback for Pretendard, not a new brand font."
+      }
+    ]
+  }
 }

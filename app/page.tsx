@@ -3,6 +3,7 @@ import { Hero } from '@/components/home/Hero';
 import { LetterSection } from '@/components/home/LetterSection';
 import { GiftMeaning } from '@/components/home/GiftMeaning';
 import { Story } from '@/components/home/Story';
+import { SodamFilm } from '@/components/home/SodamFilm';
 import { Product } from '@/components/home/Product';
 import { Facts } from '@/components/home/Facts';
 import { News } from '@/components/home/News';
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero />
       <Product />
       <Story />
+      <SodamFilm />
       <LetterSection />
       <GiftMeaning />
       <Facts />

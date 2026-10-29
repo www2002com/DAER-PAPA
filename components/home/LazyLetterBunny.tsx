@@ -3,7 +3,7 @@
 import { useEffect, useState, type ComponentProps } from 'react';
 import type { LetterBunny as LetterBunnyComponent } from './LetterBunny';
 import styles from './LetterBunny.module.css';
-import { SODAM_GESTURES } from '@/lib/sodam-gestures';
+import { SODAM_POSTERS } from '@/lib/sodam-performance';
 import { SodamCue } from './SodamCue';
 
 type Props = ComponentProps<typeof LetterBunnyComponent>;
@@ -40,7 +40,7 @@ function LetterBunnyShell({ messageEditor }: Pick<Props, 'messageEditor'>) {
     <div className={styles.companion} aria-busy="true" data-lazy-bunny-shell="">
       <div className={styles.characterArea} aria-hidden="true">
         <span className={styles.character}>
-          <img className={styles.shellPortrait} src={SODAM_GESTURES.invite} width="256" height="256" alt="" />
+          <img className={styles.shellPortrait} src={SODAM_POSTERS.welcome} width="384" height="384" alt="" />
           <span className={styles.gestureBadge}><SodamCue kind="letter" /></span>
         </span>
       </div>

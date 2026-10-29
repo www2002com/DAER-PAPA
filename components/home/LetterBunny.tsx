@@ -4,6 +4,10 @@ import { useCallback, useEffect, useId, useRef, useState, type FormEvent, type R
 import { preparedBunnyReply } from '@/lib/bunny-prepared-reply';
 import { BunnyPortrait } from './BunnyPortrait';
 import { SodamCue } from './SodamCue';
+import { SodamControls } from './SodamControls';
+import { useSodamSound } from './useSodamSound';
+import { companionPose } from '@/lib/sodam-performance';
+import { preloadSodamPoses } from '@/lib/sodam-poses';
 import styles from './LetterBunny.module.css';
 
 type AnswerAction = { kind: 'letter' | 'product' | 'support'; href: string; label: string; description?: string };
@@ -31,7 +35,8 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
   draftComposing?: boolean;
 }) {
   const [replay, setReplay] = useState(0);
-  const [dancePaused, setDancePaused] = useState(false);
+  const [motionPaused, setMotionPaused] = useState(false);
+  const [danceMode, setDanceMode] = useState(false);
   const [open, setOpen] = useState(false);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
@@ -60,6 +65,8 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
   const supportOnlyRef = useRef(false);
   const responseElement = useRef<HTMLDivElement>(null);
   const scrollToReply = useRef(false);
+  const characterArea = useRef<HTMLDivElement>(null);
+  const sound = useSodamSound(supportOnly || isWriting || open || loading || speaking, characterArea);
 
   useEffect(() => { if (open) input.current?.focus(); }, [open]);
   useEffect(() => {
@@ -85,10 +92,12 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
     setSpeaking(false);
     setLoading(false);
     setOpen(false);
+    setError('');
     (questionOpener.current ?? trigger.current)?.focus();
   }
 
   function toggleQuestion(opener: HTMLButtonElement) {
+    preloadSodamPoses();
     if (open) closeQuestion();
     else { questionOpener.current = opener; setOpen(true); }
   }
@@ -223,29 +232,31 @@ export function LetterBunny({ messageEditor, onWriteLetter, isWriting = false, d
 
   const nudging = Boolean(onWriteLetter) && !isWriting && !open && !loading && !speaking && !answer && !supportOnly;
   const listening = isWriting || open || loading || speaking || Boolean(answer) || supportOnly || (!onWriteLetter && replay % 2 === 1);
+  const pose = companionPose({ supportOnly, error: Boolean(error), loading, speaking, isWriting,
+    hasDraft: Boolean(draft?.trim()), open, hasAnswer: Boolean(answer), product: answerAction?.kind === 'product' });
+  const motion = motionPaused || supportOnly || isWriting || open || loading || speaking ? null
+    : pose === 'welcome' ? (danceMode ? 'dance' : 'welcome') : pose === 'listening' ? 'listen' : null;
 
   return (
     <div className={styles.companion}>
-      <div className={styles.characterArea}>
+      <div ref={characterArea} className={styles.characterArea}>
       <button type="button" className={styles.character}
         aria-label={onWriteLetter ? 'Sodam과 편지 쓰기' : 'Sodam 움직임 다시 보기'}
         data-speaking={speaking} data-nudging={nudging} disabled={loading || speaking}
-        onClick={() => { if (onWriteLetter) onWriteLetter(); else setReplay((value) => value + 1); }}>
+        onClick={() => { preloadSodamPoses(); sound.react(); if (onWriteLetter) onWriteLetter(); else setReplay((value) => value + 1); }}>
         <span className={styles.patrol} data-bunny-patrol="">
           <span className={styles.portraitWrap}>
-            <BunnyPortrait nudging={nudging && !dancePaused} pose={listening ? 'listen' : 'invite'} />
+            <BunnyPortrait pose={pose} motion={motion} replay={replay} />
           </span>
         </span>
         <span className={styles.gestureBadge} aria-hidden="true">
           <SodamCue kind={loading ? 'wait' : listening ? 'heart' : 'letter'} />
         </span>
       </button>
-      {onWriteLetter && <button type="button" className={styles.motionToggle}
-        aria-label={dancePaused ? 'Sodam 춤 재생하기' : 'Sodam 춤 멈추기'}
-        aria-pressed={dancePaused} disabled={!nudging}
-        onClick={() => setDancePaused(value => !value)}>
-        <span aria-hidden="true">{dancePaused ? '▶' : 'Ⅱ'}</span>
-      </button>}
+      <SodamControls paused={motionPaused} onPause={() => setMotionPaused(value => !value)}
+        dancing={danceMode} onDance={() => { setDanceMode(value => !value); setMotionPaused(false); }}
+        sound={sound.enabled} onSound={() => { if (!sound.enabled) setReplay(value => value + 1); sound.toggle(); }}
+        quiet={supportOnly || isWriting || open || loading || speaking} />
       </div>
       <div className={styles.note}>
         <span className={styles.salutation}>Dear Papa,</span>

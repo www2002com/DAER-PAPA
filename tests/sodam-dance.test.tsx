@@ -15,23 +15,25 @@ function motionPreference(reduced: boolean) {
 describe('Sodam dance playback', () => {
   it('honors motion preference changes and stops when writing begins', () => {
     const media = motionPreference(true);
-    const view = render(<BunnyPortrait nudging />);
+    const view = render(<BunnyPortrait motion="dance" />);
     const picture = view.container.querySelector('img');
     expect(picture).not.toBeNull();
+    fireEvent.load(picture!);
     const still = picture!.getAttribute('src');
     act(() => { media.matches = false; media.dispatchEvent(new Event('change')); });
     expect(picture!.getAttribute('src')).not.toBe(still);
-    view.rerender(<BunnyPortrait nudging={false} />);
+    view.rerender(<BunnyPortrait />);
     expect(picture!.getAttribute('src')).toBe(still);
   });
 
   it('keeps the static character visible when the animated asset fails', () => {
     motionPreference(false);
-    const view = render(<BunnyPortrait nudging={false} />);
+    const view = render(<BunnyPortrait />);
     const picture = view.container.querySelector('img');
     expect(picture).not.toBeNull();
+    fireEvent.load(picture!);
     const still = picture!.getAttribute('src');
-    view.rerender(<BunnyPortrait nudging />);
+    view.rerender(<BunnyPortrait motion="dance" />);
     expect(picture!.getAttribute('src')).not.toBe(still);
     fireEvent.error(picture!);
     expect(picture!.getAttribute('src')).toBe(still);
@@ -42,15 +44,19 @@ describe('Sodam dance playback', () => {
     const write = vi.fn();
     const view = render(<LetterBunny onWriteLetter={write} />);
     const picture = view.container.querySelector('img')!;
+    fireEvent.load(picture);
+    expect(picture.getAttribute('data-sodam-motion')).toBe('welcome');
+    fireEvent.click(screen.getByRole('button', { name: 'Sodam 춤' }));
     const dancing = picture?.getAttribute('src');
-    fireEvent.click(screen.getByRole('button', { name: 'Sodam 춤 멈추기' }));
+    expect(picture.getAttribute('data-sodam-motion')).toBe('dance');
+    fireEvent.click(screen.getByRole('button', { name: 'Sodam 움직임 멈춤' }));
     expect(write).not.toHaveBeenCalled();
     expect(picture.getAttribute('src')).not.toBe(dancing);
     // Editing must not clear an explicit pause when the visitor returns.
     view.rerender(<LetterBunny onWriteLetter={write} isWriting />);
     view.rerender(<LetterBunny onWriteLetter={write} />);
     expect(picture.getAttribute('src')).not.toBe(dancing);
-    fireEvent.click(screen.getByRole('button', { name: 'Sodam 춤 재생하기' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Sodam 움직임 멈춤' }));
     expect(picture.getAttribute('src')).toBe(dancing);
   });
 });

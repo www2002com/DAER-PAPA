@@ -6,7 +6,7 @@ import StructuredData from '@/app/@structuredData/sodam/page';
 import { SODAM_CUTS, SODAM_PAGE, sodamJsonLd, visibleProfileRows } from '@/lib/sodam-page';
 
 const BANNED = [
-  '소담이', '상담', '챗봇', '채팅', 'Gemini', '써봐라', '편지 도우미',
+  '상담', '챗봇', '채팅', 'Gemini', '써봐라', '편지 도우미',
   '진정', '붉은기', '저자극', '무자극', '끈적임', '보습', '미백', '주름', '효과', '효능',
   '사전 예약', '사전예약', '신청', '끝내는', '가장 먼저', 'Waitlist',
   '최초', '유일', '1위', '프리미엄', '50대', '60대', '40~60대', '40-60대',
@@ -41,13 +41,17 @@ describe('/sodam v4 character page', () => {
     expect(packed).not.toMatch(/Product|Offer|price/i);
   });
 
-  it('shows the profile card with Sodam only and keeps name-origin off', () => {
+  it('shows the profile card with Sodam and the approved name-origin line', () => {
     const text = visibleText();
     expect(text).toContain('프로필');
     expect(text).toContain('저는 Sodam이에요.');
     expect(text).toContain('Sodam');
-    expect(text).not.toContain('소담이');
-    expect(SODAM_PAGE.profile.showNameOrigin).toBe(false);
+    expect(SODAM_PAGE.profile.showNameOrigin).toBe(true);
+    expect(SODAM_PAGE.profile.nameOriginLine).toBe("소담이는 '소중함을 담다'에서 온 이름이에요.");
+    expect(html()).toContain("소담이는 &#x27;소중함을 담다&#x27;에서 온 이름이에요.");
+    expect(text).toContain('소담이는');
+    expect(text).toContain('소중함을 담다');
+    expect(text).toContain('에서 온 이름이에요.');
     expect(visibleProfileRows([{ label: 'MBTI', value: '' }, { label: '이름', value: 'Sodam' }]).map((r) => r.label)).toEqual(['이름']);
   });
 

@@ -1,6 +1,6 @@
 // /sodam v4 캐릭터 소개 페이지 문구.
 // 원고: /workspace/dearpapa/content/character/sodam-v2-three-drafts-v1-2026-10-28.md
-// 써니 06:14 FAQ 확정. 표기 「Sodam」, 한글 첫 언급 「Sodam(소담)」. 「소담이」·AI·챗봇·상담 호칭 금지.
+// 써니 06:14 FAQ 확정. 표기 「Sodam」, 한글 첫 언급 「Sodam(소담)」. AI·챗봇·상담 호칭 금지. 「소담이」는 승인된 이름 뜻 한 줄에만 씀.
 // 이미지: brand/character 공식 6컷만 (다시 그리거나 자르지 않음).
 
 export type ProfileRow = { label: string; value: string };
@@ -35,9 +35,9 @@ export const SODAM_PAGE = {
       { label: '하는 일', value: '한 줄 편지를 거드는 조용한 친구' },
       { label: '특기', value: '쑥스러운 말을 한 줄로 줄이기' },
     ] satisfies ProfileRow[],
-    /** 이름 유래 한 줄. 대표님이 「넣어」 하시면 이 값만 true로 바꾼다. */
-    showNameOrigin: false,
-    nameOriginLine: '',
+    /** 이름 유래 한 줄. 대표님 지시(소중함을 담다) 반영. */
+    showNameOrigin: true,
+    nameOriginLine: "소담이는 '소중함을 담다'에서 온 이름이에요.",
   },
 
   roleTitle: 'Sodam이 하는 일',

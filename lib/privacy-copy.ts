@@ -26,9 +26,10 @@ export const LETTER_STORY_PRIVACY = {
 
 /**
  * /privacy 「한 줄 챌린지」 절. SNS challenge-one-line-v2 표 (3) 그대로.
- * 보관 기간·모집 기간은 대표님 확정 전까지 「[미정]」.
+ * Hidden until 대표님 confirms 보관 기간·모집 기간 (no [미정] on the live page).
+ * Flip to true in the same change that fills those dates. Code kept; not rendered while false.
  */
-export const CHALLENGE_ONE_LINE_PRIVACY_ENABLED = true;
+export const CHALLENGE_ONE_LINE_PRIVACY_ENABLED = false;
 
 export const CHALLENGE_ONE_LINE_PRIVACY = {
   title: '「한 줄 챌린지」(#아빠에게한줄편지)',

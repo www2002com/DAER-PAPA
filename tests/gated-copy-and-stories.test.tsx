@@ -5,9 +5,15 @@ import Privacy from '@/app/privacy/page';
 import SkincareGuide from '@/app/journal/dad-gift-skincare-guide/page';
 import AfterShave from '@/app/journal/after-shave-gift/page';
 import { LAUNCH_NOTIFY_ENABLED_COPY } from '@/lib/launch-notify';
-import { LETTER_STORY_PRIVACY, LETTER_STORY_PRIVACY_ENABLED } from '@/lib/privacy-copy';
+import {
+  LETTER_STORY_PRIVACY,
+  LETTER_STORY_PRIVACY_ENABLED,
+  CHALLENGE_ONE_LINE_PRIVACY,
+  CHALLENGE_ONE_LINE_PRIVACY_ENABLED,
+} from '@/lib/privacy-copy';
 import { RETENTION } from '@/lib/privacy-retention';
 import { LetterStoryNotice } from '@/components/privacy/LetterStoryNotice';
+import { ChallengeOneLineNotice } from '@/components/privacy/ChallengeOneLineNotice';
 import { STARTERS } from '@/components/letter/starters';
 import { getJournalEntry } from '@/lib/journal';
 
@@ -76,6 +82,35 @@ describe('letter story privacy section (own flag, off until retention is confirm
   });
   it('has no prize or application wording', () => {
     const all = JSON.stringify(LETTER_STORY_PRIVACY);
+    for (const w of ['사례품', '경품', '증정', '혜택', '신청']) expect(all).not.toContain(w);
+  });
+});
+
+
+describe('challenge one-line privacy section (own flag, off until periods are confirmed)', () => {
+  it('flag is off by default', () => expect(CHALLENGE_ONE_LINE_PRIVACY_ENABLED).toBe(false));
+  for (const [label, setup] of [['gate off', off], ['gate on', on]] as const) {
+    it(`is hidden on /privacy with ${label} while the flag is off`, () => {
+      setup();
+      const { container } = render(<Privacy />);
+      expect(container.querySelector('#challenge-one-line')).toBeNull();
+      expect(container.textContent).not.toContain('한 줄 챌린지');
+      expect(container.textContent).not.toContain('[미정]');
+    });
+  }
+  it('renders every row when the flag is on', () => {
+    const { container } = render(<ChallengeOneLineNotice enabled />);
+    expect(container.querySelector('#challenge-one-line')?.textContent).toBe(CHALLENGE_ONE_LINE_PRIVACY.title);
+    for (const [k, v] of CHALLENGE_ONE_LINE_PRIVACY.rows) {
+      expect(container.textContent).toContain(k);
+      expect(container.textContent).toContain(v);
+    }
+  });
+  it('copy still holds the table for when periods are confirmed', () => {
+    const all = JSON.stringify(CHALLENGE_ONE_LINE_PRIVACY);
+    expect(all).toContain('수집 방법');
+    expect(all).toContain('보관 기간');
+    expect(all).toContain('모집 기간');
     for (const w of ['사례품', '경품', '증정', '혜택', '신청']) expect(all).not.toContain(w);
   });
 });

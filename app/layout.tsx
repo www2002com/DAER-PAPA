@@ -40,12 +40,14 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image' },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: '32x32' },
-      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/brand/icons-r2/favicon.ico', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
+      { url: '/brand/icons-r2/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/brand/icons-r2/favicon.svg', sizes: 'any', type: 'image/svg+xml' },
     ],
-    apple: '/apple-touch-icon.png',
+    shortcut: '/brand/icons-r2/favicon.ico',
+    apple: [{ url: '/brand/icons-r2/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
-  manifest: '/site.webmanifest',
+  manifest: '/brand/icons-r2/site.webmanifest',
   other: {
     'naver-site-verification': '515b59337fd2da9e31e63cdfecaa5ea2aba924b8',
   },

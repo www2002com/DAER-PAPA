@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import Home from '@/app/page';
 import Privacy from '@/app/privacy/page';
 import { storeFromEnv } from '@/lib/launch-notify-server';
@@ -15,12 +15,14 @@ describe('unconfigured production release', () => {
     expect(container.querySelector('input[type=email]')).not.toBeNull();
     expect(container.innerHTML).not.toContain('private-test-key');
   });
-  it('does not request an email before collection is explicitly enabled', () => {
+  it('does not request an email before collection is explicitly enabled', async () => {
     vi.stubEnv('LAUNCH_NOTIFY_ENABLED', '');
     vi.stubEnv('RESEND_API_KEY', '');
     const { container } = render(<Home />);
     expect(container.querySelector('input[type=email]')).toBeNull();
     expect(screen.getByText('출시 소식은 공식 채널에서 확인해 주세요')).toBeTruthy();
+    // Home starts an idle import; finish it before Vitest tears down this environment.
+    await act(() => vi.dynamicImportSettled());
   });
   it('does not activate delivery merely because a key was added', () => {
     expect(storeFromEnv({ RESEND_API_KEY: 'test-key' })).toBeNull();

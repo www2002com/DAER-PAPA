@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: '당신에게 도착한 편지', description: '작은 봉투에 담긴 마음을 열어보세요.',
     url: 'https://dearpapa.kr/letter/received', type: 'website',
-    images: [{ url: `https://dearpapa.kr${SODAM_LETTER_STICKER_PNG}`, width: 1254, height: 1254, alt: '봉투를 들고 손으로 인사하는 Sodam' }],
+    images: [{ url: `https://dearpapa.kr${SODAM_LETTER_STICKER_PNG}`, width: 1254, height: 1254, alt: '눈웃음으로 봉투를 들고 인사하는 Sodam' }],
   },
   twitter: { card: 'summary_large_image', title: '당신에게 도착한 편지', description: '작은 봉투에 담긴 마음을 열어보세요.', images: [`https://dearpapa.kr${SODAM_LETTER_STICKER_PNG}`] },
 };

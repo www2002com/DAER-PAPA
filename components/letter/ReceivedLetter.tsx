@@ -50,7 +50,7 @@ export function ReceivedLetter() {
     </div> : !opened ? <div className={styles.arrival}>
       <p className={styles.eyebrow}>DEAR PAPA · A LETTER FOR YOU</p>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={styles.sticker} src={SODAM_LETTER_STICKER} width="400" height="400" alt="봉투를 들고 손으로 인사하는 Sodam" fetchPriority="high" />
+      <img className={styles.sticker} src={SODAM_LETTER_STICKER} width="400" height="400" alt="눈웃음으로 봉투를 들고 인사하는 Sodam" fetchPriority="high" />
       <h1>{letter.from ? `${letter.from}의 편지가 도착했어요.` : '당신에게 도착한 편지예요.'}</h1>
       <p>작은 봉투에 담긴 마음을 열어보세요.</p>
       <button type="button" className={styles.openButton} onClick={() => setOpened(true)}>

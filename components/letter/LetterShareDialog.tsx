@@ -117,7 +117,7 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
           <div className={styles.kakaoPreview}>
             {/* A generic arrival preview; the personal letter appears only after opening the recipient link. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className={styles.sticker} src={SODAM_LETTER_STICKER} width="240" height="240" alt="봉투를 들고 손으로 인사하는 Sodam" />
+            <img className={styles.sticker} src={SODAM_LETTER_STICKER} width="240" height="240" alt="눈웃음으로 봉투를 들고 인사하는 Sodam" />
             <p className={styles.previewTitle}>{letter.from ? `${letter.from}의 편지가 도착했어요.` : '마음을 담아 보낸 편지'}</p>
             <a className={styles.previewLink} href={previewUrl} target="_blank" rel="noopener noreferrer">받는 화면 미리보기 <span aria-hidden="true">↗</span></a>
           </div>

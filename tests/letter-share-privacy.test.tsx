@@ -15,7 +15,7 @@ it('excludes the personal letter body from Kakao preview text and uses a recipie
   expect(template.content.title + template.content.description).not.toContain(letter.text);
   expect(template.content.description).toContain('딸');
   expect(template.buttons[0].link.webUrl).toMatch(/^https:\/\/dearpapa.kr\/letter\/received#letter=/);
-  expect(template.content.imageUrl).toBe('https://dearpapa.kr/media/sodam-nonverbal-r1/Sodam-letter-wave-r1.png');
+  expect(template.content.imageUrl).toBe('https://dearpapa.kr/media/sodam-expression-r1/Sodam-welcome-smile-r1.png');
 });
 
 it('suppresses both analytics and campaign attribution on the received-letter page', () => {

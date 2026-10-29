@@ -3,27 +3,10 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
+import { BANNED, FIXED_FUNCTIONAL } from './copy-rules';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = path.join(root, 'out');
-
-const BANNED = [
-  '진정',
-  '붉은기',
-  '저자극',
-  '무자극',
-  '끈적임 없는',
-  '사전 예약',
-  '끝내는',
-  '가장 먼저',
-  '50대',
-  '60대',
-  '40~60대',
-  '스킨로션',
-] as const;
-
-const FIXED_FUNCTIONAL =
-  '미백·주름 개선 2중 기능성화장품 심사를 준비하고 있습니다';
 
 type FaqPair = { q: string; a: string };
 

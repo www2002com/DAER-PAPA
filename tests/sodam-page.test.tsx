@@ -41,15 +41,23 @@ describe('/sodam v4 character page', () => {
     expect(packed).not.toMatch(/Product|Offer|price/i);
   });
 
+  it('places the name-origin line right after the definition sentence', () => {
+    const out = html();
+    const def = 'Sodam(소담)은 디어파파(DEAR PAPA)의 토끼 캐릭터예요.';
+    const origin = "Sodam(소담)은 &#x27;소중함을 담다&#x27;에서 온 이름이에요.";
+    expect(out.indexOf(def)).toBeGreaterThanOrEqual(0);
+    expect(out.indexOf(origin)).toBeGreaterThan(out.indexOf(def));
+  });
+
   it('shows the profile card with Sodam and the approved name-origin line', () => {
     const text = visibleText();
     expect(text).toContain('프로필');
     expect(text).toContain('저는 Sodam이에요.');
     expect(text).toContain('Sodam');
     expect(SODAM_PAGE.profile.showNameOrigin).toBe(true);
-    expect(SODAM_PAGE.profile.nameOriginLine).toBe("소담이는 '소중함을 담다'에서 온 이름이에요.");
-    expect(html()).toContain("소담이는 &#x27;소중함을 담다&#x27;에서 온 이름이에요.");
-    expect(text).toContain('소담이는');
+    expect(SODAM_PAGE.profile.nameOriginLine).toBe("Sodam(소담)은 '소중함을 담다'에서 온 이름이에요.");
+    expect(html()).toContain("Sodam(소담)은 &#x27;소중함을 담다&#x27;에서 온 이름이에요.");
+    expect(text).toContain("Sodam(소담)은");
     expect(text).toContain('소중함을 담다');
     expect(text).toContain('에서 온 이름이에요.');
     expect(visibleProfileRows([{ label: 'MBTI', value: '' }, { label: '이름', value: 'Sodam' }]).map((r) => r.label)).toEqual(['이름']);

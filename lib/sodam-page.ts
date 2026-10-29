@@ -1,6 +1,6 @@
 // /sodam v4 캐릭터 소개 페이지 문구.
 // 원고: /workspace/dearpapa/content/character/sodam-v2-three-drafts-v1-2026-10-28.md
-// 써니 06:14 FAQ 확정. 표기 「Sodam」, 한글 첫 언급 「Sodam(소담)」. AI·챗봇·상담 호칭 금지. 「소담이」는 승인된 이름 뜻 한 줄에만 씀.
+// 써니 06:14 FAQ 확정. 표기 「Sodam」, 한글 첫 언급 「Sodam(소담)」. AI·챗봇·상담 호칭 금지. 이름 뜻은 「Sodam(소담)은 '소중함을 담다'에서 온 이름이에요.」.
 // 이미지: brand/character 공식 6컷만 (다시 그리거나 자르지 않음).
 
 export type ProfileRow = { label: string; value: string };
@@ -24,7 +24,7 @@ export const SODAM_PAGE = {
   heading: 'Sodam을 소개할게요',
   /** /sodam v4 첫 문단 — 콘텐츠 담당 초안·써니 지시 반영. 첫 문장 고정. */
   intro:
-    'Sodam(소담)은 디어파파(DEAR PAPA)의 토끼 캐릭터예요. 마음을 건네는 조용한 친구로, 말보다 먼저 곁에 앉아, 아빠에게 쓸 첫 줄을 같이 기다려 줘요. 조금 비대칭이어도 괜찮아요. 일단 한 줄이면 돼요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요.',
+    "Sodam(소담)은 디어파파(DEAR PAPA)의 토끼 캐릭터예요. Sodam(소담)은 '소중함을 담다'에서 온 이름이에요. 마음을 건네는 조용한 친구로, 말보다 먼저 곁에 앉아, 아빠에게 쓸 첫 줄을 같이 기다려 줘요. 조금 비대칭이어도 괜찮아요. 일단 한 줄이면 돼요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요.",
   portraitAlt: 'Sodam 기본 컷 — 디어파파의 토끼 캐릭터',
 
   profile: {
@@ -37,7 +37,7 @@ export const SODAM_PAGE = {
     ] satisfies ProfileRow[],
     /** 이름 유래 한 줄. 대표님 지시(소중함을 담다) 반영. */
     showNameOrigin: true,
-    nameOriginLine: "소담이는 '소중함을 담다'에서 온 이름이에요.",
+    nameOriginLine: "Sodam(소담)은 '소중함을 담다'에서 온 이름이에요.",
   },
 
   roleTitle: 'Sodam이 하는 일',

@@ -2,7 +2,7 @@
 // Shared geometry keeps SVG placements and letter-card PNG exports identical.
 import type { ReactNode } from 'react';
 
-type Props = { className?: string; title?: string; mark?: ReactNode };
+type Props = { className?: string; title?: string; mark?: ReactNode; wordmarkClassName?: string };
 type LogoPath = {
   t: [number, number, number];
   d: string;
@@ -88,7 +88,7 @@ export function LogoMark({ className }: { className?: string }) {
   );
 }
 
-export function Logo({ className, title = 'DEAR PAPA', mark }: Props) {
+export function Logo({ className, title = 'DEAR PAPA', mark, wordmarkClassName }: Props) {
   return (
     <svg
       className={className}
@@ -99,7 +99,7 @@ export function Logo({ className, title = 'DEAR PAPA', mark }: Props) {
     >
       <g fill="currentColor">
         {mark ?? <LogoPaths paths={MARK_PATHS} />}
-        <LogoPaths paths={WORDMARK_PATHS} />
+        <g className={wordmarkClassName}><LogoPaths paths={WORDMARK_PATHS} /></g>
       </g>
     </svg>
   );

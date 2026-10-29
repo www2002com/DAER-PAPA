@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { LetterCard } from './LetterCard';
+import { LetterShareDialog } from './LetterShareDialog';
 import {
   MAX_CHARS,
   MAX_FROM,
@@ -12,6 +13,7 @@ import {
   renderCard,
   toBlob,
   todayStamp,
+  type LetterInput,
 } from './card';
 import {
   MAX_LETTERS,
@@ -85,7 +87,7 @@ export function Composer() {
   const [flip, setFlip] = useState(false);
   const [download, setDownload] = useState<Busy>('idle');
   const [hasExported, setHasExported] = useState(false);
-  const [canShare, setCanShare] = useState(false);
+  const [shareLetter, setShareLetter] = useState<LetterInput | null>(null);
   const [toast, setToast] = useState<Toast | null>(null);
   const [tab, setTab] = useState<(typeof STARTERS)[number]['id']>('examples');
   const [inserting, setInserting] = useState(false);
@@ -120,12 +122,6 @@ export function Composer() {
       setStagger(true);
       later(() => setStagger(false), 2000);
       if (draft.text) showToast('쓰던 편지를 이어서 쓸 수 있어요.');
-    }
-    try {
-      const probe = new File([new Blob(['x'], { type: 'image/png' })], 'p.png', { type: 'image/png' });
-      setCanShare(!!navigator.canShare?.({ files: [probe] }));
-    } catch {
-      setCanShare(false);
     }
     setMounted(true);
     const t = timers.current;
@@ -455,17 +451,9 @@ export function Composer() {
     }
   }
 
-  async function share() {
+  function share() {
     if (!guard()) return;
-    const data = { text: text.trim(), from: from.trim(), date: todayStamp() };
-    try {
-      const blob = await makeBlob(data);
-      if (!blob) return setWarn('over');
-      const file = new File([blob], 'dear-papa-letter.png', { type: 'image/png' });
-      await navigator.share({ files: [file], title: 'Dear Papa' });
-    } catch (e) {
-      if ((e as DOMException)?.name !== 'AbortError') showToast('공유창을 열 수 없었어요. 이미지로 저장해 주세요.');
-    }
+    setShareLetter({ text: text.trim(), from: from.trim(), date: todayStamp() });
   }
 
   // ── Gentle tilt on fine pointers ────────────────────────────
@@ -720,9 +708,14 @@ export function Composer() {
           </div>
 
           <div className={styles.actions}>
+            <button type="button" className={styles.shareButton} onClick={share}>
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
+              <span><strong>편지 공유하기</strong><small>카카오톡 · Instagram</small></span>
+              <span className={styles.shareArrow} aria-hidden="true">↗</span>
+            </button>
             <button
               type="button"
-              className={`btn ${styles.primary}`}
+              className={`btn btn--ghost ${styles.primary}`}
               onClick={() => downloadImage()}
               aria-busy={download === 'busy'}
               data-state={download}
@@ -751,11 +744,6 @@ export function Composer() {
               {editingId ? '보관함에 다시 담기' : '보관함에 담기'}
             </button>
             <div className={styles.textBtns}>
-              {canShare && (
-                <button type="button" className={styles.textBtn} onClick={share}>
-                  공유하기
-                </button>
-              )}
               <button type="button" className={styles.textBtn} onClick={clearLetter} disabled={!text && !from}>
                 지우기
               </button>
@@ -832,6 +820,7 @@ export function Composer() {
         </aside>
       )}
 
+      {shareLetter && <LetterShareDialog letter={shareLetter} onClose={() => setShareLetter(null)} />}
       <div className={styles.toastWrap} role="status" aria-live="polite">
         {toast && (
           <div key={toast.id} className={styles.toast}>

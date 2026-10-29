@@ -481,7 +481,7 @@
 }
 
 .primary {
-  grid-column: 1 / -1;
+  grid-column: auto;
 }
 
 .primary[data-state='done'] {
@@ -511,8 +511,17 @@
 }
 
 .secondary {
-  grid-column: 1 / -1;
+  grid-column: auto;
 }
+
+.shareButton { grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; width: 100%; min-height: 76px; padding: 16px 22px; border-radius: 12px; background: var(--ink); color: #fff; text-align: left; box-shadow: 0 6px 18px #34566a18; transition: background-color 180ms; }
+.shareButton:hover { background: #234456; }
+.shareButton strong { display: block; font-size: 17px; font-weight: 650; }
+.shareButton small { display: block; margin-top: 3px; font-size: 12px; color: #d2e3ed; }
+.shareButton > svg { flex: none; }
+.shareArrow { margin-left: auto; font-size: 26px; }
+.shareButton:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+.actions > .primary, .actions > .secondary { min-width: 0; padding-inline: 10px; font-size: 13px; }
 
 .textBtns {
   grid-column: 1 / -1;
@@ -717,7 +726,7 @@
   }
 
   .actions {
-    grid-template-columns: auto auto 1fr;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
   }
 

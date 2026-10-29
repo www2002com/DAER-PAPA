@@ -1,0 +1,33 @@
+.dialog { width: min(480px, calc(100vw - 28px)); max-height: calc(100dvh - 32px); margin: auto; padding: 0; border: 1px solid #d6e1e7; border-radius: 24px; background: #fcfaf6; color: #203e50; box-shadow: 0 24px 80px #18354530; overscroll-behavior: contain; }
+.dialog::backdrop { background: #17334880; }
+.inner { padding: 24px; }
+.header { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 20px; }
+.eyebrow { font-size: 10px; letter-spacing: .16em; color: #587184; margin: 0 0 4px; }
+.header h2 { font-size: 24px; line-height: 1.4; margin: 0; letter-spacing: -.04em; }
+.close { width: 44px; height: 44px; flex: none; font-size: 28px; border-radius: 50%; background: #e9f0f3; }
+.tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 14px; background: #e7edf0; margin-bottom: 16px; }
+.tabs button { min-height: 44px; border-radius: 11px; font-size: 14px; font-weight: 600; color: #4e6879; }
+.tabs button[aria-selected='true'] { background: white; color: #203e50; box-shadow: 0 1px 4px #17334815; }
+.kakaoPreview { text-align: center; padding: 4px 16px 18px; background: #eaf2f7; border-radius: 18px; }
+.sticker { display: block; width: 220px; height: 220px; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.previewTitle { margin: 0; font-size: 17px; font-weight: 650; overflow-wrap: anywhere; }
+.previewCopy { margin: 4px 0 8px; font-size: 13px; color: #587184; }
+.previewLink { display: inline-flex; align-items: center; gap: 10px; min-height: 36px; padding: 0 16px; border-radius: 8px; background: #fff; font-size: 12px; }
+.privacy { margin: 14px 0; color: #536b7b; font-size: 12px; line-height: 1.7; word-break: keep-all; overflow-wrap: anywhere; }
+.kakaoButton, .instagramButton, .secondary { display: flex; width: 100%; align-items: center; justify-content: center; gap: 9px; min-height: 52px; border-radius: 12px; font-size: 14px; font-weight: 600; padding: 10px 12px; text-align: center; }
+.kakaoButton { background: #fee500; color: #191919; }
+.instagramButton { background: #34566a; color: white; }
+.secondary { margin-top: 8px; border: 1px solid #cbd9e0; background: transparent; color: #34566a; }
+.kakaoButton:disabled, .instagramButton:disabled { opacity: .55; cursor: progress; }
+.dialog button, .dialog a { touch-action: manipulation; }
+.dialog :is(button,a,input):focus-visible { outline: 2px solid #34566a; outline-offset: 3px; }
+.note { font-size: 12px; line-height: 1.65; margin: 12px 0; color: #536b7b; }
+.status { margin: 12px 0 0; color: #34566a; font-size: 13px; line-height: 1.6; }
+.status:empty { display: none; }
+.intro { text-align: center; margin: 8px 0 12px; font-size: 14px; }
+.storyPreview { width: 164px; aspect-ratio: 9 / 16; margin: auto; display: grid; place-items: center; background: #e9f1f5; border: 1px solid #cbd9e0; border-radius: 10px; overflow: hidden; }
+.storyPreview img { width: 100%; height: auto; display: block; }
+.storyPreview p { font-size: 12px; padding: 12px; line-height: 1.6; text-align: center; }
+.external { display: flex; min-height: 44px; align-items: center; justify-content: center; gap: 8px; font-size: 13px; text-decoration: underline; text-underline-offset: 4px; }
+.copyInput { display: block; width: 100%; min-height: 44px; margin-top: 10px; border: 1px solid #a9bfcb; border-radius: 6px; padding: 8px; font-size: 12px; }
+@media (max-width: 380px) { .inner { padding: 18px; } .sticker { width: 190px; height: 190px; } }

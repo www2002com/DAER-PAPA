@@ -35,6 +35,14 @@ export const metadata: Metadata = {
 
 const dotted = (iso: string) => iso.replaceAll('-', '. ') + '.';
 
+function LetterShareNotice() {
+  return <>
+    <h3>이용자가 선택한 편지 공유</h3>
+    <p>‘편지 공유하기’에서 카카오톡 전송이나 링크 복사를 선택하면 편지 내용·보내는 사람·날짜가 포함된 링크를 만들 수 있습니다. 이 링크는 암호화된 비밀 편지가 아니며 링크를 가진 누구나 내용을 읽을 수 있습니다. 링크를 공개하거나 전달할 때 주의해 주세요. 보관함에서 지워도 이미 전달한 링크는 회수되지 않습니다.</p>
+    <p>편지 내용은 링크의 # 뒤에 담기며 이 사이트의 페이지 요청이나 서버 저장소로 보내지 않습니다. 받은 편지 화면에서는 방문 통계와 캠페인 기록 기능을 실행하지 않습니다. 카카오톡으로 보내기를 누르면 해당 링크와 보내는 사람 표기가 카카오에 전달되며 카카오의 개인정보 처리방침이 적용됩니다. 이미지 공유를 선택하면 이미지 안에 편지와 이름이 표시됩니다. 공유 대상과 공개 범위는 이용자가 직접 선택합니다.</p>
+  </>;
+}
+
 function AiPrivacyNotice() {
   return <>
     <h3 id="ai-questions">AI Sodam 질문 기능</h3>
@@ -61,6 +69,7 @@ export default function PrivacyPage() {
     <ArticleLayout eyebrow="PRIVACY" title="개인정보 처리 안내" lead={<p>현재 출시 알림 신청을 위한 이메일을 수집하지 않습니다.</p>}>
       <h2>편지 작성과 보관</h2>
       <p>작성한 편지와 보내는 사람 표기는 이 기기의 브라우저에만 보관되며 서버로 전송하지 않습니다. 기기의 편지 도구에서 지우거나 브라우저 저장 데이터를 삭제할 수 있습니다.</p>
+      <LetterShareNotice />
       <AiPrivacyNotice />
       <LetterStoryNotice />
       <ChallengeOneLineNotice />
@@ -186,6 +195,7 @@ export default function PrivacyPage() {
         서버로 전송하지 않습니다.
       </p>
 
+      <LetterShareNotice />
       <AiPrivacyNotice />
       <LetterStoryNotice />
       <ChallengeOneLineNotice />

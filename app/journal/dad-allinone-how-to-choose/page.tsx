@@ -5,11 +5,10 @@ import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/Arti
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
 import { DAD_ALLINONE_HOW_TO_CHOOSE_DESCRIPTION, DAD_ALLINONE_HOW_TO_CHOOSE_FAQ, dotDate, getJournalEntry, DAD_ALLINONE_HOW_TO_CHOOSE_META_TITLE, DAD_ALLINONE_HOW_TO_CHOOSE_META_DESCRIPTION } from '@/lib/journal';
 
-// Ported verbatim from content/journal/guide-dad-allinone-how-to-choose-v1.md (article body only; line-2 status note omitted).
+// Ported from content/journal/guide-dad-allinone-how-to-choose-v1.md; FAQ Q&A and FAQPage JSON-LD share DAD_ALLINONE_HOW_TO_CHOOSE_FAQ.
 
 const entry = getJournalEntry('dad-allinone-how-to-choose');
 const URL = `https://dearpapa.kr${entry.href}`;
-const PAGE_TITLE = `${entry.title} | 디어파파 DEAR PAPA`;
 
 export const metadata: Metadata = {
   metadataBase: null,
@@ -56,48 +55,23 @@ export default function DadAllInOneHowToChoosePage() {
       <h2>한 줄 답</h2>
       <p>{DAD_ALLINONE_HOW_TO_CHOOSE_DESCRIPTION}</p>
 
-      <h2>남자 올인원은 무엇인가요?</h2>
-      <p>남자 올인원은 스킨과 로션처럼 따로 바르던 여러 단계를 한 제품으로 줄인 화장품입니다. 세안 후 한 가지만 바르면 되기 때문에, 여러 병을 챙기지 않는 아빠도 매일 쓰기 쉽습니다.</p>
+      {DAD_ALLINONE_HOW_TO_CHOOSE_FAQ.map(({ q, a }) => (
+        <section key={q}>
+          <h2>{q}</h2>
+          <p>{a}</p>
+        </section>
+      ))}
 
-      <h2>피부 타입별로 어떻게 고르나요?</h2>
-      <p>피부 타입은 효능보다 「바른 뒤 느낌이 아빠에게 편한지」를 기준으로 고르면 됩니다.</p>
-      <ul>
-        <li>지성: 오후에 번들거림이 신경 쓰인다면, 가볍고 빨리 스며드는 제형인지 확인해 보세요.</li>
-        <li>건성: 세안 후 당김이 신경 쓰인다면, 바른 뒤 느낌이 아빠에게 편한지 먼저 확인해 보세요.</li>
-        <li>민감: 새 제품은 귀 뒤나 팔 안쪽에 먼저 조금 발라 보고 얼굴에 쓰는 것이 좋습니다.</li>
-      </ul>
-      <p>피부 타입을 모르겠다면 아빠께 「세안하고 나면 당기세요, 오후에 번들거리세요?」라고 물어보세요.</p>
-
-      <h2>향이 없는 올인원을 찾으려면 무엇을 보나요?</h2>
-      <p>무향 제품을 찾는다면 제품 설명과 전성분에 「향료」가 적혀 있는지부터 확인하세요. 향을 즐기지 않는 아빠나, 다른 향 제품을 함께 쓰는 아빠에게 특히 중요한 기준입니다.</p>
-
-      <h2>전성분은 어떻게 확인하나요?</h2>
-      <p>전성분은 제품 상세 페이지나 용기 뒷면에서 확인하고, 다음 세 가지를 보면 됩니다.</p>
-      <ol>
-        <li>향료가 들어 있는지</li>
-        <li>에탄올(변성알코올)이 들어 있는지</li>
-        <li>아빠가 예전에 맞지 않았던 성분 이름이 있는지</li>
-      </ol>
-
-      <h2>올인원은 몇 단계로 바르나요?</h2>
-      <p>올인원은 한 단계로 바릅니다. 순서는 씻고, 적당량을 손에 덜고, 얼굴 전체에 펴 바르는 것이 전부입니다. 낮에는 자외선 차단제를 별도 단계로 바르는 것이 일반적인 피부 관리 권고입니다.</p>
-
-      <h2>면도 후에도 올인원 하나면 되나요?</h2>
-      <p>면도 후 한 가지만 바르고 싶은 아빠라면, 면도 후에 바르는 용도로 만든 올인원인지 확인하면 됩니다. 매일 면도한다면 전성분에서 에탄올이 들어 있는지도 함께 보세요.</p>
-
-      <h2>세안 후 하나로 마무리하고 싶다면요?</h2>
-      <p>세안 후 하나로 마무리하고 싶다면 스킨·로션을 따로 바르지 않아도 되는 올인원을 고르면 됩니다. 아침에 준비 시간이 짧은 아빠, 욕실 선반을 간단하게 두고 싶은 아빠에게 맞는 방식입니다.</p>
-
-      <h2>올인원과 스킨·로션·애프터셰이브는 어떻게 다른가요?</h2>
-      <p>가장 큰 차이는 바르는 단계 수와 바르는 시점입니다.</p>
+      <h2>제품 유형 비교</h2>
+      <p>올인원·스킨·에센스·크림·애프터셰이브의 일반적인 차이를 정리했어요. 특정 제품이나 다른 브랜드를 비교한 표가 아니에요.</p>
       <table>
         <thead>
           <tr><th scope="col">제품 유형</th><th scope="col">바르는 단계 수</th><th scope="col">주로 바르는 시점</th><th scope="col">이런 아빠에게</th></tr>
         </thead>
         <tbody>
           <tr><td>올인원</td><td>1단계</td><td>세안 후, 면도 후</td><td>한 가지만 바르고 싶은 아빠</td></tr>
-          <tr><td>스킨</td><td>여러 단계 중 첫 단계</td><td>세안 후 가장 먼저</td><td>단계별로 나눠 바르는 데 익숙한 아빠</td></tr>
-          <tr><td>로션</td><td>스킨 다음 단계</td><td>스킨을 바른 뒤</td><td>스킨과 함께 쓰는 아빠</td></tr>
+          <tr><td>스킨</td><td>여러 단계 중 첫 단계</td><td>세안 직후</td><td>단계별로 나눠 바르는 데 익숙한 아빠</td></tr>
+          <tr><td>에센스·크림</td><td>스킨 다음 단계</td><td>스킨을 바른 뒤</td><td>단계를 나눠 쓰는 아빠</td></tr>
           <tr><td>애프터셰이브</td><td>면도 후 단계</td><td>면도 직후</td><td>면도 후 바르는 제품을 따로 두는 아빠</td></tr>
         </tbody>
       </table>
@@ -120,24 +94,6 @@ export default function DadAllInOneHowToChoosePage() {
         사이트에서는 아빠에게 한 줄 편지를 쓰고 카드 이미지로 저장할 수 있습니다.
       </p>
       <p>전성분, 가격, 출시일, 판매처는 아직 확정되지 않았습니다.</p>
-
-      <h2>자주 묻는 질문</h2>
-      {DAD_ALLINONE_HOW_TO_CHOOSE_FAQ.map(({ q, a }) => (
-        <div key={q}>
-          <p>Q. {q}</p>
-          <p>
-            A.{' '}
-            {a.startsWith('hello@dearpapa.kr') ? (
-              <>
-                <a href="mailto:hello@dearpapa.kr">hello@dearpapa.kr</a>
-                {a.slice('hello@dearpapa.kr'.length)}
-              </>
-            ) : (
-              a
-            )}
-          </p>
-        </div>
-      ))}
 
       <p>
         출시 소식은 인스타그램{' '}

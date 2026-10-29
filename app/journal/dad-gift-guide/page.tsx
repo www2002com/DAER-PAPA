@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/ArticleLayout';
 import { preservedMetadata } from '@/lib/preserved-metadata';
 import { JOURNAL_SITE_SUFFIX, dotDate, getJournalEntry } from '@/lib/journal';
+import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
 
 // Copied verbatim from the previous /journal/dad-gift-guide page.
 
@@ -72,7 +73,7 @@ export default function DadGiftGuidePage() {
         <h2 id="official-info">공식 정보</h2>
         <FactList
           rows={[
-            ['기준일', <time dateTime="2026-10-17">2026년 10월 17일</time>],
+            ['기준일', <time dateTime={FACTS_UPDATED}>{FACTS_UPDATED_KO}</time>],
             ['공식 사이트', <Link href="/about/facts">https://dearpapa.kr</Link>],
             ['출시 상태', '현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.'],
             ['미정 항목', 'DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 가격, 전성분, 출시일은 아직 확정되지 않았습니다.'],

@@ -11,7 +11,7 @@ import styles from './SiteHeader.module.css';
 
 const NAV_IDS = ['product', 'story', 'faq', 'journal'] as const;
 const CHANNEL_LOGOS = {
-  instagram: '/icons/social/instagram.svg', blog: '/icons/social/naver-blog.ico',
+  instagram: '/icons/social/instagram.svg', blog: '/icons/social/naver-blog.ico', tistory: '/icons/social/tistory.svg', blogger: '/icons/social/blogger.svg',
   youtube: '/icons/social/youtube.svg', facebook: '/icons/social/facebook.svg',
 } as const;
 

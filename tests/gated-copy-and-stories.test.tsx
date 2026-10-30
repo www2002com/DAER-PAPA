@@ -23,7 +23,7 @@ describe('copy tied to the launch-notify gate', () => {
     expect(screen.queryByText(LAUNCH_NOTIFY_ENABLED_COPY.homeIntro)).toBeNull();
     home.unmount();
     render(<Privacy />);
-    expect(screen.getByText('현재 출시 알림 신청을 위한 이메일을 수집하지 않습니다.')).toBeTruthy();
+    expect(screen.getByText('현재 사이트에서 이메일을 수집하지 않습니다.')).toBeTruthy();
     expect(screen.queryByText(LAUNCH_NOTIFY_ENABLED_COPY.privacySummaryTitle)).toBeNull();
   });
 
@@ -34,7 +34,7 @@ describe('copy tied to the launch-notify gate', () => {
     expect(screen.queryByText('출시 소식은 공식 채널에서 확인해 주세요')).toBeNull();
     home.unmount();
     const { container } = render(<Privacy />);
-    expect(screen.queryByText('현재 출시 알림 신청을 위한 이메일을 수집하지 않습니다.')).toBeNull();
+    expect(screen.queryByText('현재 사이트에서 이메일을 수집하지 않습니다.')).toBeNull();
     const summary = container.querySelector('#launch-email-summary')!;
     expect(summary.textContent).toContain(LAUNCH_NOTIFY_ENABLED_COPY.privacySummaryTitle);
     for (const [k, v] of LAUNCH_NOTIFY_ENABLED_COPY.privacySummary) {

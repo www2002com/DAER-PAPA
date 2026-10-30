@@ -6,5 +6,6 @@ Retrieved on 2026-10-20. Assets are served locally; channel destinations remain 
 - YouTube: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/youtube.svg
 - Facebook: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/facebook.svg
 - Naver Blog: https://ssl.pstatic.net/static/blog/icon/favicon.ico — the favicon linked by https://section.blog.naver.com/
+- Tistory: https://t1.daumcdn.net/tistory_admin/top_v2/bi-tistory-favicon.svg — the icon linked by https://www.tistory.com/ (retrieved 2026-10-30; merged into one even-odd path so the dots show through the CSS mask)
 
 The SVG shapes are unchanged. A solid platform color is set on each SVG root.

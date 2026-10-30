@@ -99,6 +99,7 @@ export const NOT_AFFILIATED_LIST = [
 export const CHANNELS = [
   { key: 'instagram', label: 'Instagram', handle: '@dearpapa.kr', href: 'https://www.instagram.com/dearpapa.kr/' },
   { key: 'blog', label: 'Naver Blog', handle: 'dearpapa_kr', href: 'https://blog.naver.com/dearpapa_kr' },
+  { key: 'tistory', label: 'Tistory', handle: 'dearpapa', href: 'https://dearpapa.tistory.com/' },
   { key: 'youtube', label: 'YouTube', handle: '@dearpapa_kr', href: 'https://www.youtube.com/@dearpapa_kr' },
   {
     key: 'facebook',
@@ -114,6 +115,7 @@ export const SAME_AS = [
   'https://www.instagram.com/dearpapa.kr/',
   'https://www.facebook.com/profile.php?id=61594835806301',
   'https://blog.naver.com/dearpapa_kr',
+  'https://dearpapa.tistory.com/',
   'https://www.youtube.com/channel/UCUPHFagfIAnbp1QK6DZfDmg',
   'https://www.youtube.com/@dearpapa_kr',
 ];

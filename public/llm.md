@@ -125,5 +125,6 @@ A. Not yet. DEAR PAPA has not launched, so there are no user reviews, and the fu
 인스타그램: @dearpapa.kr (https://www.instagram.com/dearpapa.kr/)
 페이스북: https://www.facebook.com/profile.php?id=61594835806301
 네이버 블로그: https://blog.naver.com/dearpapa_kr
+티스토리 블로그: https://dearpapa.tistory.com/
 유튜브: @dearpapa_kr (https://www.youtube.com/@dearpapa_kr)
 문의: hello@dearpapa.kr

@@ -26,7 +26,7 @@ export const LETTER_STORY_PRIVACY = {
 
 /**
  * /privacy 「한 줄 챌린지」 절. SNS challenge-one-line-v2 표 (3) 그대로.
- * 보관 기간·모집 기간은 대표님 확정 전까지 「[미정]」.
+ * 보관 기간·모집 기간은 대표님 10/30 08:14 KST 확정.
  */
 export const CHALLENGE_ONE_LINE_PRIVACY_ENABLED = true;
 
@@ -41,7 +41,7 @@ export const CHALLENGE_ONE_LINE_PRIVACY = {
     ['목적', '참여 확인·회신·동의한 경우 공식 인스타 소개'],
     ['대가', '없음'],
     ['철회', 'hello@dearpapa.kr, 7일 안'],
-    ['보관 기간', '[미정]'],
-    ['모집 기간', '[미정]'],
+    ['보관 기간', '챌린지 종료 후 30일, 이후 파기'],
+    ['모집 기간', '2주'],
   ],
 } as const;

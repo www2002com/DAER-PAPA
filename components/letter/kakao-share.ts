@@ -1,4 +1,4 @@
-import { KAKAO_JAVASCRIPT_KEY } from '@/lib/kakao-share-config';
+import { KAKAO_JAVASCRIPT_KEY, KAKAO_SHARE_ORIGINS } from '@/lib/kakao-share-config';
 import { LETTER_SHARE_CARD } from './share-assets';
 import { createLetterShareUrl } from './share-link';
 import type { LetterInput } from './card';
@@ -49,7 +49,7 @@ export function isKakaoReady(): boolean {
 }
 
 export function prepareKakaoShare(): Promise<boolean> {
-  if (!KAKAO_JAVASCRIPT_KEY) return Promise.resolve(false);
+  if (!KAKAO_JAVASCRIPT_KEY || !KAKAO_SHARE_ORIGINS.includes(window.location.origin)) return Promise.resolve(false);
   if (window.Kakao) {
     if (!window.Kakao.isInitialized()) window.Kakao.init(KAKAO_JAVASCRIPT_KEY);
     return Promise.resolve(true);

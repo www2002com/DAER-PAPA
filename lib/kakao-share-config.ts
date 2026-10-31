@@ -3,3 +3,6 @@
 // Public browser key for DEAR PAPA app 1628157. Kakao restricts SDK requests
 // to its registered website domains. Never put a REST/Admin key here.
 export const KAKAO_JAVASCRIPT_KEY = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY ?? 'd13fac6dc35e6b40768be051fba52ac7';
+// Origins registered in the Kakao console (플랫폼 > Web, 제품 링크 관리). On any other origin the SDK's
+// template check fails and it navigates the page to Kakao's error screen, so sharing is treated as unavailable there.
+export const KAKAO_SHARE_ORIGINS: readonly string[] = ['https://dearpapa.kr'];

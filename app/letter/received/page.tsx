@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 // in the server HTML, so they never flash before the letter.
 export default function ReceivedLetterPage() {
   return <>
-    <style>{'[data-site-chrome],.skip-link{display:none!important}'}</style>
+    <style>{'[data-site-chrome]{display:none!important}'}</style>
     <ReceivedLetter />
   </>;
 }

@@ -5,7 +5,7 @@ import { LetterCard } from './LetterCard';
 import { LetterShareDialog } from './LetterShareDialog';
 import { KakaoHandoff } from './KakaoHandoff';
 import { useKakaoSend } from './useKakaoSend';
-import { createLetterShareUrl } from './share-link';
+import { isShareableLetter, tryCreateLetterShareUrl } from './share-link';
 import {
   MAX_CHARS,
   MAX_FROM,
@@ -97,7 +97,8 @@ export function Composer() {
   // Load the Kakao SDK as soon as the visitor starts, so the share tap can open KakaoTalk directly.
   const kakao = useKakaoSend(greeted || !!text.trim());
   const resetKakao = kakao.reset;
-  const handoffUrl = handoffLetter ? createLetterShareUrl(handoffLetter) : '';
+  const handoffUrl = (handoffLetter && tryCreateLetterShareUrl(handoffLetter)) || '';
+  const shareButtonRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     resetKakao();
     setHandoffLetter(null);
@@ -110,6 +111,7 @@ export function Composer() {
   const [bump, setBump] = useState(0);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const fromRef = useRef<HTMLInputElement>(null);
   const composing = useRef(false);
   const stageRef = useRef<HTMLDivElement>(null);
   const timers = useRef<number[]>([]);
@@ -195,6 +197,9 @@ export function Composer() {
     [text, mounted, fontVersion],
   );
   const over = !!draftLayout?.over;
+  const textTooLong = text.length > MAX_CHARS;
+  const fromTooLong = from.length > MAX_FROM;
+  const shareTooLong = textTooLong || fromTooLong;
   const charKeys = showingSaved
     ? Array.from(cardText, (_, i) => `a${selected!.id}-${i}`)
     : isSample
@@ -469,9 +474,23 @@ export function Composer() {
   const currentLetter = (): LetterInput => ({ text: text.trim(), from: from.trim(), date: todayStamp() });
 
   /** One tap: hand the letter straight to KakaoTalk once the SDK is ready; otherwise show every way to send it. */
-  function shareKakao() {
-    if (!guard()) return;
+  /** Share needs the same letter the recipient link accepts; the card-fit guard alone is not that. */
+  function shareable(): LetterInput | null {
+    if (shareTooLong) {
+      if (textTooLong) focusText();
+      else fromRef.current?.focus({ preventScroll: true });
+      return null;
+    }
+    if (inserting || !guard()) return null;
     const letter = currentLetter();
+    if (!isShareableLetter(letter)) { setWarn('over'); focusText(); return null; }
+    return letter;
+  }
+
+  function shareKakao() {
+    if (kakao.handoff === 'opening') return;
+    const letter = shareable();
+    if (!letter) return;
     if (kakao.sdk === 'ready') {
       setHandoffLetter(letter);
       kakao.send(letter);
@@ -481,8 +500,8 @@ export function Composer() {
   }
 
   function share() {
-    if (!guard()) return;
-    setShareLetter(currentLetter());
+    const letter = shareable();
+    if (letter) setShareLetter(letter);
   }
 
   // ── Gentle tilt on fine pointers ────────────────────────────
@@ -512,7 +531,9 @@ export function Composer() {
   const full = text.length >= MAX_CHARS;
 
   const warnText =
-    warn === 'empty'
+    shareTooLong
+      ? `원문을 자르지 않았어요. 공유하려면 편지 내용을 ${MAX_CHARS}자, 보내는 사람을 ${MAX_FROM}자 이내로 직접 줄여 주세요.`
+      : warn === 'empty'
       ? '아빠에게 전할 말을 한 줄 써 주세요.'
       : warn === 'over'
         ? '카드에 다 담기지 않아요. 문장이나 줄바꿈을 조금 줄여 주세요.'
@@ -536,7 +557,7 @@ export function Composer() {
     greeted,
     focused,
     hasText: !!text.trim(),
-    problem: warn !== null || over || saved === 'error',
+    problem: warn !== null || over || shareTooLong || saved === 'error',
     exporting: download === 'busy',
     delivered: hasExported,
     archiveEmpty: letters.length === 0,
@@ -711,7 +732,7 @@ export function Composer() {
               onFocus={() => { setFocused(true); setGreeted(true); }}
               onBlur={() => setFocused(false)}
               aria-describedby={`${reassureId} ${countId} ${warnId}`}
-              aria-invalid={over || warn === 'empty' || undefined}
+              aria-invalid={over || textTooLong || warn === 'empty' || undefined}
               spellCheck={false}
             />
             <div className={styles.meta}>
@@ -741,27 +762,32 @@ export function Composer() {
             </label>
             <input
               id={`${uid}-from`}
+              ref={fromRef}
               className={`pen ${styles.input}`}
               value={from}
               placeholder="이름이나 애칭"
               autoComplete="off"
               onChange={(e) => setFrom(cleanFrom(e.target.value))}
-              maxLength={MAX_FROM}
+              aria-describedby={warnId}
+              aria-invalid={fromTooLong || undefined}
             />
           </div>
 
           <div className={styles.actions}>
-            <button type="button" className={styles.shareButton} onClick={shareKakao} data-kakao={kakao.sdk}>
+            <button ref={shareButtonRef} type="button" className={styles.shareButton} onClick={shareKakao} data-kakao={kakao.sdk}
+              aria-busy={kakao.handoff === 'opening' || undefined}>
               <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.3 4.7 6.7l-.9 3.3c-.1.3.2.5.5.3l4-2.6 1.7.1c5.5 0 10-3.5 10-7.8S17.5 3 12 3Z"/></svg>
               <span><strong>카카오톡으로 편지 보내기</strong><small>{kakao.sdk === 'loading' && (greeted || text.trim()) ? '카카오톡 연결을 준비하고 있어요' : '받을 분을 고르면 편지가 링크로 전해져요'}</small></span>
               <span className={styles.shareArrow} aria-hidden="true">↗</span>
             </button>
-            {kakao.handoff !== 'idle' && handoffUrl && <div className={styles.handoff}>
-              <KakaoHandoff sdk={kakao.sdk} handoff={kakao.handoff} shareUrl={handoffUrl}
+            {/* Always mounted so the status line exists before its first message; screen readers announce changes only. */}
+            <div className={styles.handoff} data-idle={kakao.handoff === 'idle' || undefined}>
+              <KakaoHandoff sdk={kakao.sdk} handoff={kakao.handoff} route={kakao.route} shareUrl={handoffUrl} showUnavailable={false}
                 onSendAgain={() => { if (handoffLetter && guard()) kakao.send(handoffLetter); }}
                 onSendWeb={() => { if (handoffLetter && guard()) kakao.send(handoffLetter, { web: true }); }}
-                onReconnect={kakao.retry} onDismiss={kakao.reset} />
-            </div>}
+                onReconnect={kakao.retry}
+                onDismiss={() => { kakao.reset(); shareButtonRef.current?.focus({ preventScroll: true }); }} />
+            </div>
             <p className={styles.sharePrivacy}>편지와 이름이 링크에 담겨요. 링크를 받은 사람은 누구나 읽을 수 있어요.</p>
             <button type="button" className={styles.otherShare} onClick={share}>
               다른 방법으로 보내기 <span aria-hidden="true">·</span> Instagram <span aria-hidden="true">·</span> 링크 복사

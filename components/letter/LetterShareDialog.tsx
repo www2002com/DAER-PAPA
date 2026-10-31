@@ -111,7 +111,8 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
           {kakao.sdk !== 'unavailable' && <button type="button" className={styles.kakaoButton} disabled={kakao.sdk === 'loading'} onClick={shareKakao}>
             <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.3 4.7 6.7l-.9 3.3c-.1.3.2.5.5.3l4-2.6 1.7.1c5.5 0 10-3.5 10-7.8S17.5 3 12 3Z"/></svg>
             {kakao.sdk === 'loading' ? '카카오톡 연결 중…' : '카카오톡으로 편지 보내기'}</button>}
-          <KakaoHandoff sdk={kakao.sdk} handoff={kakao.handoff} shareUrl={shareUrl}
+          <p className={styles.privacy}>편지와 이름이 링크에 담겨요. 링크를 받은 사람은 누구나 읽을 수 있어요.</p>
+          <KakaoHandoff sdk={kakao.sdk} handoff={kakao.handoff} route={kakao.route} shareUrl={shareUrl}
             onSendAgain={shareKakao} onSendWeb={() => { setStatus(''); kakao.send(letter, { web: true }); }} onReconnect={kakao.retry} />
           {kakao.handoff === 'idle' && kakao.sdk !== 'unavailable' && <button type="button" className={styles.secondary} onClick={copyLink}>편지 링크 복사</button>}
           {manualCopy && <input className={styles.copyInput} aria-label="복사할 편지 링크" readOnly value={shareUrl} onFocus={e => e.currentTarget.select()} />}
@@ -131,7 +132,8 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
             </div>
             <div className={styles.kakaoButtons} aria-hidden="true"><span>편지 열어보기</span><span>나도 편지 쓰기</span></div>
           </figure>
-          <p className={styles.privacy}>편지 내용은 카카오톡 메시지에 보이지 않고, 받는 분이 열어야 보여요. 편지와 이름은 링크에 담기므로 링크를 받은 사람은 누구나 읽을 수 있어요. <a className={styles.previewLink} href={previewUrl} target="_blank" rel="noopener noreferrer">받는 화면 미리보기 <span aria-hidden="true">↗</span></a></p>
+          <p className={styles.privacy}>편지 내용은 카카오톡 메시지에 보이지 않고, 받는 분이 열어야 보여요.</p>
+          <a className={styles.previewLink} href={previewUrl} target="_blank" rel="noopener noreferrer">받는 화면 미리보기 <span aria-hidden="true">↗</span></a>
         </> : <>
           <p className={styles.intro}>Sodam과 편지를 한 장에 담았어요.</p>
           <div className={styles.storyPreview}>

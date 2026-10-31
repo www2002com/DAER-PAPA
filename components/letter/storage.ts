@@ -1,8 +1,6 @@
 // Browser-only storage for letters. Nothing is ever sent to a server.
 // Keys and shapes match the previous site, so letters people already kept still load.
 
-import { MAX_CHARS, MAX_FROM } from './card';
-
 export const LETTERS_KEY = 'dearpapa.letters.v1';
 export const DRAFT_KEY = 'dearpapa.draft.v1';
 export const MAX_LETTERS = 20;
@@ -28,9 +26,9 @@ function write(key: string, value: unknown): boolean {
   }
 }
 
-/** Remove carriage returns and cap length (a guard against pathological pastes). */
-export const cleanText = (v: string) => v.replace(/\r/g, '').slice(0, MAX_CHARS);
-export const cleanFrom = (v: string) => v.replace(/[\r\n]/g, '').slice(0, MAX_FROM);
+/** Normalize user input only. Length limits belong at sharing, never at persistence. */
+export const cleanText = (v: string) => v.replace(/\r/g, '');
+export const cleanFrom = (v: string) => v.replace(/[\r\n]/g, '');
 
 export function loadLetters(): Letter[] {
   const raw = read<unknown>(LETTERS_KEY);
@@ -46,6 +44,7 @@ export function loadLetters(): Letter[] {
         typeof (l as Letter).text === 'string' &&
         (l as Letter).text.trim() !== '',
     )
+    // Keep originals intact: an unrelated save/delete writes this list back to storage.
     .map((l) => ({ id: l.id, date: l.date, text: l.text, from: typeof l.from === 'string' ? l.from : '' }));
 }
 
@@ -56,8 +55,8 @@ export function loadDraft(): Draft | null {
   const d = read<Partial<Draft>>(DRAFT_KEY);
   if (!d || typeof d !== 'object' || Array.isArray(d)) return null;
   return {
-    text: typeof d.text === 'string' ? d.text.replace(/\r/g, '') : '',
-    from: typeof d.from === 'string' ? cleanFrom(d.from) : '',
+    text: typeof d.text === 'string' ? d.text : '',
+    from: typeof d.from === 'string' ? d.from : '',
     editingId: typeof d.editingId === 'number' ? d.editingId : null,
   };
 }

@@ -8,7 +8,7 @@
 .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 14px; background: #e7edf0; margin-bottom: 16px; }
 .tabs button { min-height: 44px; border-radius: 11px; font-size: 14px; font-weight: 600; color: #4e6879; }
 .tabs button[aria-selected='true'] { background: white; color: #203e50; box-shadow: 0 1px 4px #17334815; }
-.previewLink { display: inline-flex; align-items: center; gap: 10px; min-height: 36px; padding: 0 16px; border-radius: 8px; background: #fff; font-size: 12px; }
+.previewLink { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 44px; margin-top: 8px; padding: 0 16px; border: 1px solid #cbd9e0; border-radius: 10px; background: #fff; color: #34566a; font-size: 13px; }
 .privacy { margin: 14px 0; color: #536b7b; font-size: 12px; line-height: 1.7; word-break: keep-all; overflow-wrap: anywhere; }
 .kakaoButton, .instagramButton, .secondary { display: flex; width: 100%; align-items: center; justify-content: center; gap: 9px; min-height: 52px; border-radius: 12px; font-size: 14px; font-weight: 600; padding: 10px 12px; text-align: center; }
 .kakaoButton { background: #fee500; color: #191919; }
@@ -25,7 +25,7 @@
 .storyPreview img { width: 100%; height: auto; display: block; }
 .storyPreview p { font-size: 12px; padding: 12px; line-height: 1.6; text-align: center; }
 .external { display: flex; min-height: 44px; align-items: center; justify-content: center; gap: 8px; font-size: 13px; text-decoration: underline; text-underline-offset: 4px; }
-.copyInput { display: block; width: 100%; min-height: 44px; margin-top: 10px; border: 1px solid #a9bfcb; border-radius: 6px; padding: 8px; font-size: 12px; }
+.copyInput { display: block; width: 100%; min-height: 44px; margin-top: 10px; border: 1px solid #a9bfcb; border-radius: 6px; padding: 8px; font-size: 16px; }
 @media (max-width: 380px) { .inner { padding: 18px; } }
 /* The KakaoTalk message as the recipient sees it: card image, sender and date, never the letter. */
 .kakaoMessage { margin: 16px 0 0; padding: 12px; border-radius: 14px; background: #b2c7d9; }
@@ -35,8 +35,7 @@
 .kakaoTitle { margin: 0; font-size: 14px; font-weight: 700; color: #191919; overflow-wrap: anywhere; }
 .kakaoDesc { margin: 3px 0 6px; font-size: 12px; color: #555; }
 .kakaoItems { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; margin: 0; font-size: 12px; }
-.kakaoItems dt { color: #777; }
+.kakaoItems dt { color: #666; }
 .kakaoItems dd { margin: 0; color: #191919; text-align: right; overflow-wrap: anywhere; }
 .kakaoButtons { display: grid; gap: 1px; border-radius: 0 0 10px 10px; overflow: hidden; background: #e5e5e5; }
 .kakaoButtons span { display: block; padding: 10px; background: #f7f7f7; text-align: center; font-size: 13px; color: #191919; }
-.previewLink { white-space: nowrap; }

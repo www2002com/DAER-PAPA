@@ -31,6 +31,6 @@ describe('unconfigured production release', () => {
     vi.stubEnv('LAUNCH_NOTIFY_ENABLED', '');
     vi.stubEnv('RESEND_API_KEY', '');
     render(<Privacy />);
-    expect(screen.getByText(/현재 출시 알림 신청을 위한 이메일을 수집하지 않습니다/)).toBeTruthy();
+    expect(screen.getByText(/현재 사이트에서 이메일을 수집하지 않습니다/)).toBeTruthy();
   });
 });

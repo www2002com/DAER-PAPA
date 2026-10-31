@@ -1,0 +1,23 @@
+{
+  "source": "모듈 1 제품·고객 프로필 요약 (2026-10-22). 광고 생성 프롬프트에 넣는 공개 가능 범위만 둔다 — 내부 가격 정책값(대외비)은 넣지 않는다.",
+  "product": "디어파파 레터 올인원 (Letter All-in-One), 150mL 올인원 1종",
+  "status": "출시 준비 중 — 가격·전성분·출시일 미확정, 결제·주문 미연결",
+  "brand": {
+    "tagline": "아빠의 매일에, 딸의 마음을.",
+    "phrases": ["좋은 선물은, 매일의 안부가 되니까.", "받는 순간을 넘어, 매일 쓰일 선물", "씻고 → 덜고 → 바르고"],
+    "giftSet": "편지 카드 → 보틀 → 사용 안내 순서(출시 후 계획). 편지 카드는 나눔 펜 스크립트 인쇄이며 실제 손글씨가 아니다."
+  },
+  "audience": {
+    "user": "4060 아빠 — 편안함, 간편함(세안 후 1회), 매일 지속 사용",
+    "buyer": "딸(아들·배우자도 가능). 연령대 20~40대는 가설"
+  },
+  "channels": {
+    "instagram": "@dearpapa.kr",
+    "site": "dearpapa.kr — 편지 작성 기능: 가입 없이, 이 기기(브라우저)에만 저장, PNG 저장"
+  },
+  "assets": {
+    "bottle-draft": { "file": "../public/images/letter-all-in-one-deep-green-logo-v4.webp", "draft": true, "label": "패키지 디자인 시안 · 개발 중" },
+    "carton-draft": { "file": "../public/images/letter-all-in-one-carton-sage-v1.webp", "draft": true, "label": "패키지 디자인 시안 · 개발 중" },
+    "endcard": { "file": null, "draft": false }
+  }
+}

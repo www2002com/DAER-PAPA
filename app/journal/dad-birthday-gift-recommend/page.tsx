@@ -179,6 +179,7 @@ export default function DadBirthdayGiftRecommendPage() {
             label: '아빠 올인원 스킨케어 선물, 언제 맞을까요?',
           },
           { href: '/journal/dad-gift-guide', label: '편지와 함께 건네는 아빠 스킨케어' },
+          { href: '/letter-all-in-one', label: '디어파파 레터 올인원 제품 정보' },
           { href: '/about/facts', label: '디어파파 공식 정보' },
           { href: '/#letter', label: '아빠에게 편지 쓰기' },
         ]}

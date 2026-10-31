@@ -175,6 +175,7 @@ export default function DadAllinoneSkincareGiftPage() {
             href: '/journal/dad-birthday-gift-skincare',
             label: '아빠 생일 선물 스킨케어, 무엇을 봐야 할까요?',
           },
+          { href: '/letter-all-in-one', label: '디어파파 레터 올인원 제품 정보' },
           { href: '/about/facts', label: '디어파파 공식 정보' },
           { href: '/#letter', label: '아빠에게 편지 쓰기' },
         ]}

@@ -89,7 +89,7 @@ export default function LetterAllInOnePage() {
 
         <h2 id="unboxing">상자를 여는 순서 (구상 중)</h2>
         <p>
-          구상 중(출시 후 계획): 상자를 열면 편지 카드, 보틀, 사용 안내 순서로 보이는 선물 구성을 기획하고 있습니다.
+          구상 중(출시 후 계획): 상자를 열면 보틀, 사용 안내 순서로 보이는 선물 구성을 기획하고 있습니다.
         </p>
 
         <h2 id="container">용기</h2>

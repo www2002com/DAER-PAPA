@@ -255,3 +255,51 @@
 }
 .productBox p { margin: 0 0 0.5rem; }
 .productBox a { font-weight: 600; }
+
+
+.toc {
+  margin: 0 0 2.4em;
+  padding: 1.1em 1.2em 1.2em;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--paper) 88%, var(--ink) 4%);
+}
+
+.tocTitle {
+  margin: 0 0 0.7em;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.toc ol {
+  display: grid;
+  gap: 0.45em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.toc li {
+  padding: 0;
+}
+
+.toc li::before {
+  display: none;
+}
+
+.toc a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.toc a:hover {
+  color: var(--rose-ink);
+  text-decoration: underline;
+}
+
+/* TOC sits above the first H2; do not inherit the first-child H2 reset when TOC precedes it. */
+.prose > .toc + h2,
+.prose > .toc + section > h2:first-child {
+  margin-top: 0;
+}

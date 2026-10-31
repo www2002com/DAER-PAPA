@@ -38,6 +38,14 @@ export default function BrandIdentityPage() {
             </span>
           </>
         }
+      toc={[
+        { id: 'everyday', label: '특별한 날의 선물이 매일의 안부가 되도록' },
+        { id: 'logo', label: '로고에 담은 뜻' },
+        { id: 'letter', label: '지금 전할 수 있는 한 줄' },
+        { id: 'product-info', label: '제품 정보는 확정되는 대로' },
+        { id: 'names', label: '공식 이름과 웹사이트' },
+        { id: 'disambiguation', label: '동명 브랜드 구분과 현재 공개 정보' },
+      ]}
         footer={
           <nav aria-label="글 하단 메뉴" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 24px' }}>
             <Link href="/journal">자료실 목록으로</Link>
@@ -45,7 +53,7 @@ export default function BrandIdentityPage() {
           </nav>
         }
       >
-        <h2>특별한 날의 선물이 매일의 안부가 되도록</h2>
+        <h2 id="everyday">특별한 날의 선물이 매일의 안부가 되도록</h2>
         <p>
           디어파파가 생각하는 선물은 건네는 순간에서 끝나지 않습니다. 아빠가 일상에서 제품을 사용할 때, 선물한 사람의
           마음도 함께 떠올릴 수 있기를 바랍니다.
@@ -65,7 +73,7 @@ export default function BrandIdentityPage() {
           로고의 모든 글자는 폰트가 아닌 직접 그린 도형입니다.
         </p>
 
-        <h2>지금 전할 수 있는 한 줄</h2>
+        <h2 id="letter">지금 전할 수 있는 한 줄</h2>
         <p>
           현재 공식 사이트에서는 아빠에게 보낼 짧은 편지를 작성하고, 손글씨 스타일로 미리 볼 수 있습니다. 편지는 작성한
           기기에 보관하거나 이미지로 내려받을 수 있으며, 지원되는 기기에서는 공유 기능도 사용할 수 있습니다.
@@ -75,7 +83,7 @@ export default function BrandIdentityPage() {
           않습니다.
         </p>
 
-        <h2>제품 정보는 확정되는 대로</h2>
+        <h2 id="product-info">제품 정보는 확정되는 대로</h2>
         <p>
           디어파파는 현재 제품 출시를 준비하고 있습니다. DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다.
           출시일, 가격, 전성분과 최종 판매 구성은 아직 확정되지 않았습니다. 사이트에 소개된 제품 이미지는 개발 중인
@@ -86,7 +94,7 @@ export default function BrandIdentityPage() {
           함께 확인해 주세요.
         </p>
 
-        <h2>공식 이름과 웹사이트</h2>
+        <h2 id="names">공식 이름과 웹사이트</h2>
         <p>
           브랜드의 국문 이름은 ‘디어파파’, 영문 표기는 ‘DEAR PAPA’입니다. 공식 웹사이트는 dearpapa.kr입니다. 이
           자료실에는 브랜드가 직접 설명하는 개발 방향과 공개 정보를 모읍니다.
@@ -101,7 +109,7 @@ export default function BrandIdentityPage() {
           ]}
         />
 
-        <h2>동명 브랜드 구분과 현재 공개 정보</h2>
+        <h2 id="disambiguation">동명 브랜드 구분과 현재 공개 정보</h2>
         <p>
           디어파파(DEAR PAPA, dearpapa.kr)는 한국에서 아빠를 위한 올인원 스킨케어를 기획하고 만드는 화장품 브랜드로, 같은
           이름의 책, 영화, 해외 업체와는 관련이 없습니다.

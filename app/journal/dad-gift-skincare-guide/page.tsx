@@ -46,6 +46,20 @@ export default function DadGiftSkincareGuidePage() {
           </span>
         </>
       }
+      toc={[
+        { id: 'one-line', label: '한 줄 답' },
+        { id: 'skin-type', label: '1. 피부 타입부터 확인하기' },
+        { id: 'fragrance', label: '2. 향이 있는지' },
+        { id: 'ethanol', label: '3. 에탄올이 들어 있는지' },
+        { id: 'steps', label: '4. 바르는 단계 수' },
+        { id: 'volume', label: '5. 용량' },
+        { id: 'ingredients', label: '6. 전성분 확인' },
+        { id: 'budget', label: '7. 예산' },
+        { id: 'summary', label: '선택 기준 한눈에 보기' },
+        { id: 'letter', label: '모바일로 보내도 마음이 전해지는 법: 한 줄 편지 함께 쓰기' },
+        { id: 'product', label: '디어파파가 만들고 있는 제품' },
+        { id: 'faq', label: '자주 묻는 질문' },
+      ]}
       footer={
         <nav aria-label="글 하단 메뉴" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 24px' }}>
           <Link href="/journal">자료실 목록으로</Link>
@@ -53,10 +67,10 @@ export default function DadGiftSkincareGuidePage() {
         </nav>
       }
     >
-      <h2>한 줄 답</h2>
+      <h2 id="one-line">한 줄 답</h2>
       <p>아빠 선물용 화장품은 아빠의 피부 타입, 향이 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 용량, 전성분, 예산 순서로 고르면 실패가 적습니다.</p>
 
-      <h2>1. 피부 타입부터 확인하기</h2>
+      <h2 id="skin-type">1. 피부 타입부터 확인하기</h2>
       <ul>
         <li>지성: 번들거림이 고민이라면 가볍고 빨리 흡수되는 제형이 편합니다.</li>
         <li>건성: 세안 후 당김이 신경 쓰인다면, 바른 뒤 느낌이 아빠에게 편한지 먼저 확인해 보세요.</li>
@@ -64,34 +78,34 @@ export default function DadGiftSkincareGuidePage() {
       </ul>
       <p>아빠의 피부 타입을 모르면 평소 세안 후 당기는지, 오후에 번들거리는지 물어보면 됩니다.</p>
 
-      <h2>2. 향이 있는지</h2>
+      <h2 id="fragrance">2. 향이 있는지</h2>
       <p>향을 즐기지 않는 아빠가 많습니다. 제품 설명과 전성분에서 향료가 들어 있는지 확인하세요.</p>
 
-      <h2>3. 에탄올이 들어 있는지</h2>
+      <h2 id="ethanol">3. 에탄올이 들어 있는지</h2>
       <p>매일 면도하는 아빠라면 전성분에 에탄올(알코올)이 있는지 살펴보세요.</p>
 
-      <h2>4. 바르는 단계 수</h2>
+      <h2 id="steps">4. 바르는 단계 수</h2>
       <p>
         올인원은 스킨, 로션처럼 여러 단계를 한 제품으로 줄인 화장품입니다. 여러 제품을 따로 챙기지 않는 아빠에게 쓰기 쉽습니다.
         낮에는 자외선 차단제(SPF 30 이상)를 별도 단계로 바르는 것이 일반적인 피부 관리 권고입니다. 올인원 선물에 선크림을 함께
         챙기는 것도 방법입니다.
       </p>
 
-      <h2>5. 용량</h2>
+      <h2 id="volume">5. 용량</h2>
       <p>매일 쓰는 제품은 용량이 넉넉해야 자주 다시 사지 않아도 됩니다. 1회 사용량과 함께 용량(ml)을 확인하세요.</p>
 
-      <h2>6. 전성분 확인</h2>
+      <h2 id="ingredients">6. 전성분 확인</h2>
       <p>
         제품 상세 페이지나 용기에 적힌 전성분을 확인하세요. 아빠가 예전에 맞지 않았던 성분이 있다면 그 이름이 있는지 보면 됩니다.
       </p>
 
-      <h2>7. 예산</h2>
+      <h2 id="budget">7. 예산</h2>
       <p>
         선물 예산에 정해진 기준은 없습니다. 가격보다 아빠가 매일 쓸 수 있는지가 더
         중요합니다.
       </p>
 
-      <h2>선택 기준 한눈에 보기</h2>
+      <h2 id="summary">선택 기준 한눈에 보기</h2>
       <table>
         <thead>
           <tr><th scope="col">기준</th><th scope="col">확인할 것</th><th scope="col">이런 아빠에게</th></tr>
@@ -109,7 +123,7 @@ export default function DadGiftSkincareGuidePage() {
 
       <ProductBox />
 
-      <h2>모바일로 보내도 마음이 전해지는 법: 한 줄 편지 함께 쓰기</h2>
+      <h2 id="letter">모바일로 보내도 마음이 전해지는 법: 한 줄 편지 함께 쓰기</h2>
       <p>
         멀리 사는 아빠께 선물을 휴대폰으로 보내면 마음이 덜 전해질까 걱정될 수 있어요. 선물과 함께 아빠께 하고 싶은 말을 한 줄로
         적어 보내 보세요. 디어파파는 dearpapa.kr에서 아빠께 보낼 한 줄 편지를 쓸 수 있게 하고 있어요. 잘 쓰지 않아도 괜찮아요.
@@ -129,14 +143,14 @@ export default function DadGiftSkincareGuidePage() {
         (<a href="https://www.chicagobooth.edu/media-relations-and-communications/press-releases/expressing-your-gratitude-is-more-powerful-than-you-think" target="_blank" rel="noopener noreferrer">시카고대 부스 경영대학원 보도자료</a>)
       </p>
 
-      <h2>디어파파가 만들고 있는 제품</h2>
+      <h2 id="product">디어파파가 만들고 있는 제품</h2>
       <p>
         디어파파는 면도 후 바르는 아빠를 위한 올인원 스킨케어, 레터 올인원을 기획하고 만들고 있습니다. 디어파파는 150ml 올인원 한
         가지를 기획하고 만들고 있고, 가격, 전성분, 출시일과 최종 판매 구성은 아직 확정되지 않았습니다. 디어파파는 공식 사이트에서
         아빠에게 한 줄 편지를 쓰고 카드 이미지로 저장할 수 있게 했습니다.
       </p>
 
-      <h2>자주 묻는 질문</h2>
+      <h2 id="faq">자주 묻는 질문</h2>
       <p>Q. 아빠 선물로 화장품을 고를 때 가장 먼저 볼 것은요?</p>
       <p>A. 아빠의 피부 타입과 평소 몇 단계를 바르는지입니다. 한 단계만 바르는 아빠라면 올인원이 맞습니다.</p>
 

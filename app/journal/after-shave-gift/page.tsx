@@ -46,6 +46,15 @@ export default function AfterShaveGiftPage() {
           </span>
         </>
       }
+      toc={[
+        { id: 'one-line', label: '한 줄 답' },
+        { id: 'no-fragrance', label: '1. 향이 없는지' },
+        { id: 'no-ethanol', label: '2. 에탄올이 들어 있는지' },
+        { id: 'one-step', label: '3. 한 단계로 바르는지' },
+        { id: 'letter', label: '모바일로 보내도 마음이 전해지는 법: 한 줄 편지 함께 쓰기' },
+        { id: 'product', label: '디어파파가 만들고 있는 제품' },
+        { id: 'faq', label: '자주 묻는 질문' },
+      ]}
       footer={
         <nav aria-label="글 하단 메뉴" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 24px' }}>
           <Link href="/journal">자료실 목록으로</Link>
@@ -53,19 +62,19 @@ export default function AfterShaveGiftPage() {
         </nav>
       }
     >
-      <h2>한 줄 답</h2>
+      <h2 id="one-line">한 줄 답</h2>
       <p>면도 후 아빠에게 줄 스킨케어는 향이 없는지, 에탄올이 들어 있지 않은지, 바르기 쉬운 한 단계인지부터 보면 됩니다.</p>
 
-      <h2>1. 향이 없는지</h2>
+      <h2 id="no-fragrance">1. 향이 없는지</h2>
       <p>
         매일 면도하는 아빠는 향이 강한 제품을 오래 쓰지 않는 경우가 많습니다. 제품 설명이나 전성분에서 향료와 에센셜오일이
         들어 있는지 확인하세요.
       </p>
 
-      <h2>2. 에탄올이 들어 있는지</h2>
+      <h2 id="no-ethanol">2. 에탄올이 들어 있는지</h2>
       <p>면도한 직후 피부에 바르는 제품이라면 전성분에 에탄올(알코올)이 있는지 살펴보세요.</p>
 
-      <h2>3. 한 단계로 바르는지</h2>
+      <h2 id="one-step">3. 한 단계로 바르는지</h2>
       <p>
         스킨, 로션, 크림을 따로 챙기지 않는 아빠라면 한 번만 바르면 되는 올인원이 쓰기 쉽습니다. 빨리 흡수되는 워터리 제형은
         바른 뒤 끈적임이 덜합니다.
@@ -73,7 +82,7 @@ export default function AfterShaveGiftPage() {
 
       <ProductBox />
 
-      <h2>모바일로 보내도 마음이 전해지는 법: 한 줄 편지 함께 쓰기</h2>
+      <h2 id="letter">모바일로 보내도 마음이 전해지는 법: 한 줄 편지 함께 쓰기</h2>
       <p>
         멀리 사는 아빠께 선물을 휴대폰으로 보내면 마음이 덜 전해질까 걱정될 수 있어요. 선물과 함께 아빠께 하고 싶은 말을 한 줄로
         적어 보내 보세요. 디어파파는 dearpapa.kr에서 아빠께 보낼 한 줄 편지를 쓸 수 있게 하고 있어요. 잘 쓰지 않아도 괜찮아요.
@@ -93,13 +102,13 @@ export default function AfterShaveGiftPage() {
         (<a href="https://www.chicagobooth.edu/media-relations-and-communications/press-releases/expressing-your-gratitude-is-more-powerful-than-you-think" target="_blank" rel="noopener noreferrer">시카고대 부스 경영대학원 보도자료</a>)
       </p>
 
-      <h2>디어파파가 만들고 있는 제품</h2>
+      <h2 id="product">디어파파가 만들고 있는 제품</h2>
       <p>
         디어파파는 면도 후에 바르는 올인원을, 빠른 흡수의 워터리 제형과 무에탄올을 목표로 기획하고 만들고 있습니다.
         디어파파는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 가격, 전성분, 출시일은 아직 확정되지 않았습니다.
       </p>
 
-      <h2>자주 묻는 질문</h2>
+      <h2 id="faq">자주 묻는 질문</h2>
       {AFTER_SHAVE_GIFT_FAQ.map(({ q, a }) => (
         <div key={q}>
           <p>Q. {q}</p>

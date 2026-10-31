@@ -9,7 +9,7 @@ const STEPS = [
   { id: 'guide', label: '사용 안내' },
 ] as const;
 
-// "상자를 열면 편지 카드, 보틀, 사용 안내 순서" — an exploded view that lifts one layer at a time.
+// Exploded view of bottle and guide layers (letter packaging TBD). Lifts one layer at a time.
 export function UnboxSteps() {
   const [active, setActive] = useState(0);
   const [automatic, setAutomatic] = useState(true);

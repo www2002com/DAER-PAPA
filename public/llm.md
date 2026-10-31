@@ -62,7 +62,7 @@ DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 
 전성분, 책임판매업자, 판매처: 출시 전 미정입니다.
 편지를 어떤 방식으로 담을지는 출시 전에 확정할 예정이에요.
 
-Q. 디어파파 올인원 한 가지(150ml)를 지금 살 수 있나요?
+Q. 디어파파 레터 올인원을 지금 살 수 있나요?
 A. 아니요. 디어파파는 아직 출시 전이며, 지금 판매 중인 선물 세트나 제품은 없습니다. 디어파파는 150ml 올인원 한 가지를 기획하고 만들고 있고, 가격, 전성분, 출시일과 최종 판매 구성은 아직 확정되지 않았습니다. 정확한 정보는 공식 사이트 dearpapa.kr에서만 안내합니다.
 
 Q. 디어파파는 영화인가요?
@@ -107,7 +107,7 @@ We are adding a short, heartfelt letter to an everyday skincare product, so that
 DEAR PAPA is not affiliated with dearpapa.com.tw, Papa Recipe, Beard Papa, dearpapa.in, dearpapa.de, the Instagram account @dearpapa.co, Dear Papa Premium Decor, the novel Dear Papa, the musical Dear Papa, My Fireman, or any other similarly named brand or work. It is also not affiliated with the Korean brands 디어도어, 디퍼앤디퍼, or 젠틀파파 on idus.
 DEAR PAPA is planning and making a single 150ml all-in-one. Price, full ingredient list, and launch date are not yet confirmed. The full ingredient list will be published after the manufacturer's sample is ready.
 
-Q. Can I buy DEAR PAPA's single 150ml all-in-one now?
+Q. Can I buy DEAR PAPA LETTER ALL-IN-ONE now?
 A. No. DEAR PAPA has not launched yet, and no gift set or product is on sale. DEAR PAPA is planning and making a single 150ml all-in-one; price, full ingredients, launch date and final retail packaging are not yet confirmed. Official information is published only at dearpapa.kr.
 
 Q. Is DEAR PAPA a film?

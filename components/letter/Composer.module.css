@@ -541,6 +541,8 @@
 .shareButton:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
 .shareButton[data-kakao='ready'] > svg { color: #fee500; }
 .handoff { grid-column: 1 / -1; }
+/* Idle: keep the live region in the accessibility tree without taking a grid row. */
+.handoff[data-idle] { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); }
 .sharePrivacy { grid-column: 1 / -1; margin: 0; color: var(--ink-2); font-size: 0.8125rem; line-height: 1.6; word-break: keep-all; overflow-wrap: anywhere; }
 .otherShare { grid-column: 1 / -1; min-height: 44px; color: var(--ink-2); font-size: 0.8125rem; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
 .otherShare:focus-visible { outline: 2px solid var(--forest); outline-offset: 2px; border-radius: 4px; }

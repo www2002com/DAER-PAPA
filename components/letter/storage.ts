@@ -46,7 +46,8 @@ export function loadLetters(): Letter[] {
         typeof (l as Letter).text === 'string' &&
         (l as Letter).text.trim() !== '',
     )
-    .map((l) => ({ id: l.id, date: l.date, text: l.text, from: typeof l.from === 'string' ? l.from : '' }));
+    // Older or hand-edited entries may exceed today's limits; the card and the share link both assume them.
+    .map((l) => ({ id: l.id, date: l.date, text: cleanText(l.text), from: cleanFrom(typeof l.from === 'string' ? l.from : '') }));
 }
 
 // Never make room by silently discarding an existing letter.
@@ -56,7 +57,7 @@ export function loadDraft(): Draft | null {
   const d = read<Partial<Draft>>(DRAFT_KEY);
   if (!d || typeof d !== 'object' || Array.isArray(d)) return null;
   return {
-    text: typeof d.text === 'string' ? d.text.replace(/\r/g, '') : '',
+    text: typeof d.text === 'string' ? cleanText(d.text) : '',
     from: typeof d.from === 'string' ? cleanFrom(d.from) : '',
     editingId: typeof d.editingId === 'number' ? d.editingId : null,
   };

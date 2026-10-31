@@ -61,6 +61,10 @@ export function KakaoHandoff({ sdk, handoff, route = 'app', shareUrl, showUnavai
 
   // The web route is the recommended next step only when the app showed no sign of opening.
   const recommendWeb = web || handoff === 'notOpened';
+  // In-app browsers (Instagram, Facebook) often cannot launch KakaoTalk, so the link copy shows
+  // from the first moment instead of after 3 s of waiting. It stays alone: another hand-off would
+  // collide with the one in flight, and the device share sheet would blur the page and read as opened.
+  const opening = handoff === 'opening';
   const hint = copy === 'copied' ? '링크를 복사했어요. 카카오톡 대화방에 붙여 넣으면 받는 분이 편지를 열 수 있어요.'
     : copy === 'manual' ? '아래 링크를 길게 누르거나 선택해서 복사해 주세요.'
       : shareError;
@@ -68,16 +72,16 @@ export function KakaoHandoff({ sdk, handoff, route = 'app', shareUrl, showUnavai
   return (
     <div className={active ? styles.notice : styles.idle} data-handoff={!active ? 'idle' : unavailable ? 'unavailable' : handoff}>
       <p role="status" aria-live="polite">{message}</p>
-      {active && handoff !== 'opening' && <div className={styles.actions}>
-        {unavailable
+      {active && <div className={styles.actions}>
+        {opening ? null : unavailable
           ? <button type="button" data-primary="" onClick={onReconnect}>카카오톡 다시 연결</button>
           : <>
             <button type="button" data-primary={recommendWeb ? '' : undefined} onClick={onSendWeb}>{web ? '카카오 공유 창 다시 열기' : '웹에서 카카오톡으로 보내기'}</button>
             {!web && <button type="button" onClick={onSendAgain}>카카오톡 다시 열기</button>}
           </>}
         <button type="button" onClick={copyLink}>{copy === 'copied' ? '링크를 복사했어요' : '편지 링크 복사'}</button>
-        {canShare && <button type="button" onClick={shareSheet} disabled={sharing}>공유창으로 보내기</button>}
-        {onDismiss && <button type="button" className={styles.dismiss} onClick={onDismiss} aria-label="안내 닫기">닫기</button>}
+        {!opening && canShare && <button type="button" onClick={shareSheet} disabled={sharing}>공유창으로 보내기</button>}
+        {!opening && onDismiss && <button type="button" className={styles.dismiss} onClick={onDismiss} aria-label="안내 닫기">닫기</button>}
       </div>}
       <p className={styles.hint} role="status" aria-live="polite">{hint}</p>
       {copy === 'manual' && <input className={styles.copyInput} aria-label="복사할 편지 링크" readOnly value={shareUrl}

@@ -123,6 +123,34 @@ it('ignores a second tap while KakaoTalk is still opening', async () => {
   expect(sendLetterToKakao).toHaveBeenCalledTimes(2);
 });
 
+// In-app browsers (Instagram, Facebook) often cannot launch KakaoTalk; no user-agent check decides this.
+it('offers only the link copy while KakaoTalk is still opening, and copying does not decide the verdict', async () => {
+  vi.useFakeTimers({ shouldAdvanceTime: true });
+  const oldShare = Object.getOwnPropertyDescriptor(navigator, 'share');
+  Object.defineProperty(navigator, 'share', { configurable: true, value: vi.fn() });
+  try {
+    const copy = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: copy } });
+    const button = await readyComposer();
+    fireEvent.click(button);
+    const notice = screen.getByText('카카오톡을 여는 중이에요…').parentElement!;
+    expect(within(notice).getAllByRole('button').map(b => b.textContent)).toEqual(['편지 링크 복사']);
+    fireEvent.click(within(notice).getByRole('button', { name: '편지 링크 복사' }));
+    expect(await within(notice).findByText(/링크를 복사했어요\. 카카오톡 대화방에 붙여 넣으면/)).toBeTruthy();
+    expect(readSharedLetter(new URL(copy.mock.calls[0][0]).hash)?.text).toBe(letter.text);
+    expect(screen.getByText('카카오톡을 여는 중이에요…')).toBeTruthy();
+    act(() => { vi.advanceTimersByTime(3000); });
+    expect(screen.getByText(/카카오톡이 열리지 않았다면/)).toBeTruthy();
+    expect(within(notice).getByRole('button', { name: '웹에서 카카오톡으로 보내기' })).toBeTruthy();
+    expect(within(notice).getByRole('button', { name: '링크를 복사했어요' })).toBeTruthy();
+    expect(within(notice).getByRole('button', { name: '공유창으로 보내기' })).toBeTruthy();
+    expect(sendLetterToKakao).toHaveBeenCalledTimes(1);
+  } finally {
+    vi.useRealTimers();
+    if (oldShare) Object.defineProperty(navigator, 'share', oldShare); else Reflect.deleteProperty(navigator, 'share');
+  }
+});
+
 it('offers the web share page and link copy when KakaoTalk shows no sign of opening, and the verdict stays final', async () => {
   vi.useFakeTimers({ shouldAdvanceTime: true });
   try {

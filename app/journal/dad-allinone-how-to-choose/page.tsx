@@ -33,7 +33,7 @@ export default function DadAllInOneHowToChoosePage() {
       crumbs={[{ href: '/journal', label: '브랜드 자료실' }]}
       eyebrow={entry.category}
       title={entry.title}
-      lead={<p>아빠 올인원 스킨케어 선물은 피부 타입·향료·에탄올·단계 수·면도 후 쓰기 편한지 순으로 보면 돼요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요.</p>}
+      lead={<p>디어파파가 보는 아빠 올인원 스킨케어 선물 고르는 순서는 피부 타입, 향료, 에탄올, 단계 수, 면도 후 쓰기 편한지예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어로, 출시 전이에요.</p>}
       meta={
         <>
           <span>작성 · 디어파파</span>

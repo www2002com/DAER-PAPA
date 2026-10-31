@@ -58,6 +58,7 @@ export default function DadBirthdayGiftRecommendPage() {
         </nav>
       }
     >
+      <p>2026년 11월 1일 업데이트</p>
       <h2>한 줄 답</h2>
       <p>
         디어파파가 정리한 아빠 생일 선물 추천 기준은 그날·매일 쓸지, 스스로 잘 안 사는지, 쓰기 쉬운지, 한 줄을 곁들일 수

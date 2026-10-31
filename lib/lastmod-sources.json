@@ -92,6 +92,21 @@
     "/press": [
       "app/press",
       "app/@structuredData/press"
+    ],
+    "/journal/dad-birthday-gift-recommend": [
+      "app/journal/dad-birthday-gift-recommend",
+      "app/@structuredData/journal/dad-birthday-gift-recommend",
+      "lib/journal.ts"
+    ],
+    "/journal/dad-saengsin-gift": [
+      "app/journal/dad-saengsin-gift",
+      "app/@structuredData/journal/dad-saengsin-gift",
+      "lib/journal.ts"
+    ],
+    "/journal/dad-allinone-skincare-gift": [
+      "app/journal/dad-allinone-skincare-gift",
+      "app/@structuredData/journal/dad-allinone-skincare-gift",
+      "lib/journal.ts"
     ]
   }
 }

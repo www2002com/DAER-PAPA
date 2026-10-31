@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 export default function DadSaengsinGiftPage() {
   return (
     <ArticleLayout
-      crumbs={[{ href: '/journal', label: '브랜드 자료실' }]}
+      crumbs={[{ href: '/journal/dad-gift-guide', label: '아빠 선물 가이드' }]}
       eyebrow={entry.category}
       title={entry.title}
       lead={<p>디어파파(DEAR PAPA)는 아빠를 위한 올인원 스킨케어 브랜드입니다(dearpapa.kr).</p>}
@@ -143,6 +143,11 @@ export default function DadSaengsinGiftPage() {
       <p>
         예산 칸만 따로 보지 말고, 표 앞줄을 통과한 뒤 가격을 확인하세요. 디어파파 레터 올인원 가격은 아직 정해지지 않았어요.
         판매처도 아직 없어요. 사이트에는 가격대 표현을 두지 않아요.
+      </p>
+
+      <p>
+        아빠 스킨케어는 후기보다 향이 강하지 않은지, 전성분을 먼저 확인해 보세요.{' '}
+        <Link href="/about/facts">공식 정보 확인하기</Link>
       </p>
 
       <ProductBox />

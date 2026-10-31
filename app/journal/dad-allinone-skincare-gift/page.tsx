@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 export default function DadAllinoneSkincareGiftPage() {
   return (
     <ArticleLayout
-      crumbs={[{ href: '/journal', label: '브랜드 자료실' }]}
+      crumbs={[{ href: '/journal/dad-gift-guide', label: '아빠 선물 가이드' }]}
       eyebrow={entry.category}
       title={entry.title}
       lead={<p>디어파파(DEAR PAPA)는 아빠를 위한 올인원 스킨케어 브랜드입니다(dearpapa.kr).</p>}

@@ -108,6 +108,10 @@ describe('content bot letter lines (10/26)', () => {
 });
 
 describe('Kumar & Epley paragraph in the two journal pages', () => {
+  const modifiedBySlug = {
+    'dad-gift-skincare-guide': '2026-10-31',
+    'after-shave-gift': '2026-10-26',
+  } as const;
   for (const [slug, Page] of [['dad-gift-skincare-guide', SkincareGuide], ['after-shave-gift', AfterShave]] as const) {
     it(slug, () => {
       const { container } = render(<Page />);
@@ -119,7 +123,7 @@ describe('Kumar & Epley paragraph in the two journal pages', () => {
       expect(container.querySelector('a[href="https://doi.org/10.1177/0956797618772506"]')).not.toBeNull();
       expect(container.querySelector('a[href*="webflow"]')).toBeNull();
       expect(container.querySelector('a[href*="chicagobooth"]')).not.toBeNull();
-      expect(getJournalEntry(slug).modified).toBe('2026-10-26');
+      expect(getJournalEntry(slug).modified).toBe(modifiedBySlug[slug]);
     });
   }
 });

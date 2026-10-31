@@ -62,7 +62,7 @@ export default function DadSkincareGiftTypesPage() {
       }
     >
       <p>
-        아빠 선물 추천 화장품을 찾고 계신다면, 결론부터 말씀드릴게요. 아빠가 평소 몇 단계를 바르시는지, 피부가 번들거리는 편인지 당기는 편인지, 향을 좋아하시는지 세 가지만 먼저 확인하면 선물 종류가 거의 정해져요. 바르는 걸 번거로워하시는 아빠께는 단계가 적은 올인원, 이미 스킨과 로션을 챙겨 쓰시는 아빠께는 스킨+로션 세트, 바깥 활동이 많은 아빠께는 선크림, 매일 면도하시는 아빠께는 면도 후 제품이나 면도 후에 바르는 올인원이 잘 맞는 출발점이에요. 아빠 생일선물 화장품이든 4060 아빠 선물 스킨케어든, 아래 비교표와 체크리스트로 한 번에 고를 수 있어요.
+        4060 아빠 스킨케어 선물은 평소 단계 수·피부 느낌·향 취향만 보면 종류가 거의 정해져요. 디어파파(DEAR PAPA)는 출시 전 올인원 스킨케어예요.
       </p>
 
       <h2>아빠 스킨케어 선물 종류별 비교표</h2>
@@ -144,8 +144,8 @@ export default function DadSkincareGiftTypesPage() {
         title="함께 확인할 자료"
         links={[
           { href: '/letter-all-in-one', label: '우리가 준비하고 있는 것' },
-          { href: '/journal/dad-allinone-how-to-choose', label: '4060 아빠 올인원 고르는 법, 피부 타입·향료·단계 수로 보는 기준' },
-          { href: '/journal/dad-gift-skincare-guide', label: '아빠 선물 화장품, 생신 선물 스킨케어 고르는 기준 7가지' },
+          { href: '/journal/dad-allinone-how-to-choose', label: '아빠 올인원 스킨케어 선물, 디어파파가 보는 고르는 순서는?' },
+          { href: '/journal/dad-gift-skincare-guide', label: '아빠 스킨케어 선물, 디어파파가 정리한 고르는 기준은?' },
           { href: '/about/facts', label: '디어파파 공식 정보' },
         ]}
       />

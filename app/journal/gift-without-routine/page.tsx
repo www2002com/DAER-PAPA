@@ -179,7 +179,7 @@ export default function GiftWithoutRoutinePage() {
         title="함께 확인할 자료"
         links={[
           { href: '/journal/fathers-gift-guide', label: '아빠 선물 스킨케어, 일상에 맞게 고르는 법' },
-          { href: '/journal/dad-gift-guide', label: '아빠 선물 추천, 편지와 함께 건네는 스킨케어' },
+          { href: '/journal/dad-gift-guide', label: '편지와 함께 건네는 아빠 스킨케어, 디어파파는 무엇을 준비하나요?' },
           { href: '/about/facts', label: '디어파파 공식 정보' },
           { href: '/#letter', label: '아빠에게 편지 쓰기' },
         ]}

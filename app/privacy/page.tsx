@@ -4,7 +4,7 @@ import { ArticleLayout, FactList } from '@/components/article/ArticleLayout';
 import { CONTACT_EMAIL } from '@/lib/facts';
 import { PRIVACY_EFFECTIVE_DATE, PRIVACY_OFFICER, PROCESSORS } from '@/lib/business';
 import { launchNotifyReady } from '@/lib/launch-notify-config';
-import { LAUNCH_NOTIFY_ENABLED_COPY } from '@/lib/launch-notify';
+import { LAUNCH_NOTIFY_ENABLED_COPY } from '@/lib/launch-notify-enabled-copy';
 import { LetterStoryNotice } from '@/components/privacy/LetterStoryNotice';
 import { ChallengeOneLineNotice } from '@/components/privacy/ChallengeOneLineNotice';
 

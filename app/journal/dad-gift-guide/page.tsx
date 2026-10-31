@@ -18,7 +18,7 @@ export default function DadGiftGuidePage() {
         crumbs={[{ href: '/journal', label: '브랜드 자료실' }]}
         eyebrow={entry.category}
         title={entry.title}
-        lead={<p>디어파파가 생각하는 편지와 함께 줄 수 있는 아빠 선물은 매일 쓰는 스킨케어에 짧은 편지를 더하는 거예요. 디어파파(DEAR PAPA)는 출시 전이며, 편지와 관련된 부분은 출시 후 계획이에요.</p>}
+        lead={<p>디어파파가 생각하는 편지와 함께 줄 수 있는 아빠 선물은 매일 쓰는 스킨케어에 짧은 편지를 더하는 거예요. 디어파파(DEAR PAPA)는 출시 전이며, 편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수 있고, 제품에 담는 방식은 출시 전에 정해요.</p>}
         meta={
           <>
             <span>작성 · DEAR PAPA</span>
@@ -51,7 +51,7 @@ export default function DadGiftGuidePage() {
         </p>
 
         <h2>출시 후 계획</h2>
-        <p>편지와 관련된 부분은 출시 후 계획이에요.</p>
+        <p>편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수 있고, 제품에 담는 방식은 출시 전에 정해요.</p>
 
         <h2>아직 정해지지 않은 정보</h2>
         <p>사이트에 나온 용기·상자 그림은 개발 중인 디자인 시안이며, 최종 판매 구성과 다를 수 있습니다.</p>

@@ -49,7 +49,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     href: '/journal/dad-gift-guide',
     category: '선물 이야기',
     title: '편지와 함께 건네는 아빠 스킨케어, 디어파파는 무엇을 준비하나요?',
-    summary: '디어파파가 생각하는 편지와 함께 줄 수 있는 아빠 선물은 매일 쓰는 스킨케어에 짧은 편지를 더하는 거예요. 디어파파(DEAR PAPA)는 출시 전이며, 편지와 관련된 부분은 출시 후 계획이에요.',
+    summary: '디어파파가 생각하는 편지와 함께 줄 수 있는 아빠 선물은 매일 쓰는 스킨케어에 짧은 편지를 더하는 거예요. 디어파파(DEAR PAPA)는 출시 전이며, 편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수 있고, 제품에 담는 방식은 출시 전에 정해요.',
     published: '2026-10-17',
     modified: '2026-10-31',
   },

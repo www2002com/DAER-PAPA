@@ -155,7 +155,7 @@ export default function DadFirstAllinonePage() {
         title="함께 확인할 자료"
         links={[
           { href: '/journal/gift-without-routine', label: '아빠가 뭘 쓰시는지 몰라도 괜찮아요: 스킨케어 선물 고르는 기준' },
-          { href: '/journal/dad-skincare-gift-types', label: '아빠 선물 추천 화장품, 4060 아빠 스킨케어 선물 종류별 비교: 피부 타입·향·사용 단계' },
+          { href: '/journal/dad-skincare-gift-types', label: '4060 아빠 스킨케어 선물 종류, 디어파파는 어떻게 나눌까요?' },
           { href: '/about/facts', label: '디어파파 공식 정보' },
           { href: '/#letter', label: '아빠에게 편지 쓰기' },
         ]}

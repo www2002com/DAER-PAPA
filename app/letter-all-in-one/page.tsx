@@ -27,7 +27,7 @@ export default function LetterAllInOnePage() {
         }
         footer={
           <p>
-            <Link href="/journal/dad-gift-guide">아빠 선물 추천, 편지와 함께 건네는 스킨케어</Link>
+            <Link href="/journal/dad-gift-guide">편지와 함께 건네는 아빠 스킨케어, 디어파파는 무엇을 준비하나요?</Link>
           </p>
         }
       >

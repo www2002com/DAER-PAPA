@@ -90,7 +90,7 @@ export default function FathersGiftGuidePage() {
         <RelatedLinks
           title="함께 확인할 자료"
           links={[
-            { href: '/journal/dad-gift-guide', label: '아빠 선물 추천, 편지와 함께 건네는 스킨케어' },
+            { href: '/journal/dad-gift-guide', label: '편지와 함께 건네는 아빠 스킨케어, 디어파파는 무엇을 준비하나요?' },
             { href: '/#letter', label: '아빠에게 편지 쓰기' },
             { href: '/journal/development-principles', label: '디어파파 제품 개발 원칙' },
           ]}

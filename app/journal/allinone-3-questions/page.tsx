@@ -89,7 +89,7 @@ export default function AllInOneThreeQuestionsPage() {
         title="함께 확인할 자료"
         links={[
           { href: '/letter-all-in-one', label: '우리가 준비하고 있는 것' },
-          { href: '/journal/dad-allinone-how-to-choose', label: '4060 아빠 올인원 고르는 법, 피부 타입·향료·단계 수로 보는 기준' },
+          { href: '/journal/dad-allinone-how-to-choose', label: '아빠 올인원 스킨케어 선물, 디어파파가 보는 고르는 순서는?' },
           { href: '/journal/after-shave-gift', label: '면도 후 아빠 스킨케어, 선물 고를 때 볼 세 가지' },
           { href: '/about/facts', label: '디어파파 공식 정보' },
         ]}

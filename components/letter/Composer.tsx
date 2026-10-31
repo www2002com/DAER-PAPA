@@ -111,6 +111,7 @@ export function Composer() {
   const [bump, setBump] = useState(0);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const fromRef = useRef<HTMLInputElement>(null);
   const composing = useRef(false);
   const stageRef = useRef<HTMLDivElement>(null);
   const timers = useRef<number[]>([]);
@@ -196,6 +197,9 @@ export function Composer() {
     [text, mounted, fontVersion],
   );
   const over = !!draftLayout?.over;
+  const textTooLong = text.length > MAX_CHARS;
+  const fromTooLong = from.length > MAX_FROM;
+  const shareTooLong = textTooLong || fromTooLong;
   const charKeys = showingSaved
     ? Array.from(cardText, (_, i) => `a${selected!.id}-${i}`)
     : isSample
@@ -472,6 +476,11 @@ export function Composer() {
   /** One tap: hand the letter straight to KakaoTalk once the SDK is ready; otherwise show every way to send it. */
   /** Share needs the same letter the recipient link accepts; the card-fit guard alone is not that. */
   function shareable(): LetterInput | null {
+    if (shareTooLong) {
+      if (textTooLong) focusText();
+      else fromRef.current?.focus({ preventScroll: true });
+      return null;
+    }
     if (inserting || !guard()) return null;
     const letter = currentLetter();
     if (!isShareableLetter(letter)) { setWarn('over'); focusText(); return null; }
@@ -522,7 +531,9 @@ export function Composer() {
   const full = text.length >= MAX_CHARS;
 
   const warnText =
-    warn === 'empty'
+    shareTooLong
+      ? `원문을 자르지 않았어요. 공유하려면 편지 내용을 ${MAX_CHARS}자, 보내는 사람을 ${MAX_FROM}자 이내로 직접 줄여 주세요.`
+      : warn === 'empty'
       ? '아빠에게 전할 말을 한 줄 써 주세요.'
       : warn === 'over'
         ? '카드에 다 담기지 않아요. 문장이나 줄바꿈을 조금 줄여 주세요.'
@@ -546,7 +557,7 @@ export function Composer() {
     greeted,
     focused,
     hasText: !!text.trim(),
-    problem: warn !== null || over || saved === 'error',
+    problem: warn !== null || over || shareTooLong || saved === 'error',
     exporting: download === 'busy',
     delivered: hasExported,
     archiveEmpty: letters.length === 0,
@@ -721,7 +732,7 @@ export function Composer() {
               onFocus={() => { setFocused(true); setGreeted(true); }}
               onBlur={() => setFocused(false)}
               aria-describedby={`${reassureId} ${countId} ${warnId}`}
-              aria-invalid={over || warn === 'empty' || undefined}
+              aria-invalid={over || textTooLong || warn === 'empty' || undefined}
               spellCheck={false}
             />
             <div className={styles.meta}>
@@ -751,12 +762,14 @@ export function Composer() {
             </label>
             <input
               id={`${uid}-from`}
+              ref={fromRef}
               className={`pen ${styles.input}`}
               value={from}
               placeholder="이름이나 애칭"
               autoComplete="off"
               onChange={(e) => setFrom(cleanFrom(e.target.value))}
-              maxLength={MAX_FROM}
+              aria-describedby={warnId}
+              aria-invalid={fromTooLong || undefined}
             />
           </div>
 

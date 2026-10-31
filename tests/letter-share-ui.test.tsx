@@ -46,6 +46,36 @@ beforeEach(() => {
   URL.revokeObjectURL = vi.fn();
 });
 
+it('blocks both share paths for long restored text/sender, then shares the explicitly shortened letter', async () => {
+  const original = { text: '가'.repeat(149) + '💌끝', from: '딸'.repeat(13), editingId: null };
+  localStorage.setItem(DRAFT_KEY, JSON.stringify(original));
+  render(<Composer />);
+  const send = screen.getByRole('button', { name: /카카오톡으로 편지 보내기/ });
+  const other = screen.getByRole('button', { name: /다른 방법으로 보내기/ });
+  await waitFor(() => expect(send.getAttribute('data-kakao')).toBe('ready'));
+  fireEvent.click(send);
+  fireEvent.click(other);
+  expect(sendLetterToKakao).not.toHaveBeenCalled();
+  expect(screen.queryByRole('dialog')).toBeNull();
+  expect(screen.getByText(/공유하려면.*직접 줄여 주세요/)).toBeTruthy();
+  expect(JSON.parse(localStorage.getItem(DRAFT_KEY)!)).toEqual(original);
+  fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: letter.text } });
+  fireEvent.click(send);
+  fireEvent.click(other);
+  expect(sendLetterToKakao).not.toHaveBeenCalled();
+  expect(screen.queryByRole('dialog')).toBeNull();
+  expect(document.activeElement).toBe(screen.getByLabelText(/보내는 사람/));
+  fireEvent.change(screen.getByLabelText(/보내는 사람/), { target: { value: letter.from } });
+  expect(screen.queryByText(/공유하려면.*직접 줄여 주세요/)).toBeNull();
+  fireEvent.click(send);
+  expect(sendLetterToKakao).toHaveBeenCalledTimes(1);
+  expect(vi.mocked(sendLetterToKakao).mock.calls[0][0]).toMatchObject({ text: letter.text, from: letter.from });
+  fireEvent.click(other);
+  const dialog = screen.getByRole('dialog');
+  const url = within(dialog).getByRole('link', { name: /받는 화면 미리보기/ }).getAttribute('href')!;
+  expect(readSharedLetter(new URL(url, 'https://dearpapa.kr').hash)).toMatchObject({ text: letter.text, from: letter.from });
+});
+
 it('opens KakaoTalk in one tap once the SDK is ready and only gives guidance, never a sent claim', async () => {
   render(<Composer />);
   const button = screen.getByRole('button', { name: /카카오톡으로 편지 보내기/ });

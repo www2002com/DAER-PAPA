@@ -9,7 +9,12 @@ import { KakaoHandoff } from './KakaoHandoff';
 import { useKakaoSend } from './useKakaoSend';
 import styles from './LetterShareDialog.module.css';
 
-export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; onClose: () => void }) {
+/**
+ * onShareAction fires when the writer actually chose a send action: Kakao send opened, the system share
+ * sheet opened, a recipient link was copied, or the Instagram story image was saved. Kakao has no delivery
+ * callback, so this means attempted — not delivered.
+ */
+export function LetterShareDialog({ letter, onClose, onShareAction }: { letter: LetterInput; onClose: () => void; onShareAction?: () => void }) {
   const id = useId();
   const dialog = useRef<HTMLDialogElement>(null);
   const alive = useRef(false);
@@ -68,7 +73,7 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
     busyRef.current = true;
     setBusy(true);
     setStatus('');
-    try { await navigator.share(data); }
+    try { await navigator.share(data); onShareAction?.(); }
     catch (error) {
       if (alive.current && (error as DOMException)?.name !== 'AbortError') setStatus('공유창을 열 수 없었어요. 링크를 복사하거나 이미지를 저장해 주세요.');
     } finally {
@@ -78,12 +83,13 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
   }
   function shareKakao() {
     setStatus('');
-    kakao.send(letter);
+    if (kakao.send(letter)) onShareAction?.();
   }
   async function copyLink() {
     try {
       if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
       await navigator.clipboard.writeText(shareUrl);
+      onShareAction?.();
       if (alive.current) setStatus('편지 링크를 복사했어요.');
     } catch {
       if (alive.current) { setManualCopy(true); setStatus('아래 링크를 길게 누르거나 선택해서 복사해 주세요.'); }
@@ -113,7 +119,7 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
             {kakao.sdk === 'loading' ? '카카오톡 연결 중…' : '카카오톡으로 편지 보내기'}</button>}
           <p className={styles.privacy}>편지와 이름이 링크에 담겨요. 링크를 받은 사람은 누구나 읽을 수 있어요.</p>
           <KakaoHandoff sdk={kakao.sdk} handoff={kakao.handoff} route={kakao.route} shareUrl={shareUrl}
-            onSendAgain={shareKakao} onSendWeb={() => { setStatus(''); kakao.send(letter, { web: true }); }} onReconnect={kakao.retry} />
+            onSendAgain={shareKakao} onSendWeb={() => { setStatus(''); if (kakao.send(letter, { web: true })) onShareAction?.(); }} onReconnect={kakao.retry} />
           {kakao.handoff === 'idle' && kakao.sdk !== 'unavailable' && <button type="button" className={styles.secondary} onClick={copyLink}>편지 링크 복사</button>}
           {manualCopy && <input className={styles.copyInput} aria-label="복사할 편지 링크" readOnly value={shareUrl} onFocus={e => e.currentTarget.select()} />}
           <figure className={styles.kakaoMessage}>
@@ -142,7 +148,7 @@ export function LetterShareDialog({ letter, onClose }: { letter: LetterInput; on
           </div>
           <p className={styles.privacy}>이미지에는 편지 내용과 이름이 보여요. 올리기 전에 공개 범위를 확인해 주세요.</p>
           {story?.canShare && <><button type="button" className={styles.instagramButton} disabled={busy} onClick={() => nativeShare({ files: [story.file], title: '당신에게 도착한 편지' })}>이미지 공유창 열기</button><p className={styles.note}>공유창에서 Instagram을 선택해 주세요.</p></>}
-          {story && <a className={styles.secondary} href={story.url} download="DEAR-PAPA-letter-story.png">Instagram용 이미지 저장</a>}
+          {story && <a className={styles.secondary} href={story.url} download="DEAR-PAPA-letter-story.png" onClick={() => onShareAction?.()}>Instagram용 이미지 저장</a>}
           {storyError && <button type="button" className={styles.secondary} onClick={() => setStoryAttempt(v => v + 1)}>이미지 다시 만들기</button>}
           <p className={styles.note}>저장한 이미지를 Instagram 스토리나 게시물에 올릴 수 있어요.</p>
           <a className={styles.external} href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram 열기 <span aria-hidden="true">↗</span></a>

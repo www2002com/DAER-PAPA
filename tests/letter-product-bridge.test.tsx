@@ -1,11 +1,19 @@
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { Composer } from '@/components/letter/Composer';
 import { renderCard, toBlob } from '@/components/letter/card';
 import { trackAction } from '@/lib/analytics';
 import { LETTERS_KEY } from '@/components/letter/storage';
+import { prepareKakaoShare, sendLetterToKakao } from '@/components/letter/kakao-share';
 
+let kakaoReady = false;
 vi.mock('@/lib/analytics', () => ({ trackAction: vi.fn() }));
+vi.mock('@/components/letter/kakao-share', () => ({
+  prepareKakaoShare: vi.fn(),
+  isKakaoReady: vi.fn(() => kakaoReady),
+  sendLetterToKakao: vi.fn(),
+}));
+vi.mock('@/components/letter/share-story', () => ({ createLetterStory: vi.fn().mockResolvedValue(new Blob(['png'], { type: 'image/png' })) }));
 vi.mock('@/components/letter/card', async (original) => ({
   ...await original<typeof import('@/components/letter/card')>(),
   renderCard: vi.fn(), toBlob: vi.fn(),
@@ -14,11 +22,17 @@ vi.mock('@/components/letter/card', async (original) => ({
 const productLink = () => screen.queryByRole('link', { name: '레터 올인원 준비 내용 보기' });
 
 beforeEach(() => {
+  kakaoReady = false;
   vi.mocked(trackAction).mockClear();
   vi.mocked(renderCard).mockReset().mockResolvedValue(document.createElement('canvas'));
   vi.mocked(toBlob).mockReset().mockResolvedValue(new Blob(['test'], { type: 'image/png' }));
   vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:test-card');
   vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {});
+  vi.mocked(prepareKakaoShare).mockReset().mockImplementation(async () => { kakaoReady = true; return true; });
+  vi.mocked(sendLetterToKakao).mockReset();
+  HTMLDialogElement.prototype.showModal = function () { this.open = true; };
+  HTMLDialogElement.prototype.close = function () { this.open = false; };
+  Object.defineProperty(document, 'hidden', { configurable: true, get: () => false });
 });
 
 describe('optional product discovery after letter export', () => {
@@ -36,11 +50,73 @@ describe('optional product discovery after letter export', () => {
     expect(trackAction).toHaveBeenCalledWith('letter_card_exported');
     productLink()!.addEventListener('click', event => event.preventDefault());
     fireEvent.click(productLink()!);
-    expect(trackAction).toHaveBeenCalledWith('product_details_after_letter_clicked');
+    expect(trackAction).toHaveBeenCalledWith('product_details_after_letter_clicked', { source: 'export' });
     expect(vi.mocked(trackAction).mock.calls.filter(call => call[0] === 'product_details_after_letter_clicked')).toHaveLength(1);
-    expect(vi.mocked(trackAction).mock.calls.every(call => call.length === 1)).toBe(true);
+    const serialized = JSON.stringify(vi.mocked(trackAction).mock.calls);
+    expect(serialized).not.toContain('개인적인 문장');
+    expect(vi.mocked(trackAction).mock.calls.every(call => call.length === 1 || Object.keys(call[1] as object).every(k => k === 'source'))).toBe(true);
     expect((screen.getByLabelText('편지 내용') as HTMLTextAreaElement).value).toBe('아빠에게 전하는 개인적인 문장');
     expect(screen.getByText('카드 이미지를 만들었어요. 다운로드를 확인해 주세요.')).toBeTruthy();
+  });
+
+  it('reveals the product link after a direct Kakao handoff attempt, tagged as share', async () => {
+    render(<Composer />);
+    fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: '공유로 전하는 문장' } });
+    const button = screen.getByRole('button', { name: /카카오톡으로 편지 보내기/ });
+    await waitFor(() => expect(button.getAttribute('data-kakao')).toBe('ready'));
+    fireEvent.click(button);
+    expect(sendLetterToKakao).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(productLink()).not.toBeNull());
+    productLink()!.addEventListener('click', event => event.preventDefault());
+    fireEvent.click(productLink()!);
+    expect(trackAction).toHaveBeenCalledWith('product_details_after_letter_clicked', { source: 'share' });
+  });
+
+  it('reveals the same link once a share action is chosen in the dialog, tagged as share', async () => {
+    render(<Composer />);
+    fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: '공유로 전하는 문장' } });
+    await waitFor(() => expect(screen.getByRole('button', { name: /카카오톡으로 편지 보내기/ }).getAttribute('data-kakao')).toBe('ready'));
+    fireEvent.click(screen.getByRole('button', { name: /다른 방법으로 보내기/ }));
+    const dialog = screen.getByRole('dialog');
+    expect(productLink()).toBeNull();
+    const send = await within(dialog).findByRole('button', { name: '카카오톡으로 편지 보내기' });
+    await waitFor(() => expect(send.hasAttribute('disabled')).toBe(false));
+    fireEvent.click(send);
+    expect(sendLetterToKakao).toHaveBeenCalled();
+    fireEvent.click(within(dialog).getByRole('button', { name: '공유창 닫기' }));
+    await waitFor(() => expect(productLink()).not.toBeNull());
+    productLink()!.addEventListener('click', event => event.preventDefault());
+    fireEvent.click(productLink()!);
+    expect(trackAction).toHaveBeenCalledWith('product_details_after_letter_clicked', { source: 'share' });
+  });
+
+  it('counts a copied recipient link as a share action', async () => {
+    const copy = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: copy } });
+    render(<Composer />);
+    fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: '링크로 전하는 문장' } });
+    fireEvent.click(screen.getByRole('button', { name: /다른 방법으로 보내기/ }));
+    fireEvent.click(within(screen.getByRole('dialog')).getByRole('button', { name: '편지 링크 복사' }));
+    await screen.findByText('편지 링크를 복사했어요.');
+    expect(productLink()).not.toBeNull();
+  });
+
+  it('does not reveal the link when the dialog closes without a share action, or when Kakao send fails', async () => {
+    vi.mocked(sendLetterToKakao).mockImplementation(() => { throw new Error('not initialised'); });
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: vi.fn().mockRejectedValue(new Error('denied')) } });
+    render(<Composer />);
+    fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: '보내지 않는 문장' } });
+    await waitFor(() => expect(screen.getByRole('button', { name: /카카오톡으로 편지 보내기/ }).getAttribute('data-kakao')).toBe('ready'));
+    fireEvent.click(screen.getByRole('button', { name: /다른 방법으로 보내기/ }));
+    const dialog = screen.getByRole('dialog');
+    const send = await within(dialog).findByRole('button', { name: '카카오톡으로 편지 보내기' });
+    await waitFor(() => expect(send.hasAttribute('disabled')).toBe(false));
+    fireEvent.click(send);
+    fireEvent.click(within(dialog).getByRole('button', { name: '편지 링크 복사' }));
+    await screen.findByText(/길게 누르거나 선택해서 복사/);
+    fireEvent.click(within(dialog).getByRole('button', { name: '공유창 닫기' }));
+    await act(async () => { await Promise.resolve(); });
+    expect(productLink()).toBeNull();
   });
 
   it('keeps the product link hidden for empty input', () => {
@@ -95,6 +171,9 @@ describe('optional product discovery after letter export', () => {
     fireEvent.click(screen.getByRole('button', { name: '이미지 저장' }));
     await waitFor(() => expect(productLink()).not.toBeNull());
     expect(productLink()?.closest('[hidden]')).toBeNull();
+    productLink()!.addEventListener('click', event => event.preventDefault());
+    fireEvent.click(productLink()!);
+    expect(trackAction).toHaveBeenCalledWith('product_details_after_letter_clicked', { source: 'archive' });
   });
 
   it.each(['render', 'blob', 'exception'])('does not show a success follow-up after %s failure', async (failure) => {

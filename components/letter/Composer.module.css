@@ -752,6 +752,7 @@
   text-decoration: underline;
   text-underline-offset: 4px;
 }
+.productFollowup a + a { margin-left: 20px; }
 .productFollowup a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 
 /* ── Wider screens: writing on the left, the card on the right ── */

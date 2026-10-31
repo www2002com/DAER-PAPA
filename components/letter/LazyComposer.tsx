@@ -58,7 +58,7 @@ function scheduleLoad(run: () => void, root: Element | null): () => void {
 }
 
 /** Idle / near-viewport loader for the letter Composer (below-the-fold on home). */
-export function LazyComposer() {
+export function LazyComposer({ notifyReady = false }: { notifyReady?: boolean } = {}) {
   const host = useRef<HTMLDivElement>(null);
   const [Comp, setComp] = useState<Comp | null>(() => cached);
 
@@ -86,5 +86,5 @@ export function LazyComposer() {
       />
     );
   }
-  return <Comp />;
+  return <Comp notifyReady={notifyReady} />;
 }

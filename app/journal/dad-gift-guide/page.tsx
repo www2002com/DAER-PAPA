@@ -57,6 +57,11 @@ export default function DadGiftGuidePage() {
         <p>DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 가격, 전성분, 출시일은 아직 확정되지 않았습니다.</p>
         <p>현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.</p>
 
+        <p>
+          아빠 스킨케어는 후기보다 향이 강하지 않은지, 전성분을 먼저 확인해 보세요.{' '}
+          <Link href="/about/facts">공식 정보 확인하기</Link>
+        </p>
+
         <RelatedLinks
           title="함께 확인할 자료"
           links={[

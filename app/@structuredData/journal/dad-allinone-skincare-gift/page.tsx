@@ -46,7 +46,7 @@ const jsonLd = {
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: '디어파파', item: 'https://dearpapa.kr/' },
-        { '@type': 'ListItem', position: 2, name: '브랜드 자료실', item: 'https://dearpapa.kr/journal' },
+        { '@type': 'ListItem', position: 2, name: '아빠 선물 가이드', item: 'https://dearpapa.kr/journal/dad-gift-guide' },
         { '@type': 'ListItem', position: 3, name: entry.title, item: URL },
       ],
     },

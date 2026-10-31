@@ -137,6 +137,8 @@ describe('bunny chat server boundary', () => {
     const offTopic = createBunnyChatHandler({ env, fetchImpl: async () => output('off_topic', 'Here is your Python code') });
     const reply = await (await offTopic(post())).json();
     expect(reply.answer).toContain('아빠와의 관계');
+    // Brand guide (2026-10-28): on screen Sodam is never called an AI, chatbot or counsellor.
+    expect(reply.answer).not.toMatch(/AI|챗봇|상담/);
     expect(reply.answer).not.toContain('Python');
     expect(reply.action).toBeNull();
     const invalid = createBunnyChatHandler({ env, fetchImpl: async () => output('buy_now') });

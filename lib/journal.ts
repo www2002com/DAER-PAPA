@@ -201,6 +201,10 @@ export const DAD_BIRTHDAY_GIFT_SKINCARE_META_DESCRIPTION =
 /** dad-birthday-gift-skincare visible FAQ; FAQPage JSON-LD is built from this. */
 export const DAD_BIRTHDAY_GIFT_SKINCARE_FAQ = [
   {
+    q: '아빠 생일 선물 추천을 찾기 전에 무엇부터 정하면 좋을까요?',
+    a: '먼저 쓰는 때(세안 후·면도 후)를 정한 뒤, 단계 수·향·전성분 공개 여부·바로 써 보기 순으로 보면 돼요.',
+  },
+  {
     q: '아빠 생일 화장품 선물을 찾을 때도 이 표면 되나요?',
     a: '네. 화장품·스킨케어·올인원 모두 생일엔 쓰는 때를 먼저 보고, 그다음 단계 수·향·전성분·바로 써 보기·가격 확인 순서가 같아요.',
   },

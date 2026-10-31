@@ -91,7 +91,7 @@ export function Composer() {
   const [warn, setWarn] = useState<'empty' | 'over' | 'storage' | 'full' | null>(null);
   const [flip, setFlip] = useState(false);
   const [download, setDownload] = useState<Busy>('idle');
-  const [hasExported, setHasExported] = useState(false);
+  const [bridge, setBridge] = useState<'export' | 'share' | 'archive' | null>(null);
   const [greeted, setGreeted] = useState(false);
   const [handoffLetter, setHandoffLetter] = useState<LetterInput | null>(null);
   // Load the Kakao SDK as soon as the visitor starts, so the share tap can open KakaoTalk directly.
@@ -455,7 +455,7 @@ export function Composer() {
       }
       saveBlob(blob, data.date);
       trackAction('letter_card_exported');
-      setHasExported(true);
+      setBridge(l ? 'archive' : 'export');
       setDownload('done');
       showToast('카드 이미지를 만들었어요. 다운로드를 확인해 주세요.', undefined, 'smallWin');
       if (downloadResetTimer.current !== null) window.clearTimeout(downloadResetTimer.current);
@@ -493,7 +493,7 @@ export function Composer() {
     if (!letter) return;
     if (kakao.sdk === 'ready') {
       setHandoffLetter(letter);
-      kakao.send(letter);
+      if (kakao.send(letter)) setBridge('share');
     } else {
       setShareLetter(letter);
     }
@@ -559,7 +559,7 @@ export function Composer() {
     hasText: !!text.trim(),
     problem: warn !== null || over || shareTooLong || saved === 'error',
     exporting: download === 'busy',
-    delivered: hasExported,
+    delivered: !!bridge,
     archiveEmpty: letters.length === 0,
   });
 
@@ -890,17 +890,18 @@ export function Composer() {
         </div>
       </div>
 
-      {hasExported && (
+      {bridge && (
         <aside className={styles.productFollowup} aria-label="디어파파 제품 알아보기">
           <p>편지에 담은 마음, 아빠의 매일에도.</p>
           <p>디어파파는 아빠를 위한 올인원 스킨케어를 준비하고 있어요.</p>
-          <a href="/letter-all-in-one" onClick={() => trackAction('product_details_after_letter_clicked')}>
+          <a href="/letter-all-in-one" onClick={() => trackAction('product_details_after_letter_clicked', { source: bridge })}>
             레터 올인원 준비 내용 보기
           </a>
         </aside>
       )}
 
-      {shareLetter && <LetterShareDialog letter={shareLetter} onClose={() => setShareLetter(null)} />}
+      {shareLetter && <LetterShareDialog letter={shareLetter} onClose={() => setShareLetter(null)}
+        onShareAction={() => setBridge('share')} />}
       <div className={styles.toastWrap} role="status" aria-live="polite">
         {toast && (
           <div key={toast.id} className={styles.toast} data-sodam={toast.pose ? '' : undefined}>

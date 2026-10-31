@@ -5,6 +5,15 @@ export const CAMPAIGN_IDS = [
 ] as const;
 export type CampaignId = (typeof CAMPAIGN_IDS)[number];
 
+/**
+ * AI assistants that link to the site. Only the fixed identifier is ever sent to analytics;
+ * the referrer URL and any query values stay in the browser.
+ * ChatGPT appends utm_source=chatgpt.com to links it shows; the others are recognised by referrer host.
+ */
+export const AI_SOURCE_IDS = ['ai_chatgpt', 'ai_perplexity', 'ai_gemini', 'ai_claude', 'ai_copilot'] as const;
+export type AiSourceId = (typeof AI_SOURCE_IDS)[number];
+export type LandingId = CampaignId | AiSourceId;
+
 const CURRENT_CAMPAIGN_KEY = 'dearpapa:campaign-current';
 
 type AttributionTuple = {
@@ -32,8 +41,31 @@ const APPROVED: ReadonlyArray<readonly [AttributionTuple, CampaignId]> = [
   [{ utm_campaign: 'prelaunch_202610', utm_source: 'authonnews', utm_medium: 'referral', utm_content: 'article_link' }, 'authon_article'],
 ];
 
+/** Exact hosts (and their subdomains) that count as an AI assistant referral. */
+const AI_HOSTS: ReadonlyArray<readonly [string, AiSourceId]> = [
+  ['chatgpt.com', 'ai_chatgpt'],
+  ['perplexity.ai', 'ai_perplexity'],
+  ['gemini.google.com', 'ai_gemini'],
+  ['claude.ai', 'ai_claude'],
+  ['copilot.microsoft.com', 'ai_copilot'],
+];
+
 function tupleEquals(a: AttributionTuple, b: AttributionTuple) {
   return KEYS.every((key) => a[key] === b[key]);
+}
+
+function parseSearch(search: string): URLSearchParams | null {
+  try {
+    return new URLSearchParams(search.startsWith('?') ? search : `?${search}`);
+  } catch {
+    return null;
+  }
+}
+
+function aiIdForHost(host: string): AiSourceId | null {
+  const h = host.trim().toLowerCase();
+  if (!h) return null;
+  return AI_HOSTS.find(([allowed]) => h === allowed || h.endsWith(`.${allowed}`))?.[1] ?? null;
 }
 
 /**
@@ -41,12 +73,8 @@ function tupleEquals(a: AttributionTuple, b: AttributionTuple) {
  * Unrelated query keys are ignored; duplicate attribution keys and unknown values are rejected.
  */
 export function campaignFromSearch(search: string): CampaignId | null {
-  let params: URLSearchParams;
-  try {
-    params = new URLSearchParams(search.startsWith('?') ? search : `?${search}`);
-  } catch {
-    return null;
-  }
+  const params = parseSearch(search);
+  if (!params) return null;
 
   const values = Object.fromEntries(KEYS.map((key) => [key, params.getAll(key)])) as Record<(typeof KEYS)[number], string[]>;
   if (KEYS.some((key) => values[key].length !== 1)) return null;
@@ -57,31 +85,55 @@ export function campaignFromSearch(search: string): CampaignId | null {
 
 /** True when a URL carries any attribution key, even if the tuple is invalid. */
 export function hasAttributionParams(search: string): boolean {
-  try {
-    const params = new URLSearchParams(search.startsWith('?') ? search : `?${search}`);
-    return KEYS.some((key) => params.has(key));
-  } catch {
-    return false;
-  }
+  const params = parseSearch(search);
+  return params ? KEYS.some((key) => params.has(key)) : false;
 }
 
-function isCampaignId(value: string | null): value is CampaignId {
-  return value !== null && (CAMPAIGN_IDS as readonly string[]).includes(value);
+/** utm_source set by an AI assistant (today only ChatGPT does this: utm_source=chatgpt.com). Exactly one value required. */
+export function aiSourceFromSearch(search: string): AiSourceId | null {
+  const params = parseSearch(search);
+  if (!params) return null;
+  const sources = params.getAll('utm_source');
+  if (sources.length !== 1) return null;
+  return aiIdForHost(sources[0]);
 }
 
-/** Read only the allowlisted campaign code kept for this browser tab. */
-export function campaignFromSession(): CampaignId | null {
-  if (typeof window === 'undefined') return null;
+/** AI assistant recognised from the document referrer host. Nothing from the referrer path or query is used. */
+export function aiSourceFromReferrer(referrer: string): AiSourceId | null {
+  if (!referrer) return null;
   try {
-    const value = window.sessionStorage.getItem(CURRENT_CAMPAIGN_KEY);
-    return isCampaignId(value) ? value : null;
+    return aiIdForHost(new URL(referrer).hostname);
   } catch {
     return null;
   }
 }
 
-/** Store a fixed campaign code; raw query strings and personal values never enter storage. */
-export function rememberCampaign(campaign: CampaignId): void {
+/**
+ * One fixed landing identifier for this page load, in priority order:
+ * approved campaign tuple → AI utm_source → AI referrer. Anything else (search engines, direct, unknown
+ * campaigns) yields null and sends no event, so "direct" is read as the remainder.
+ */
+export function landingFromPage(search: string, referrer: string): LandingId | null {
+  return campaignFromSearch(search) ?? aiSourceFromSearch(search) ?? aiSourceFromReferrer(referrer);
+}
+
+function isLandingId(value: string | null): value is LandingId {
+  return value !== null && ((CAMPAIGN_IDS as readonly string[]).includes(value) || (AI_SOURCE_IDS as readonly string[]).includes(value));
+}
+
+/** Read only the allowlisted campaign or AI code kept for this browser tab. */
+export function campaignFromSession(): LandingId | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const value = window.sessionStorage.getItem(CURRENT_CAMPAIGN_KEY);
+    return isLandingId(value) ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Store a fixed campaign or AI code; raw query strings, referrer URLs and personal values never enter storage. */
+export function rememberCampaign(campaign: LandingId): void {
   if (typeof window === 'undefined') return;
   try {
     window.sessionStorage.setItem(CURRENT_CAMPAIGN_KEY, campaign);
@@ -100,10 +152,13 @@ export function clearRememberedCampaign(): void {
   }
 }
 
-/** Resolve attribution for an event on this page. A URL tuple wins over storage; invalid UTM never falls back. */
-export function campaignForCurrentLocation(): CampaignId | null {
+/**
+ * Resolve attribution for an event on this page. The page's own landing id (approved tuple, AI utm_source
+ * or AI referrer) wins over storage; invalid UTM never falls back to a remembered code.
+ */
+export function campaignForCurrentLocation(): LandingId | null {
   if (typeof window === 'undefined') return null;
-  const direct = campaignFromSearch(window.location.search);
+  const direct = landingFromPage(window.location.search, document.referrer);
   if (direct) return direct;
   if (hasAttributionParams(window.location.search)) return null;
   return campaignFromSession();

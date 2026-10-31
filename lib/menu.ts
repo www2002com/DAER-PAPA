@@ -76,7 +76,7 @@ export const MENU_COPY: Record<MenuLanguage, MenuCopy> = {
     introduction: 'Everyday skincare.\nA few words from the heart.',
     contact: 'Contact', channels: 'Dear Papa official channels', newTab: 'Opens in a new tab',
     groups: {
-      product: { title: 'Letter All-in-One', description: 'Discover the skincare and gift set we are developing for Dad’s daily routine.' },
+      product: { title: 'Letter All-in-One', description: 'Discover the all-in-one skincare gift we are developing for Dad’s daily routine.' },
       story: { title: 'Our story', description: 'The thought behind Dear Papa, our name and our logo.' },
       letter: { title: 'Write a letter', description: 'Put your feelings for Dad into words and save them as a card image.' },
       faq: { title: 'Questions & answers', description: 'Find out what we are preparing and what has been confirmed so far.' },

@@ -4,7 +4,7 @@ import Home from '@/app/page';
 import Privacy from '@/app/privacy/page';
 import SkincareGuide from '@/app/journal/dad-gift-skincare-guide/page';
 import AfterShave from '@/app/journal/after-shave-gift/page';
-import { LAUNCH_NOTIFY_ENABLED_COPY } from '@/lib/launch-notify';
+import { LAUNCH_NOTIFY_ENABLED_COPY } from '@/lib/launch-notify-enabled-copy';
 import { LETTER_STORY_PRIVACY, LETTER_STORY_PRIVACY_ENABLED } from '@/lib/privacy-copy';
 import { RETENTION } from '@/lib/privacy-retention';
 import { LetterStoryNotice } from '@/components/privacy/LetterStoryNotice';

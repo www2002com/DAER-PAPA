@@ -11,7 +11,7 @@ export function LetterSection() {
             말로 다 못한 마음,<br />여기서 시작해 볼까요?
           </h2>
           <p className={styles.lead} data-reveal data-reveal-delay="60">
-            짧은 한마디면 충분해요. 쓰는 대로 아빠에게 건넬 카드가 됩니다.
+            짧은 한마디면 충분해요. 지금 미리보기와 PNG로 저장할 수 있어요.
           </p>
         </header>
 
@@ -26,7 +26,7 @@ export function LetterSection() {
           </p>
           <p data-reveal data-reveal-delay="50">
             <span className="tag" data-tone="later">
-              출시 후
+              안내
             </span>
             {LETTER.printPlan}
           </p>

@@ -1,5 +1,7 @@
 # Sodam 3D dance r1
 
+> Superseded for delivery by [performance r2](sodam-performance-r2.md): same frames, beats and shadow, cut again with a clean outline at 384 px.
+
 The homepage letter companion uses a transparent, silent 3D-style animation at
 149 BPM. One sixteen-beat loop is 6,443 ms. The character's joint motion is in
 the asset; CSS does not translate, rotate or squash the whole cutout.

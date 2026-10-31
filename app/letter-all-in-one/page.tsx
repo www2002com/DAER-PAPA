@@ -19,10 +19,16 @@ export default function LetterAllInOnePage() {
       <ArticleLayout
         eyebrow="THE PRODUCT"
         title="우리가 준비하고 있는 것"
-        lead={<p>제품명: 디어파파 레터 올인원 / DEAR&nbsp;PAPA LETTER ALL-IN-ONE (출시 준비 중)</p>}
+        lead={
+          <>
+            <p>편지와 함께 건네는 아빠 선물, 디어파파(DEAR&nbsp;PAPA). 아빠를 위한 올인원 스킨케어.</p>
+            <p>슬로건: 아빠의 매일에, 딸의 마음을.</p>
+            <p>제품명: 디어파파 레터 올인원 / DEAR&nbsp;PAPA LETTER ALL-IN-ONE (출시 준비 중)</p>
+          </>
+        }
         meta={
           <p>
-            최종 업데이트: <time dateTime="2026-10-29">2026년 10월 29일</time>
+            최종 업데이트: <time dateTime="2026-10-31">2026년 10월 31일</time>
           </p>
         }
         footer={
@@ -37,7 +43,7 @@ export default function LetterAllInOnePage() {
             loading="eager" fetchPriority="high" sizes="(max-width: 900px) calc(100vw - 44px), 832px"
             // Smaller copies round their height by a pixel; pin the original shape so the page below never moves.
             style={{ aspectRatio: '1672 / 941' }} />
-          <figcaption>용기와 단상자는 개발 중인 디자인 시안입니다. 최종 제품과 판매 구성은 확정 전입니다.</figcaption>
+          <figcaption>연출 시안이며 용기 디자인은 아직 정하지 않았습니다. 최종 제품과 판매 구성은 확정 전입니다.</figcaption>
         </figure>
         <h2 id="after-shave">면도 후에 바르는 올인원</h2>
         <p>디어파파는 면도 후에 바르는 올인원을, 빠른 흡수의 워터리 제형으로 기획하고 만들고 있습니다.</p>
@@ -97,11 +103,12 @@ export default function LetterAllInOnePage() {
 
         <h2 id="undecided">아직 정해지지 않은 정보</h2>
         <p>
-          DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 가격, 전성분, 출시일은 아직 확정되지 않았습니다.
-          정확한 전성분은 제조사 샘플이 나온 뒤 공개합니다.
+          DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다.
+          가격·출시일·전성분은 「미정」입니다. 정확한 전성분은 제조사 샘플이 나온 뒤 공개합니다.
         </p>
         <p>현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.</p>
         <p>효능과 사용감, 심사 결과는 확인되면 공식 정보 페이지에 올립니다.</p>
+        <p>문의: hello@dearpapa.kr</p>
 
         <LaunchNotifySection placement="product" />
 
@@ -110,6 +117,9 @@ export default function LetterAllInOnePage() {
             title="함께 보기"
             links={[
               { href: '/about/facts#preparing', label: 'DEAR PAPA(디어파파) 공식 정보' },
+              { href: '/journal/dad-birthday-gift-recommend', label: '아빠 생일 선물 추천, 무엇부터 정할까요?' },
+              { href: '/journal/dad-saengsin-gift', label: '아버지 생신 선물, 생일과 어떻게 다를까요?' },
+              { href: '/journal/dad-allinone-skincare-gift', label: '아빠 올인원 스킨케어 선물, 언제 맞을까요?' },
               { href: '/#product', label: '홈: 제품 소개' },
               { href: '/#letter', label: '아빠에게 편지 쓰기' },
             ]}

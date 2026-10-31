@@ -67,7 +67,8 @@ export default function DadSkincareGiftTypesPage() {
 
       <h2>아빠 스킨케어 선물 종류별 비교표</h2>
       <p>제품마다 성분과 제형이 달라서, 아래 표는 종류별로 일반적인 차이와 고를 때 볼 점만 정리했어요. 특정 제품의 효과를 비교한 표는 아니에요.</p>
-      <div style={{ overflowX: 'auto' }}>
+      {/* On phones the table scrolls sideways; a focusable, named region lets keyboard users scroll it too (WCAG 2.1.1). */}
+      <div role="region" aria-label="아빠 스킨케어 선물 종류별 비교표" tabIndex={0} style={{ overflowX: 'auto' }}>
         <table>
           <thead>
             <tr>

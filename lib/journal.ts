@@ -125,6 +125,16 @@ export const JOURNAL: readonly JournalEntry[] = [
     published: '2026-10-26',
     modified: '2026-10-26',
   },
+  {
+    slug: 'dad-birthday-gift-skincare',
+    href: '/journal/dad-birthday-gift-skincare',
+    category: '선물 이야기',
+    title: '아빠 생일 선물 스킨케어, 무엇을 봐야 할까요? 디어파파가 정리한 기준',
+    summary:
+      '디어파파가 정리한 아빠 생일 선물 스킨케어 기준은 먼저 아빠가 세안 후·면도 후 언제 바르는지 보고, 그다음 단계 수와 향, 전성분 공개 여부를 보는 거예요.',
+    published: '2026-10-31',
+    modified: '2026-10-31',
+  },
 ];
 
 /** guide-04 meta/og description and lead (longer than the list summary). */
@@ -176,6 +186,39 @@ export const DAD_ALLINONE_HOW_TO_CHOOSE_FAQ = [
   {
     q: '올인원과 스킨·에센스·크림·애프터셰이브는 어떻게 다른가요?',
     a: '가장 큰 차이는 바르는 단계 수와 바르는 시점입니다. 올인원은 1단계로 세안 후·면도 후에 바르고, 스킨·에센스·크림은 여러 단계로 나눠 바르며, 애프터셰이브는 면도 직후에 바르는 제품입니다.',
+  },
+] as const;
+
+
+/** dad-birthday-gift-skincare: 직답 (H1 바로 아래, ≤150자; Sun-ny 17:00 first sentence + brand line). */
+export const DAD_BIRTHDAY_GIFT_SKINCARE_DESCRIPTION =
+  '디어파파가 정리한 아빠 생일 선물 스킨케어 기준은 먼저 아빠가 세안 후·면도 후 언제 바르는지 보고, 그다음 단계 수와 향, 전성분 공개 여부를 보는 거예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요.';
+export const DAD_BIRTHDAY_GIFT_SKINCARE_META_TITLE =
+  '아빠 생일 선물 스킨케어, 무엇을 봐야 할까요? | 디어파파 DEAR PAPA';
+export const DAD_BIRTHDAY_GIFT_SKINCARE_META_DESCRIPTION =
+  '아빠 생일·생신에 스킨케어를 건넬 때 쓰는 때(세안 후·면도 후)·단계 수·향·전성분 공개·바로 써 보기·예산 순으로 보면 돼요. 디어파파는 출시 전 올인원 스킨케어예요.';
+
+/** dad-birthday-gift-skincare visible FAQ; FAQPage JSON-LD is built from this. */
+export const DAD_BIRTHDAY_GIFT_SKINCARE_FAQ = [
+  {
+    q: '아빠 생일 선물 추천을 찾기 전에 무엇부터 정하면 좋을까요?',
+    a: '먼저 쓰는 때(세안 후·면도 후)를 정한 뒤, 단계 수·향·전성분 공개 여부·바로 써 보기 순으로 보면 돼요.',
+  },
+  {
+    q: '아빠 생일 화장품 선물을 찾을 때도 이 표면 되나요?',
+    a: '네. 화장품·스킨케어·올인원 모두 생일엔 쓰는 때를 먼저 보고, 그다음 단계 수·향·전성분·바로 써 보기·가격 확인 순서가 같아요.',
+  },
+  {
+    q: '아빠 스킨케어 선물과 생일 선물 스킨케어는 다른가요?',
+    a: '고르는 항목은 비슷하지만, 생일·생신은 「그날 바로 바를 수 있는지」와 「쓰는 법 한 줄」을 같이 건네기 좋은 때예요.',
+  },
+  {
+    q: '지금 디어파파를 살 수 있나요?',
+    a: '아니요. 출시 전이며 판매 중인 제품은 없어요.',
+  },
+  {
+    q: '공식 정보는 어디인가요?',
+    a: 'https://dearpapa.kr/about/facts · 문의 hello@dearpapa.kr',
   },
 ] as const;
 

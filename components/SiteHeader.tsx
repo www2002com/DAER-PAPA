@@ -96,6 +96,10 @@ export function SiteHeader() {
               <a key={id} href={MENU_GROUPS.find((item) => item.id === id)!.href} className={styles.navLink}>{copy.groups[id].title}</a>
             ))}
           </nav>
+          <a href="/#letter" className={styles.letterLink} lang={lang} data-letter-entry data-track-action="letter_entry_clicked">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 6 9 7 9-7" /></svg>
+            <span>{copy.groups.letter.title}</span>
+          </a>
           <button ref={menuBtn} type="button" className={styles.menuBtn} aria-expanded={open}
             aria-controls="site-menu" aria-haspopup="dialog" lang={lang} onClick={() => setOpen(true)}>
             <span className="sr-only">{copy.open}</span>

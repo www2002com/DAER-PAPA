@@ -35,7 +35,7 @@ import styles from './Composer.module.css';
 export const LETTER_REASSURE = '잘 쓰지 않아도 괜찮아요. 아빠는 문장보다 마음을 먼저 읽어요.';
 
 type View = 'write' | 'box';
-type Toast = { id: number; msg: string; action?: { label: string; run: () => void }; pose?: Pose };
+type Toast = { id: number; msg: string; action?: { label: string; run: () => void; draft?: boolean }; pose?: Pose };
 type Busy = 'idle' | 'busy' | 'done';
 
 const prefersReduced = () =>
@@ -199,7 +199,8 @@ export function Composer() {
   function showToast(msg: string, action?: Toast['action'], pose?: Pose) {
     const id = Date.now() + Math.random();
     setToast({ id, msg, action, pose });
-    later(() => setToast((t) => (t && t.id === id ? null : t)), action ? 6500 : 3200);
+    // Recovery must not depend on how quickly someone reads or reaches a button.
+    if (!action) later(() => setToast((t) => (t && t.id === id ? null : t)), 3200);
   }
 
   const focusText = (end = true) => {
@@ -266,6 +267,7 @@ export function Composer() {
   }
 
   function onText(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    setToast(current => current?.action?.draft ? null : current);
     const v = e.target.value;
     if (v.trim()) markStarted();
     setText(composing.current ? v.replace(/\r/g, '') : cleanText(v));
@@ -281,7 +283,7 @@ export function Composer() {
     const done = () => {
       setInserting(false);
       focusText();
-      showToast('문장을 넣었어요.', { label: '되돌리기', run: () => setText(before) }, 'writing');
+      showToast('문장을 넣었어요.', { label: '되돌리기', draft: true, run: () => setText(before) }, 'writing');
     };
     if (prefersReduced()) {
       setText(target);
@@ -308,6 +310,7 @@ export function Composer() {
     setWarn(null);
     showToast('편지를 지웠어요.', {
       label: '되돌리기',
+      draft: true,
       run: () => {
         setText(snap.text);
         setFrom(snap.from);
@@ -317,9 +320,8 @@ export function Composer() {
   }
 
   function startNew() {
+    clearLetter();
     setEditingId(null);
-    setText('');
-    setFrom('');
     setView('write');
     later(() => focusText(), 50);
   }
@@ -357,6 +359,7 @@ export function Composer() {
   }
 
   function continueLetter(l: Letter) {
+    setToast(current => current?.action?.draft ? null : current);
     setText(l.text);
     setFrom(l.from);
     setEditingId(l.id);
@@ -719,7 +722,10 @@ export function Composer() {
               value={from}
               placeholder="이름이나 애칭"
               autoComplete="off"
-              onChange={(e) => setFrom(cleanFrom(e.target.value))}
+              onChange={(e) => {
+                setToast(current => current?.action?.draft ? null : current);
+                setFrom(cleanFrom(e.target.value));
+              }}
               maxLength={MAX_FROM}
             />
           </div>
@@ -850,11 +856,18 @@ export function Composer() {
                 onClick={() => {
                   toast.action!.run();
                   setToast(null);
+                  if (view === 'write') focusText();
+                  else document.getElementById(`${uid}-v-box`)?.focus();
                 }}
               >
                 {toast.action.label}
               </button>
             )}
+            {toast.action && <button type="button" aria-label="알림 닫기" onClick={() => {
+              setToast(null);
+              if (view === 'write') focusText();
+              else document.getElementById(`${uid}-v-box`)?.focus();
+            }}>닫기</button>}
           </div>
         )}
       </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ProductBox } from '@/components/article/ProductBox';
+import { ComparisonTable } from '@/components/article/ComparisonTable';
 import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/ArticleLayout';
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
 import { DAD_GIFT_SKINCARE_GUIDE_DESCRIPTION, dotDate, getJournalEntry, DAD_GIFT_SKINCARE_GUIDE_META_TITLE, DAD_GIFT_SKINCARE_GUIDE_META_DESCRIPTION } from '@/lib/journal';
@@ -92,6 +93,7 @@ export default function DadGiftSkincareGuidePage() {
       </p>
 
       <h2>선택 기준 한눈에 보기</h2>
+      <ComparisonTable label="아빠 스킨케어 선물 비교표">
       <table>
         <thead>
           <tr><th scope="col">기준</th><th scope="col">확인할 것</th><th scope="col">이런 아빠에게</th></tr>
@@ -106,6 +108,7 @@ export default function DadGiftSkincareGuidePage() {
           <tr><td>예산</td><td>매일 쓸 수 있는 제품인지</td><td>선물을 준비하는 자녀</td></tr>
         </tbody>
       </table>
+      </ComparisonTable>
 
       <ProductBox />
 

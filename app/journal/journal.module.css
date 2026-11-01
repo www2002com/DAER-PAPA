@@ -28,7 +28,7 @@
 .index .row {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 24px;
   padding: 30px 0 32px;
@@ -49,8 +49,8 @@
   padding: 0;
   border: 0;
   font-size: clamp(1.4rem, 1.2rem + 0.9vw, 1.9rem);
-  font-weight: 300;
-  line-height: 1.3;
+  font-weight: 500;
+  line-height: 1.45;
   letter-spacing: -0.035em;
   color: var(--ink);
 }
@@ -87,7 +87,7 @@
   display: block;
   margin-top: 14px;
   font-size: 0.8125rem;
-  color: var(--ink-3);
+  color: var(--ink-2);
   font-variant-numeric: tabular-nums;
 }
 
@@ -99,7 +99,7 @@
     color var(--dur-1) var(--ease-out);
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .index .row:hover .arrow {
     transform: translateX(6px);
     color: var(--ink);
@@ -111,9 +111,10 @@
 }
 
 .index .row:focus-within .arrow {
-  transform: translateX(6px);
   color: var(--ink);
 }
+
+.index .latest .category { color: var(--ink-2); }
 
 /* Notes after the list (표기 기준 / 기록 원칙) */
 .index .note {

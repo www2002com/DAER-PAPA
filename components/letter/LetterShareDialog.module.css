@@ -25,7 +25,7 @@
 .storyPreview img { width: 100%; height: auto; display: block; }
 .storyPreview p { font-size: 12px; padding: 12px; line-height: 1.6; text-align: center; }
 .external { display: flex; min-height: 44px; align-items: center; justify-content: center; gap: 8px; font-size: 13px; text-decoration: underline; text-underline-offset: 4px; }
-.copyInput { display: block; width: 100%; min-height: 44px; margin-top: 10px; border: 1px solid #a9bfcb; border-radius: 6px; padding: 8px; font-size: 16px; }
+.copyInput { display: block; width: 100%; min-height: 44px; margin-top: 10px; border: 1px solid var(--control-border); border-radius: 6px; padding: 8px; font-size: 1rem; }
 @media (max-width: 380px) { .inner { padding: 18px; } }
 /* The KakaoTalk message as the recipient sees it: card image, sender and date, never the letter. */
 .kakaoMessage { margin: 16px 0 0; padding: 12px; border-radius: 14px; background: #b2c7d9; }

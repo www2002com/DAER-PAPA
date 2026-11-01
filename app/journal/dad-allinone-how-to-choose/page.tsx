@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ProductBox } from '@/components/article/ProductBox';
+import { ComparisonTable } from '@/components/article/ComparisonTable';
 import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/ArticleLayout';
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
 import { DAD_ALLINONE_HOW_TO_CHOOSE_DESCRIPTION, DAD_ALLINONE_HOW_TO_CHOOSE_FAQ, dotDate, getJournalEntry, DAD_ALLINONE_HOW_TO_CHOOSE_META_TITLE, DAD_ALLINONE_HOW_TO_CHOOSE_META_DESCRIPTION } from '@/lib/journal';
@@ -64,6 +65,7 @@ export default function DadAllInOneHowToChoosePage() {
 
       <h2>제품 유형 비교</h2>
       <p>올인원·스킨·에센스·크림·애프터셰이브의 일반적인 차이를 정리했어요. 특정 제품이나 다른 브랜드를 비교한 표가 아니에요.</p>
+      <ComparisonTable label="아빠 올인원 선택 기준 비교표">
       <table>
         <thead>
           <tr><th scope="col">제품 유형</th><th scope="col">바르는 단계 수</th><th scope="col">주로 바르는 시점</th><th scope="col">이런 아빠에게</th></tr>
@@ -75,6 +77,7 @@ export default function DadAllInOneHowToChoosePage() {
           <tr><td>애프터셰이브</td><td>면도 후 단계</td><td>면도 직후</td><td>면도 후 바르는 제품을 따로 두는 아빠</td></tr>
         </tbody>
       </table>
+      </ComparisonTable>
 
       <ProductBox />
 

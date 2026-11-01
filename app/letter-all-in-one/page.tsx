@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styles from './ProductPage.module.css';
 import { LaunchNotifySection } from '@/components/LaunchNotifySection';
 import { ArticleLayout, RelatedLinks } from '@/components/article/ArticleLayout';
+import { ComparisonTable } from '@/components/article/ComparisonTable';
 import { preservedMetadata } from '@/lib/preserved-metadata';
 import {
   COMPARE_HEAD, COMPARE_INTRO, COMPARE_NOTES, COMPARE_ROWS, FIT_FOR, FIT_INTRO, NOT_YET_FOR, PRODUCT_FAQ,
@@ -37,10 +38,16 @@ export default function LetterAllInOnePage() {
           </p>
         }
       >
+        <nav className={styles.contents} aria-label="제품 정보 바로가기">
+          <a href="#after-shave">제품 소개</a>
+          <a href="#compare">종류별 비교</a>
+          <a href="#faq">자주 묻는 질문</a>
+          <a href="#undecided">미정 정보</a>
+        </nav>
         <figure className={styles.campaign}>
           <Image src="/images/campaign-blue/packaging.webp" width={1672} height={941}
             alt="파우더블루 배경 위 차분한 블루 색상의 레터 올인원 용기와 단상자를 나란히 놓은 디자인 시안"
-            loading="eager" fetchPriority="high" sizes="(max-width: 900px) calc(100vw - 44px), 832px"
+            preload sizes="(max-width: 700px) calc(100vw - 44px), 608px"
             // Smaller copies round their height by a pixel; pin the original shape so the page below never moves.
             style={{ aspectRatio: '1672 / 941' }} />
           <figcaption>연출 시안이며 용기 디자인은 아직 정하지 않았습니다. 최종 제품과 판매 구성은 확정 전입니다.</figcaption>
@@ -69,6 +76,7 @@ export default function LetterAllInOnePage() {
 
         <h2 id="compare">올인원과 스킨(토너)·로션·애프터셰이브 비교</h2>
         <p>{COMPARE_INTRO}</p>
+        <ComparisonTable label="올인원과 스킨·로션·애프터셰이브 비교표">
         <table>
           <thead>
             <tr>{COMPARE_HEAD.map((cell) => <th scope="col" key={cell}>{cell}</th>)}</tr>
@@ -79,6 +87,7 @@ export default function LetterAllInOnePage() {
             ))}
           </tbody>
         </table>
+        </ComparisonTable>
         {COMPARE_NOTES.map((note) => <p key={note}>{note}</p>)}
 
         <h2 id="faq">자주 묻는 질문</h2>

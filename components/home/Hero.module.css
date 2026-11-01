@@ -27,10 +27,11 @@
 }
 .titleSub { display: block; margin-top: 12px; font-size: clamp(15px, 1.6vw, 18px); font-weight: 500; line-height: 1.45; letter-spacing: -.02em; color: var(--ink-2); }
 .definition { margin-top: 14px; font-size: clamp(15px, 1.55vw, 17px); line-height: 1.65; color: var(--ink); font-weight: 500; }
-.statusBlock { margin-top: 14px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); max-width: 28rem; }
-.statusBlock > p { margin-top: 10px; font-size: 13px; line-height: 1.65; color: var(--ink-2); }
-.statusMeta { font-size: 12px !important; color: var(--ink-3) !important; }
-.statusBlock small { display: block; margin-top: 10px; font-size: 11px; color: var(--ink-3); }
+.statusBlock { margin-top: 28px; padding: 18px 20px; border-inline-start: 2px solid var(--line-strong); background: var(--paper); max-width: 32rem; }
+.statusBlock > p { margin-top: 8px; font-size: .875rem; line-height: 1.65; color: var(--ink-2); }
+.statusMeta { font-size: .8125rem !important; color: var(--ink-3) !important; }
+.statusBlock small { display: block; margin-top: 10px; font-size: .8125rem; color: var(--ink-3); }
+.brandNote { max-width: 36em; margin-top: 16px; color: var(--ink-2); font-size: .8125rem; line-height: 1.7; }
 .status { display: flex; align-items: center; gap: 8px; margin-top: 16px; font-size: 13px; color: var(--forest); }
 .status span { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 .description { margin-top: 24px; font-size: 17px; line-height: 1.8; color: var(--ink-2); }
@@ -50,8 +51,8 @@
 .campaign { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: 50% 50%; border-radius: 4px; }
 .experience { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 4%; align-items: start; padding-block: 48px 56px; border-top: 1px solid var(--line); }
 .experienceTitle { margin-top: 8px; font-size: 28px; font-weight: 550; line-height: 1.5; letter-spacing: -.035em; }
-.letterCard { position: relative; z-index: 3; min-width: 0; padding: 20px 24px; background: var(--card); color: var(--forest); container-type: inline-size; }
-.caption { font-size: 11px; line-height: 1.6; color: var(--ink-2); }
+.letterCard { position: relative; z-index: 3; min-width: 0; padding: 28px; border-radius: var(--radius-m); background: var(--card); color: var(--forest); container-type: inline-size; box-shadow: 0 8px 32px -24px rgb(32 60 80 / .2); }
+.caption { font-size: .8125rem; line-height: 1.7; color: var(--ink-2); }
 .caption span { display: block; }
 .introBand { background: var(--paper); border-bottom: 1px solid var(--line); }
 .intro { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 48px; padding-block: 40px; }
@@ -75,7 +76,7 @@
   .letterCard { margin-left: 0; padding: 14px 16px; }
   .experience { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-block: 28px 32px; }
   .experienceTitle { margin-top: 0; font-size: 23px; }
-  .caption { margin-left: 0; font-size: 10px; }
+  .caption { margin-left: 0; font-size: .8125rem; }
   .description { margin-top: 18px; font-size: 15px; }
   .intro { grid-template-columns: 1fr 1fr; gap: 26px 20px; padding-block: 32px; }
   .intro > p { grid-column: 1 / -1; font-size: 23px; }
@@ -83,8 +84,12 @@
   .intro h2, .introLabel { font-size: 14px; margin-bottom: 8px; }
   .titleSub { margin-top: 10px; font-size: 14px; }
   .definition { margin-top: 12px; font-size: 14px; }
-  .statusBlock { margin-top: 12px; padding: 12px 14px; }
+  .statusBlock { margin-top: 24px; padding: 16px; }
   .intro div p { font-size: 13px; }
+}
+@media (hover: none) {
+  .cta:hover { background: var(--ink); }
+  .secondary:hover { background: transparent; }
 }
 @media (max-width: 360px) {
   .letterCard { padding: 14px 12px; }

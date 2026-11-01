@@ -1,2 +1,5 @@
 .campaign img { display: block; width: 100%; height: auto; border-radius: 4px; }
 .campaign figcaption { margin-top: 12px; font-size: 12px; line-height: 1.8; color: var(--ink-3); word-break: keep-all; }
+.contents { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+.contents a { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 14px; border: 1px solid var(--line-strong); border-radius: var(--radius-s); color: var(--ink); font-size: .875rem; line-height: 1.5; text-decoration: none; }
+@media (hover: hover) { .contents a:hover { background: var(--ivory); border-color: var(--ink); } }

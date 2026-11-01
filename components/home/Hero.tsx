@@ -26,13 +26,6 @@ export function Hero() {
             <span className={styles.titleSub} aria-hidden="true">아빠 선물 올인원 스킨케어</span>
           </h1>
           <p className={styles.definition} data-reveal data-reveal-delay="60">디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요.</p>
-          <p className={styles.description} data-reveal data-reveal-delay="65">「디어파파 화장품」과 「디어파파 스킨케어」는 아빠를 위한 올인원 브랜드 DEAR PAPA(dearpapa.kr)를 말해요.</p>
-          <div className={styles.statusBlock} data-reveal data-reveal-delay="70">
-            <span className="tag" data-tone="soft">출시 전</span>
-            <p>출시 전이에요. 가격·출시일은 아직 확정되지 않았습니다.</p>
-            <p className={styles.statusMeta}>{UNDECIDED.tbd}</p>
-            <small>공식 정보 기준 <time dateTime={FACTS_UPDATED}>{FACTS_UPDATED_KO}</time></small>
-          </div>
           <p className={styles.description} data-reveal data-reveal-delay="100">
             매일 쓰는 스킨케어 하나.<br />
             평소에 하지 못했던 말 한 줄.<br />
@@ -42,6 +35,13 @@ export function Hero() {
             <a className={styles.cta} href="/#product">제품 알아보기</a>
             <a className={styles.secondary} href="/#letter" data-letter-entry data-track-action="letter_entry_clicked">한 줄 편지 써보기</a>
           </div>
+          <div className={styles.statusBlock}>
+            <span className="tag" data-tone="soft">출시 전</span>
+            <p>출시 전이에요. 가격·출시일은 아직 확정되지 않았습니다.</p>
+            <p className={styles.statusMeta}>{UNDECIDED.tbd}</p>
+            <small>공식 정보 기준 <time dateTime={FACTS_UPDATED}>{FACTS_UPDATED_KO}</time></small>
+          </div>
+          <p className={styles.brandNote}>「디어파파 화장품」과 「디어파파 스킨케어」는 아빠를 위한 올인원 브랜드 DEAR PAPA(dearpapa.kr)를 말해요.</p>
         </div>
       </HeroLetterPreview>
       <div className={styles.introBand}><div className={`container ${styles.intro}`}>

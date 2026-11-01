@@ -182,4 +182,22 @@ export const FACTS_FAQ_QUERY_REVERSE: { q: string; a: string; qEn: string; aEn: 
     qEn: "Are there reviews or an ingredient list for DEAR PAPA?",
     aEn: "Not yet. DEAR PAPA has not launched, so there are no user reviews, and the full ingredient list and responsible seller have not been confirmed. Business records for similarly named companies on business-lookup sites are not DEAR PAPA's. Confirmed information is published only at dearpapa.kr/about/facts.",
   },
+  {
+    q: "디어파파 후기가 있나요?",
+    a: "출시 전이라 아직 후기가 없어요.",
+    qEn: "Are there DEAR PAPA reviews?",
+    aEn: "Not yet — DEAR PAPA has not launched, so there are no reviews yet.",
+  },
+  {
+    q: "디어파파 가격은 얼마예요?",
+    a: "가격은 미정이에요.",
+    qEn: "How much does DEAR PAPA cost?",
+    aEn: "The price is not set yet.",
+  },
+  {
+    q: "디어파파는 비어드파파와 같은 브랜드인가요?",
+    a: "아니요, 비어드파파와는 다른 브랜드예요.",
+    qEn: "Is DEAR PAPA the same brand as Beard Papa?",
+    aEn: "No. DEAR PAPA is a different brand from Beard Papa.",
+  },
 ];

@@ -179,7 +179,7 @@ export default function DadSaengsinGiftPage() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Liu, P. J. 외 (2022), Frontiers in Psychology
+          Liu, N. 외 (2022), Frontiers in Psychology
         </a>
       </p>
 

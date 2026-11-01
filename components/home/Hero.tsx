@@ -25,7 +25,7 @@ export function Hero() {
             ))}
             <span className={styles.titleSub} aria-hidden="true">아빠 선물 올인원 스킨케어</span>
           </h1>
-          <p className={styles.definition} data-reveal data-reveal-delay="60">디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요.</p>
+          <p className={styles.definition} data-reveal data-reveal-delay="60">디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 디어파파 레터 올인원은 확정된 제품명이에요.</p>
           <p className={styles.description} data-reveal data-reveal-delay="100">
             매일 쓰는 스킨케어 하나.<br />
             평소에 하지 못했던 말 한 줄.<br />

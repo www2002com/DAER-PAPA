@@ -164,6 +164,25 @@ export default function DadSaengsinGiftPage() {
         있고, 가격·전성분·출시일은 아직 정해지지 않았어요. 확인된 내용은 <Link href="/about/facts">공식 정보 페이지</Link>에 있어요.
       </p>
 
+      <h2>비싼 선물보다 매일 쓰기 편한 선물이 나을까요?</h2>
+      <p>
+        받는 사람은 값보다 쓰임새를 더 반기는 경향이 있어요. 2022년 Frontiers in Psychology에 실린 Liu 외 연구에서 받는 사람은
+        실용적인 선물을 더 높게 평가했고(5.10 대 4.16), 같은 선물이면 더 저렴한 쪽도 더 높게 봤어요(5.31 대 4.33). 반면 주는 사람은
+        비싼 쪽을 더 골랐어요(4.84 대 3.12). 다만 이 연구는 대학생이 친구 생일에 이어폰을 주고받는 상황을 다룬 것이라 아버지 생신에
+        그대로 들어맞는다고 단정할 수는 없어요. 디어파파 스킨케어는 매일 한 번에 바르는 올인원이라, 여러 단계를 번거로워하는 4060
+        아빠에게 '매일 쓰기 편한 선물'로 고려해 볼 수 있어요.
+      </p>
+      <p>
+        출처:{' '}
+        <a
+          href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2022.790434/full"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Liu, P. J. 외 (2022), Frontiers in Psychology
+        </a>
+      </p>
+
       <h2>보습을 아직 안 하는 아빠에게, 가족이 골라 주는 첫 올인원과 한 줄 편지는 어떻게 고를까요?</h2>
       <p>
         보습을 아직 안 하는 아빠라면, 가족이 첫 올인원과 <Link href="/#letter">한 줄 편지</Link>를 같이 골라 주면 돼요.

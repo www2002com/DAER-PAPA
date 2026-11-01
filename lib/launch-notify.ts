@@ -1,6 +1,7 @@
 // 출시 알림 신청: client-safe shared rules (copy, validation, consent version).
 // Personal data (the email address) is never written to git, public/, analytics, or logs.
-import { RETENTION } from './privacy-retention';
+// No imports: the Vercel Function in api/ needs './x.js' paths and the Next.js build cannot resolve them
+// (tests/api-function-imports.test.ts). Copy that needs other modules lives in launch-notify-enabled-copy.ts.
 
 export const LAUNCH_NOTIFY_ENDPOINT = '/api/launch-notify';
 /** Bump when the consent text below changes, so stored records show which text was agreed to. */
@@ -27,21 +28,6 @@ export const LAUNCH_NOTIFY_COPY = {
     not_configured: '지금은 온라인 신청을 받을 수 없어요. 출시 소식은 공식 사이트 dearpapa.kr과 인스타그램 @dearpapa.kr에서도 알려 드립니다.',
     server_error: '신청을 처리하지 못했어요. 잠시 후 다시 시도해 주세요.',
   },
-} as const;
-
-/**
- * Copy that flips together with the email field (same launchNotifyReady() gate).
- * Gate off keeps the existing wording; these strings render only when collection is enabled.
- */
-export const LAUNCH_NOTIFY_ENABLED_COPY = {
-  homeIntro: '출시 소식을 이메일로 받아 보실 수 있어요.',
-  privacySummaryTitle: '출시 소식 이메일 안내',
-  privacySummary: [
-    ['수집 항목', '이메일 주소'],
-    ['이용 목적', '디어파파 출시 소식 안내 메일 발송'],
-    ['보관 기간', RETENTION.launchEmail],
-    ['수신 거부 방법', '메일 하단 링크 또는 hello@dearpapa.kr로 요청'],
-  ],
 } as const;
 
 export type LaunchNotifyErrorCode = keyof typeof LAUNCH_NOTIFY_COPY.errors;

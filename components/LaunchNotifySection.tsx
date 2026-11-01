@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { LaunchNotify } from './LaunchNotify';
 import { launchNotifyReady } from '@/lib/launch-notify-config';
-import { LAUNCH_NOTIFY_ENABLED_COPY, type LaunchNotifyPlacement } from '@/lib/launch-notify';
+import type { LaunchNotifyPlacement } from '@/lib/launch-notify';
+import { LAUNCH_NOTIFY_ENABLED_COPY } from '@/lib/launch-notify-enabled-copy';
 import styles from './LaunchNotify.module.css';
 
 export function LaunchNotifySection({ placement }: { placement: LaunchNotifyPlacement }) {

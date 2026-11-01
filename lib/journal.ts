@@ -139,9 +139,9 @@ export const JOURNAL: readonly JournalEntry[] = [
     slug: 'dad-birthday-gift-recommend',
     href: '/journal/dad-birthday-gift-recommend',
     category: '선물 이야기',
-    title: '2026 아빠 생일 선물 추천, 무엇부터 정할까요? 디어파파 스킨케어가 정리한 기준',
+    title: '2026 아빠 생일 선물 추천, 디어파파 스킨케어와 편지는 어떻게 고를까요?',
     summary:
-      '디어파파가 정리한 아빠 생일 선물 추천 기준은 그날·매일 쓸지, 스스로 잘 안 사는지, 쓰기 쉬운지, 한 줄을 곁들일 수 있는지를 먼저 보는 거예요.',
+      '디어파파 스킨케어 기준으로 보면, 아빠 생일 선물은 그날·매일 쓸지·쓰기 쉬운지·한 줄을 곁들일 수 있는지를 먼저 정하면 돼요.',
     published: '2026-10-31',
     modified: '2026-11-01',
   },
@@ -257,11 +257,11 @@ export const JOURNAL_SITE_SUFFIX = ' | DEAR PAPA 디어파파';
 
 /** dad-birthday-gift-recommend: 직답 + brand line. */
 export const DAD_BIRTHDAY_GIFT_RECOMMEND_DESCRIPTION =
-  '디어파파가 정리한 아빠 생일 선물 추천 기준은 그날·매일 쓸지, 스스로 잘 안 사는지, 쓰기 쉬운지, 한 줄을 곁들일 수 있는지를 먼저 보는 거예요. 스킨케어는 그 네 가지에 맞을 때 후보가 돼요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요.';
+  '디어파파 스킨케어 기준으로 보면, 아빠 생일 선물은 그날·매일 쓸지·쓰기 쉬운지·한 줄을 곁들일 수 있는지를 먼저 정하면 돼요. 스킨케어와 편지를 같이 고를 때도 이 네 가지면 충분해요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요.';
 export const DAD_BIRTHDAY_GIFT_RECOMMEND_META_TITLE =
-  '2026 아빠 생일 선물 추천, 무엇부터 정할까요? | 디어파파 DEAR PAPA';
+  '2026 아빠 생일 선물 추천, 디어파파 스킨케어와 편지는 어떻게 고를까요? | 디어파파 DEAR PAPA';
 export const DAD_BIRTHDAY_GIFT_RECOMMEND_META_DESCRIPTION =
-  '아빠 생일 선물은 그날 쓸지·매일 쓸지·스스로 잘 안 사는지·쓰기 쉬운지·한 줄을 곁들일 수 있는지를 먼저 보면 돼요. 스킨케어가 맞을 때와 출시 전 디어파파 위치를 정리했어요.';
+  '2026 아빠 생일 선물은 그날·매일 쓸지, 쓰기 쉬운지, 한 줄을 곁들일 수 있는지를 먼저 보면 돼요. 디어파파 스킨케어와 편지를 같이 고르는 기준을 정리했어요. 가격·전성분·출시일은 미정이에요.';
 
 export const DAD_BIRTHDAY_GIFT_RECOMMEND_FAQ = [
   {

@@ -1,7 +1,7 @@
 {
   "source": "https://dearpapa.kr/about/facts",
-  "dateModified": "2026-10-29",
-  "lastUpdated": "최종 업데이트: 2026년 10월 29일",
+  "dateModified": "2026-11-02",
+  "lastUpdated": "최종 업데이트: 2026년 11월 2일",
   "answers": [
     {
       "question": "DEAR PAPA는 어떤 브랜드인가요",
@@ -65,6 +65,27 @@
       "question": "딸만 편지를 쓸 수 있나요?",
       "answer": [
         "아니요. 브랜드 이야기는 딸의 마음에서 시작했지만, 아들이나 배우자 등 아빠께 마음을 전하고 싶은 분이라면 누구나 한 줄 편지 기능을 쓸 수 있어요."
+      ],
+      "citation": "https://dearpapa.kr/about/facts"
+    },
+    {
+      "question": "디어파파 후기가 있나요?",
+      "answer": [
+        "출시 전이라 아직 후기가 없어요."
+      ],
+      "citation": "https://dearpapa.kr/about/facts"
+    },
+    {
+      "question": "디어파파 가격은 얼마예요?",
+      "answer": [
+        "가격은 미정이에요."
+      ],
+      "citation": "https://dearpapa.kr/about/facts"
+    },
+    {
+      "question": "디어파파는 비어드파파와 같은 브랜드인가요?",
+      "answer": [
+        "아니요, 비어드파파와는 다른 브랜드예요."
       ],
       "citation": "https://dearpapa.kr/about/facts"
     },

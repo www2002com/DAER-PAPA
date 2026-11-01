@@ -11,7 +11,7 @@ import {
   getJournalEntry,
 } from '@/lib/journal';
 
-// Ported from content/journal/journal-dad-saengsin-gift-4060-v1-2026-10-31.md (Sun-ny approved).
+// Ported from content/journal/journal-dad-saengsin-gift-2026-update-v1-2026-11-02.md (Sun-ny approved).
 
 const entry = getJournalEntry('dad-saengsin-gift');
 const URL = `https://dearpapa.kr${entry.href}`;
@@ -58,10 +58,11 @@ export default function DadSaengsinGiftPage() {
         </nav>
       }
     >
+      <p>2026년 11월 2일 업데이트</p>
       <h2>한 줄 답</h2>
       <p>
-        디어파파 스킨케어가 정리한 아버지 생신 선물 기준은 격식·가족이 함께 드리는지·매일 쓰는지·쓰기 쉬운지·한 줄 마음을
-        먼저 보는 거예요. 올인원은 그 다섯에 맞을 때 후보예요.
+        디어파파 스킨케어 기준으로 보면, 2026 아버지 생신 선물은 격식·가족이 함께 드리는지·매일 쓰는지·쓰기 쉬운지·한 줄
+        마음을 먼저 정하면 돼요. 올인원은 그 다섯에 맞을 때 후보예요.
       </p>
       <p>디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요.</p>
 
@@ -161,6 +162,13 @@ export default function DadSaengsinGiftPage() {
       <p>
         피부 타입을 모르겠다면 단계가 적은 제품이 부담이 덜해요. 디어파파 스킨케어도 여러 단계를 하나로 줄이는 방향으로 준비하고
         있고, 가격·전성분·출시일은 아직 정해지지 않았어요. 확인된 내용은 <Link href="/about/facts">공식 정보 페이지</Link>에 있어요.
+      </p>
+
+      <h2>보습을 아직 안 하는 아빠에게, 가족이 골라 주는 첫 올인원과 한 줄 편지는 어떻게 고를까요?</h2>
+      <p>
+        보습을 아직 안 하는 아빠라면, 가족이 첫 올인원과 <Link href="/#letter">한 줄 편지</Link>를 같이 골라 주면 돼요.
+        디어파파는 여러 단계를 번거로워하는 4060 아빠에게 맞는 올인원이에요. 편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수
+        있고, 제품에 담는 방식은 출시 전에 정해요.
       </p>
 
       <h2>올인원 스킨케어는 생신 표에서 어디에 해당하나요?</h2>

@@ -149,11 +149,11 @@ export const JOURNAL: readonly JournalEntry[] = [
     slug: 'dad-saengsin-gift',
     href: '/journal/dad-saengsin-gift',
     category: '선물 이야기',
-    title: '아버지 생신 선물, 생일과 어떻게 다를까요? 디어파파 스킨케어가 정리한 기준',
+    title: '2026 아버지 생신 선물, 디어파파 스킨케어와 편지는 어떻게 고를까요?',
     summary:
-      '디어파파 스킨케어가 정리한 아버지 생신 선물 기준은 격식·가족이 함께 드리는지·매일 쓰는지·쓰기 쉬운지·한 줄 마음을 먼저 보는 거예요.',
+      '디어파파 스킨케어 기준으로 보면, 2026 아버지 생신 선물은 격식·가족이 함께 드리는지·매일 쓰는지·쓰기 쉬운지·한 줄 마음을 먼저 정하면 돼요.',
     published: '2026-10-31',
-    modified: '2026-10-31',
+    modified: '2026-11-02',
   },
   {
     slug: 'dad-allinone-skincare-gift',
@@ -288,11 +288,11 @@ export const DAD_BIRTHDAY_GIFT_RECOMMEND_FAQ = [
 
 /** dad-saengsin-gift: 직답 + brand line. */
 export const DAD_SAENGSIN_GIFT_DESCRIPTION =
-  '디어파파 스킨케어가 정리한 아버지 생신 선물 기준은 격식·가족이 함께 드리는지·매일 쓰는지·쓰기 쉬운지·한 줄 마음을 먼저 보는 거예요. 올인원은 그 다섯에 맞을 때 후보예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요.';
+  '디어파파 스킨케어 기준으로 보면, 2026 아버지 생신 선물은 격식·가족이 함께 드리는지·매일 쓰는지·쓰기 쉬운지·한 줄 마음을 먼저 정하면 돼요. 올인원은 그 다섯에 맞을 때 후보예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요.';
 export const DAD_SAENGSIN_GIFT_META_TITLE =
-  '아버지 생신 선물, 생일과 어떻게 다를까요? | 디어파파 DEAR PAPA';
+  '2026 아버지 생신 선물, 디어파파 스킨케어와 편지는 어떻게 고를까요? | 디어파파 DEAR PAPA';
 export const DAD_SAENGSIN_GIFT_META_DESCRIPTION =
-  '아버지 생신 선물은 생일보다 격식·가족이 함께 드리는지·매일 쓰는지·쓰기 쉬운지·한 줄 마음을 먼저 보면 돼요. 스킨케어가 맞을 때와 출시 전 디어파파 위치를 정리했어요.';
+  '2026 아버지 생신 선물은 격식·가족이 함께·매일 쓸지·쓰기 쉬운지·한 줄 마음을 먼저 보면 돼요. 디어파파 스킨케어와 편지를 같이 고르는 기준을 정리했어요. 가격·전성분·출시일은 미정이에요.';
 
 export const DAD_SAENGSIN_GIFT_FAQ = [
   {

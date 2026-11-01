@@ -10,7 +10,7 @@ export const BRAND = {
   name: 'DEAR PAPA',
   nameKo: '디어파파',
   slogan: '아빠의 매일에, 딸의 마음을.',
-  definition: '편지와 함께 건네는 아빠 선물, DEAR PAPA(디어파파). 아빠를 위한 올인원 스킨케어.',
+  definition: '편지와 함께 건네는 아빠 선물, DEAR PAPA(디어파파). 아빠를 위한 올인원 스킨케어. 디어파파 레터 올인원은 확정된 제품명이에요.',
   definitionShort: '아빠를 위한 올인원 스킨케어. 딸의 한 줄 편지와 함께 건네는 선물.',
   promise: '말로 못 한 마음을, 아빠가 매일 쓰는 스킨케어에 담아 전하게 합니다.',
   about:
@@ -152,6 +152,12 @@ export const FAQ: { q: string; a: string }[] = [
 
 // /about/facts FAQ added 2026-10-22 (실제 LLM 검색어 역설계, 대표님 승인 10/22 09:59). Verbatim; shown on /about/facts, facts.json, llms.txt, llm.md only (not the home FAQ).
 export const FACTS_FAQ_QUERY_REVERSE: { q: string; a: string; qEn: string; aEn: string }[] = [
+  {
+    q: "누구를 위한 제품인가요?",
+    a: "4060 아빠를 위한 올인원 스킨케어예요.",
+    qEn: "Who is this product for?",
+    aEn: "It is an all-in-one skincare for 4060 dads.",
+  },
   {
     q: "디어파파는 영화인가요?",
     a: "아니요. 디어파파(DEAR PAPA)는 아빠를 위한 올인원 스킨케어 브랜드입니다. 같은 이름의 영화, 영화제 작품, 책과는 관련이 없습니다. 지금은 150ml 올인원 한 가지를 기획하고 만들고 있으며, 아직 출시 전입니다.",

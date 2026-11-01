@@ -24,6 +24,14 @@ export function createLetterShareUrl(letter: LetterInput): string {
   return `https://dearpapa.kr${RECEIVED_LETTER_PATH}#letter=${encoded}`;
 }
 
+/** True when the letter can become a recipient link (same rules as createLetterShareUrl). */
+export const isShareableLetter = (value: unknown): value is LetterInput => validLetter(value);
+
+/** Like createLetterShareUrl, but null instead of throwing: safe to call during render. */
+export function tryCreateLetterShareUrl(letter: LetterInput): string | null {
+  return validLetter(letter) ? createLetterShareUrl(letter) : null;
+}
+
 export function readSharedLetter(hash: string): LetterInput | null {
   if (hash.length > MAX_HASH_LENGTH || !/^#letter=[A-Za-z0-9_-]+$/.test(hash)) return null;
   try {

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { sodamPoseSrc, type SodamPose } from '@/lib/sodam-poses';
-import { SODAM_PERFORMANCES, SODAM_LARGE_PERFORMANCES, SODAM_POSTERS, type SodamPerformance } from '@/lib/sodam-performance';
+import { SODAM_PERFORMANCES, SODAM_LARGE_PERFORMANCES, SODAM_POSTERS, SODAM_LARGE_POSTERS, type SodamPerformance } from '@/lib/sodam-performance';
 import styles from './BunnyPortrait.module.css';
 
 const replayAssets = new Map<string, Promise<Blob>>();
@@ -64,7 +64,7 @@ export function BunnyPortrait({ pose = 'welcome', motion = null, replay = 0, pri
   }, [asset, replay]);
   const poster = pose === 'welcome' ? 'welcome' : pose === 'listening' ? 'listen' : null;
   const src = asset ? replaySource?.asset === asset && replaySource.replay === replay ? replaySource.url : asset : poster
-    ? SODAM_POSTERS[poster] : sodamPoseSrc(pose);
+    ? (large ? SODAM_LARGE_POSTERS : SODAM_POSTERS)[poster] : sodamPoseSrc(pose);
   return <img key={replay} ref={picture} className={styles.portrait} src={src}
     width="384" height="384" alt={label} aria-hidden={label ? undefined : true} draggable={false}
     fetchPriority={priority && !active ? 'high' : 'auto'} onLoad={() => setPosterReady(true)}

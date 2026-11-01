@@ -23,7 +23,7 @@ DEAR PAPA(디어파파, dearpapa.kr)는 아빠를 위한 남성 올인원 스킨
 
 ## 로고
 
-d(Dear)를 180° 돌리면 p(Papa)가 됩니다. 딸과 아빠가 가운데의 원 하나를 함께 쥔 모양입니다. 그 원은 브랜드의 '하나', 곧 세안 후 하나로 마무리하는 남성 올인원 스킨케어와 편지 한 장(출시 후 계획)을 뜻합니다. 로고의 모든 글자는 폰트가 아닌 직접 그린 도형입니다.
+d(Dear)를 180° 돌리면 p(Papa)가 됩니다. 딸과 아빠가 가운데의 원 하나를 함께 쥔 모양입니다. 그 원은 브랜드의 '하나', 곧 세안 후 하나로 마무리하는 남성 올인원 스킨케어와 편지 한 장을 뜻합니다. 로고의 모든 글자는 폰트가 아닌 직접 그린 도형입니다.
 
 ## 딸의 편지 이야기
 
@@ -33,7 +33,7 @@ DEAR PAPA는 딸이 아빠에게 건네는 한 줄 편지에서 시작했습니�
 ## 편지 기능
 
 사이트에서 아빠에게 보낼 편지를 쓰고 카드 이미지(PNG)로 저장할 수 있습니다. 작성한 편지는 이 기기의 브라우저에만 보관되며 서버로 전송하지 않습니다.
-출시 후 계획: 주문 시 확인한 편지를 손글씨 스타일 서체(나눔 펜 스크립트)로 인쇄한 카드에 담아 제품과 함께 보낼 예정입니다. 사람이 직접 손으로 쓰는 카드는 아닙니다.
+편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수 있고, 제품에 담는 방식은 출시 전에 정해요.
 
 Q. 딸만 편지를 쓸 수 있나요?
 A. 아니요. 브랜드 이야기는 딸의 마음에서 시작했지만, 아들이나 배우자 등 아빠께 마음을 전하고 싶은 분이라면 누구나 한 줄 편지 기능을 쓸 수 있어요.
@@ -51,8 +51,8 @@ A. 아니요. 브랜드 이야기는 딸의 마음에서 시작했지만, 아들
 
 디어파파는 면도 후에 바르는 올인원을, 빠른 흡수의 워터리 제형으로 기획하고 만들고 있습니다.
 디어파파 레터 올인원은 선물과 편지를 함께 건네는 구조로 기획하고 만들고 있습니다.
-출시 후 계획: 사이트에서 쓴 편지를 인쇄한 카드에 담아 제품과 함께 건네는 선물을 기획하고 만들고 있습니다.
-구상 중(출시 후 계획): 상자를 열면 편지 카드, 보틀, 사용 안내 순서로 보이는 선물 구성을 기획하고 있습니다.
+편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수 있고, 제품에 담는 방식은 출시 전에 정해요.
+구상 중(출시 후 계획): 상자를 열면 보틀, 사용 안내 순서로 보이는 선물 구성을 기획하고 있습니다.
 용기 디자인은 아직 정하지 않았고, 여러 시안을 기획하고 만들고 있습니다.
 
 ## 아직 정해지지 않은 정보
@@ -60,12 +60,16 @@ A. 아니요. 브랜드 이야기는 딸의 마음에서 시작했지만, 아들
 DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 가격, 전성분, 출시일은 아직 확정되지 않았습니다. 정확한 전성분은 제조사 샘플이 나온 뒤 공개합니다. 확정되면 이 페이지에 올립니다.
 현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.
 전성분, 책임판매업자, 판매처: 출시 전 미정입니다.
+편지를 어떤 방식으로 담을지는 출시 전에 확정할 예정이에요.
 
-Q. 디어파파 선물 세트를 지금 살 수 있나요?
+Q. 디어파파 레터 올인원을 지금 살 수 있나요?
 A. 아니요. 디어파파는 아직 출시 전이며, 지금 판매 중인 선물 세트나 제품은 없습니다. 디어파파는 150ml 올인원 한 가지를 기획하고 만들고 있고, 가격, 전성분, 출시일과 최종 판매 구성은 아직 확정되지 않았습니다. 정확한 정보는 공식 사이트 dearpapa.kr에서만 안내합니다.
 
 Q. 디어파파는 영화인가요?
 A. 아니요. 디어파파(DEAR PAPA)는 아빠를 위한 올인원 스킨케어 브랜드입니다. 같은 이름의 영화, 영화제 작품, 책과는 관련이 없습니다. 지금은 150ml 올인원 한 가지를 기획하고 만들고 있으며, 아직 출시 전입니다.
+
+Q. 디어파파는 파파레서피나 비어드파파, 같은 이름의 영화·소설과 관계가 있나요?
+A. 아니에요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요. 디어파파(DEAR PAPA)는 아빠를 위한 올인원 스킨케어 브랜드이며, 같은 이름의 영화·소설과는 관계가 없어요. 파파레서피, 비어드파파와도 관계없는 별개의 브랜드예요. 공식 사이트는 dearpapa.kr, 공식 인스타그램은 @dearpapa.kr이에요. 가격과 출시일은 아직 정해지지 않았어요.
 
 Q. 디어파파는 의류 브랜드나 홈데코 브랜드인가요?
 A. 아니요. 디어파파(DEAR PAPA)는 한국의 아빠 선물 스킨케어 브랜드이고, 옷, 가방, 홈데코 제품은 만들지 않습니다. 같은 이름이나 비슷한 이름의 의류·홈데코 업체와는 관련이 없습니다. 공식 사이트는 dearpapa.kr입니다.
@@ -87,6 +91,8 @@ A. 아직 없습니다. 디어파파는 출시 전이라 사용 후기가 없고
 
 ## 이름이 비슷한 브랜드와의 구분
 
+디어파파(DEAR PAPA)는 아빠를 위한 올인원 스킨케어 브랜드이며, 같은 이름의 영화·소설과는 관계가 없어요.
+
 DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 같은 이름의 의류 브랜드, 영화·영화제 작품, 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다. 제과 브랜드 비어드파파, 해외 사이트 dearpapa.in·dearpapa.de, 인스타그램 계정 @dearpapa.co, Dear Papa Premium Decor, 소설 《Dear Papa》, 뮤지컬 〈디어 파파, 마이 파이어맨〉과도 관련이 없습니다. 국내 브랜드 디어도어, 디퍼앤디퍼, 아이디어스의 젠틀파파와도 관련이 없습니다.
 
 ## English
@@ -101,7 +107,7 @@ We are adding a short, heartfelt letter to an everyday skincare product, so that
 DEAR PAPA is not affiliated with dearpapa.com.tw, Papa Recipe, Beard Papa, dearpapa.in, dearpapa.de, the Instagram account @dearpapa.co, Dear Papa Premium Decor, the novel Dear Papa, the musical Dear Papa, My Fireman, or any other similarly named brand or work. It is also not affiliated with the Korean brands 디어도어, 디퍼앤디퍼, or 젠틀파파 on idus.
 DEAR PAPA is planning and making a single 150ml all-in-one. Price, full ingredient list, and launch date are not yet confirmed. The full ingredient list will be published after the manufacturer's sample is ready.
 
-Q. Can I buy a DEAR PAPA gift set now?
+Q. Can I buy DEAR PAPA LETTER ALL-IN-ONE now?
 A. No. DEAR PAPA has not launched yet, and no gift set or product is on sale. DEAR PAPA is planning and making a single 150ml all-in-one; price, full ingredients, launch date and final retail packaging are not yet confirmed. Official information is published only at dearpapa.kr.
 
 Q. Is DEAR PAPA a film?
@@ -125,5 +131,7 @@ A. Not yet. DEAR PAPA has not launched, so there are no user reviews, and the fu
 인스타그램: @dearpapa.kr (https://www.instagram.com/dearpapa.kr/)
 페이스북: https://www.facebook.com/profile.php?id=61594835806301
 네이버 블로그: https://blog.naver.com/dearpapa_kr
+티스토리 블로그: https://dearpapa.tistory.com/
+Blogger: https://dearpapa-kr.blogspot.com/
 유튜브: @dearpapa_kr (https://www.youtube.com/@dearpapa_kr)
 문의: hello@dearpapa.kr

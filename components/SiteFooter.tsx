@@ -16,20 +16,22 @@ const EXPLORE = [
 const ARCHIVE = [
   { href: '/about/facts', label: '공식 정보 (Official facts)' },
   { href: '/journal', label: '브랜드 자료실' },
-  { href: '/journal/dad-gift-guide', label: '아빠 선물 추천, 편지와 함께 건네는 스킨케어' },
+  { href: '/journal/dad-gift-guide', label: '편지와 함께 건네는 아빠 스킨케어, 디어파파는 무엇을 준비하나요?' },
   { href: '/press', label: '디어파파가 제공한 자료를 바탕으로 쓴 기사' },
 ];
 
 const CHANNEL_LOGOS = {
   instagram: '/icons/social/instagram.svg',
   blog: '/icons/social/naver-blog.ico',
+  tistory: '/icons/social/tistory.svg',
+  blogger: '/icons/social/blogger.svg',
   youtube: '/icons/social/youtube.svg',
   facebook: '/icons/social/facebook.svg',
 } as const;
 
 export function SiteFooter() {
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} data-site-chrome="">
       <div className="container">
         <FooterLogo
           slogan={BRAND.slogan}

@@ -35,7 +35,7 @@ export default function DadGiftSkincareGuidePage() {
       crumbs={[{ href: '/journal', label: '브랜드 자료실' }]}
       eyebrow={entry.category}
       title={entry.title}
-      lead={<p>디어파파(DEAR PAPA)는 아빠를 위한 올인원 스킨케어 브랜드입니다(dearpapa.kr).</p>}
+      lead={<p>디어파파가 정리한 아빠 스킨케어 선물 기준은 피부 타입, 향, 사용 단계, 전성분 공개 여부예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어로, 출시 전이에요.</p>}
       meta={
         <>
           <span>작성 · 디어파파</span>
@@ -55,7 +55,7 @@ export default function DadGiftSkincareGuidePage() {
       }
     >
       <h2>한 줄 답</h2>
-      <p>아빠 선물용 화장품은 아빠의 피부 타입, 향이 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 용량, 전성분, 예산 순서로 고르면 실패가 적습니다.</p>
+      <p>디어파파가 정리한 아빠 스킨케어 선물 기준은 피부 타입, 향, 사용 단계, 전성분 공개 여부예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어로, 출시 전이에요.</p>
 
       <h2>1. 피부 타입부터 확인하기</h2>
       <ul>
@@ -140,7 +140,7 @@ export default function DadGiftSkincareGuidePage() {
       </p>
 
       <h2>자주 묻는 질문</h2>
-      <p>Q. 아빠 선물로 화장품을 고를 때 가장 먼저 볼 것은요?</p>
+      <p>Q. 아빠 선물로 화장품을 고를 때 무엇부터 보면 되나요?</p>
       <p>A. 아빠의 피부 타입과 평소 몇 단계를 바르는지입니다. 한 단계만 바르는 아빠라면 올인원이 맞습니다.</p>
 
       <p>Q. 생신 선물 예산은 얼마가 적당한가요?</p>

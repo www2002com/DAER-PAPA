@@ -4,7 +4,7 @@ import { ArticleLayout, FactList } from '@/components/article/ArticleLayout';
 import { CONTACT_EMAIL } from '@/lib/facts';
 import { PRIVACY_EFFECTIVE_DATE, PRIVACY_OFFICER, PROCESSORS } from '@/lib/business';
 import { launchNotifyReady } from '@/lib/launch-notify-config';
-import { LAUNCH_NOTIFY_ENABLED_COPY } from '@/lib/launch-notify';
+import { LAUNCH_NOTIFY_ENABLED_COPY } from '@/lib/launch-notify-enabled-copy';
 import { LetterStoryNotice } from '@/components/privacy/LetterStoryNotice';
 import { ChallengeOneLineNotice } from '@/components/privacy/ChallengeOneLineNotice';
 
@@ -66,7 +66,7 @@ function AiPrivacyNotice() {
 export default function PrivacyPage() {
   const mail = <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>;
   if (!launchNotifyReady()) return (
-    <ArticleLayout eyebrow="PRIVACY" title="개인정보 처리 안내" lead={<p>현재 출시 알림 신청을 위한 이메일을 수집하지 않습니다.</p>}>
+    <ArticleLayout eyebrow="PRIVACY" title="개인정보 처리 안내" lead={<p>현재 사이트에서 이메일을 수집하지 않습니다.</p>}>
       <h2>편지 작성과 보관</h2>
       <p>작성한 편지와 보내는 사람 표기는 이 기기의 브라우저에만 보관되며 서버로 전송하지 않습니다. 기기의 편지 도구에서 지우거나 브라우저 저장 데이터를 삭제할 수 있습니다.</p>
       <LetterShareNotice />

@@ -4,12 +4,11 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './Product.module.css';
 
 const STEPS = [
-  { id: 'card', label: '편지 카드' },
   { id: 'bottle', label: '보틀' },
   { id: 'guide', label: '사용 안내' },
 ] as const;
 
-// "상자를 열면 편지 카드, 보틀, 사용 안내 순서" — an exploded view that lifts one layer at a time.
+// Exploded view of bottle and guide layers. Lifts one layer at a time.
 export function UnboxSteps() {
   const [active, setActive] = useState(0);
   const [automatic, setAutomatic] = useState(true);
@@ -39,7 +38,7 @@ export function UnboxSteps() {
   useEffect(() => {
     if (!visible || !automatic || active === STEPS.length - 1 ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    // Explain the three layers once, then leave the visitor in control.
+    // Explain the two layers once, then leave the visitor in control.
     const timer = window.setTimeout(() => setActive((step) => Math.min(step + 1, STEPS.length - 1)), 1500);
     return () => clearTimeout(timer);
   }, [visible, automatic, active]);
@@ -54,17 +53,12 @@ export function UnboxSteps() {
       <div className={styles.iso} aria-hidden="true">
         <div className={styles.plane} data-active={STEPS[active].id}>
           <span className={styles.tray} />
-          <span className={`${styles.layer} ${styles.lGuide}`} data-on={active === 2 || undefined}>
+          <span className={`${styles.layer} ${styles.lGuide}`} data-on={active === 1 || undefined}>
             <i />
             <i />
             <i />
           </span>
-          <span className={`${styles.layer} ${styles.lBottle}`} data-on={active === 1 || undefined}>
-            <i />
-          </span>
-          <span className={`${styles.layer} ${styles.lCard}`} data-on={active === 0 || undefined}>
-            <b className="pen">Dear Papa,</b>
-            <i />
+          <span className={`${styles.layer} ${styles.lBottle}`} data-on={active === 0 || undefined}>
             <i />
           </span>
         </div>

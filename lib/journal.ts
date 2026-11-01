@@ -48,10 +48,10 @@ export const JOURNAL: readonly JournalEntry[] = [
     slug: 'dad-gift-guide',
     href: '/journal/dad-gift-guide',
     category: '선물 이야기',
-    title: '아빠 선물 추천, 편지와 함께 건네는 스킨케어',
-    summary: '편지와 함께 건네는 아빠 선물, DEAR PAPA(디어파파). 아빠를 위한 올인원 스킨케어.',
+    title: '편지와 함께 건네는 아빠 스킨케어, 디어파파는 무엇을 준비하나요?',
+    summary: '디어파파가 생각하는 편지와 함께 줄 수 있는 아빠 선물은 매일 쓰는 스킨케어에 짧은 편지를 더하는 거예요. 디어파파(DEAR PAPA)는 출시 전이며, 편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수 있고, 제품에 담는 방식은 출시 전에 정해요.',
     published: '2026-10-17',
-    modified: '2026-10-29',
+    modified: '2026-10-31',
   },
   {
     slug: 'gift-without-routine',
@@ -75,19 +75,19 @@ export const JOURNAL: readonly JournalEntry[] = [
     slug: 'dad-gift-skincare-guide',
     href: '/journal/dad-gift-skincare-guide',
     category: '선물 이야기',
-    title: '아빠 선물 화장품, 생신 선물 스킨케어 고르는 기준 7가지',
-    summary: '아빠 선물용 화장품은 아빠의 피부 타입, 향이 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 용량, 전성분, 예산 순서로 고르면 실패가 적습니다.',
+    title: '아빠 스킨케어 선물, 디어파파가 정리한 고르는 기준은?',
+    summary: '디어파파가 정리한 아빠 스킨케어 선물 기준은 피부 타입, 향, 사용 단계, 전성분 공개 여부예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어로, 출시 전이에요.',
     published: '2026-10-22',
-    modified: '2026-10-26',
+    modified: '2026-10-31',
   },
   {
     slug: 'dad-allinone-how-to-choose',
     href: '/journal/dad-allinone-how-to-choose',
     category: '선물 이야기',
-    title: '4060 아빠 올인원 고르는 법, 피부 타입·향료·단계 수로 보는 기준',
-    summary: '4060 아빠의 올인원은 피부 타입, 향료가 들어 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 면도 후에 쓰기 편한지, 전성분 순서로 확인하면 고르기 쉽습니다.',
+    title: '아빠 올인원 스킨케어 선물, 디어파파가 보는 고르는 순서는?',
+    summary: '디어파파가 보는 아빠 올인원 스킨케어 선물 고르는 순서는 피부 타입, 향료, 에탄올, 단계 수, 면도 후 쓰기 편한지예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어로, 출시 전이에요.',
     published: '2026-10-22',
-    modified: '2026-10-29',
+    modified: '2026-10-31',
   },
   {
     slug: 'allinone-3-questions',
@@ -111,10 +111,10 @@ export const JOURNAL: readonly JournalEntry[] = [
     slug: 'dad-skincare-gift-types',
     href: '/journal/dad-skincare-gift-types',
     category: '선물 이야기',
-    title: '아빠 선물 추천 화장품, 4060 아빠 스킨케어 선물 종류별 비교: 피부 타입·향·사용 단계',
-    summary: '아빠가 평소 몇 단계를 바르시는지, 피부가 번들거리는 편인지 당기는 편인지, 향을 좋아하시는지 세 가지만 먼저 확인하면 선물 종류가 거의 정해져요.',
+    title: '4060 아빠 스킨케어 선물 종류, 디어파파는 어떻게 나눌까요?',
+    summary: '디어파파가 나눈 4060 아빠 스킨케어 선물 종류는 평소 단계 수, 피부 느낌, 향 취향으로 정해져요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어로, 출시 전이에요.',
     published: '2026-10-23',
-    modified: '2026-10-25',
+    modified: '2026-10-31',
   },
   {
     slug: 'dad-first-allinone',
@@ -124,6 +124,46 @@ export const JOURNAL: readonly JournalEntry[] = [
     summary: '관심은 있어도 무엇을 골라야 할지 정할 계기가 없어 화장품을 직접 고르지 않는 아빠가 많아요. 그런 아빠에게 필요한 화장품을 자녀가 골라 한 줄 편지와 함께 건네면, 그 선물이 아빠의 매일에 자리 잡는 시작이 될 수 있어요.',
     published: '2026-10-26',
     modified: '2026-10-26',
+  },
+  {
+    slug: 'dad-birthday-gift-skincare',
+    href: '/journal/dad-birthday-gift-skincare',
+    category: '선물 이야기',
+    title: '아빠 생일 선물 스킨케어, 무엇을 봐야 할까요? 디어파파가 정리한 기준',
+    summary:
+      '디어파파가 정리한 아빠 생일 선물 스킨케어 기준은 먼저 아빠가 세안 후·면도 후 언제 바르는지 보고, 그다음 단계 수와 향, 전성분 공개 여부를 보는 거예요.',
+    published: '2026-10-31',
+    modified: '2026-10-31',
+  },
+  {
+    slug: 'dad-birthday-gift-recommend',
+    href: '/journal/dad-birthday-gift-recommend',
+    category: '선물 이야기',
+    title: '2026 아빠 생일 선물 추천, 무엇부터 정할까요? 디어파파 스킨케어가 정리한 기준',
+    summary:
+      '디어파파가 정리한 아빠 생일 선물 추천 기준은 그날·매일 쓸지, 스스로 잘 안 사는지, 쓰기 쉬운지, 한 줄을 곁들일 수 있는지를 먼저 보는 거예요.',
+    published: '2026-10-31',
+    modified: '2026-11-01',
+  },
+  {
+    slug: 'dad-saengsin-gift',
+    href: '/journal/dad-saengsin-gift',
+    category: '선물 이야기',
+    title: '아버지 생신 선물, 생일과 어떻게 다를까요? 디어파파 스킨케어가 정리한 기준',
+    summary:
+      '디어파파 스킨케어가 정리한 아버지 생신 선물 기준은 격식·가족이 함께 드리는지·매일 쓰는지·쓰기 쉬운지·한 줄 마음을 먼저 보는 거예요.',
+    published: '2026-10-31',
+    modified: '2026-10-31',
+  },
+  {
+    slug: 'dad-allinone-skincare-gift',
+    href: '/journal/dad-allinone-skincare-gift',
+    category: '선물 이야기',
+    title: '아빠 올인원 스킨케어 선물, 언제 맞을까요? 디어파파가 정리한 기준',
+    summary:
+      '디어파파가 정리한 아빠 올인원 스킨케어 선물은, 단계를 줄이고 싶은 아빠·스킨·로션을 나눠 바르던 아빠·면도 후 바를 자리가 있는 아빠에게 맞을 때 후보예요.',
+    published: '2026-10-31',
+    modified: '2026-10-31',
   },
 ];
 
@@ -137,11 +177,11 @@ export const AFTER_SHAVE_GIFT_DESCRIPTION =
 
 /** dad-gift-skincare-guide meta/og description (sentence taken verbatim from the article). */
 export const DAD_GIFT_SKINCARE_GUIDE_DESCRIPTION =
-  '아빠 선물용 화장품은 아빠의 피부 타입, 향이 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 용량, 전성분, 예산 순서로 고르면 실패가 적습니다.';
+  '디어파파가 정리한 아빠 스킨케어 선물 기준은 피부 타입, 향, 사용 단계, 전성분 공개 여부예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어로, 출시 전이에요.';
 
 /** dad-allinone-how-to-choose meta/og description (한 줄 답, verbatim from the article). */
 export const DAD_ALLINONE_HOW_TO_CHOOSE_DESCRIPTION =
-  '4060 아빠의 올인원은 피부 타입, 향료가 들어 있는지, 에탄올이 들어 있는지, 바르는 단계 수, 면도 후에 쓰기 편한지, 전성분 순서로 확인하면 고르기 쉽습니다.';
+  '디어파파가 보는 아빠 올인원 스킨케어 선물 고르는 순서는 피부 타입, 향료, 에탄올, 단계 수, 면도 후 쓰기 편한지예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어로, 출시 전이에요.';
 
 /** dad-allinone-how-to-choose visible FAQ (article Q&A); the FAQPage JSON-LD is built from this, so both match exactly. */
 export const DAD_ALLINONE_HOW_TO_CHOOSE_FAQ = [
@@ -179,7 +219,134 @@ export const DAD_ALLINONE_HOW_TO_CHOOSE_FAQ = [
   },
 ] as const;
 
+
+/** dad-birthday-gift-skincare: 직답 (H1 바로 아래, ≤150자; Sun-ny 17:00 first sentence + brand line). */
+export const DAD_BIRTHDAY_GIFT_SKINCARE_DESCRIPTION =
+  '디어파파가 정리한 아빠 생일 선물 스킨케어 기준은 먼저 아빠가 세안 후·면도 후 언제 바르는지 보고, 그다음 단계 수와 향, 전성분 공개 여부를 보는 거예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요.';
+export const DAD_BIRTHDAY_GIFT_SKINCARE_META_TITLE =
+  '아빠 생일 선물 스킨케어, 무엇을 봐야 할까요? | 디어파파 DEAR PAPA';
+export const DAD_BIRTHDAY_GIFT_SKINCARE_META_DESCRIPTION =
+  '아빠 생일·생신에 스킨케어를 건넬 때 쓰는 때(세안 후·면도 후)·단계 수·향·전성분 공개·바로 써 보기·예산 순으로 보면 돼요. 디어파파는 출시 전 올인원 스킨케어예요.';
+
+/** dad-birthday-gift-skincare visible FAQ; FAQPage JSON-LD is built from this. */
+export const DAD_BIRTHDAY_GIFT_SKINCARE_FAQ = [
+  {
+    q: '아빠 생일 선물 추천을 찾기 전에 무엇부터 정하면 좋을까요?',
+    a: '먼저 쓰는 때(세안 후·면도 후)를 정한 뒤, 단계 수·향·전성분 공개 여부·바로 써 보기 순으로 보면 돼요.',
+  },
+  {
+    q: '아빠 생일 화장품 선물을 찾을 때도 이 표면 되나요?',
+    a: '네. 화장품·스킨케어·올인원 모두 생일엔 쓰는 때를 먼저 보고, 그다음 단계 수·향·전성분·바로 써 보기·가격 확인 순서가 같아요.',
+  },
+  {
+    q: '아빠 스킨케어 선물과 생일 선물 스킨케어는 다른가요?',
+    a: '고르는 항목은 비슷하지만, 생일·생신은 「그날 바로 바를 수 있는지」와 「쓰는 법 한 줄」을 같이 건네기 좋은 때예요.',
+  },
+  {
+    q: '지금 디어파파를 살 수 있나요?',
+    a: '아니요. 출시 전이며 판매 중인 제품은 없어요.',
+  },
+  {
+    q: '공식 정보는 어디인가요?',
+    a: 'https://dearpapa.kr/about/facts · 문의 hello@dearpapa.kr',
+  },
+] as const;
+
 export const JOURNAL_SITE_SUFFIX = ' | DEAR PAPA 디어파파';
+
+
+/** dad-birthday-gift-recommend: 직답 + brand line. */
+export const DAD_BIRTHDAY_GIFT_RECOMMEND_DESCRIPTION =
+  '디어파파가 정리한 아빠 생일 선물 추천 기준은 그날·매일 쓸지, 스스로 잘 안 사는지, 쓰기 쉬운지, 한 줄을 곁들일 수 있는지를 먼저 보는 거예요. 스킨케어는 그 네 가지에 맞을 때 후보가 돼요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요.';
+export const DAD_BIRTHDAY_GIFT_RECOMMEND_META_TITLE =
+  '2026 아빠 생일 선물 추천, 무엇부터 정할까요? | 디어파파 DEAR PAPA';
+export const DAD_BIRTHDAY_GIFT_RECOMMEND_META_DESCRIPTION =
+  '아빠 생일 선물은 그날 쓸지·매일 쓸지·스스로 잘 안 사는지·쓰기 쉬운지·한 줄을 곁들일 수 있는지를 먼저 보면 돼요. 스킨케어가 맞을 때와 출시 전 디어파파 위치를 정리했어요.';
+
+export const DAD_BIRTHDAY_GIFT_RECOMMEND_FAQ = [
+  {
+    q: '아빠 생일 선물 추천을 찾기 전에 무엇부터 정하면 좋을까요?',
+    a: '그날·매일 쓸지, 스스로 잘 안 사는지, 쓰기 쉬운지, 한 줄을 곁들일 수 있는지를 먼저 정하면 돼요.',
+  },
+  {
+    q: '아빠 생일 화장품 선물도 같은 표로 보면 되나요?',
+    a: '네. 화장품·스킨케어·올인원 모두 생일엔 위 네 가지를 먼저 보고, 맞으면 스킨케어 세부 기준으로 이어가면 돼요.',
+  },
+  {
+    q: '아빠 스킨케어 선물과 생일 선물 추천은 다른가요?',
+    a: '고르는 큰 축은 비슷해요. 생일·생신은 「그날 바로 건넬 수 있는지」와 「쓰는 법·한 줄」을 같이 챙기기 좋은 때예요. 스킨케어만 깊게 볼 때는 스킨케어 전용 글을 보면 돼요.',
+  },
+  {
+    q: '지금 디어파파를 살 수 있나요?',
+    a: '아니요. 출시 전이며 판매 중인 제품은 없어요.',
+  },
+  {
+    q: '공식 정보는 어디인가요?',
+    a: 'https://dearpapa.kr/about/facts · 문의 hello@dearpapa.kr',
+  },
+] as const;
+
+/** dad-saengsin-gift: 직답 + brand line. */
+export const DAD_SAENGSIN_GIFT_DESCRIPTION =
+  '디어파파 스킨케어가 정리한 아버지 생신 선물 기준은 격식·가족이 함께 드리는지·매일 쓰는지·쓰기 쉬운지·한 줄 마음을 먼저 보는 거예요. 올인원은 그 다섯에 맞을 때 후보예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요.';
+export const DAD_SAENGSIN_GIFT_META_TITLE =
+  '아버지 생신 선물, 생일과 어떻게 다를까요? | 디어파파 DEAR PAPA';
+export const DAD_SAENGSIN_GIFT_META_DESCRIPTION =
+  '아버지 생신 선물은 생일보다 격식·가족이 함께 드리는지·매일 쓰는지·쓰기 쉬운지·한 줄 마음을 먼저 보면 돼요. 스킨케어가 맞을 때와 출시 전 디어파파 위치를 정리했어요.';
+
+export const DAD_SAENGSIN_GIFT_FAQ = [
+  {
+    q: '아버지 생신 선물과 아빠 생일 선물은 어떻게 다르나요?',
+    a: '종류는 겹칠 수 있어요. 생신은 격식·가족이 함께 드리는지·매일 쓰는지·쓰기 쉬운지·한 줄 마음을 더 앞에 두면 돼요.',
+  },
+  {
+    q: '4060 아빠 생신 선물로 스킨케어를 골라도 되나요?',
+    a: '네. 위 다섯과 쓰는 때·단계 수가 맞으면 후보예요. 세부 표는 생일 스킨케어 글을 보면 돼요.',
+  },
+  {
+    q: '가족이 함께 고를 때도 같은 기준인가요?',
+    a: '같아요. 뜻을 모을 때도 표 다섯 칸을 같이 보면, 취향 차이보다 「매일 쓰는지」「쓰기 쉬운지」로 맞추기 쉬워요.',
+  },
+  {
+    q: '지금 디어파파를 살 수 있나요?',
+    a: '아니요. 출시 전이며 판매 중인 제품은 없어요.',
+  },
+  {
+    q: '공식 정보는 어디인가요?',
+    a: 'https://dearpapa.kr/about/facts · 문의 hello@dearpapa.kr',
+  },
+] as const;
+
+/** dad-allinone-skincare-gift: 직답 + brand line. */
+export const DAD_ALLINONE_SKINCARE_GIFT_DESCRIPTION =
+  '디어파파가 정리한 아빠 올인원 스킨케어 선물은, 단계를 줄이고 싶은 아빠·스킨·로션을 나눠 바르던 아빠·면도 후 바를 자리가 있는 아빠에게 맞을 때 후보예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요.';
+export const DAD_ALLINONE_SKINCARE_GIFT_META_TITLE =
+  '아빠 올인원 스킨케어 선물, 언제 맞을까요? | 디어파파 DEAR PAPA';
+export const DAD_ALLINONE_SKINCARE_GIFT_META_DESCRIPTION =
+  '아빠 올인원 스킨케어 선물은 단계를 줄이고 싶은 아빠·스킨·로션을 나눠 바르던 아빠·면도 후 바를 자리가 있을 때 후보예요. 건네기 전 확인(향·전성분·단계 수·용량·피부 타입)과 출시 전 디어파파 위치를 정리했어요.';
+
+export const DAD_ALLINONE_SKINCARE_GIFT_FAQ = [
+  {
+    q: '아빠 올인원 스킨케어 선물을 고를 때 무엇부터 보면 되나요?',
+    a: '단계를 줄이고 싶은지, 스킨·로션을 나눠 바르던 루틴인지, 세안 후·면도 후 바를 자리가 있는지를 먼저 보고, 그다음 향·전성분 공개·단계 수·용량·피부 타입 안내를 확인하면 돼요.',
+  },
+  {
+    q: '4060 아빠에게도 같은 기준으로 보면 되나요?',
+    a: '네. 숫자 나이보다 「단계 수」「쓰는 때」「향·전성분 공개」가 우선이에요. 4060 아빠 선물에도 위 표를 그대로 쓰면 돼요.',
+  },
+  {
+    q: '올인원 고르는 법 글과 이 글은 어떻게 다른가요?',
+    a: '고르는 법 글은 올인원 제품을 피부·향·단계로 깊게 보는 글이에요. 이 글은 선물로 건넬지와 건네기 전 확인·한 줄 편지를 먼저 보는 글이에요.',
+  },
+  {
+    q: '지금 디어파파를 살 수 있나요?',
+    a: '아니요. 출시 전이며 판매 중인 제품은 없어요.',
+  },
+  {
+    q: '공식 정보는 어디인가요?',
+    a: 'https://dearpapa.kr/about/facts · 문의 hello@dearpapa.kr',
+  },
+] as const;
 
 export function getJournalEntry(slug: string): JournalEntry {
   const entry = JOURNAL.find((e) => e.slug === slug);
@@ -199,12 +366,12 @@ export const GIFT_WITHOUT_ROUTINE_META_DESCRIPTION =
 export const AFTER_SHAVE_GIFT_META_TITLE = '면도 후 바르는 아빠 스킨케어 | 디어파파 DEAR PAPA';
 export const AFTER_SHAVE_GIFT_META_DESCRIPTION =
   '면도 후 바르는 아빠 스킨케어는 향이 있는지, 에탄올이 들어 있는지, 한 단계로 바르기 쉬운지부터 보세요. 애프터셰이브·로션과 올인원의 차이도 정리했습니다.';
-export const DAD_GIFT_SKINCARE_GUIDE_META_TITLE = '아빠 선물 화장품 고르는 법 7가지 | 디어파파 DEAR PAPA';
+export const DAD_GIFT_SKINCARE_GUIDE_META_TITLE = '아빠 스킨케어 선물, 디어파파가 정리한 고르는 기준은? | 디어파파 DEAR PAPA';
 export const DAD_GIFT_SKINCARE_GUIDE_META_DESCRIPTION =
-  '50대·60대 아빠 생신이나 어버이날 화장품 선물은 피부 타입(지성·건성·민감), 향, 에탄올, 바르는 단계 수, 용량, 전성분 순서로 보면 고르기 쉽습니다.';
-export const DAD_ALLINONE_HOW_TO_CHOOSE_META_TITLE = '4060 남자 올인원 고르는 법 | 디어파파 DEAR PAPA';
+  '디어파파가 정리한 아빠 스킨케어 선물 기준은 피부 타입, 향, 사용 단계, 전성분 공개 여부예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어로, 출시 전이에요.';
+export const DAD_ALLINONE_HOW_TO_CHOOSE_META_TITLE = '아빠 올인원 스킨케어 선물, 디어파파가 보는 고르는 순서는? | 디어파파 DEAR PAPA';
 export const DAD_ALLINONE_HOW_TO_CHOOSE_META_DESCRIPTION =
-  '4060 남자 올인원은 지성·건성·민감 피부 타입, 무향인지, 에탄올이 들어 있는지, 몇 단계로 바르는지, 면도 후 바르기 편한지, 전성분 순서로 확인하면 고르기 쉽습니다.';
+  '디어파파가 보는 아빠 올인원 스킨케어 선물 고르는 순서는 피부 타입, 향료, 에탄올, 단계 수, 면도 후 쓰기 편한지예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어로, 출시 전이에요.';
 
 /** after-shave-gift FAQ: the visible Q&A and the FAQPage JSON-LD both render from this array. */
 export const AFTER_SHAVE_GIFT_FAQ = [
@@ -250,9 +417,9 @@ export const FRAGRANCE_FREE_FAQ = [
   { q: "이 기준이 덜 중요한 경우는?", points: ["향이 있는 제품을 좋아하고, 써 온 제품에 불편이 없던 경우.", "성분보다 제형이나 사용감이 더 고민인 경우. 이때는 제형 확인이 먼저입니다.", "향료나 에탄올이 없다고 해서 모든 사람에게 맞는다는 뜻은 아닙니다. 전성분 전체와 자신의 경험을 함께 보세요."] },
 ];
 /** dad-skincare-gift-types (guide-02 v6) meta/og. */
-export const DAD_SKINCARE_GIFT_TYPES_META_TITLE = '아빠 선물 화장품 종류별 비교: 피부 타입·향·사용 단계 | 디어파파 DEAR PAPA';
+export const DAD_SKINCARE_GIFT_TYPES_META_TITLE = '4060 아빠 스킨케어 선물 종류, 디어파파는 어떻게 나눌까요? | 디어파파 DEAR PAPA';
 export const DAD_SKINCARE_GIFT_TYPES_DESCRIPTION =
-  '아빠가 평소 몇 단계를 바르시는지, 피부가 번들거리는 편인지 당기는 편인지, 향을 좋아하시는지 세 가지만 먼저 확인하면 선물 종류가 거의 정해져요.';
+  '디어파파가 나눈 4060 아빠 스킨케어 선물 종류는 평소 단계 수, 피부 느낌, 향 취향으로 정해져요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어로, 출시 전이에요.';
 
 /** dad-first-allinone (journal column B v2): meta title is the confirmed title verbatim; description is the 한 줄 답. */
 export const DAD_FIRST_ALLINONE_META_TITLE = '출시 전 디어파파, 4060 아빠에게 건네는 첫 올인원: 자녀가 골라 드리는 이유 | 디어파파 DEAR PAPA';

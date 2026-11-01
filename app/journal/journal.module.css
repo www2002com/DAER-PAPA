@@ -10,7 +10,8 @@
 
 .index .latest .title { line-height: 1.5; }
 .index .latest .title a { color: var(--logo); text-decoration-thickness: 1px; text-underline-offset: .2em; }
-.index .latest .category { margin-bottom: 10px; }
+/* On the sage card, --ink-3 measures 4.49:1 at 12px (below WCAG AA 4.5:1); --ink-2 measures 5.47:1. */
+.index .latest .category { margin-bottom: 10px; color: var(--ink-2); }
 
 .index .list {
   display: block;

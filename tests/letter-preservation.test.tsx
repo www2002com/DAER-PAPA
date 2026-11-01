@@ -1,14 +1,70 @@
 import { StrictMode } from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { Composer } from '@/components/letter/Composer';
 import { DRAFT_KEY, LETTERS_KEY, loadLetters, saveLetters } from '@/components/letter/storage';
+import { STARTERS } from '@/components/letter/starters';
 
 const archive = () => Array.from({ length: 20 }, (_, i) => ({
   id: i + 1, date: '2026.10.20', text: `보관한 편지 ${i + 1}`, from: '딸',
 }));
 
 describe('letter preservation', () => {
+  const longLetter = { id: 91, date: '2026.10.29', text: '가'.repeat(149) + '💌마지막 문장', from: '딸'.repeat(13) + '💌' };
+  const storedDraft = () => JSON.parse(localStorage.getItem(DRAFT_KEY)!);
+
+  it('preserves a long draft through repeated Strict Mode restoration and automatic saves', () => {
+    const original = { text: longLetter.text + '\r\n끝', from: longLetter.from, editingId: null };
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(original));
+    for (let i = 0; i < 3; i++) {
+      const page = render(<StrictMode><Composer /></StrictMode>);
+      expect(storedDraft()).toEqual(original);
+      expect((screen.getByLabelText(/보내는 사람/) as HTMLInputElement).value).toBe(original.from);
+      page.unmount();
+      expect(storedDraft()).toEqual(original);
+    }
+  });
+
+  it('does not truncate a long restored letter during deletion, IME completion or starter insertion', () => {
+    localStorage.setItem(DRAFT_KEY, JSON.stringify({ ...longLetter, editingId: null }));
+    render(<Composer />);
+    const input = screen.getByLabelText('편지 내용');
+    const shorter = longLetter.text.slice(0, -1);
+    fireEvent.change(input, { target: { value: shorter } });
+    expect(storedDraft().text).toBe(shorter);
+    fireEvent.compositionStart(input);
+    fireEvent.change(input, { target: { value: shorter + '한' } });
+    fireEvent.compositionEnd(input);
+    expect(storedDraft().text).toBe(shorter + '한');
+    const sender = longLetter.from.slice(0, -2);
+    fireEvent.change(screen.getByLabelText(/보내는 사람/), { target: { value: sender } });
+    expect(storedDraft().from).toBe(sender);
+    const starter = STARTERS[0].lines[0];
+    fireEvent.click(screen.getByRole('button', { name: starter }));
+    expect(storedDraft().text).toBe(shorter + '한\n' + starter);
+  });
+
+  it('preserves long archive entries when another entry is saved, deleted and restored', () => {
+    const other = { id: 92, date: '2026.10.30', text: '다른 편지', from: '아들' };
+    localStorage.setItem(LETTERS_KEY, JSON.stringify([longLetter, other]));
+    render(<Composer />);
+    fireEvent.change(screen.getByLabelText('편지 내용'), { target: { value: '새 편지' } });
+    fireEvent.click(screen.getByRole('button', { name: '보관함에 담기' }));
+    expect(loadLetters().find(l => l.id === longLetter.id)).toEqual(longLetter);
+    fireEvent.click(screen.getByRole('tab', { name: /보관함/ }));
+    fireEvent.click(screen.getByRole('button', { name: '2026.10.30 편지 지우기' }));
+    expect(loadLetters().find(l => l.id === longLetter.id)).toEqual(longLetter);
+    fireEvent.click(screen.getByRole('button', { name: '되돌리기' }));
+    expect(loadLetters().find(l => l.id === other.id)).toEqual(other);
+    for (let i = 0; i < 2; i++) {
+      const item = screen.getByText(longLetter.text, { selector: 'span' }).closest('li')!;
+      fireEvent.click(within(item).getByRole('button', { name: '이어 쓰기' }));
+      expect(storedDraft()).toEqual({ text: longLetter.text, from: longLetter.from, editingId: longLetter.id });
+      expect(loadLetters().find(l => l.id === longLetter.id)).toEqual(longLetter);
+      fireEvent.click(screen.getByRole('tab', { name: /보관함/ }));
+    }
+  });
+
   it('focuses the message field when arriving at the letter hash', async () => {
     const page = render(<Composer />);
     window.history.replaceState(null, '', '/#letter');

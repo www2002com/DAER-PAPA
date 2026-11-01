@@ -9,13 +9,19 @@ vi.mock('@vercel/analytics/next', () => ({ Analytics: () => <div data-testid="an
 vi.mock('@/components/CampaignAttribution', () => ({ CampaignAttribution: () => <div data-testid="attribution" /> }));
 afterEach(() => vi.unstubAllEnvs());
 
-it('excludes the personal letter body from Kakao preview text and uses a recipient link', () => {
+it('names the sender and date in the KakaoTalk card but never the letter, and links to the recipient page', () => {
   const letter = { text: '이 문장은 미리보기에 노출되면 안 돼요.', from: '딸', date: '2026.10.29' };
   const template = kakaoLetterTemplate(letter);
-  expect(template.content.title + template.content.description).not.toContain(letter.text);
-  expect(template.content.description).toContain('딸');
+  const visible = JSON.stringify({ title: template.content.title, description: template.content.description, items: template.itemContent, buttons: template.buttons.map(b => b.title) });
+  expect(visible).not.toContain(letter.text);
+  expect(template.content.title).toBe('딸의 편지가 도착했어요');
+  expect(template.itemContent.items).toEqual([{ item: '보낸 사람', itemOp: '딸' }, { item: '쓴 날', itemOp: '2026.10.29' }]);
+  expect(template.buttons.map(b => b.title)).toEqual(['편지 열어보기', '나도 편지 쓰기']);
   expect(template.buttons[0].link.webUrl).toMatch(/^https:\/\/dearpapa.kr\/letter\/received#letter=/);
-  expect(template.content.imageUrl).toBe('https://dearpapa.kr/media/sodam-expression-r1/Sodam-welcome-smile-r1.png');
+  expect(template.buttons[1].link.webUrl).toBe('https://dearpapa.kr/#letter');
+  expect(template.content.imageUrl).toBe('https://dearpapa.kr/media/letter-share-r2/DEAR-PAPA-letter-card-r2.jpg');
+  expect(kakaoLetterTemplate({ ...letter, from: '' }).content.title).toBe('편지가 도착했어요');
+  expect(kakaoLetterTemplate({ ...letter, from: '' }).itemContent.items).toEqual([{ item: '쓴 날', itemOp: '2026.10.29' }]);
 });
 
 it('suppresses both analytics and campaign attribution on the received-letter page', () => {

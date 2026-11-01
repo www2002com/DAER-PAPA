@@ -133,10 +133,7 @@ export default function GiftWithoutRoutinePage() {
         </li>
       </ul>
       <p>
-        지금 할 수 있는 것도 있어요. 「사이트에서 아빠에게 보낼 편지를 쓰고 카드 이미지(PNG)로 저장할 수 있습니다. 작성한
-        편지는 이 기기의 브라우저에만 보관되며 서버로 전송하지 않습니다.」 제품과 함께 보내는 카드는 공식 정보 페이지에
-        「출시 후 계획: 주문 시 확인한 편지를 손글씨 스타일 서체(나눔 펜 스크립트)로 인쇄한 카드에 담아 제품과 함께 보낼
-        예정입니다. 사람이 직접 손으로 쓰는 카드는 아닙니다.」라고 적혀 있어요.
+        지금 할 수 있는 것도 있어요. 「편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수 있고, 제품에 담는 방식은 출시 전에 정해요.」
       </p>
 
       <h2>자주 묻는 질문</h2>
@@ -179,7 +176,7 @@ export default function GiftWithoutRoutinePage() {
         title="함께 확인할 자료"
         links={[
           { href: '/journal/fathers-gift-guide', label: '아빠 선물 스킨케어, 일상에 맞게 고르는 법' },
-          { href: '/journal/dad-gift-guide', label: '아빠 선물 추천, 편지와 함께 건네는 스킨케어' },
+          { href: '/journal/dad-gift-guide', label: '편지와 함께 건네는 아빠 스킨케어, 디어파파는 무엇을 준비하나요?' },
           { href: '/about/facts', label: '디어파파 공식 정보' },
           { href: '/#letter', label: '아빠에게 편지 쓰기' },
         ]}

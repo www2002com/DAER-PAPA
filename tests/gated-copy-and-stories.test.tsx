@@ -4,7 +4,7 @@ import Home from '@/app/page';
 import Privacy from '@/app/privacy/page';
 import SkincareGuide from '@/app/journal/dad-gift-skincare-guide/page';
 import AfterShave from '@/app/journal/after-shave-gift/page';
-import { LAUNCH_NOTIFY_ENABLED_COPY } from '@/lib/launch-notify';
+import { LAUNCH_NOTIFY_ENABLED_COPY } from '@/lib/launch-notify-enabled-copy';
 import { LETTER_STORY_PRIVACY, LETTER_STORY_PRIVACY_ENABLED } from '@/lib/privacy-copy';
 import { RETENTION } from '@/lib/privacy-retention';
 import { LetterStoryNotice } from '@/components/privacy/LetterStoryNotice';
@@ -23,7 +23,7 @@ describe('copy tied to the launch-notify gate', () => {
     expect(screen.queryByText(LAUNCH_NOTIFY_ENABLED_COPY.homeIntro)).toBeNull();
     home.unmount();
     render(<Privacy />);
-    expect(screen.getByText('현재 출시 알림 신청을 위한 이메일을 수집하지 않습니다.')).toBeTruthy();
+    expect(screen.getByText('현재 사이트에서 이메일을 수집하지 않습니다.')).toBeTruthy();
     expect(screen.queryByText(LAUNCH_NOTIFY_ENABLED_COPY.privacySummaryTitle)).toBeNull();
   });
 
@@ -34,7 +34,7 @@ describe('copy tied to the launch-notify gate', () => {
     expect(screen.queryByText('출시 소식은 공식 채널에서 확인해 주세요')).toBeNull();
     home.unmount();
     const { container } = render(<Privacy />);
-    expect(screen.queryByText('현재 출시 알림 신청을 위한 이메일을 수집하지 않습니다.')).toBeNull();
+    expect(screen.queryByText('현재 사이트에서 이메일을 수집하지 않습니다.')).toBeNull();
     const summary = container.querySelector('#launch-email-summary')!;
     expect(summary.textContent).toContain(LAUNCH_NOTIFY_ENABLED_COPY.privacySummaryTitle);
     for (const [k, v] of LAUNCH_NOTIFY_ENABLED_COPY.privacySummary) {
@@ -108,6 +108,10 @@ describe('content bot letter lines (10/26)', () => {
 });
 
 describe('Kumar & Epley paragraph in the two journal pages', () => {
+  const modifiedBySlug = {
+    'dad-gift-skincare-guide': '2026-10-31',
+    'after-shave-gift': '2026-10-26',
+  } as const;
   for (const [slug, Page] of [['dad-gift-skincare-guide', SkincareGuide], ['after-shave-gift', AfterShave]] as const) {
     it(slug, () => {
       const { container } = render(<Page />);
@@ -119,7 +123,7 @@ describe('Kumar & Epley paragraph in the two journal pages', () => {
       expect(container.querySelector('a[href="https://doi.org/10.1177/0956797618772506"]')).not.toBeNull();
       expect(container.querySelector('a[href*="webflow"]')).toBeNull();
       expect(container.querySelector('a[href*="chicagobooth"]')).not.toBeNull();
-      expect(getJournalEntry(slug).modified).toBe('2026-10-26');
+      expect(getJournalEntry(slug).modified).toBe(modifiedBySlug[slug]);
     });
   }
 });

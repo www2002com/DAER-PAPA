@@ -34,7 +34,7 @@ export default function DadAllInOneHowToChoosePage() {
       crumbs={[{ href: '/journal', label: '브랜드 자료실' }]}
       eyebrow={entry.category}
       title={entry.title}
-      lead={<p>디어파파(DEAR PAPA)는 딸의 한 줄 편지와 함께 건네는 아빠를 위한 올인원 스킨케어 브랜드입니다(dearpapa.kr).</p>}
+      lead={<p>디어파파가 보는 아빠 올인원 스킨케어 선물 고르는 순서는 피부 타입, 향료, 에탄올, 단계 수, 면도 후 쓰기 편한지예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어로, 출시 전이에요.</p>}
       meta={
         <>
           <span>작성 · 디어파파</span>
@@ -110,7 +110,7 @@ export default function DadAllInOneHowToChoosePage() {
         title="함께 확인할 자료"
         links={[
           { href: '/letter-all-in-one', label: '우리가 준비하고 있는 것' },
-          { href: '/journal/dad-gift-skincare-guide', label: '아빠 선물 화장품, 생신 선물 스킨케어 고르는 기준 7가지' },
+          { href: '/journal/dad-gift-skincare-guide', label: '아빠 스킨케어 선물, 디어파파가 정리한 고르는 기준은?' },
           { href: '/journal/after-shave-gift', label: '면도 후 아빠 스킨케어, 선물 고를 때 볼 세 가지' },
           { href: '/about/facts', label: '디어파파 공식 정보' },
           { href: '/#letter', label: '아빠에게 편지 쓰기' },

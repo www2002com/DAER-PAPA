@@ -397,3 +397,9 @@ npm run verify:preservation -- --url http://127.0.0.1:3130
 
 - 보존 대상 외 새 글. 콘텐츠 원문 v2(content/journal/journal-dad-first-allinone-v2-2026-10-26.md, 써니 검수 통과) 본문을 그대로 옮김(헤더·출처 메모 주석 제외, 본문 안 출처 문장은 그대로). 제목(메타)은 확정본 「출시 전 디어파파, 4060 아빠에게 건네는 첫 올인원: 자녀가 골라 드리는 이유 | 디어파파 DEAR PAPA」, H1은 접미사 제외. Article·BreadcrumbList JSON-LD.
 - sitemap.xml, llms.txt, rss.xml에 추가하고 sitemap·llms 해시만 갱신.
+
+## 2026-10-31 새 저널 /journal/dad-birthday-gift-skincare
+
+- 보존 대상 외 새 글. 콘텐츠 원문 FINAL(content/journal/journal-dad-birthday-gift-skincare-v1-2026-10-31.md, mtime 2026-10-31 17:02:50 +0900, 써니 17:01·17:03 확정) 본문을 옮김. 메타 제목 써니 확정 「아빠 생일 선물 스킨케어, 무엇을 봐야 할까요? | 디어파파 DEAR PAPA」, H1은 「…무엇을 봐야 할까요? 디어파파가 정리한 기준」. Article·FAQPage·BreadcrumbList JSON-LD.
+- 가드레일 최소 수정: 본문 H2·FAQ Q의 랭킹「추천」, 본문 「10만원」 표기 제거. 편지 문장은 원문 유지(인쇄 카드·동봉 단정 없음; 미리보기·PNG만, 담는 방식은 출시 전 확정 예정).
+- sitemap.xml, llms.txt, rss.xml에 추가하고 sitemap·llms 해시만 갱신.

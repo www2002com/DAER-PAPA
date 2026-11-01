@@ -120,9 +120,8 @@ export default function DadFirstAllinonePage() {
 
       <h2>디어파파가 만들고 있는 제품</h2>
       <p>
-        디어파파는 150ml 올인원 한 가지로 기획하고 있어요. 가격, 전성분, 출시일은 아직 확정되지 않았습니다. 사이트에서
-        아빠에게 보낼 편지를 쓰고 카드 이미지(PNG)로 저장할 수 있습니다. 출시 후 계획: 사이트에서 쓴 편지를 인쇄한 카드에
-        담아 제품과 함께 건네는 선물을 기획하고 만들고 있습니다.
+        디어파파는 150ml 올인원 한 가지로 기획하고 있어요. 가격, 전성분, 출시일은 아직 확정되지 않았습니다.
+        편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수 있고, 제품에 담는 방식은 출시 전에 정해요.
       </p>
 
       <h2>자주 묻는 질문</h2>
@@ -155,7 +154,7 @@ export default function DadFirstAllinonePage() {
         title="함께 확인할 자료"
         links={[
           { href: '/journal/gift-without-routine', label: '아빠가 뭘 쓰시는지 몰라도 괜찮아요: 스킨케어 선물 고르는 기준' },
-          { href: '/journal/dad-skincare-gift-types', label: '아빠 선물 추천 화장품, 4060 아빠 스킨케어 선물 종류별 비교: 피부 타입·향·사용 단계' },
+          { href: '/journal/dad-skincare-gift-types', label: '4060 아빠 스킨케어 선물 종류, 디어파파는 어떻게 나눌까요?' },
           { href: '/about/facts', label: '디어파파 공식 정보' },
           { href: '/#letter', label: '아빠에게 편지 쓰기' },
         ]}

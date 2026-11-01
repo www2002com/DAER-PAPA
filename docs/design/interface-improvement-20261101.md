@@ -92,5 +92,14 @@ changed. This is a UI improvement, not a change to the legacy archive size polic
 change scope. The automated checks do not establish full WCAG conformance or
 replace the unperformed native assistive-technology checks listed above.
 
-The production site is unchanged. Review the local preview before merging this
-branch into the deployment branch.
+## Deployment integration — 2026-11-01
+
+The user explicitly requested production deployment. PR #132 integrates the
+latest production commit `07e5e1f` while retaining the new journal articles,
+native Kakao handoff, original-letter preservation, and clean Sodam animation
+assets. An independent merge review found no material regression.
+
+The integrated production build passed 241 tests across 32 files, TypeScript,
+preservation checks and icon checks. All 44 browser interaction checks passed.
+Deployment completion is recorded separately after GitHub merge and live-site
+verification; this document does not itself assert a completed deployment.

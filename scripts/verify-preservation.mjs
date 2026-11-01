@@ -93,7 +93,7 @@ for (const [file, expected] of Object.entries(baseline.rootFilesSha256)) {
 for (const [file, expected] of Object.entries(baseline.approvedStorySha256)) {
   const bytes = await readFile(path.join(root, file));
   // Git may convert source-code line endings on Windows; rendered content must stay identical.
-  const content = /\.(tsx|css)$/.test(file) ? bytes.toString('utf8').replace(/\r\n/g, '\n') : bytes;
+  const content = /\.(tsx?|css)$/.test(file) ? bytes.toString('utf8').replace(/\r\n/g, '\n') : bytes;
   check(file, () => assert.equal(hash(content), expected, 'approved Lincoln section changed'));
 }
 

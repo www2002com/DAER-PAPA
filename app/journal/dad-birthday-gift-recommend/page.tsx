@@ -11,7 +11,7 @@ import {
   getJournalEntry,
 } from '@/lib/journal';
 
-// Ported from content/journal/journal-dad-birthday-gift-recommend-v1-2026-10-31.md (Sun-ny approved).
+// Ported from content/journal/journal-dad-birthday-gift-recommend-2026-update-v1-2026-11-01.md (Sun-ny OK).
 
 const entry = getJournalEntry('dad-birthday-gift-recommend');
 const URL = `https://dearpapa.kr${entry.href}`;
@@ -61,8 +61,8 @@ export default function DadBirthdayGiftRecommendPage() {
       <p>2026년 11월 1일 업데이트</p>
       <h2>한 줄 답</h2>
       <p>
-        디어파파가 정리한 아빠 생일 선물 추천 기준은 그날·매일 쓸지, 스스로 잘 안 사는지, 쓰기 쉬운지, 한 줄을 곁들일 수
-        있는지를 먼저 보는 거예요. 스킨케어는 그 네 가지에 맞을 때 후보가 돼요.
+        디어파파 스킨케어 기준으로 보면, 아빠 생일 선물은 그날·매일 쓸지·쓰기 쉬운지·한 줄을 곁들일 수 있는지를 먼저 정하면
+        돼요. 스킨케어와 편지를 같이 고를 때도 이 네 가지면 충분해요.
       </p>
       <p>디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요.</p>
 
@@ -121,6 +121,14 @@ export default function DadBirthdayGiftRecommendPage() {
             <td>스킨케어</td>
             <td>세안 후·면도 후, 매일</td>
             <td>스스로 잘 사지 않지만 매일 쓸 자리가 있을 때 (디어파파는 여러 단계를 하나로, 가격 미정)</td>
+          </tr>
+          <tr>
+            <td>스킨케어 + 편지</td>
+            <td>매일 쓰는 자리 + 받는 날의 한 줄</td>
+            <td>
+              매일 쓸 스킨케어에 마음을 같이 전하고 싶을 때. 편지 쓰는 법은{' '}
+              <Link href="/#letter">편지 쓰기 안내</Link>를 보세요
+            </td>
           </tr>
           <tr>
             <td>편지</td>
@@ -182,8 +190,8 @@ export default function DadBirthdayGiftRecommendPage() {
 
       <h2>편지와 함께 줄 수 있는 아빠 생일 선물인가요?</h2>
       <p>
-        네. 짧은 한 줄을 곁들이면 「한 줄」 칸을 채울 수 있어요. 편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수 있고, 제품에
-        담는 방식은 출시 전에 정해요. <Link href="/#letter">한 줄 편지 쓰기</Link>
+        네. 짧은 한 줄을 곁들이면 「한 줄」 칸을 채울 수 있어요. 쓰는 법은 <Link href="/#letter">편지 쓰기 안내</Link>를 보면
+        돼요. 편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수 있고, 제품에 담는 방식은 출시 전에 정해요.
       </p>
 
       <h2>예산을 정해 두고 고를 때는요?</h2>

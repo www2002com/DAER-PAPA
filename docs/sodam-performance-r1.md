@@ -1,5 +1,7 @@
 # Sodam performance r1
 
+> Superseded for delivery by [r2](sodam-performance-r2.md): same originals and timing, cut again with a clean outline at 768/384 px.
+
 The home companion and received-letter invitation now show a rendered facial performance: a soft blink and smiling eyes for welcome, and a small attentive head movement for listening. These are new generated video derivatives, not a rigged 3D master or CSS cutout animation.
 
 - The default is the welcome performance. The previously approved 149 BPM dance remains available through its own button.

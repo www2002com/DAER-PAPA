@@ -6,7 +6,7 @@ import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/Arti
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
 import { DAD_ALLINONE_HOW_TO_CHOOSE_DESCRIPTION, DAD_ALLINONE_HOW_TO_CHOOSE_FAQ, dotDate, getJournalEntry, DAD_ALLINONE_HOW_TO_CHOOSE_META_TITLE, DAD_ALLINONE_HOW_TO_CHOOSE_META_DESCRIPTION } from '@/lib/journal';
 
-// Ported from content/journal/guide-dad-allinone-how-to-choose-v1.md; FAQ Q&A and FAQPage JSON-LD share DAD_ALLINONE_HOW_TO_CHOOSE_FAQ.
+// Ported from content/journal/journal-dad-allinone-how-to-choose-2026-update-v1-2026-11-02.md (Sun-ny approved).
 
 const entry = getJournalEntry('dad-allinone-how-to-choose');
 const URL = `https://dearpapa.kr${entry.href}`;
@@ -34,7 +34,7 @@ export default function DadAllInOneHowToChoosePage() {
       crumbs={[{ href: '/journal', label: '브랜드 자료실' }]}
       eyebrow={entry.category}
       title={entry.title}
-      lead={<p>디어파파가 보는 아빠 올인원 스킨케어 선물 고르는 순서는 피부 타입, 향료, 에탄올, 단계 수, 면도 후 쓰기 편한지예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어로, 출시 전이에요.</p>}
+      lead={<p>디어파파(DEAR PAPA)는 아빠를 위한 올인원 스킨케어 브랜드입니다(dearpapa.kr).</p>}
       meta={
         <>
           <span>작성 · 디어파파</span>
@@ -53,6 +53,7 @@ export default function DadAllInOneHowToChoosePage() {
         </nav>
       }
     >
+      <p>2026년 11월 2일 업데이트</p>
       <h2>한 줄 답</h2>
       <p>{DAD_ALLINONE_HOW_TO_CHOOSE_DESCRIPTION}</p>
 
@@ -78,6 +79,52 @@ export default function DadAllInOneHowToChoosePage() {
         </tbody>
       </table>
       </ComparisonTable>
+
+      <h2>선물로 줄 올인원, 어떤 기준으로 고를까요?</h2>
+      <p>
+        선물로 줄 올인원은 피부 타입·향·용량·편지를 순서대로 보면 고르기 쉬워요. 아래 표에 확인할 점과 확인 방법을 정리했고, 디어파파 칸은
+        출시 전 상태예요.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">기준</th>
+            <th scope="col">확인할 점</th>
+            <th scope="col">어떻게 확인하나</th>
+            <th scope="col">디어파파(출시 전)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>피부 타입(지성·건성·민감)</td>
+            <td>지성·건성·민감 중 아빠 피부에 맞는지</td>
+            <td>세안 후 당김·오후 번들거림을 물어보고, 민감하면 귀 뒤·팔 안쪽에 먼저 조금 발라 보기</td>
+            <td>미정</td>
+          </tr>
+          <tr>
+            <td>향</td>
+            <td>향료가 들어 있는지, 아빠가 향을 즐기는지</td>
+            <td>제품 설명·전성분에 「향료」가 있는지 보고, 가능하면 매장·샘플로 냄새 확인</td>
+            <td>출시 전 확인</td>
+          </tr>
+          <tr>
+            <td>용량</td>
+            <td>선물로 주기 적당한 용량인지</td>
+            <td>판매처·용기 표기 용량을 확인</td>
+            <td>용량·전성분·가격 미정</td>
+          </tr>
+          <tr>
+            <td>편지</td>
+            <td>한 줄 마음을 같이 건넬 수 있는지</td>
+            <td>사이트에서 미리보기·PNG 저장이 되는지 확인</td>
+            <td>
+              편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수 있고, 제품에 담는 방식은 출시 전에 정해요.{' '}
+              <Link href="/#letter">한 줄 편지</Link>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>누구에게 맞나요? 디어파파는 여러 단계를 번거로워하는 4060 아빠에게 맞는 올인원이에요.</p>
 
       <ProductBox />
 

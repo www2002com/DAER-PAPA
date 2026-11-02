@@ -2,6 +2,7 @@ import { FACTS_UPDATED } from '@/lib/facts';
 import {
   DAD_BIRTHDAY_GIFT_RECOMMEND_DESCRIPTION,
   DAD_BIRTHDAY_GIFT_RECOMMEND_FAQ,
+  DAD_BIRTHDAY_GIFT_RECOMMEND_H1,
   getJournalEntry,
 } from '@/lib/journal';
 
@@ -18,7 +19,7 @@ const jsonLd = {
       '@id': URL,
       url: URL,
       mainEntityOfPage: URL,
-      headline: entry.title,
+      headline: DAD_BIRTHDAY_GIFT_RECOMMEND_H1,
       description: DAD_BIRTHDAY_GIFT_RECOMMEND_DESCRIPTION,
       datePublished: entry.published,
       dateModified: entry.modified,

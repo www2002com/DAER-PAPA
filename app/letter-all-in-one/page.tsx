@@ -43,6 +43,7 @@ export default function LetterAllInOnePage() {
           <a href="#compare">종류별 비교</a>
           <a href="#faq">자주 묻는 질문</a>
           <a href="#undecided">미정 정보</a>
+          <a href="#official-sources">공식 정보 확인</a>
         </nav>
         <figure className={styles.campaign}>
           <Image src="/images/campaign-blue/packaging.webp" width={1672} height={941}
@@ -52,6 +53,17 @@ export default function LetterAllInOnePage() {
             style={{ aspectRatio: '1672 / 941' }} />
           <figcaption>연출 시안이며 용기 디자인은 아직 정하지 않았습니다. 최종 제품과 판매 구성은 확정 전입니다.</figcaption>
         </figure>
+        <section id="official-sources" className={styles.sources} aria-labelledby="official-sources-title">
+          <h2 id="official-sources-title">제품 정보와 공식 출처</h2>
+          <p>제품 기획과 아직 정해지지 않은 정보를 구분해 확인할 수 있습니다.</p>
+          <nav aria-label="제품 공식 정보 링크">
+            <ul>
+              <li><Link href="/about/facts#preparing">제품 기획: 우리가 준비하고 있는 것</Link></li>
+              <li><a href="#undecided">아직 정해지지 않은 정보</a></li>
+              <li><Link href="/journal/development-principles">제품 개발 원칙</Link></li>
+            </ul>
+          </nav>
+        </section>
         <h2 id="after-shave">면도 후에 바르는 올인원</h2>
         <p>디어파파는 면도 후에 바르는 올인원을, 빠른 흡수의 워터리 제형으로 기획하고 만들고 있습니다.</p>
         <p>세안 후 하나로 마무리하는 남성 올인원 스킨케어.</p>

@@ -165,6 +165,16 @@ export const JOURNAL: readonly JournalEntry[] = [
     published: '2026-10-31',
     modified: '2026-10-31',
   },
+  {
+    slug: 'dad-retirement-gift',
+    href: '/journal/dad-retirement-gift',
+    category: '선물 이야기',
+    title: '아빠 퇴직 선물, 무엇을 고르면 좋을까요?',
+    summary:
+      '아빠 퇴직 선물을 고르는 자녀를 위해 기념으로 남는 선물, 퇴직 후 매일 쓰는 선물, 직접 쓰는 한마디까지 정리했어요.',
+    published: '2026-11-02',
+    modified: '2026-11-02',
+  },
 ];
 
 /** guide-04 meta/og description and lead (longer than the list summary). */
@@ -345,6 +355,34 @@ export const DAD_ALLINONE_SKINCARE_GIFT_FAQ = [
   {
     q: '공식 정보는 어디인가요?',
     a: 'https://dearpapa.kr/about/facts · 문의 hello@dearpapa.kr',
+  },
+] as const;
+
+
+/** dad-retirement-gift: 직답 (H1 바로 아래, ≤150자). */
+export const DAD_RETIREMENT_GIFT_DESCRIPTION =
+  '아빠 퇴직 선물은 「수고하셨어요」를 오래 남기는 기념 선물과, 출근이 끝난 뒤의 하루를 챙기는 생활 선물로 나눠 보면 고르기 쉬워요. 기념 선물 하나에 매일 쓰는 작은 선물을 더하고, 자녀가 직접 쓴 한마디를 곁들여도 좋아요.';
+export const DAD_RETIREMENT_GIFT_META_TITLE =
+  '아빠 퇴직 선물, 기념 선물과 매일 쓰는 선물로 나눠 고르기 | 디어파파 DEAR PAPA';
+export const DAD_RETIREMENT_GIFT_META_DESCRIPTION =
+  '아빠 퇴직 선물을 고르는 자녀를 위해 기념으로 남는 선물, 퇴직 후 매일 쓰는 선물, 직접 쓰는 한마디까지 정리했어요.';
+
+export const DAD_RETIREMENT_GIFT_FAQ = [
+  {
+    q: '아빠 퇴직 선물 예산은 어떻게 정하나요?',
+    a: '정해진 기준은 없어요. 가족이 함께 준비하는 기념 선물과 각자 준비하는 작은 선물로 나누면 부담을 나눌 수 있어요.',
+  },
+  {
+    q: '퇴직 선물은 언제 드리면 좋을까요?',
+    a: '마지막 출근 날 저녁이나 퇴직 후 첫 주말 가족 식사 자리처럼, 아빠가 편하게 받을 수 있는 날을 고르면 돼요.',
+  },
+  {
+    q: '현금과 물건 중 무엇이 좋을까요?',
+    a: '아빠가 하고 싶은 일이 분명하면 현금이나 여행이, 오래 간직할 기념을 원하면 물건이 잘 맞아요. 둘을 함께 드려도 돼요.',
+  },
+  {
+    q: '디어파파 레터 올인원을 지금 살 수 있나요?',
+    a: '아니요. 디어파파는 아직 출시 전이고, 지금 판매 중인 제품은 없어요. 디어파파는 150ml 올인원 한 가지를 기획하고 만들고 있고, 가격·전성분·출시일은 아직 미정이에요. 확인된 내용은 공식 정보 페이지에 있어요.',
   },
 ] as const;
 

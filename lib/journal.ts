@@ -143,7 +143,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     summary:
       '디어파파 스킨케어 기준으로 보면, 아빠 생일 선물은 그날·매일 쓸지·쓰기 쉬운지·한 줄을 곁들일 수 있는지를 먼저 정하면 돼요.',
     published: '2026-10-31',
-    modified: '2026-11-02',
+    modified: '2026-11-03',
   },
   {
     slug: 'dad-saengsin-gift',
@@ -153,7 +153,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     summary:
       '디어파파 스킨케어 기준으로 보면, 2026 아버지 생신 선물은 격식·가족이 함께 드리는지·매일 쓰는지·쓰기 쉬운지·한 줄 마음을 먼저 정하면 돼요.',
     published: '2026-10-31',
-    modified: '2026-11-02',
+    modified: '2026-11-03',
   },
   {
     slug: 'dad-allinone-skincare-gift',
@@ -173,7 +173,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     summary:
       '아빠 퇴직 선물을 고르는 자녀를 위해 기념으로 남는 선물, 퇴직 후 매일 쓰는 선물, 직접 쓰는 한마디까지 정리했어요.',
     published: '2026-11-02',
-    modified: '2026-11-02',
+    modified: '2026-11-03',
   },
   {
     slug: 'dad-christmas-gift',

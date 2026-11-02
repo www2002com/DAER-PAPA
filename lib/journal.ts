@@ -175,6 +175,16 @@ export const JOURNAL: readonly JournalEntry[] = [
     published: '2026-11-02',
     modified: '2026-11-02',
   },
+  {
+    slug: 'dad-christmas-gift',
+    href: '/journal/dad-christmas-gift',
+    category: '선물 이야기',
+    title: '아빠 크리스마스 선물, 무엇을 고르면 좋을까요?',
+    summary:
+      '아빠 크리스마스 선물과 엄마 아빠께 함께 드리는 선물, 직접 만드는 선물, 연말 한마디 쓰는 법까지 정리했어요.',
+    published: '2026-11-02',
+    modified: '2026-11-02',
+  },
 ];
 
 /** guide-04 meta/og description and lead (longer than the list summary). */
@@ -382,6 +392,34 @@ export const DAD_RETIREMENT_GIFT_FAQ = [
   },
   {
     q: '디어파파 레터 올인원을 지금 살 수 있나요?',
+    a: '아니요. 디어파파는 아직 출시 전이고, 지금 판매 중인 제품은 없어요. 디어파파는 150ml 올인원 한 가지를 기획하고 만들고 있고, 가격·전성분·출시일은 아직 미정이에요. 확인된 내용은 공식 정보 페이지에 있어요.',
+  },
+] as const;
+
+
+/** dad-christmas-gift: 직답 (H1 바로 아래, ≤150자). */
+export const DAD_CHRISTMAS_GIFT_DESCRIPTION =
+  '아빠 크리스마스 선물은 겨울에 매일 쓰는 것과 연말 분위기를 함께 담으면 고르기 쉬워요. 부담 없는 크기의 생활 선물에 한 해를 돌아보는 짧은 한마디를 곁들여 보세요.';
+export const DAD_CHRISTMAS_GIFT_META_TITLE =
+  '아빠 크리스마스 선물, 겨울에 매일 쓰는 것으로 고르기 | 디어파파 DEAR PAPA';
+export const DAD_CHRISTMAS_GIFT_META_DESCRIPTION =
+  '아빠 크리스마스 선물과 엄마 아빠께 함께 드리는 선물, 직접 만드는 선물, 연말 한마디 쓰는 법까지 정리했어요.';
+
+export const DAD_CHRISTMAS_GIFT_FAQ = [
+  {
+    q: '아빠 크리스마스 선물 예산은 어떻게 정하나요?',
+    a: '정해진 기준은 없어요. 크리스마스는 가족이 다 같이 주고받는 날이라, 생일보다 가볍게 정하고 한마디를 곁들이는 것도 방법이에요.',
+  },
+  {
+    q: '크리스마스 선물은 언제 준비하면 좋을까요?',
+    a: '연말에는 배송이 늦어질 수 있으니 12월 초에 미리 고르고 주문해 두면 여유가 있어요.',
+  },
+  {
+    q: '남자친구·여자친구 부모님께 드리는 크리스마스 선물은 어떻게 고를까요?',
+    a: '두 분이 함께 쓰는 물건이나 차·간식처럼 취향을 크게 타지 않는 것이 무난해요. 짧은 인사 카드를 곁들이면 마음이 더 잘 전해져요.',
+  },
+  {
+    q: '디어파파 레터 올인원을 크리스마스 선물로 살 수 있나요?',
     a: '아니요. 디어파파는 아직 출시 전이고, 지금 판매 중인 제품은 없어요. 디어파파는 150ml 올인원 한 가지를 기획하고 만들고 있고, 가격·전성분·출시일은 아직 미정이에요. 확인된 내용은 공식 정보 페이지에 있어요.',
   },
 ] as const;

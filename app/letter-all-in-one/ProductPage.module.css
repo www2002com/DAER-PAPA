@@ -3,3 +3,10 @@
 .contents { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
 .contents a { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 14px; border: 1px solid var(--line-strong); border-radius: var(--radius-s); color: var(--ink); font-size: .875rem; line-height: 1.5; text-decoration: none; }
 @media (hover: hover) { .contents a:hover { background: var(--ivory); border-color: var(--ink); } }
+.sources { margin: 28px 0 40px; padding: 20px 24px; border: 1px solid var(--line); border-left: 3px solid var(--ink-3); border-radius: var(--radius-s); background: color-mix(in srgb, var(--ivory) 42%, transparent); scroll-margin-block-start: calc(var(--header-h) + 24px); }
+.sources h2[id] { margin: 0 0 8px; padding: 0; border: 0; font-size: 1.05rem; }
+.sources.sources > p { margin: 0 0 14px; color: var(--ink-2); font-size: .9rem; line-height: 1.7; }
+.sources ul { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.sources a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); font-size: .9rem; line-height: 1.5; text-decoration: underline; text-underline-offset: 3px; }
+.sources a:focus-visible, .contents a:focus-visible { outline: 3px solid var(--accent, #52615a); outline-offset: 3px; }
+@media (max-width: 560px) { .sources { padding: 18px; } .sources a { width: 100%; } }

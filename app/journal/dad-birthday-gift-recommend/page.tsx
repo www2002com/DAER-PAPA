@@ -5,6 +5,7 @@ import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/Arti
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
 import {
   DAD_BIRTHDAY_GIFT_RECOMMEND_FAQ,
+  DAD_BIRTHDAY_GIFT_RECOMMEND_H1,
   DAD_BIRTHDAY_GIFT_RECOMMEND_META_DESCRIPTION,
   DAD_BIRTHDAY_GIFT_RECOMMEND_META_TITLE,
   dotDate,
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     images: [{ url: 'https://dearpapa.kr/og.png' }],
   },
-  twitter: { card: 'summary_large_image' },
+  twitter: { card: 'summary_large_image', title: DAD_BIRTHDAY_GIFT_RECOMMEND_META_TITLE },
 };
 
 export default function DadBirthdayGiftRecommendPage() {
@@ -38,7 +39,7 @@ export default function DadBirthdayGiftRecommendPage() {
     <ArticleLayout
       crumbs={[{ href: '/journal/dad-gift-guide', label: '아빠 선물 가이드' }]}
       eyebrow={entry.category}
-      title={entry.title}
+      title={DAD_BIRTHDAY_GIFT_RECOMMEND_H1}
       lead={<p>디어파파(DEAR PAPA)는 아빠를 위한 올인원 스킨케어 브랜드입니다(dearpapa.kr).</p>}
       meta={
         <>

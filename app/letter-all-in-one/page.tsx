@@ -54,13 +54,13 @@ export default function LetterAllInOnePage() {
           <figcaption>연출 시안이며 용기 디자인은 아직 정하지 않았습니다. 최종 제품과 판매 구성은 확정 전입니다.</figcaption>
         </figure>
         <section id="official-sources" className={styles.sources} aria-labelledby="official-sources-title">
-          <h2 id="official-sources-title">제품 정보를 확인하는 순서</h2>
+          <h2 id="official-sources-title">제품 정보와 공식 출처</h2>
           <p>제품 기획과 아직 정해지지 않은 정보를 구분해 확인할 수 있습니다.</p>
           <nav aria-label="제품 공식 정보 링크">
             <ul>
-              <li><Link href="/about/facts#preparing">제품 기획·출시 준비 상태</Link></li>
+              <li><Link href="/about/facts#preparing">제품 기획: 우리가 준비하고 있는 것</Link></li>
               <li><a href="#undecided">아직 정해지지 않은 정보</a></li>
-              <li><Link href="/journal/development-principles">제품을 준비하는 원칙</Link></li>
+              <li><Link href="/journal/development-principles">제품 개발 원칙</Link></li>
             </ul>
           </nav>
         </section>

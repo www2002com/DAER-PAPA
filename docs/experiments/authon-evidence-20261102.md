@@ -16,7 +16,7 @@ The existing official paragraphs, metadata, head JSON-LD, facts body and protect
 | Structured-data authority layer | Existing head JSON-LD already links to facts; validate and retain it, without duplicate markup. |
 | First-person / proprietary content | Link the existing development-principles article; no invented study, manufacturing test or new unverified claim. |
 | Measurement variance review | Freeze pre-release baseline, compare full 7/28-day windows and disclose small samples and confounders. |
-| Third-party surface options | `/press` already distinguishes AUTHON materials from independent coverage. No new external placements are made; external authority remains untested. |
+| Third-party surface options | `/press` already distinguishes AUTHON materials from independent coverage. AUTHON/authonnews is operated by the same owner (`www2002com`) as DEAR PAPA and is not counted as an independent source. No new external placements are made; external authority remains untested. |
 | Coverage gap plan | Record page/query data; unmeasured AI coverage is not treated as zero. No fabricated query results. |
 | External authority review | Existing provenance caveat retained; no independent endorsement claimed or requested. |
 
@@ -33,6 +33,16 @@ This tests **one deployable intervention**, not the causal effect of all seven p
 - Fewer than 100 impressions or 10 clicks in either compared sample is an operational small-sample flag, **not** a power calculation or statistical significance rule. Results remain descriptive even above it. Increases are observations, not proof of causal lift; decreases and no change are equally reportable.
 - AI-answer/citation/GVS and revenue effects remain `not_measured`. GSC is not a substitute for those measurements.
 - Concurrent site releases, indexation lag, changing query mix, seasonality and nonrandom comparison pages are confounders. Record changed pages/commits when evaluating. Other authorized work is not frozen by this experiment.
+
+Known changes between baseline end (2026-10-31 Pacific) and this release:
+
+| Page | Prior change | Interpretation |
+| --- | --- | --- |
+| Treatment `/letter-all-in-one` | PR #151 (`12c26dd`): title/description and social metadata; PR #149 (`af0af73`): letter wording | Search snippet changes can affect CTR directly; any before/after difference mixes these changes with this navigation intervention. |
+| Comparison `/journal/dad-gift-guide` | PR #149 (`af0af73`): copy changes | Not an unchanged control. |
+| Comparison `/journal/brand-identity` | PR #116 (`bc62327`): copy changes | Not an unchanged control. |
+
+These changes are retained. This is a descriptive pilot of the deployed site, not an isolated causal test. The measured result cannot identify the navigation change's individual effect.
 
 ## Verification and rollback
 

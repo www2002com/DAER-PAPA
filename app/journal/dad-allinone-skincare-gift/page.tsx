@@ -151,7 +151,7 @@ export default function DadAllinoneSkincareGiftPage() {
       <p>
         150ml 올인원 한 가지를 기획하고 만들고 있어요. 세안 후 하나로 마무리하는 남성 올인원 스킨케어로, 면도 후 바르는 장면도
         생각하며 만들고 있어요. 변성알코올(에탄올)을 넣지 않고, 향료를 넣지 않는 방향으로 기획하고 만들고 있어요. 가격, 전성분,
-        출시일은 아직 확정되지 않았어요. 피부 타입별 효능도 아직 확정되지 않았어요.
+        출시일은 아직 미정이에요. 피부 타입별 효능도 아직 미정이에요.
       </p>
 
       {DAD_ALLINONE_SKINCARE_GIFT_FAQ.map(({ q, a }) => (
@@ -186,7 +186,7 @@ export default function DadAllinoneSkincareGiftPage() {
           ['기준일', <time dateTime={FACTS_UPDATED}>{FACTS_UPDATED_KO}</time>],
           ['공식 사이트', <Link href="/about/facts">https://dearpapa.kr</Link>],
           ['출시 상태', '현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.'],
-          ['미정 항목', '전성분, 가격, 출시일, 판매처는 아직 확정되지 않았습니다.'],
+          ['미정 항목', '전성분, 가격, 출시일, 판매처는 아직 미정입니다.'],
         ]}
       />
     </ArticleLayout>

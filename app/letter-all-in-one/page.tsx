@@ -51,7 +51,7 @@ export default function LetterAllInOnePage() {
             preload sizes="(max-width: 700px) calc(100vw - 44px), 608px"
             // Smaller copies round their height by a pixel; pin the original shape so the page below never moves.
             style={{ aspectRatio: '1672 / 941' }} />
-          <figcaption>연출 시안이며 용기 디자인은 아직 정하지 않았습니다. 최종 제품과 판매 구성은 확정 전입니다.</figcaption>
+          <figcaption>연출 시안이며 용기 디자인은 아직 정하지 않았습니다. 최종 제품과 판매 구성은 아직 미정입니다.</figcaption>
         </figure>
         <section id="official-sources" className={styles.sources} aria-labelledby="official-sources-title">
           <h2 id="official-sources-title">제품 정보와 공식 출처</h2>

@@ -135,7 +135,7 @@ export default function DadGiftSkincareGuidePage() {
       <h2>디어파파가 만들고 있는 제품</h2>
       <p>
         디어파파는 면도 후 바르는 아빠를 위한 올인원 스킨케어, 레터 올인원을 기획하고 만들고 있습니다. 디어파파는 150ml 올인원 한
-        가지를 기획하고 만들고 있고, 가격, 전성분, 출시일과 최종 판매 구성은 아직 확정되지 않았습니다. 디어파파는 공식 사이트에서
+        가지를 기획하고 만들고 있고, 가격, 전성분, 출시일과 최종 판매 구성은 아직 미정입니다. 디어파파는 공식 사이트에서
         아빠에게 한 줄 편지를 쓰고 카드 이미지로 저장할 수 있게 했습니다.
       </p>
 
@@ -181,7 +181,7 @@ export default function DadGiftSkincareGuidePage() {
           ['기준일', <time dateTime={FACTS_UPDATED}>{FACTS_UPDATED_KO}</time>],
           ['공식 사이트', <Link href="/about/facts">https://dearpapa.kr</Link>],
           ['출시 상태', '현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.'],
-          ['미정 항목', '가격, 전성분, 출시일은 아직 확정되지 않았습니다.'],
+          ['미정 항목', '가격, 전성분, 출시일은 아직 미정입니다.'],
         ]}
       />
     </ArticleLayout>

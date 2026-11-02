@@ -32,7 +32,7 @@ describe('bunny chat server boundary', () => {
     const sent = JSON.parse(observed!.init.body as string);
     expect(sent.contents).toEqual([{ role: 'user', parts: [{ text: question.messages[0].content }] }]);
     expect(sent.generationConfig.responseFormat.text).toMatchObject({ mimeType: 'APPLICATION_JSON', schema: { required: ['mode', 'answer'] } });
-    expect(sent.systemInstruction.parts[0].text).toContain('가격, 전성분, 출시일은 아직 확정되지 않았습니다.');
+    expect(sent.systemInstruction.parts[0].text).toContain('가격, 전성분, 출시일은 아직 미정입니다.');
     expect(sent.generationConfig.thinkingConfig).toEqual({ thinkingLevel: 'low', includeThoughts: false });
     expect(sent.generationConfig.maxOutputTokens).toBe(2048);
     expect(response.headers.get('cache-control')).toBe('no-store');

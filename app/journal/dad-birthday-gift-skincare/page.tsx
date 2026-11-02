@@ -137,7 +137,7 @@ export default function DadBirthdayGiftSkincarePage() {
       <h2>편지와 함께 줄 수 있는 아빠 선물인가요?</h2>
       <p>
         네, 짧은 한 줄을 곁들일 수 있어요. 지금 사이트에서 편지 카드 미리보기와 PNG 저장만 가능해요. 편지를 어떤 방식으로 담을지는 출시
-        전에 확정할 예정이에요.{' '}
+        전에 정할 예정이에요.{' '}
         <Link href="/#letter">한 줄 편지 쓰기</Link>
       </p>
 
@@ -147,7 +147,7 @@ export default function DadBirthdayGiftSkincarePage() {
       <p>
         150ml 올인원 한 가지를 기획하고 만들고 있어요. 세안 후 하나로 마무리하는 남성 올인원 스킨케어로, 면도 후 바르는 장면도 생각하며
         만들고 있어요. 변성알코올(에탄올)을 넣지 않고, 향료를 넣지 않는 방향으로 기획하고 만들고 있어요. 가격, 전성분, 출시일은 아직
-        확정되지 않았어요.
+        미정이에요.
       </p>
 
       {DAD_BIRTHDAY_GIFT_SKINCARE_FAQ.map(({ q, a }) => (
@@ -180,7 +180,7 @@ export default function DadBirthdayGiftSkincarePage() {
           ['기준일', <time dateTime={FACTS_UPDATED}>{FACTS_UPDATED_KO}</time>],
           ['공식 사이트', <Link href="/about/facts">https://dearpapa.kr</Link>],
           ['출시 상태', '현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.'],
-          ['미정 항목', '전성분, 가격, 출시일, 판매처는 아직 확정되지 않았습니다.'],
+          ['미정 항목', '전성분, 가격, 출시일, 판매처는 아직 미정입니다.'],
         ]}
       />
     </ArticleLayout>

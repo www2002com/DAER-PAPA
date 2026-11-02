@@ -49,7 +49,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     href: '/journal/dad-gift-guide',
     category: '선물 이야기',
     title: '편지와 함께 건네는 아빠 스킨케어, 디어파파는 무엇을 준비하나요?',
-    summary: '디어파파가 생각하는 편지와 함께 줄 수 있는 아빠 선물은 매일 쓰는 스킨케어에 짧은 편지를 더하는 거예요. 디어파파(DEAR PAPA)는 출시 전이며, 편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수 있고, 제품에 담는 방식은 출시 전에 정해요.',
+    summary: '디어파파가 생각하는 편지와 함께 줄 수 있는 아빠 선물은 매일 쓰는 스킨케어에 짧은 편지를 더하는 거예요. 디어파파(DEAR PAPA)는 출시 전이며, 편지는 자녀가 따로 써서 건네는 거예요. 지금 사이트에서 미리보기와 PNG 저장을 할 수 있어요.',
     published: '2026-10-17',
     modified: '2026-10-31',
   },
@@ -149,7 +149,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     slug: 'dad-saengsin-gift',
     href: '/journal/dad-saengsin-gift',
     category: '선물 이야기',
-    title: '2026 아버지 생신 선물, 디어파파 스킨케어와 편지는 어떻게 고를까요?',
+    title: '2026 아버지 생신 선물, 스킨케어 고르는 법과 직접 쓰는 편지 한 줄',
     summary:
       '디어파파 스킨케어 기준으로 보면, 2026 아버지 생신 선물은 격식·가족이 함께 드리는지·매일 쓰는지·쓰기 쉬운지·한 줄 마음을 먼저 정하면 돼요.',
     published: '2026-10-31',
@@ -316,7 +316,9 @@ export const DAD_BIRTHDAY_GIFT_RECOMMEND_FAQ = [
 export const DAD_SAENGSIN_GIFT_DESCRIPTION =
   '디어파파 스킨케어 기준으로 보면, 2026 아버지 생신 선물은 격식·가족이 함께 드리는지·매일 쓰는지·쓰기 쉬운지·한 줄 마음을 먼저 정하면 돼요. 올인원은 그 다섯에 맞을 때 후보예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요.';
 export const DAD_SAENGSIN_GIFT_META_TITLE =
-  '2026 아버지 생신 선물, 디어파파 스킨케어와 편지는 어떻게 고를까요? | 디어파파 DEAR PAPA';
+  '2026 아버지 생신 선물, 스킨케어 고르는 법과 직접 쓰는 편지 한 줄 | 디어파파 DEAR PAPA';
+export const DAD_SAENGSIN_GIFT_H1 =
+  '2026 아버지 생신 선물, 스킨케어는 어떻게 고르고 편지 한 줄은 어떻게 쓸까요?';
 export const DAD_SAENGSIN_GIFT_META_DESCRIPTION =
   '2026 아버지 생신 선물은 격식·가족이 함께·매일 쓸지·쓰기 쉬운지·한 줄 마음을 먼저 보면 돼요. 디어파파 스킨케어와 편지를 같이 고르는 기준을 정리했어요. 가격·전성분·출시일은 미정이에요.';
 
@@ -332,6 +334,10 @@ export const DAD_SAENGSIN_GIFT_FAQ = [
   {
     q: '가족이 함께 고를 때도 같은 기준인가요?',
     a: '같아요. 뜻을 모을 때도 표 다섯 칸을 같이 보면, 취향 차이보다 「매일 쓰는지」「쓰기 쉬운지」로 맞추기 쉬워요.',
+  },
+  {
+    q: '아버지 생신 선물로 지갑이나 면도기 대신 스킨케어를 드려도 될까요?',
+    a: '네. 지갑이나 면도기를 바꿀 때가 아니라면, 세안 후 매일 쓰는 스킨케어도 좋은 후보예요. 아빠 피부가 당기는지 번들거리는지 먼저 보고, 쓰는 법을 적은 한 줄을 직접 써서 같이 건네면 돼요.',
   },
   {
     q: '지금 디어파파를 살 수 있나요?',

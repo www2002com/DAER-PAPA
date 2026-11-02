@@ -1,5 +1,5 @@
 import { FACTS_UPDATED } from '@/lib/facts';
-import { DAD_SAENGSIN_GIFT_DESCRIPTION, DAD_SAENGSIN_GIFT_FAQ, getJournalEntry } from '@/lib/journal';
+import { DAD_SAENGSIN_GIFT_DESCRIPTION, DAD_SAENGSIN_GIFT_FAQ, DAD_SAENGSIN_GIFT_H1, getJournalEntry } from '@/lib/journal';
 
 const entry = getJournalEntry('dad-saengsin-gift');
 const URL = `https://dearpapa.kr${entry.href}`;
@@ -14,7 +14,7 @@ const jsonLd = {
       '@id': URL,
       url: URL,
       mainEntityOfPage: URL,
-      headline: entry.title,
+      headline: DAD_SAENGSIN_GIFT_H1,
       description: DAD_SAENGSIN_GIFT_DESCRIPTION,
       datePublished: entry.published,
       dateModified: entry.modified,

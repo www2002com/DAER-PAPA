@@ -3,7 +3,7 @@ import original from './preserved-site.json';
 
 export type PreservedPath = keyof typeof original.pages;
 
-/** Production metadata is pinned to the approved dearpapa.kr snapshot. */
+/** Production metadata is pinned to the approved dearpapa.org snapshot. */
 export function preservedMetadata(path: PreservedPath): Metadata {
   const page = original.pages[path];
   const fields = Object.fromEntries(page.meta.map((entry) => [
@@ -22,8 +22,13 @@ export function preservedMetadata(path: PreservedPath): Metadata {
       url: fields['og:url'],
       siteName: fields['og:site_name'],
       locale: fields['og:locale'],
-      images: [{ url: fields['og:image'] || 'https://dearpapa.kr/og.png' }],
+      images: [{ url: fields['og:image'] || 'https://dearpapa.org/og.png' }],
     },
-    twitter: { card: 'summary_large_image', images: [fields['og:image'] || 'https://dearpapa.kr/og.png'] },
+    twitter: {
+      card: 'summary_large_image',
+      title: fields['twitter:title'] || fields['og:title'],
+      description: fields['twitter:description'] || fields['og:description'],
+      images: [fields['og:image'] || 'https://dearpapa.org/og.png'],
+    },
   };
 }

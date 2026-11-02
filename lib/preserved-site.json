@@ -4,12 +4,12 @@
   "pages": {
     "/": {
       "file": "index.html",
-      "title": "디어파파 DEAR PAPA | 아빠 선물 올인원 스킨케어",
+      "title": "디어파파 DEAR PAPA | 아빠를 위한 올인원 스킨케어 150ml, 출시 준비 중",
       "canonical": "https://dearpapa.kr/",
       "meta": [
         {
           "name": "description",
-          "content": "편지와 함께 건네는 아빠 선물, 디어파파 레터 올인원. 4060 아빠가 세안 후 하나로 마무리하는 올인원을 출시 준비 중입니다. 편지를 써 보고 공식 채널에서 출시 소식을 확인하세요. dearpapa.kr 디어파파(DEAR PAPA) 공식 사이트."
+          "content": "4060 아빠가 세안 후 하나로 마무리하는 올인원 스킨케어 150ml, 디어파파 레터 올인원을 출시 준비 중이에요. 아빠에게 건넬 한 줄 편지는 자녀가 직접 쓰고, 이 사이트에서 미리 써 볼 수 있어요. 디어파파(DEAR PAPA) 공식 사이트."
         },
         {
           "property": "og:type",
@@ -29,15 +29,23 @@
         },
         {
           "property": "og:title",
-          "content": "디어파파 DEAR PAPA | 아빠 선물 올인원 스킨케어"
+          "content": "디어파파 DEAR PAPA | 아빠를 위한 올인원 스킨케어 150ml, 출시 준비 중"
         },
         {
           "property": "og:description",
-          "content": "편지와 함께 건네는 아빠 선물, 디어파파 레터 올인원. 4060 아빠가 세안 후 하나로 마무리하는 올인원을 출시 준비 중입니다. 편지를 써 보고 공식 채널에서 출시 소식을 확인하세요. dearpapa.kr 디어파파(DEAR PAPA) 공식 사이트."
+          "content": "4060 아빠가 세안 후 하나로 마무리하는 올인원 스킨케어 150ml, 디어파파 레터 올인원을 출시 준비 중이에요. 아빠에게 건넬 한 줄 편지는 자녀가 직접 쓰고, 이 사이트에서 미리 써 볼 수 있어요. 디어파파(DEAR PAPA) 공식 사이트."
         },
         {
           "property": "og:image",
           "content": "https://dearpapa.kr/assets/522ad60892e08d80.png"
+        },
+        {
+          "name": "twitter:title",
+          "content": "디어파파 DEAR PAPA | 아빠를 위한 올인원 스킨케어 150ml, 출시 준비 중"
+        },
+        {
+          "name": "twitter:description",
+          "content": "4060 아빠가 세안 후 하나로 마무리하는 올인원 스킨케어 150ml, 디어파파 레터 올인원을 출시 준비 중이에요. 아빠에게 건넬 한 줄 편지는 자녀가 직접 쓰고, 이 사이트에서 미리 써 볼 수 있어요. 디어파파(DEAR PAPA) 공식 사이트."
         }
       ],
       "jsonLd": [
@@ -365,12 +373,12 @@
     },
     "/letter-all-in-one": {
       "file": "letter-all-in-one.html",
-      "title": "디어파파 레터 올인원 | 아빠를 위한 올인원 스킨케어",
+      "title": "디어파파 레터 올인원 | 아빠를 위한 올인원 스킨케어 150ml, 출시 준비 중",
       "canonical": "https://dearpapa.kr/letter-all-in-one",
       "meta": [
         {
           "name": "description",
-          "content": "4060 아빠를 위해 준비 중인 남성 올인원. 세안 후 하나로 마무리하고, 면도 후 바르는 한 단계로 기획합니다. 아직 판매 전이며 제품 준비 내용은 공식 사이트에서 확인하실 수 있습니다."
+          "content": "4060 아빠를 위해 준비 중인 150ml 남성 올인원이에요. 세안 후나 면도 후에 한 번 바르고 끝내도록 기획하고 있어요. 선물할 때는 자녀가 직접 쓴 한 줄 편지를 곁들여 보세요. 아직 판매 전이고, 가격·전성분·출시일은 미정이에요."
         },
         {
           "property": "og:type",
@@ -386,15 +394,23 @@
         },
         {
           "property": "og:title",
-          "content": "디어파파 레터 올인원 | 아빠를 위한 올인원 스킨케어"
+          "content": "디어파파 레터 올인원 | 아빠를 위한 올인원 스킨케어 150ml, 출시 준비 중"
         },
         {
           "property": "og:description",
-          "content": "4060 아빠를 위해 준비 중인 남성 올인원. 세안 후 하나로 마무리하고, 면도 후 바르는 한 단계로 기획합니다. 아직 판매 전이며 제품 준비 내용은 공식 사이트에서 확인하실 수 있습니다."
+          "content": "4060 아빠를 위해 준비 중인 150ml 남성 올인원이에요. 세안 후나 면도 후에 한 번 바르고 끝내도록 기획하고 있어요. 선물할 때는 자녀가 직접 쓴 한 줄 편지를 곁들여 보세요. 아직 판매 전이고, 가격·전성분·출시일은 미정이에요."
         },
         {
           "property": "og:url",
           "content": "https://dearpapa.kr/letter-all-in-one"
+        },
+        {
+          "name": "twitter:title",
+          "content": "디어파파 레터 올인원 | 아빠를 위한 올인원 스킨케어 150ml, 출시 준비 중"
+        },
+        {
+          "name": "twitter:description",
+          "content": "4060 아빠를 위해 준비 중인 150ml 남성 올인원이에요. 세안 후나 면도 후에 한 번 바르고 끝내도록 기획하고 있어요. 선물할 때는 자녀가 직접 쓴 한 줄 편지를 곁들여 보세요. 아직 판매 전이고, 가격·전성분·출시일은 미정이에요."
         }
       ],
       "jsonLd": [
@@ -433,12 +449,12 @@
     },
     "/about/facts": {
       "file": "about/facts.html",
-      "title": "디어파파 공식 정보 | 디어파파 DEAR PAPA",
+      "title": "디어파파 공식 정보: 제품, 출시 상태, 공식 채널 | 디어파파 DEAR PAPA",
       "canonical": "https://dearpapa.kr/about/facts",
       "meta": [
         {
           "name": "description",
-          "content": "디어파파(DEAR PAPA, dearpapa.kr) 공식 정보. 편지와 함께 건네는 아빠 선물, 디어파파 레터 올인원을 준비하는 브랜드입니다. 파파레서피와는 관련이 없습니다."
+          "content": "디어파파(DEAR PAPA, dearpapa.org) 공식 정보예요. 아빠를 위한 올인원 스킨케어(150ml) 한 가지를 출시 준비 중이고, 지금 판매 중인 제품은 없어요. 가격·전성분·출시일은 미정이에요. 공식 인스타그램은 @dearpapa.org이고, 파파레서피와는 관련이 없어요."
         },
         {
           "property": "og:type",
@@ -454,15 +470,23 @@
         },
         {
           "property": "og:title",
-          "content": "디어파파 공식 정보 | 디어파파 DEAR PAPA"
+          "content": "디어파파 공식 정보: 제품, 출시 상태, 공식 채널 | 디어파파 DEAR PAPA"
         },
         {
           "property": "og:description",
-          "content": "디어파파(DEAR PAPA, dearpapa.kr) 공식 정보. 편지와 함께 건네는 아빠 선물, 디어파파 레터 올인원을 준비하는 브랜드입니다. 파파레서피와는 관련이 없습니다."
+          "content": "디어파파(DEAR PAPA, dearpapa.org) 공식 정보예요. 아빠를 위한 올인원 스킨케어(150ml) 한 가지를 출시 준비 중이고, 지금 판매 중인 제품은 없어요. 가격·전성분·출시일은 미정이에요. 공식 인스타그램은 @dearpapa.org이고, 파파레서피와는 관련이 없어요."
         },
         {
           "property": "og:url",
           "content": "https://dearpapa.kr/about/facts"
+        },
+        {
+          "name": "twitter:title",
+          "content": "디어파파 공식 정보: 제품, 출시 상태, 공식 채널 | 디어파파 DEAR PAPA"
+        },
+        {
+          "name": "twitter:description",
+          "content": "디어파파(DEAR PAPA, dearpapa.org) 공식 정보예요. 아빠를 위한 올인원 스킨케어(150ml) 한 가지를 출시 준비 중이고, 지금 판매 중인 제품은 없어요. 가격·전성분·출시일은 미정이에요. 공식 인스타그램은 @dearpapa.org이고, 파파레서피와는 관련이 없어요."
         }
       ],
       "jsonLd": [

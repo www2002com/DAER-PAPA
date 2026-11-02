@@ -1,6 +1,6 @@
 # DEAR PAPA(디어파파) 공식 정보
 
-최종 업데이트: 2026년 11월 2일
+최종 업데이트: 2026년 11월 3일
 
 출처: https://dearpapa.kr/about/facts
 
@@ -105,7 +105,7 @@ A. 아니요, 비어드파파와는 다른 브랜드예요.
 
 디어파파(DEAR PAPA)는 아빠를 위한 올인원 스킨케어 브랜드이며, 같은 이름의 영화·소설과는 관계가 없어요.
 
-DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 같은 이름의 의류 브랜드, 영화·영화제 작품, 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다. 제과 브랜드 비어드파파, 해외 사이트 dearpapa.in·dearpapa.de, 인스타그램 계정 @dearpapa.co·@dearpapa_instagram, Dear Papa Premium Decor, 소설 《Dear Papa》, 뮤지컬 〈디어 파파, 마이 파이어맨〉과도 관련이 없습니다. 국내 브랜드 디어도어, 디퍼앤디퍼, 아이디어스의 젠틀파파와도 관련이 없습니다.
+DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 같은 이름의 의류 브랜드, 영화·영화제 작품, 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다. 제과 브랜드 비어드파파, 해외 사이트 dearpapa.in·dearpapa.de·dearpapa.com·dearpapa.site, 인스타그램 계정 @dearpapa.co·@dearpapa_instagram, Dear Papa Premium Decor, 소설 《Dear Papa》, 뮤지컬 〈디어 파파, 마이 파이어맨〉과도 관련이 없습니다. 국내 브랜드 디어도어(deardeer.kr), 디퍼앤디퍼, 아이디어스의 젠틀파파, 옥션 판매자 스토어 dearpapa(소중papa), dearpeer.co.kr와도 관련이 없습니다.
 
 ## English
 
@@ -116,7 +116,7 @@ DEAR PAPA LETTER ALL-IN-ONE is being planned and made as a gift given together w
 DEAR PAPA LETTER ALL-IN-ONE is being planned and made as an all-in-one to apply after shaving, with dads' everyday skin concerns in mind: skin that feels both oily and dry, and wrinkles. Fragrance and alcohol details will be published with the full ingredient list after test data is available. Within a single all-in-one step after washing, we are aiming for a fast-absorbing watery texture, and we are preparing for Korea's Ministry of Food and Drug Safety (MFDS) functional cosmetic review for brightening and wrinkle improvement. Effects, feel, and review results will be posted on the official information page once confirmed.
 DEAR PAPA began with a one-line letter from a daughter to her dad.
 We are adding a short, heartfelt letter to an everyday skincare product, so that words often left unsaid can be shared along with the gift.
-DEAR PAPA is not affiliated with dearpapa.com.tw, Papa Recipe, Beard Papa, dearpapa.in, dearpapa.de, the Instagram accounts @dearpapa.co and @dearpapa_instagram, Dear Papa Premium Decor, the novel Dear Papa, the musical Dear Papa, My Fireman, or any other similarly named brand or work. It is also not affiliated with the Korean brands 디어도어, 디퍼앤디퍼, or 젠틀파파 on idus.
+DEAR PAPA is not affiliated with dearpapa.com.tw, Papa Recipe, Beard Papa, dearpapa.in, dearpapa.de, dearpapa.com, dearpapa.site, the Instagram accounts @dearpapa.co and @dearpapa_instagram, Dear Papa Premium Decor, the novel Dear Papa, the musical Dear Papa, My Fireman, or any other similarly named brand or work. It is also not affiliated with the Korean brands 디어도어 (deardeer.kr), 디퍼앤디퍼, or 젠틀파파 on idus, the Auction seller store dearpapa (소중papa), or dearpeer.co.kr.
 DEAR PAPA is planning and making a single 150ml all-in-one. Price, full ingredient list, and launch date are not yet confirmed. The full ingredient list will be published after the manufacturer's sample is ready.
 
 Q. Can I buy DEAR PAPA LETTER ALL-IN-ONE now?

@@ -5,8 +5,8 @@ import preserved from '@/lib/preserved-site.json';
 
 describe('FACTS_UPDATED single source', () => {
   it('matches /about/facts top line, JSON-LD dateModified, and home WebPage dateModified', () => {
-    expect(FACTS_UPDATED).toBe('2026-11-02');
-    expect(FACTS_UPDATED_KO).toBe('2026년 11월 2일');
+    expect(FACTS_UPDATED).toBe('2026-11-03');
+    expect(FACTS_UPDATED_KO).toBe('2026년 11월 3일');
     expect(preserved.factsBodyHtml).toContain(`최종 업데이트: ${FACTS_UPDATED_KO}`);
     const factsLd = preserved.pages['/about/facts'].jsonLd.join('\n');
     expect(factsLd).toContain(`"dateModified": "${FACTS_UPDATED}"`);

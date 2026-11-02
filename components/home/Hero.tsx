@@ -37,7 +37,6 @@ export function Hero() {
           </div>
           <div className={styles.statusBlock}>
             <span className="tag" data-tone="soft">출시 전</span>
-            <p>출시 전이에요. 가격·출시일은 아직 확정되지 않았습니다.</p>
             <p className={styles.statusMeta}>{UNDECIDED.tbd}</p>
             <small>공식 정보 기준 <time dateTime={FACTS_UPDATED}>{FACTS_UPDATED_KO}</time></small>
           </div>

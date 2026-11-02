@@ -15,6 +15,12 @@ export const BANNED = [
   '40~60대',
   '스킨로션',
   '확정',
+  '무향',
+  '향료를 넣지 않',
+  '향료 무첨가',
+  '에탄올을 넣지 않',
+  '무에탄올',
+  '무알코올',
 ] as const;
 
 /** The one approved sentence that legitimately names the functional review; scrub it before scanning. */

@@ -118,7 +118,7 @@ export default function DadAllInOneHowToChoosePage() {
             <td>한 줄 마음을 같이 건넬 수 있는지</td>
             <td>사이트에서 미리보기·PNG 저장이 되는지 확인</td>
             <td>
-              편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수 있고, 제품에 담는 방식은 출시 전에 정해요.{' '}
+              편지는 자녀가 따로 써서 건네는 거예요. 지금 사이트에서 미리보기와 PNG 저장을 할 수 있어요.{' '}
               <Link href="/#letter">한 줄 편지</Link>
             </td>
           </tr>

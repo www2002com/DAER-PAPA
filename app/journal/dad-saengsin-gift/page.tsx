@@ -5,6 +5,7 @@ import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/Arti
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
 import {
   DAD_SAENGSIN_GIFT_FAQ,
+  DAD_SAENGSIN_GIFT_H1,
   DAD_SAENGSIN_GIFT_META_DESCRIPTION,
   DAD_SAENGSIN_GIFT_META_TITLE,
   dotDate,
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     images: [{ url: 'https://dearpapa.kr/og.png' }],
   },
-  twitter: { card: 'summary_large_image' },
+  twitter: { card: 'summary_large_image', title: DAD_SAENGSIN_GIFT_META_TITLE },
 };
 
 export default function DadSaengsinGiftPage() {
@@ -38,7 +39,7 @@ export default function DadSaengsinGiftPage() {
     <ArticleLayout
       crumbs={[{ href: '/journal/dad-gift-guide', label: '아빠 선물 가이드' }]}
       eyebrow={entry.category}
-      title={entry.title}
+      title={DAD_SAENGSIN_GIFT_H1}
       lead={<p>디어파파(DEAR PAPA)는 아빠를 위한 올인원 스킨케어 브랜드입니다(dearpapa.kr).</p>}
       meta={
         <>
@@ -126,6 +127,50 @@ export default function DadSaengsinGiftPage() {
       <p>
         생일 선물 일반 기준은 <Link href="/journal/dad-birthday-gift-recommend">아빠 생일 선물 추천</Link>에, 스킨케어 세부
         표는 <Link href="/journal/dad-birthday-gift-skincare">아빠 생일 선물 스킨케어</Link>에 따로 정리해 두었어요.
+      </p>
+
+      <h2>지갑·면도기와 스킨케어, 4060 아빠 생신 선물로 어떻게 비교할까요?</h2>
+      <p>
+        지갑과 면도기는 오래 두고 쓰는 물건이고, 스킨케어는 세안 후 매일 쓰는 물건이에요. 아빠가 이미 가진 것과 요즘 불편해하는 것을
+        먼저 떠올려 보면 셋 중 어느 쪽이 맞는지 정하기 쉬워요.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">선물</th>
+            <th scope="col">아빠 손에 닿는 때</th>
+            <th scope="col">고르기 전에 확인할 것</th>
+            <th scope="col">이럴 때 맞아요</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>지갑</td>
+            <td>외출할 때마다, 몇 년씩</td>
+            <td>지금 쓰는 지갑이 낡았는지, 카드 위주인지 현금도 쓰는지</td>
+            <td>지갑을 바꿀 때가 됐을 때</td>
+          </tr>
+          <tr>
+            <td>면도기</td>
+            <td>아침 면도할 때</td>
+            <td>전기면도기를 쓰는지 날 면도기를 쓰는지, 지금 것이 불편한지</td>
+            <td>쓰던 면도기가 고장 났거나 오래됐을 때</td>
+          </tr>
+          <tr>
+            <td>매일 쓰는 스킨케어</td>
+            <td>세안 후·면도 후 매일</td>
+            <td>피부가 당기는지 번들거리는지, 향이 강하지 않은지, 바르는 단계가 적은지</td>
+            <td>세안 후 아무것도 안 바르거나 여러 병이 번거로울 때</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        스킨케어로 정했다면 두 가지만 차례로 보면 돼요. 먼저 아빠 피부가 당기는 편인지 번들거리는 편인지 확인하고, 그다음 향과 바르는
+        단계를 봐요. 피부별로 볼 점은 바로 아래 표에 정리해 두었어요.
+      </p>
+      <p>
+        건넬 때는 자녀가 따로 쓴 짧은 한 줄을 같이 드려 보세요. 「아빠, 세안하고 이것만 바르시면 돼요」처럼 쓰는 법을 함께 적어도
+        좋아요.
       </p>
 
       <h2>아빠 피부가 건조하거나 번들거리면, 생신 스킨케어 선물은 어떻게 고를까요?</h2>
@@ -217,8 +262,7 @@ export default function DadSaengsinGiftPage() {
         </tbody>
       </table>
       <p>
-        피부 타입을 모르겠다면 단계가 적은 쪽이 부담이 덜해요. 편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수 있고, 제품에
-        담는 방식은 출시 전에 정해요. 디어파파 레터 올인원 가격·전성분·출시일은 아직 정해지지 않았어요. 확인된 내용은{' '}
+        피부 타입을 모르겠다면 단계가 적은 쪽이 부담이 덜해요. 편지는 자녀가 따로 써서 건네는 거예요. 지금 사이트에서 미리보기와 PNG 저장을 할 수 있어요. 디어파파 레터 올인원 가격·전성분·출시일은 아직 정해지지 않았어요. 확인된 내용은{' '}
         <Link href="/about/facts">공식 정보 페이지</Link>에 있어요.
       </p>
 
@@ -244,8 +288,7 @@ export default function DadSaengsinGiftPage() {
       <h2>보습을 아직 안 하는 아빠에게, 가족이 골라 주는 첫 올인원과 한 줄 편지는 어떻게 고를까요?</h2>
       <p>
         보습을 아직 안 하는 아빠라면, 가족이 첫 올인원과 <Link href="/#letter">한 줄 편지</Link>를 같이 골라 주면 돼요.
-        디어파파는 여러 단계를 번거로워하는 4060 아빠에게 맞는 올인원이에요. 편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수
-        있고, 제품에 담는 방식은 출시 전에 정해요.
+        디어파파는 여러 단계를 번거로워하는 4060 아빠에게 맞는 올인원이에요. 편지는 자녀가 따로 써서 건네는 거예요. 지금 사이트에서 미리보기와 PNG 저장을 할 수 있어요.
       </p>
 
       <h2>올인원 스킨케어는 생신 표에서 어디에 해당하나요?</h2>
@@ -256,8 +299,7 @@ export default function DadSaengsinGiftPage() {
 
       <h2>편지와 함께 줄 수 있는 아버지 생신 선물인가요?</h2>
       <p>
-        네. 짧은 한 줄을 곁들이면 「한 줄 마음」 칸을 채울 수 있어요. 편지는 지금 사이트에서 미리보기와 PNG 저장을 할 수 있고,
-        제품에 담는 방식은 출시 전에 정해요. <Link href="/#letter">한 줄 편지 쓰기</Link>
+        네. 짧은 한 줄을 곁들이면 「한 줄 마음」 칸을 채울 수 있어요. 편지는 자녀가 따로 써서 건네는 거예요. 지금 사이트에서 미리보기와 PNG 저장을 할 수 있어요. <Link href="/#letter">한 줄 편지 쓰기</Link>
       </p>
 
       <h2>예산을 정해 두고 고를 때는요?</h2>

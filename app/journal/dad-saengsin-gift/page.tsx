@@ -206,7 +206,7 @@ export default function DadSaengsinGiftPage() {
           </tr>
           <tr>
             <td>용량 확인</td>
-            <td>150ml(확정)</td>
+            <td>150ml</td>
             <td>용량은 150ml예요.</td>
           </tr>
           <tr>

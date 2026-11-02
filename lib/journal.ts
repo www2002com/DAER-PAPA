@@ -30,7 +30,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     href: '/journal/development-principles',
     category: '제품 개발',
     title: '매일 쓰는 제품을 준비하는 기준',
-    summary: '디어파파의 올인원 스킨케어 개발 방향과 아직 확정되지 않은 제품 정보를 구분해 안내합니다.',
+    summary: '디어파파의 올인원 스킨케어 개발 방향과 아직 정해지지 않은 제품 정보를 구분해 안내합니다.',
     published: '2026-10-11',
     modified: '2026-10-21',
   },
@@ -189,7 +189,7 @@ export const JOURNAL: readonly JournalEntry[] = [
 
 /** guide-04 meta/og description and lead (longer than the list summary). */
 export const GIFT_WITHOUT_ROUTINE_DESCRIPTION =
-  '아빠의 스킨케어 루틴을 몰라도 고를 수 있는 선물 기준. 단계는 하나로, 향료는 빼는 쪽으로, 면도 후 바로 쓰기 편한지 살펴보세요. 디어파파는 출시 준비 중이며 가격·전성분·출시일은 아직 확정되지 않았습니다.';
+  '아빠의 스킨케어 루틴을 몰라도 고를 수 있는 선물 기준. 단계는 하나로, 향료는 빼는 쪽으로, 면도 후 바로 쓰기 편한지 살펴보세요. 디어파파는 출시 준비 중이며 가격·전성분·출시일은 아직 미정입니다.';
 
 /** after-shave-gift meta/og description (sentences taken verbatim from the article). */
 export const AFTER_SHAVE_GIFT_DESCRIPTION =

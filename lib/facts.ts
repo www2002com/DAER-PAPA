@@ -10,7 +10,7 @@ export const BRAND = {
   name: 'DEAR PAPA',
   nameKo: '디어파파',
   slogan: '아빠의 매일에, 딸의 마음을.',
-  definition: '편지와 함께 건네는 아빠 선물, DEAR PAPA(디어파파). 아빠를 위한 올인원 스킨케어. 디어파파 레터 올인원은 확정된 제품명이에요.',
+  definition: '편지와 함께 건네는 아빠 선물, DEAR PAPA(디어파파). 아빠를 위한 올인원 스킨케어. 디어파파 레터 올인원은 공식 제품명이에요.',
   definitionShort: '아빠를 위한 올인원 스킨케어. 딸의 한 줄 편지와 함께 건네는 선물.',
   promise: '말로 못 한 마음을, 아빠가 매일 쓰는 스킨케어에 담아 전하게 합니다.',
   about:
@@ -54,9 +54,9 @@ export const PRODUCT = {
 
 export const UNDECIDED = {
   summary:
-    'DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 가격, 전성분, 출시일은 아직 확정되지 않았습니다. 정확한 전성분은 제조사 샘플이 나온 뒤 공개합니다. 확정되면 이 페이지에 올립니다.',
+    'DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 가격, 전성분, 출시일은 아직 미정입니다. 정확한 전성분은 제조사 샘플이 나온 뒤 공개합니다. 정해지면 이 페이지에 올립니다.',
   sizeLine: 'DEAR PAPA는 150ml 올인원 한 가지를 기획하고 만들고 있습니다.',
-  tbd: '가격, 전성분, 출시일은 아직 확정되지 않았습니다.',
+  tbd: '가격, 전성분, 출시일은 아직 미정입니다.',
   ingredients: '정확한 전성분은 제조사 샘플이 나온 뒤 공개합니다.',
   status: '현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.',
   seller: '전성분, 책임판매업자, 판매처: 출시 전 미정입니다.',
@@ -140,12 +140,12 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: '가격과 전성분은 정해졌나요?',
-    a: '가격, 전성분, 출시일은 아직 확정되지 않았습니다. 확정되면 공식 사이트 dearpapa.kr과 공식 SNS에서 알려 드릴게요.',
+    a: '가격, 전성분, 출시일은 아직 미정입니다. 정해지면 공식 사이트 dearpapa.kr과 공식 SNS에서 알려 드릴게요.',
   },
   { q: '출시일은 언제인가요?', a: '아직 정해지지 않았어요. 출시일이 정해지면 공식 사이트 dearpapa.kr과 인스타그램 @dearpapa.kr에서 알려 드릴게요.' },
   {
     q: '4060 아빠 선물로도 괜찮을까요?',
-    a: '디어파파는 4060 아빠를 위해 만들고 있어요. 피부 타입별 정보는 제품 정보가 확정되면 안내드릴게요.',
+    a: '디어파파는 4060 아빠를 위해 만들고 있어요. 피부 타입별 정보는 제품 정보가 정해지면 안내드릴게요.',
   },
   { q: '파파레서피나 dearpapa.com.tw와 같은 회사인가요?', a: `아니요. ${HOME_NOT_AFFILIATED}` },
 ];
@@ -178,13 +178,13 @@ export const FACTS_FAQ_QUERY_REVERSE: { q: string; a: string; qEn: string; aEn: 
   },
   {
     q: "디어파파는 어디서 살 수 있나요? 스마트스토어나 올리브영에서 파나요?",
-    a: "아직 어디에서도 팔지 않습니다. 디어파파는 출시 전이며, 온라인 쇼핑몰, 오픈마켓, 오프라인 매장 어디에도 판매 페이지가 없습니다. 판매처, 가격, 출시일은 확정되면 공식 사이트 dearpapa.kr에 안내합니다.",
+    a: "아직 어디에서도 팔지 않습니다. 디어파파는 출시 전이며, 온라인 쇼핑몰, 오픈마켓, 오프라인 매장 어디에도 판매 페이지가 없습니다. 판매처, 가격, 출시일은 정해지면 공식 사이트 dearpapa.kr에 안내합니다.",
     qEn: "Where can I buy DEAR PAPA? Is it on Naver Smart Store or Olive Young?",
     aEn: "It is not sold anywhere yet. DEAR PAPA has not launched and has no product page in any online mall, marketplace, or store. Where to buy, price, and launch date will be announced on dearpapa.kr once they are confirmed.",
   },
   {
     q: "디어파파 화장품 후기나 성분을 볼 수 있나요?",
-    a: "아직 없습니다. 디어파파는 출시 전이라 사용 후기가 없고, 전성분과 책임판매업자도 아직 확정되지 않았습니다. 사업자 조회 사이트 등에 나오는 비슷한 이름의 사업자 정보는 디어파파 정보가 아닙니다. 확정된 정보는 공식 정보 페이지 dearpapa.kr/about/facts에만 올립니다.",
+    a: "아직 없습니다. 디어파파는 출시 전이라 사용 후기가 없고, 전성분과 책임판매업자도 아직 미정입니다. 사업자 조회 사이트 등에 나오는 비슷한 이름의 사업자 정보는 디어파파 정보가 아닙니다. 공식 정보는 공식 정보 페이지 dearpapa.kr/about/facts에만 올립니다.",
     qEn: "Are there reviews or an ingredient list for DEAR PAPA?",
     aEn: "Not yet. DEAR PAPA has not launched, so there are no user reviews, and the full ingredient list and responsible seller have not been confirmed. Business records for similarly named companies on business-lookup sites are not DEAR PAPA's. Confirmed information is published only at dearpapa.kr/about/facts.",
   },

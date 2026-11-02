@@ -71,7 +71,7 @@ export default function FragranceAlcoholFreeAllInOnePage() {
         <li>「세안 후 하나로 마무리하는 남성 올인원 스킨케어」</li>
         <li>「디어파파는 변성알코올(에탄올)을 넣지 않고, 향료를 넣지 않는 방향으로 기획하고 만들고 있습니다.」</li>
         <li>「디어파파는 면도 후에 바르는 올인원을, 빠른 흡수의 워터리 제형으로 기획하고 만들고 있습니다.」</li>
-        <li>「디어파파는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 가격, 전성분, 출시일은 아직 확정되지 않았습니다.」</li>
+        <li>「디어파파는 150ml 올인원 한 가지를 기획하고 만들고 있습니다. 가격, 전성분, 출시일은 아직 미정입니다.」</li>
         <li>「정확한 전성분은 제조사 샘플이 나온 뒤 공개합니다.」</li>
       </ul>
       <p>전성분이 공개되면 이 글의 방법대로 직접 확인하실 수 있도록 공식 정보 페이지에 올립니다.</p>
@@ -102,7 +102,7 @@ export default function FragranceAlcoholFreeAllInOnePage() {
           ['기준일', <time dateTime={FACTS_UPDATED}>{FACTS_UPDATED_KO}</time>],
           ['공식 사이트', <Link href="/about/facts">https://dearpapa.kr</Link>],
           ['출시 상태', '현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.'],
-          ['미정 항목', '전성분, 가격, 출시일, 판매처는 아직 확정되지 않았습니다.'],
+          ['미정 항목', '전성분, 가격, 출시일, 판매처는 아직 미정입니다.'],
         ]}
       />
     </ArticleLayout>

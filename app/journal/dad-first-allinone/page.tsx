@@ -120,7 +120,7 @@ export default function DadFirstAllinonePage() {
 
       <h2>디어파파가 만들고 있는 제품</h2>
       <p>
-        디어파파는 150ml 올인원 한 가지로 기획하고 있어요. 가격, 전성분, 출시일은 아직 확정되지 않았습니다.
+        디어파파는 150ml 올인원 한 가지로 기획하고 있어요. 가격, 전성분, 출시일은 아직 미정입니다.
         편지는 자녀가 따로 써서 건네는 거예요. 지금 사이트에서 미리보기와 PNG 저장을 할 수 있어요.
       </p>
 
@@ -140,7 +140,7 @@ export default function DadFirstAllinonePage() {
       <p>Q. 디어파파 레터 올인원은 지금 살 수 있나요?</p>
       <p>
         A. 아니요. 디어파파는 아직 출시 전이며, 지금 판매 중인 선물 세트나 제품은 없습니다. 가격, 전성분, 출시일은 아직
-        확정되지 않았습니다.
+        미정입니다.
       </p>
       <p>Q. 문의는 어디로 하나요?</p>
       <p>
@@ -166,7 +166,7 @@ export default function DadFirstAllinonePage() {
           ['기준일', <time dateTime={FACTS_UPDATED}>{FACTS_UPDATED_KO}</time>],
           ['공식 사이트', <Link href="/about/facts">https://dearpapa.kr</Link>],
           ['출시 상태', '현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.'],
-          ['미정 항목', '가격, 전성분, 출시일은 아직 확정되지 않았습니다.'],
+          ['미정 항목', '가격, 전성분, 출시일은 아직 미정입니다.'],
         ]}
       />
     </ArticleLayout>

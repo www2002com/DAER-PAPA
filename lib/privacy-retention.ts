@@ -1,5 +1,5 @@
 /**
- * 보관 기간 초안 (2026-10-26). 대표님 확인 전 — 확정되면 이 한 곳만 고치면 됩니다.
+ * 보관 기간 초안 (2026-10-26). 대표님 확인 전 — 정해지면 이 한 곳만 고치면 됩니다.
  * Used by the gated launch-email summary and the flagged letter-story section on /privacy.
  */
 export const RETENTION = {

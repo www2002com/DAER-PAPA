@@ -109,7 +109,7 @@ export function HeroLetterPreview({ children }: { children: ReactNode }) {
         <figcaption className={hero.caption}>
           <span>선물 경험 기획 이미지 · 편지 문구 예시</span>
           <span>용기와 단상자는 개발 중인 디자인 시안입니다.</span>
-          <span>최종 판매 구성은 확정 전입니다.</span>
+          <span>최종 판매 구성은 아직 미정입니다.</span>
         </figcaption>
       </figure>
     </div>

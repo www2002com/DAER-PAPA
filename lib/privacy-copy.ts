@@ -26,7 +26,7 @@ export const LETTER_STORY_PRIVACY = {
 
 /**
  * /privacy 「한 줄 챌린지」 절. SNS challenge-one-line-v2 표 (3) 그대로.
- * 보관 기간·모집 기간은 대표님 10/30 08:14 KST 확정.
+ * 보관 기간·모집 기간은 대표님 10/30 08:14 KST에 정해짐.
  */
 export const CHALLENGE_ONE_LINE_PRIVACY_ENABLED = true;
 

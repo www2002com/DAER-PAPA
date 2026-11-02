@@ -102,7 +102,7 @@ export function SiteFooter() {
             · 정보 기준일 <time dateTime={FACTS_UPDATED}>{FACTS_UPDATED_KO}</time>
           </p>
           <p className={styles.muted}>
-            출시 전 브랜드 소개용 페이지입니다. 제품 이미지는 개발 중인 디자인 시안이며, 제품 정보는 확정 후 공개합니다.
+            출시 전 브랜드 소개용 페이지입니다. 제품 이미지는 개발 중인 디자인 시안이며, 제품 정보는 정해지면 공개합니다.
             손글씨 스타일 서체: 나눔 펜 스크립트(SIL OFL). 본문 서체: Pretendard(SIL OFL).
           </p>
           <p className={`${styles.muted} ${styles.business}`} aria-label="사업자 정보">

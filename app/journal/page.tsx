@@ -73,7 +73,7 @@ export default function JournalPage() {
           <section className={styles.note}>
             <h2 className={styles.noteTitle}>조금씩, 정확하게 기록합니다.</h2>
             <p className={styles.noteBody}>
-              현재 공개할 수 있는 정보와 앞으로 준비할 내용을 구분해 안내합니다. 제품 정보가 확정되면 이곳에도 차근차근
+              현재 공개할 수 있는 정보와 앞으로 준비할 내용을 구분해 안내합니다. 제품 정보가 정해지면 이곳에도 차근차근
               담겠습니다.
             </p>
           </section>

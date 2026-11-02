@@ -7,7 +7,7 @@ import styles from './Product.module.css';
 
 const DETAILS = [
   ['용량', '150ml 한 가지를 기획하고 있습니다.'],
-  ['가격 · 출시일', '아직 확정되지 않았습니다.'],
+  ['가격 · 출시일', '아직 미정입니다.'],
   ['전성분', UNDECIDED.ingredients],
   ['책임판매업자 · 판매처', '출시 전 미정입니다.'],
 ];

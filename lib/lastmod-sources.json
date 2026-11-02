@@ -112,6 +112,11 @@
       "app/journal/dad-retirement-gift",
       "app/@structuredData/journal/dad-retirement-gift",
       "lib/journal.ts"
+    ],
+    "/journal/dad-christmas-gift": [
+      "app/journal/dad-christmas-gift",
+      "app/@structuredData/journal/dad-christmas-gift",
+      "lib/journal.ts"
     ]
   }
 }

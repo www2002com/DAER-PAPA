@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     images: [{ url: 'https://dearpapa.kr/og.png' }],
   },
-  twitter: { card: 'summary_large_image' },
+  twitter: { card: 'summary_large_image', title: DAD_BIRTHDAY_GIFT_RECOMMEND_META_TITLE },
 };
 
 export default function DadBirthdayGiftRecommendPage() {

@@ -27,17 +27,22 @@ const jsonLd = {
       about: { '@id': 'https://dearpapa.kr/#brand' },
       isPartOf: { '@id': 'https://dearpapa.kr/#website' },
       isBasedOn: { '@id': FACTS },
-      citation: [FACTS, 'https://www.law.go.kr/법령/화장품법시행규칙', 'https://www.mfds.go.kr/brd/m_641/view.do?seq=32444', 'https://www.aad.org/public/everyday-care/skin-care-basics/care/skin-care-for-men'],
+      citation: [
+        FACTS,
+        'https://www.law.go.kr/법령/화장품법시행규칙',
+        'https://www.mfds.go.kr/brd/m_641/view.do?seq=32444',
+        'https://www.aad.org/public/everyday-care/skin-care-basics/care/skin-care-for-men',
+      ],
     },
     {
       '@type': 'FAQPage',
       '@id': `${URL}#faq`,
       url: URL,
       inLanguage: 'ko-KR',
-      mainEntity: FRAGRANCE_FREE_FAQ.map(({ q, points }) => ({
+      mainEntity: FRAGRANCE_FREE_FAQ.map(({ q, a }) => ({
         '@type': 'Question',
         name: q,
-        acceptedAnswer: { '@type': 'Answer', text: points.join(' ') },
+        acceptedAnswer: { '@type': 'Answer', text: a },
       })),
     },
     {

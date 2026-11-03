@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/ArticleLayout';
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
 import { ALLINONE_3_QUESTIONS_DESCRIPTION, ALLINONE_3_QUESTIONS_FAQ, ALLINONE_3_QUESTIONS_META_TITLE, dotDate, getJournalEntry } from '@/lib/journal';
+import { questionHeadingId } from '@/lib/question-heading-id';
 
 // Ported verbatim from content/journal/guide-allinone-3questions-v2-2026-10-23.md (article body only; status, version and check notes omitted).
 
@@ -50,12 +51,12 @@ export default function AllInOneThreeQuestionsPage() {
         </nav>
       }
     >
-      <h2>한 줄로 정리하면?</h2>
+      <h2 id={questionHeadingId("한 줄로 정리하면?")}>한 줄로 정리하면?</h2>
       <p>{ALLINONE_3_QUESTIONS_DESCRIPTION}</p>
 
       {ALLINONE_3_QUESTIONS_FAQ.map(({ q, points }) => (
         <section key={q}>
-          <h2>{q}</h2>
+          <h2 id={questionHeadingId(q)}>{q}</h2>
           <ul>
             {points.map((p) => (
               <li key={p}>{p}</li>

@@ -4,6 +4,7 @@ import { ComparisonTable } from '@/components/article/ComparisonTable';
 import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/ArticleLayout';
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
 import { DAD_SKINCARE_GIFT_TYPES_DESCRIPTION, DAD_SKINCARE_GIFT_TYPES_META_TITLE, dotDate, getJournalEntry } from '@/lib/journal';
+import { questionHeadingId } from '@/lib/question-heading-id';
 
 // Ported from content/guide/guide-02-dad-skincare-gift-types-v6.md (붙여넣기용 본문 only; notes, hashtags omitted).
 // Brand first mention changed to 「디어파파(DEAR PAPA)는」 and 「DEAR PAPA는 150ml…」 to 「디어파파는 150ml…」 per site copy rules.
@@ -123,7 +124,7 @@ export default function DadSkincareGiftTypesPage() {
       </ul>
       <p>어떤 종류를 고르든, 짧은 편지 한 줄을 곁들이면 선물이 더 오래 기억돼요.</p>
 
-      <h2>디어파파는 어떤 제품을 준비하고 있나요?</h2>
+      <h2 id={questionHeadingId("디어파파는 어떤 제품을 준비하고 있나요?")}>디어파파는 어떤 제품을 준비하고 있나요?</h2>
       <p>디어파파(DEAR PAPA)는 아빠를 위한 남성 올인원 스킨케어 브랜드예요. 딸이 쓴 한 줄 편지와 함께 아빠께 건네는 선물을 만들고 있고, 지금은 출시 준비 중이에요.</p>
       <ul>
         <li>「세안 후 하나로 마무리하는 남성 올인원 스킨케어」</li>

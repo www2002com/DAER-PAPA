@@ -10,6 +10,7 @@ import {
   dotDate,
   getJournalEntry,
 } from '@/lib/journal';
+import { questionHeadingId } from '@/lib/question-heading-id';
 
 // Ported from content/journal/journal-dad-allinone-skincare-gift-v1-2026-10-31.md (Sun-ny approved).
 
@@ -65,7 +66,7 @@ export default function DadAllinoneSkincareGiftPage() {
       </p>
       <p>디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어예요. 출시 전이에요.</p>
 
-      <h2>아빠 올인원 스킨케어 선물은 어떤 아빠에게 맞나요?</h2>
+      <h2 id={questionHeadingId("아빠 올인원 스킨케어 선물은 어떤 아빠에게 맞나요?")}>아빠 올인원 스킨케어 선물은 어떤 아빠에게 맞나요?</h2>
       <p>아래가 맞으면 올인원을 선물 후보에 넣으면 돼요.</p>
       <ol>
         <li>세안 후나 면도 후에 바를 자리가 있어요.</li>
@@ -80,7 +81,7 @@ export default function DadAllinoneSkincareGiftPage() {
         건넬지를 먼저 보는 기준이에요.
       </p>
 
-      <h2>건네기 전에 무엇을 확인하면 되나요?</h2>
+      <h2 id={questionHeadingId("건네기 전에 무엇을 확인하면 되나요?")}>건네기 전에 무엇을 확인하면 되나요?</h2>
       <table>
         <thead>
           <tr>
@@ -122,7 +123,7 @@ export default function DadAllinoneSkincareGiftPage() {
         타입별 효능은 이 글에서 다루지 않아요. 순위를 매기지 않아요. 디어파파 가격·전성분·출시일은 아직 정해지지 않았어요.
       </p>
 
-      <h2>스킨·로션을 나눠 바르던 아빠에게도 올인원 선물이 맞나요?</h2>
+      <h2 id={questionHeadingId("스킨·로션을 나눠 바르던 아빠에게도 올인원 선물이 맞나요?")}>스킨·로션을 나눠 바르던 아빠에게도 올인원 선물이 맞나요?</h2>
       <p>
         맞을 수 있어요. 예전에 스킨·로션을 나눠 바르던 아빠라도, 요즘은 세안 후 한 단계로 마무리하는 쪽이 편할 때가 있어요.
         「여러 병을 따로 바를지, 하나로 줄일지」만 먼저 정하면 돼요. 제품 유형 비교는{' '}
@@ -130,7 +131,7 @@ export default function DadAllinoneSkincareGiftPage() {
         「로션」이라고 부르지는 않아요.
       </p>
 
-      <h2>면도 후·세안 후에 바르는 선물로도 괜찮은가요?</h2>
+      <h2 id={questionHeadingId("면도 후·세안 후에 바르는 선물로도 괜찮은가요?")}>면도 후·세안 후에 바르는 선물로도 괜찮은가요?</h2>
       <p>
         네. 세안 후나 면도 후에 바를 자리가 있으면, 올인원은 「매일 쓰는 축」이면서 단계가 적은 선물에 가까워요. 생일·생신
         자리에서 바로 건네기도 좋아요. 생일 선물 일반 기준은{' '}
@@ -139,7 +140,7 @@ export default function DadAllinoneSkincareGiftPage() {
         <Link href="/journal/dad-birthday-gift-skincare">아빠 생일 선물 스킨케어</Link>에 있어요.
       </p>
 
-      <h2>한 줄 편지와 함께 어떻게 건네면 되나요?</h2>
+      <h2 id={questionHeadingId("한 줄 편지와 함께 어떻게 건네면 되나요?")}>한 줄 편지와 함께 어떻게 건네면 되나요?</h2>
       <p>
         짧은 한 줄을 곁들이면 「말로 못 한 마음」을 같이 전할 수 있어요. 편지는 자녀가 따로 써서 건네는 거예요. 지금 사이트에서 미리보기와 PNG 저장을 할 수 있어요. 쓰는 법 한 줄(「세안 후에 바르세요」)과 마음을 적은 한 줄을 같이 두면, 받는
         자리에서 어색함이 줄어들어요. <Link href="/#letter">한 줄 편지 쓰기</Link>
@@ -156,7 +157,7 @@ export default function DadAllinoneSkincareGiftPage() {
 
       {DAD_ALLINONE_SKINCARE_GIFT_FAQ.map(({ q, a }) => (
         <section key={q}>
-          <h2>{q}</h2>
+          <h2 id={questionHeadingId(q)}>{q}</h2>
           <p>{a}</p>
         </section>
       ))}

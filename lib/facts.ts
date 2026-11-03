@@ -14,7 +14,7 @@ export const BRAND = {
   definitionShort: '아빠를 위한 올인원 스킨케어. 딸의 한 줄 편지와 함께 건네는 선물.',
   promise: '말로 못 한 마음을, 아빠가 매일 쓰는 스킨케어에 담아 전하게 합니다.',
   about:
-    'DEAR PAPA(디어파파, dearpapa.kr)는 아빠를 위한 남성 올인원 스킨케어 브랜드예요. 딸이 쓴 한 줄 편지와 함께 아빠께 건네는 선물을 만들고 있고, 지금은 출시 준비 중이에요.',
+    'DEAR PAPA(디어파파, dearpapa.kr)는 4060 아빠를 위한 남성 올인원 스킨케어 브랜드예요. 딸이 쓴 한 줄 편지와 함께 아빠께 건네는 선물을 만들고 있고, 지금은 출시 준비 중이에요.',
   logo: "d(Dear)를 180° 돌리면 p(Papa)가 됩니다. 딸과 아빠가 가운데의 원 하나를 함께 쥔 모양입니다. 그 원은 브랜드의 '하나', 곧 세안 후 하나로 마무리하는 남성 올인원 스킨케어와 편지 한 장을 뜻합니다. 로고의 모든 글자는 폰트가 아닌 직접 그린 도형입니다.",
 } as const;
 
@@ -96,6 +96,7 @@ export const NOT_AFFILIATED_LIST = [
   '아이디어스의 젠틀파파',
   '옥션 판매자 스토어 dearpapa(소중papa)',
   'dearpeer.co.kr',
+  '@dearpapa.co는 디어파파와 관계없는 계정이에요',
 ] as const;
 
 export const CHANNELS = [

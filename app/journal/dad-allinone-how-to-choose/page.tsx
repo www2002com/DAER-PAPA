@@ -5,6 +5,7 @@ import { ComparisonTable } from '@/components/article/ComparisonTable';
 import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/ArticleLayout';
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
 import { DAD_ALLINONE_HOW_TO_CHOOSE_DESCRIPTION, DAD_ALLINONE_HOW_TO_CHOOSE_FAQ, dotDate, getJournalEntry, DAD_ALLINONE_HOW_TO_CHOOSE_META_TITLE, DAD_ALLINONE_HOW_TO_CHOOSE_META_DESCRIPTION } from '@/lib/journal';
+import { questionHeadingId } from '@/lib/question-heading-id';
 
 // Ported from content/journal/journal-dad-allinone-how-to-choose-2026-update-v1-2026-11-02.md (Sun-ny approved).
 
@@ -59,7 +60,7 @@ export default function DadAllInOneHowToChoosePage() {
 
       {DAD_ALLINONE_HOW_TO_CHOOSE_FAQ.map(({ q, a }) => (
         <section key={q}>
-          <h2>{q}</h2>
+          <h2 id={questionHeadingId(q)}>{q}</h2>
           <p>{a}</p>
         </section>
       ))}
@@ -80,7 +81,7 @@ export default function DadAllInOneHowToChoosePage() {
       </table>
       </ComparisonTable>
 
-      <h2>선물로 줄 올인원, 어떤 기준으로 고를까요?</h2>
+      <h2 id={questionHeadingId("선물로 줄 올인원, 어떤 기준으로 고를까요?")}>선물로 줄 올인원, 어떤 기준으로 고를까요?</h2>
       <p>
         선물로 줄 올인원은 피부 타입·향·용량·편지를 순서대로 보면 고르기 쉬워요. 아래 표에 확인할 점과 확인 방법을 정리했고, 디어파파 칸은
         출시 전 상태예요.
@@ -153,7 +154,7 @@ export default function DadAllInOneHowToChoosePage() {
         만들고 있어요.
       </p>
 
-      <h2>올인원과 스킨·크림 따로 쓰기, 디어파파 스킨케어는 무엇을 비교할까요?</h2>
+      <h2 id={questionHeadingId("올인원과 스킨·크림 따로 쓰기, 디어파파 스킨케어는 무엇을 비교할까요?")}>올인원과 스킨·크림 따로 쓰기, 디어파파 스킨케어는 무엇을 비교할까요?</h2>
       <p>
         디어파파 스킨케어로 보면, 올인원과 스킨·크림을 따로 쓰는 방식은 아래 네 가지만 맞춰 보면 고르기 쉬워요. 어느 쪽이 더 낫다고
         순위를 매기지 않아요.

@@ -10,6 +10,7 @@ import {
   dotDate,
   getJournalEntry,
 } from '@/lib/journal';
+import { questionHeadingId } from '@/lib/question-heading-id';
 
 // Ported from content/journal/journal-dad-birthday-gift-skincare-v1-2026-10-31.md (FINAL, mtime 2026-10-31 17:02:50 +0900).
 // Guardrail minimal fixes (listed in PR): ranking recommendation wording in H2/FAQ Q; budget amount phrase in body/H2. Letter wording from source (no printed-card claim).
@@ -112,7 +113,7 @@ export default function DadBirthdayGiftSkincarePage() {
         가격·전성분·출시일이 아직 없는 브랜드(디어파파 포함)는 「지금 구매」 목록이 아니라 「출시 전·기준만」으로 읽으면 돼요.
       </p>
 
-      <h2>아빠 생일 선물로 스킨케어를 골랐다면 순서는요?</h2>
+      <h2 id={questionHeadingId("아빠 생일 선물로 스킨케어를 골랐다면 순서는요?")}>아빠 생일 선물로 스킨케어를 골랐다면 순서는요?</h2>
       <ol>
         <li>쓰는 때부터 맞춰요. 생일 아침인지 저녁인지에 따라 세안 후·면도 후 중 어디인지 정해요.</li>
         <li>단계 수·향·전성분 공개를 이어서 체크해요.</li>
@@ -120,21 +121,21 @@ export default function DadBirthdayGiftSkincarePage() {
         <li>예산이 정해져 있어도, 금액 단정보다 위 칸을 먼저 통과한 뒤 가격을 봐요.</li>
       </ol>
 
-      <h2>4060 아빠 생신 선물로 스킨케어를 고를 때도 표가 같나요?</h2>
+      <h2 id={questionHeadingId("4060 아빠 생신 선물로 스킨케어를 고를 때도 표가 같나요?")}>4060 아빠 생신 선물로 스킨케어를 고를 때도 표가 같나요?</h2>
       <p>같아요. 숫자 나이보다 쓰는 때·단계 수·향·전성분이 우선이에요. 4060 아빠 생신에도 같은 표를 쓰면 돼요.</p>
 
-      <h2>아빠 올인원 스킨케어 선물은 표에서 어디에 해당하나요?</h2>
+      <h2 id={questionHeadingId("아빠 올인원 스킨케어 선물은 표에서 어디에 해당하나요?")}>아빠 올인원 스킨케어 선물은 표에서 어디에 해당하나요?</h2>
       <p>
         쓰는 때가 세안 후·면도 후이고, 단계 수 칸에서 「한 단계」에 가까운 제품이에요. 생일날 바로 바르기 쉬운 쪽이기도 해요. 디어파파
         레터 올인원은 그 방향으로 기획하고 만들고 있어요.
       </p>
 
-      <h2>아버지 생신·아빠 생일 선물을 예산으로 볼 때는요?</h2>
+      <h2 id={questionHeadingId("아버지 생신·아빠 생일 선물을 예산으로 볼 때는요?")}>아버지 생신·아빠 생일 선물을 예산으로 볼 때는요?</h2>
       <p>
         예산 칸만 따로 보지 말고, 표 앞줄을 통과한 뒤 가격을 확인하세요. 디어파파 레터 올인원 가격은 미정이에요. 판매처도 아직 없어요.
       </p>
 
-      <h2>편지와 함께 줄 수 있는 아빠 선물인가요?</h2>
+      <h2 id={questionHeadingId("편지와 함께 줄 수 있는 아빠 선물인가요?")}>편지와 함께 줄 수 있는 아빠 선물인가요?</h2>
       <p>
         네, 짧은 한 줄을 곁들일 수 있어요. 지금 사이트에서 편지 카드 미리보기와 PNG 저장만 가능해요. 편지를 어떤 방식으로 담을지는 출시
         전에 정할 예정이에요.{' '}
@@ -152,7 +153,7 @@ export default function DadBirthdayGiftSkincarePage() {
 
       {DAD_BIRTHDAY_GIFT_SKINCARE_FAQ.map(({ q, a }) => (
         <section key={q}>
-          <h2>{q}</h2>
+          <h2 id={questionHeadingId(q)}>{q}</h2>
           <p>{a}</p>
         </section>
       ))}

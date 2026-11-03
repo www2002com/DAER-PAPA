@@ -12,6 +12,7 @@ import {
   dotDate,
   getJournalEntry,
 } from '@/lib/journal';
+import { questionHeadingId } from '@/lib/question-heading-id';
 
 // Ported from content/journal/journal-fragrance-alcohol-free-allinone-rewrite-v1-2026-11-02.md
 // (SEO & AEO Desk; Sun-ny 2026-11-02). URL kept; H1/title/meta/FAQ replaced.
@@ -65,7 +66,7 @@ export default function FragranceAlcoholFreeAllInOnePage() {
         </nav>
       }
     >
-      <h2>전성분 표기는 어떻게 읽나요?</h2>
+      <h2 id={questionHeadingId("전성분 표기는 어떻게 읽나요?")}>전성분 표기는 어떻게 읽나요?</h2>
       <ul>
         <li>화장품 용기나 포장에는 들어간 성분이 모두 적혀 있어요. 이것을 전성분 표기라고 해요.</li>
         <li>성분은 대체로 함량이 높은 순서로 적어요. 그래서 앞쪽에 있는 성분일수록 제품에서 차지하는 양이 크다고 보면 돼요.</li>
@@ -73,7 +74,7 @@ export default function FragranceAlcoholFreeAllInOnePage() {
         <li>착향제(향료)와 착색제도 순서와 상관없이 적을 수 있어요(화장품법 시행규칙 별표 4).</li>
       </ul>
 
-      <h2>향료는 전성분 표기에서 어떻게 찾나요?</h2>
+      <h2 id={questionHeadingId("향료는 전성분 표기에서 어떻게 찾나요?")}>향료는 전성분 표기에서 어떻게 찾나요?</h2>
       <ul>
         <li>
           <strong>「향료」:</strong> 여러 향 원료를 섞은 것을 한 단어로 적은 표기예요. 이 단어가 있으면 향 원료가 들어간
@@ -91,7 +92,7 @@ export default function FragranceAlcoholFreeAllInOnePage() {
         <li>냄새가 거의 나지 않는다고 향 원료가 없다는 뜻은 아니에요. 냄새보다 전성분 표기로 확인하세요.</li>
       </ul>
 
-      <h2>에탄올·변성알코올은 어떻게 찾나요?</h2>
+      <h2 id={questionHeadingId("에탄올·변성알코올은 어떻게 찾나요?")}>에탄올·변성알코올은 어떻게 찾나요?</h2>
       <ul>
         <li>
           <strong>표기:</strong> 「에탄올」「변성알코올」「알코올」로 적혀요. 영문으로는 Ethanol, Alcohol Denat.,
@@ -107,7 +108,7 @@ export default function FragranceAlcoholFreeAllInOnePage() {
         </li>
       </ul>
 
-      <h2>향에 민감한 4060 아빠에게는 어떻게 고를까요?</h2>
+      <h2 id={questionHeadingId("향에 민감한 4060 아빠에게는 어떻게 고를까요?")}>향에 민감한 4060 아빠에게는 어떻게 고를까요?</h2>
       <p>받는 아빠의 습관을 먼저 떠올리면 고르기 쉬워요.</p>
       <ComparisonTable label="향에 민감한 아빠 올인원 확인표">
         <table>
@@ -142,14 +143,14 @@ export default function FragranceAlcoholFreeAllInOnePage() {
         맞는 건 아니니, 전성분 전체와 아빠의 경험을 함께 보세요. 바른 뒤 불편하면 사용을 멈추고 전문가와 상담하세요.
       </p>
 
-      <h2>선물하기 전에 무엇을 더 물어보면 좋을까요?</h2>
+      <h2 id={questionHeadingId("선물하기 전에 무엇을 더 물어보면 좋을까요?")}>선물하기 전에 무엇을 더 물어보면 좋을까요?</h2>
       <ul>
         <li>지금 쓰는 제품이 있다면 이름이나 사진을 슬쩍 받아 두세요. 전성분을 비교하기 쉬워요.</li>
         <li>끈적임을 싫어하시는지, 바른 뒤 당김이 신경 쓰이시는지 여쭤 보세요.</li>
         <li>단계가 여러 개인 제품보다 세안 후 한 번 바르는 올인원이 아빠에게 더 맞을지도 생각해 보세요.</li>
       </ul>
 
-      <h2>디어파파 레터 올인원은 어떤가요?</h2>
+      <h2 id={questionHeadingId("디어파파 레터 올인원은 어떤가요?")}>디어파파 레터 올인원은 어떤가요?</h2>
       <p>향과 알코올 관련 정보는 전성분과 함께 시험 자료를 확보한 뒤 공개합니다.</p>
       <p>
         디어파파 레터 올인원은 150ml 한 가지로 준비하고 있고, 아직 출시 전이에요. 가격·전성분·출시일은 미정이에요. 확인된

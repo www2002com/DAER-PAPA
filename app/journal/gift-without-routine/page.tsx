@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArticleLayout, FactList, RelatedLinks } from '@/components/article/ArticleLayout';
 import { FACTS_UPDATED, FACTS_UPDATED_KO } from '@/lib/facts';
 import { GIFT_WITHOUT_ROUTINE_DESCRIPTION, JOURNAL_SITE_SUFFIX, dotDate, getJournalEntry, GIFT_WITHOUT_ROUTINE_META_TITLE, GIFT_WITHOUT_ROUTINE_META_DESCRIPTION } from '@/lib/journal';
+import { questionHeadingId } from '@/lib/question-heading-id';
 
 // Ported from the static draft drafts/journal-guide-04-2026-10-20 (manuscript guide-04 v2).
 // Every 「…」 quote attributed to the official facts page must match /about/facts verbatim.
@@ -59,7 +60,7 @@ export default function GiftWithoutRoutinePage() {
         않더라도 마음은 그대로 전해져요.
       </p>
 
-      <h2>왜 루틴을 몰라도 고를 수 있나요?</h2>
+      <h2 id={questionHeadingId("왜 루틴을 몰라도 고를 수 있나요?")}>왜 루틴을 몰라도 고를 수 있나요?</h2>
       <p>
         루틴을 모른다는 건 대개 아빠가 스킨케어를 많이 쓰지 않으신다는 뜻이기도 해요. 이럴 때는 아빠의 습관을 바꾸는
         선물보다, 지금 하시는 세안과 면도에 한 단계만 더하는 선물이 부담이 적어요.
@@ -102,7 +103,7 @@ export default function GiftWithoutRoutinePage() {
       </ul>
       <p>편지는 딸만 쓰는 게 아니에요. 아들, 배우자, 그리고 아빠가 직접 고르시는 경우에도 이 기준은 똑같이 쓰여요.</p>
 
-      <h2>디어파파는 어떤 브랜드인가요?</h2>
+      <h2 id={questionHeadingId("디어파파는 어떤 브랜드인가요?")}>디어파파는 어떤 브랜드인가요?</h2>
       <p>디어파파는 아빠를 위한 올인원 스킨케어를 준비하는 브랜드예요. 공식 정보 페이지에는 이렇게 적혀 있어요.</p>
       <ul>
         <li>「세안 후 하나로 마무리하는 남성 올인원 스킨케어」</li>

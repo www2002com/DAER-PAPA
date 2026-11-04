@@ -3,7 +3,7 @@ import { FRAGRANCE_FREE_DESCRIPTION, FRAGRANCE_FREE_FAQ, getJournalEntry } from 
 
 // New page (not part of the preserved production snapshot). Author/publisher point at the
 // site-wide Organization node (@id …/#organization, defined on the home page and schema.jsonld).
-const entry = getJournalEntry('fragrance-alcohol-free-allinone');
+const entry = getJournalEntry('allinone-fragrance-alcohol-info');
 const URL = `https://dearpapa.kr${entry.href}`;
 const FACTS = 'https://dearpapa.kr/about/facts';
 

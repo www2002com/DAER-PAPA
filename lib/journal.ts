@@ -99,8 +99,8 @@ export const JOURNAL: readonly JournalEntry[] = [
     modified: '2026-10-25',
   },
   {
-    slug: 'fragrance-alcohol-free-allinone',
-    href: '/journal/fragrance-alcohol-free-allinone',
+    slug: 'allinone-fragrance-alcohol-info',
+    href: '/journal/allinone-fragrance-alcohol-info',
     category: '선물 이야기',
     title: '아빠 올인원 선물, 향과 알코올은 어떻게 확인하나요?',
     summary: '화장품 용기나 상자에 적힌 전성분 표기에서 「향료」, 향 성분 이름, 라벤더오일 같은 향이 있는 식물 오일, 「에탄올」「변성알코올」을 찾아보면 돼요. 제품 설명 문구보다 전성분 표기를 먼저 보세요.',
@@ -493,7 +493,7 @@ export const ALLINONE_3_QUESTIONS_FAQ = [
   { q: "비싼 올인원이 더 좋은가요? 얼마나 써야 알 수 있나요?", points: ["바로 답: 가격이 높다고 꼭 더 맞는 것은 아닙니다.", "맞는 조건: 미국피부과학회는 제품을 고를 때 피부 타입, 현실적인 기대, 예산을 함께 고려하라고 안내합니다.", "확인할 근거: 용량을 하루 사용량으로 나눠 한 통으로 얼마나 쓰는지 계산해 보세요. 스킨과 로션을 따로 살 때의 비용과도 같은 방식으로 비교할 수 있어요. 효과를 말하는 문구가 있다면 시험 대상과 기간이 밝혀져 있는지 봅니다. 후기와 시험 결과는 다른 근거입니다.", "맞지 않는 경우: 바로 달라지는 것을 기대하기보다 몇 주 꾸준히 써 본 뒤 판단하는 것이 일반적입니다."] },
 ];
 
-/** fragrance-alcohol-free-allinone meta/og (rewrite v1 2026-11-02 SEO & AEO Desk). */
+/** allinone-fragrance-alcohol-info meta/og (rewrite v1 2026-11-02 SEO & AEO Desk). */
 export const FRAGRANCE_FREE_HEADLINE = "아빠 올인원 선물, 향과 알코올은 어떻게 확인하나요?";
 export const FRAGRANCE_FREE_META_TITLE = "아빠 올인원 선물, 향과 알코올은 어떻게 확인하나요? | 디어파파 DEAR PAPA";
 export const FRAGRANCE_FREE_DESCRIPTION = "아빠 올인원 스킨케어를 선물할 때 전성분 표기에서 향료와 에탄올을 확인하는 방법, 향에 민감한 4060 아빠에게 고르는 요령을 정리했어요.";

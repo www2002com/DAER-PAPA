@@ -13,10 +13,10 @@ import {
   getJournalEntry,
 } from '@/lib/journal';
 
-// Ported from content/journal/journal-fragrance-alcohol-free-allinone-rewrite-v1-2026-11-02.md
+// Ported from content/journal/journal-allinone-fragrance-alcohol-info-rewrite-v1-2026-11-02.md
 // (SEO & AEO Desk; Sun-ny 2026-11-02). URL kept; H1/title/meta/FAQ replaced.
 
-const entry = getJournalEntry('fragrance-alcohol-free-allinone');
+const entry = getJournalEntry('allinone-fragrance-alcohol-info');
 const URL = `https://dearpapa.kr${entry.href}`;
 
 export const metadata: Metadata = {

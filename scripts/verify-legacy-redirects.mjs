@@ -19,6 +19,8 @@ const cases = [
   ['/journal/development-principles.html', '/journal/development-principles'],
   ['/journal/fathers-gift-guide.html', '/journal/fathers-gift-guide'],
   ['/journal/dad-gift-guide.html', '/journal/dad-gift-guide'],
+  ['/journal/fragrance-alcohol-free-allinone', '/journal/allinone-fragrance-alcohol-info'],
+  ['/journal/fragrance-alcohol-free-allinone/', '/journal/allinone-fragrance-alcohol-info'],
   ['/about/facts.html?utm_source=legacy&ref=ai', '/about/facts?utm_source=legacy&ref=ai'],
 ];
 let failures = 0;

@@ -1,5 +1,5 @@
 import { FACTS_UPDATED } from '@/lib/facts';
-import { DAD_GIFT_SKINCARE_GUIDE_DESCRIPTION, getJournalEntry } from '@/lib/journal';
+import { DAD_GIFT_SKINCARE_GUIDE_DESCRIPTION, DAD_GIFT_SKINCARE_GUIDE_FAQ, getJournalEntry } from '@/lib/journal';
 
 // New page (not part of the preserved production snapshot). Author/publisher point at the
 // site-wide Organization node (@id …/#organization, defined on the home page and schema.jsonld).
@@ -28,6 +28,17 @@ const jsonLd = {
       isPartOf: { '@id': 'https://dearpapa.kr/#website' },
       isBasedOn: { '@id': FACTS },
       citation: [FACTS],
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${URL}#faq`,
+      url: URL,
+      inLanguage: 'ko-KR',
+      mainEntity: DAD_GIFT_SKINCARE_GUIDE_FAQ.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
     },
     {
       '@type': 'BreadcrumbList',

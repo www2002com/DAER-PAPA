@@ -73,7 +73,7 @@ export default function DadGiftSkincareGuidePage() {
 
       <h2>4. 바르는 단계 수</h2>
       <p>
-        올인원은 스킨, 로션처럼 여러 단계를 한 제품으로 줄인 화장품입니다. 여러 제품을 따로 챙기지 않는 아빠에게 쓰기 쉽습니다.
+        올인원은 스킨과 그다음 단계처럼 여러 단계를 한 제품으로 줄인 화장품입니다. 여러 제품을 따로 챙기지 않는 아빠에게 쓰기 쉽습니다.
         낮에는 자외선 차단제(SPF 30 이상)를 별도 단계로 바르는 것이 일반적인 피부 관리 권고입니다. 올인원 선물에 선크림을 함께
         챙기는 것도 방법입니다.
       </p>
@@ -111,6 +111,31 @@ export default function DadGiftSkincareGuidePage() {
       </ComparisonTable>
 
       <ProductBox />
+
+      <h2>차 히터 바람을 오래 맞는 아빠, 겨울 스킨케어 선물은 어떻게 고를까요?</h2>
+      <p>선물 후보를 「차·길에서 쓰는 생활 물건」과 「집에 돌아와 세안·면도 뒤에 바르는 것」으로 나눠 보세요.</p>
+      <p>
+        히터 바람을 오래 맞으며 운전·출퇴근하는 4060 아빠라도, 차 안 환경만으로 특정 스킨케어 효과를 단정하지 않는 것이 안전해요.
+        차 안 김 서림·습기는 차량 설명서의 공조 안내(송풍 방향·외부 공기)를 따르고, 피부 이야기로 옮기지 않는 편이 좋아요.
+      </p>
+      <p>
+        바르는 쪽 선물을 고를 때는 위 표의 피부 타입·단계 수·전성분을 그대로 보시면 돼요. 여러 단계 구성보다 세안 후 하나로 바를 수
+        있는지를 먼저 보면 선택이 한 번으로 줄어들어요. 바르는 때는 집에서 세안·면도 뒤로 맞춰 보는 편이 분명하고, 차 안에서
+        바르라고 권하지는 않아요. 미국피부과학회(AAD)도 건조함을 느낄 때의 일반적인 생활 습관을 안내할 뿐, 환경만으로 제품 효과를
+        약속하지는 않아요.
+      </p>
+      <p>
+        생활 쪽(차·길)과 바르는 쪽(귀가 후)을 같은 순위로 두지 마세요. 오늘은 바르는 쪽만 정해도 충분하고, 생활 쪽은{' '}
+        <Link href="/journal/dad-christmas-gift">아빠 크리스마스 선물</Link>의 겨울에 바로 쓰는 목록을 참고하면 돼요. 향과 알코올
+        관련 정보는 전성분과 함께 시험 자료를 확보한 뒤 공개합니다. 디어파파 레터 올인원은 150ml 올인원 스킨케어 한 가지로 준비하고 있고,
+        가격·전성분·출시일은 아직 미정이에요.
+      </p>
+      <p>
+        참고:{' '}
+        <a href="https://www.aad.org/public/everyday-care/skin-care-basics/dry/dermatologists-tips-relieve-dry-skin" rel="noopener">
+          AAD, Dermatologists&apos; top tips for relieving dry skin
+        </a>
+      </p>
 
       <h2>모바일로 보내도 마음이 전해지는 법: 한 줄 편지 함께 쓰기</h2>
       <p>
@@ -154,7 +179,7 @@ export default function DadGiftSkincareGuidePage() {
 
       <p>Q. 문의는 어디로 하나요?</p>
       <p>
-        A. <a href="mailto:hello@dearpapa.kr">hello@dearpapa.kr</a>로 보내 주세요.
+        A. <a href="mailto:hello@dearpapa.kr">hello@dearpapa.kr로 보내 주세요.</a>
       </p>
 
       <p>

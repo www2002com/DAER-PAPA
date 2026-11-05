@@ -39,13 +39,11 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary_large_image' },
   icons: {
-    icon: [
-      { url: '/brand/icons-r2/favicon.ico', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
-      { url: '/brand/icons-r2/favicon-32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/brand/icons-r2/favicon.svg', sizes: 'any', type: 'image/svg+xml' },
-    ],
-    shortcut: '/brand/icons-r2/favicon.ico',
-    apple: [{ url: '/brand/icons-r2/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    // Naver Search Advisor: absolute hrefs, each rel value once (no SVG icon link).
+    // https://searchadvisor.naver.com/guide/markup-favicon
+    shortcut: 'https://dearpapa.kr/brand/icons-r2/favicon.ico',
+    icon: [{ url: 'https://dearpapa.kr/brand/icons-r2/favicon-32.png', sizes: '32x32', type: 'image/png' }],
+    apple: [{ url: 'https://dearpapa.kr/brand/icons-r2/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   manifest: '/brand/icons-r2/site.webmanifest',
   other: {

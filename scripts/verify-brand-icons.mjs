@@ -18,15 +18,29 @@ async function htmlFiles(dir) {
 const pages = await htmlFiles('out');
 assert(pages.length > 0, 'Build the site before verifying icons.');
 let expected;
+const ABS = 'https://dearpapa.kr';
+const expectedHead = [
+  { rel: 'manifest', href: '/brand/icons-r2/site.webmanifest', sizes: null, type: '' },
+  { rel: 'shortcut icon', href: `${ABS}/brand/icons-r2/favicon.ico`, sizes: null, type: '' },
+  { rel: 'icon', href: `${ABS}/brand/icons-r2/favicon-32.png`, sizes: '32x32', type: 'image/png' },
+  { rel: 'apple-touch-icon', href: `${ABS}/brand/icons-r2/apple-touch-icon.png`, sizes: '180x180', type: 'image/png' },
+];
+function localPath(href) {
+  if (href.startsWith(ABS + '/')) return path.join('out', href.slice(ABS.length + 1));
+  if (href.startsWith('/')) return path.join('out', href.slice(1));
+  throw new Error(`unexpected icon href: ${href}`);
+}
 for (const file of pages) {
   const dom = new JSDOM(await fs.readFile(file, 'utf8'));
   const links = [...dom.window.document.querySelectorAll('link[rel~="icon"],link[rel="apple-touch-icon"],link[rel="manifest"]')]
     .map(n => ({ rel: n.rel, href: n.getAttribute('href'), sizes: n.getAttribute('sizes'), type: n.type }));
-  assert.equal(links.length, 6, `${file}: missing or conflicting icon declarations`);
-  assert(links.every(n => n.href.startsWith('/brand/icons-r2/')), `${file}: stale icon path`);
+  assert.deepEqual(links, expectedHead, `${file}: favicon head must match Naver absolute/one-rel shape`);
+  // Each icon rel appears once (shortcut icon, icon, apple-touch-icon).
+  const faviconRels = links.filter(n => n.rel !== 'manifest').map(n => n.rel);
+  assert.deepEqual(faviconRels, ['shortcut icon', 'icon', 'apple-touch-icon'], `${file}: favicon rels`);
   if (!expected) expected = links;
   else assert.deepEqual(links, expected, `${file}: icons differ from other pages`);
-  for (const link of links) await fs.access(path.join('out', link.href));
+  for (const link of links) await fs.access(localPath(link.href));
   dom.window.close();
 }
 for (const name of ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png', 'site.webmanifest']) {

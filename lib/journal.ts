@@ -184,7 +184,17 @@ export const JOURNAL: readonly JournalEntry[] = [
       '아빠 크리스마스 선물과 엄마 아빠께 함께 드리는 선물, 직접 만드는 선물, 연말 한마디 쓰는 법까지 정리했어요.',
     published: '2026-11-02',
     modified: '2026-11-03',
+  },  {
+    slug: 'dad-skincare-gift-checklist',
+    href: '/journal/dad-skincare-gift-checklist',
+    category: '선물 이야기',
+    title: '아빠 스킨케어 선물, 사기 전에 무엇을 확인해야 할까요?',
+    summary:
+      '사기 전에 아빠가 쓰는 단계 수, 쓰는 때, 전성분 공개, 기능성 문구의 심사·보고, 자외선 차단, 용량과 둘 자리, 함께 건넬 한 줄까지 7가지를 확인하면 돼요.',
+    published: '2026-11-05',
+    modified: '2026-11-05',
   },
+
 ];
 
 /** guide-04 meta/og description and lead (longer than the list summary). */
@@ -528,3 +538,31 @@ export const DAD_SKINCARE_GIFT_TYPES_DESCRIPTION =
 export const DAD_FIRST_ALLINONE_META_TITLE = '출시 전 디어파파, 4060 아빠에게 건네는 첫 올인원: 자녀가 골라 드리는 이유 | 디어파파 DEAR PAPA';
 export const DAD_FIRST_ALLINONE_DESCRIPTION =
   '관심은 있어도 무엇을 골라야 할지 정할 계기가 없어 화장품을 직접 고르지 않는 아빠가 많아요. 그런 아빠에게 필요한 화장품을 자녀가 골라 한 줄 편지와 함께 건네면, 그 선물이 아빠의 매일에 자리 잡는 시작이 될 수 있어요.';
+
+/** dad-skincare-gift-checklist: 7가지 체크리스트 (draft checklist-dad-skincare-gift-7-2026-11-05). */
+export const CHECKLIST_HEADLINE = '아빠 스킨케어 선물, 사기 전에 무엇을 확인해야 할까요?';
+export const CHECKLIST_META_TITLE = '아빠 스킨케어 선물, 사기 전에 무엇을 확인해야 할까요? | 디어파파 DEAR PAPA';
+export const CHECKLIST_DESCRIPTION =
+  '아빠 스킨케어 선물을 사기 전에 단계 수, 쓰는 때, 전성분, 기능성 문구, 자외선 차단, 용량, 함께 건넬 한 줄까지 7가지 확인 항목을 정리했어요.';
+/** Answer under H1 (≤150 chars). */
+export const CHECKLIST_SUMMARY =
+  '사기 전에 아빠가 쓰는 단계 수, 쓰는 때, 전성분 공개, 기능성 문구의 심사·보고, 자외선 차단, 용량과 둘 자리, 함께 건넬 한 줄까지 7가지를 확인하면 돼요.';
+/** Visible FAQ and FAQPage JSON-LD both render from this array. */
+export const CHECKLIST_FAQ = [
+  {
+    q: '아빠 스킨케어 선물은 무엇부터 확인하면 되나요?',
+    a: '아빠가 지금 몇 단계를 쓰시는지, 세안 후·면도 후·외출 전 중 언제 쓰실지부터 보세요. 그다음 전성분 공개와 용량을 확인하면 돼요.',
+  },
+  {
+    q: '미백·주름 개선 같은 문구는 어떻게 확인하나요?',
+    a: '「화장품법」 제4조에 따라 기능성화장품의 효능·효과는 품목별로 식품의약품안전처장의 심사를 받거나 보고서를 제출해야 해요. 심사·보고 문구가 있는지 확인하세요.',
+  },
+  {
+    q: '올인원 하나면 자외선 차단도 되나요?',
+    a: '자외선 차단은 기능성화장품 범위에 따로 있어요. 자외선 차단이 필요한 날에는 별도 차단제를 함께 보는 편이 안전해요.',
+  },
+  {
+    q: '디어파파 레터 올인원은 어떤 제품인가요?',
+    a: '디어파파 레터 올인원은 150ml 올인원 스킨케어 한 가지로, 미백·주름 개선 2중 기능성화장품 심사를 준비하고 있습니다. 가격·전성분·출시일은 아직 미정이에요.',
+  },
+];

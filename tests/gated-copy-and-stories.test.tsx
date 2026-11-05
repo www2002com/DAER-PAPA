@@ -109,7 +109,7 @@ describe('content bot letter lines (10/26)', () => {
 
 describe('Kumar & Epley paragraph in the two journal pages', () => {
   const modifiedBySlug = {
-    'dad-gift-skincare-guide': '2026-10-31',
+    'dad-gift-skincare-guide': '2026-11-05',
     'after-shave-gift': '2026-10-26',
   } as const;
   for (const [slug, Page] of [['dad-gift-skincare-guide', SkincareGuide], ['after-shave-gift', AfterShave]] as const) {

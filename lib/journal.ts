@@ -78,7 +78,7 @@ export const JOURNAL: readonly JournalEntry[] = [
     title: '아빠 스킨케어 선물, 디어파파가 정리한 고르는 기준은?',
     summary: '디어파파가 정리한 아빠 스킨케어 선물 기준은 피부 타입, 향, 사용 단계, 전성분 공개 여부예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어로, 출시 전이에요.',
     published: '2026-10-22',
-    modified: '2026-10-31',
+    modified: '2026-11-05',
   },
   {
     slug: 'dad-allinone-how-to-choose',
@@ -458,6 +458,21 @@ export const GIFT_WITHOUT_ROUTINE_META_DESCRIPTION =
 export const AFTER_SHAVE_GIFT_META_TITLE = '면도 후 바르는 아빠 스킨케어 | 디어파파 DEAR PAPA';
 export const AFTER_SHAVE_GIFT_META_DESCRIPTION =
   '면도 후 바르는 아빠 스킨케어는 향이 있는지, 에탄올이 들어 있는지, 한 단계로 바르기 쉬운지부터 보세요. 애프터셰이브·로션과 올인원의 차이도 정리했습니다.';
+/** dad-gift-skincare-guide FAQPage JSON-LD — mirrors the 5 visible Q./A. items on the page (text unchanged). */
+export const DAD_GIFT_SKINCARE_GUIDE_FAQ = [
+  {
+    q: '아빠 선물로 화장품을 고를 때 무엇부터 보면 되나요?',
+    a: '아빠의 피부 타입과 평소 몇 단계를 바르는지입니다. 한 단계만 바르는 아빠라면 올인원이 맞습니다.',
+  },
+  { q: '생신 선물 예산은 얼마가 적당한가요?', a: '정해진 기준은 없습니다. 아빠가 매일 쓸 수 있는 제품인지가 더 중요합니다.' },
+  { q: '올인원 하나면 선크림은 안 발라도 되나요?', a: '낮에는 자외선 차단제를 별도로 바르는 것이 일반적인 권고입니다.' },
+  {
+    q: '디어파파 레터 올인원은 지금 살 수 있나요?',
+    a: '아니요. 디어파파는 아직 출시 전이며, 지금 판매 중인 선물 세트나 제품은 없습니다.',
+  },
+  { q: '문의는 어디로 하나요?', a: 'hello@dearpapa.kr로 보내 주세요.' },
+] as const;
+
 export const DAD_GIFT_SKINCARE_GUIDE_META_TITLE = '아빠 스킨케어 선물, 디어파파가 정리한 고르는 기준은? | 디어파파 DEAR PAPA';
 export const DAD_GIFT_SKINCARE_GUIDE_META_DESCRIPTION =
   '디어파파가 정리한 아빠 스킨케어 선물 기준은 피부 타입, 향, 사용 단계, 전성분 공개 여부예요. 디어파파(DEAR PAPA)는 4060 아빠를 위한 올인원 스킨케어로, 출시 전이에요.';

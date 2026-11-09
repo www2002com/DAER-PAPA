@@ -15,6 +15,12 @@ const ARTICLES = [
     title: '출시 전 디어파파가 정리한 아빠 크리스마스 선물: 겨울에 매일 쓰는 스킨케어와 한 해 고마움 한마디 | 디어파파 DEAR PAPA',
   },
   {
+    date: '2026-11-06',
+    dateKo: '2026년 11월 6일',
+    href: 'https://authonnews.com/article/dear-papa-dad-skincare-gift-checklist-3',
+    title: '출시 전 디어파파, 아빠 스킨케어 선물 고를 때 확인할 체크리스트 | 디어파파 DEAR PAPA',
+  },
+  {
     date: '2026-10-29',
     dateKo: '2026년 10월 29일',
     href: 'https://authonnews.com/article/dear-papa-brand-name-slogan-meaning',

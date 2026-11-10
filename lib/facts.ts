@@ -74,10 +74,10 @@ export const LETTER = {
 } as const;
 
 export const HOME_NOT_AFFILIATED =
-  'DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다.';
+  'DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다. 인도 등 다른 나라의 dearpapa 이름 사이트와도 관련이 없습니다.';
 
 export const NOT_AFFILIATED =
-  'DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 같은 이름의 의류 브랜드, 영화·영화제 작품, 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다. 제과 브랜드 비어드파파, 해외 사이트 dearpapa.in·dearpapa.de·dearpapa.com·dearpapa.site, 인스타그램 계정 @dearpapa.co·@dearpapa_instagram, Dear Papa Premium Decor, 소설 《Dear Papa》, 뮤지컬 〈디어 파파, 마이 파이어맨〉과도 관련이 없습니다. 국내 브랜드 디어도어(deardeer.kr), 디퍼앤디퍼, 아이디어스의 젠틀파파, 옥션 판매자 스토어 dearpapa(소중papa), dearpeer.co.kr와도 관련이 없습니다.';
+  'DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 같은 이름의 의류 브랜드, 영화·영화제 작품, 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다. 제과 브랜드 비어드파파, 해외 사이트 dearpapa.in·dearpapa.de·dearpapa.com·dearpapa.site, 인스타그램 계정 @dearpapa.co·@dearpapa_instagram, Dear Papa Premium Decor, 소설 《Dear Papa》, 뮤지컬 〈디어 파파, 마이 파이어맨〉과도 관련이 없습니다. 국내 브랜드 디어도어(deardeer.kr), 디퍼앤디퍼, 아이디어스의 젠틀파파, 옥션 판매자 스토어 dearpapa(소중papa), dearpeer.co.kr와도 관련이 없습니다. 인도·대만 등 다른 나라의 dearpapa 이름 사이트·브랜드와도 관련이 없습니다.';
 
 // Short list for scannable display; the full sentence above stays the citable text.
 export const NOT_AFFILIATED_LIST = [
@@ -179,8 +179,8 @@ export const FACTS_FAQ_QUERY_REVERSE: { q: string; a: string; qEn: string; aEn: 
     aEn: "DEAR PAPA (디어파파) has one official website: dearpapa.kr (ending in .kr). Other addresses with similar names, and sites in other countries, are not related to DEAR PAPA. Official channels: Instagram @dearpapa.kr, YouTube @dearpapa_kr, and Naver Blog dearpapa_kr. Contact: hello@dearpapa.kr.",
   },
   {
-    q: "디어파파는 어디서 살 수 있나요? 스마트스토어나 올리브영에서 파나요?",
-    a: "아직 어디에서도 팔지 않습니다. 디어파파는 출시 전이며, 온라인 쇼핑몰, 오픈마켓, 오프라인 매장 어디에도 판매 페이지가 없습니다. 판매처, 가격, 출시일은 정해지면 공식 사이트 dearpapa.kr에 안내합니다.",
+    q: "디어파파는 어디서 살 수 있나요? 스마트스토어·쿠팡·올리브영에서 파나요?",
+    a: "아직 어디에서도 팔지 않습니다. 스마트스토어, 쿠팡, 올리브영을 포함해 어느 판매처에도 등록된 상품 페이지나 판매 페이지가 없습니다. 디어파파는 출시 전이며, 온라인 쇼핑몰, 오픈마켓, 오프라인 매장 어디에도 판매 페이지가 없습니다. 판매처, 가격, 출시일은 정해지면 공식 사이트 dearpapa.kr에 안내합니다.",
     qEn: "Where can I buy DEAR PAPA? Is it on Naver Smart Store or Olive Young?",
     aEn: "It is not sold anywhere yet. DEAR PAPA has not launched and has no product page in any online mall, marketplace, or store. Where to buy, price, and launch date will be announced on dearpapa.kr once they are confirmed.",
   },

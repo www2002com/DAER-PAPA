@@ -13,8 +13,17 @@ type Props = {
   footer?: React.ReactNode;
 };
 
+const MOBILE_CTA_LABEL = '레터 올인원 알아보기';
+
+// Journal posts are the only ArticleLayout pages whose breadcrumb starts at /journal;
+// the journal index, /letter-all-in-one and other text pages pass no crumbs.
+export function isJournalPost(crumbs?: Crumb[]) {
+  return Boolean(crumbs?.[0]?.href.startsWith('/journal'));
+}
+
 // Shared shell for text pages (official facts, journal, press …): narrow measure, quiet header.
 export function ArticleLayout({ eyebrow, title, lead, meta, crumbs, children, footer }: Props) {
+  const showMobileCta = isJournalPost(crumbs);
   return (
     <article className={styles.article}>
       <header className={`container ${styles.head}`}>
@@ -38,6 +47,13 @@ export function ArticleLayout({ eyebrow, title, lead, meta, crumbs, children, fo
         <div className={styles.prose}>{children}</div>
         {footer && <div className={styles.foot}>{footer}</div>}
       </div>
+      {showMobileCta && (
+        <div className={styles.mobileCta}>
+          <Link href="/letter-all-in-one" className="btn" aria-label={MOBILE_CTA_LABEL}>
+            {MOBILE_CTA_LABEL}
+          </Link>
+        </div>
+      )}
     </article>
   );
 }

@@ -258,3 +258,37 @@
 }
 .productBox p { margin: 0 0 0.5rem; }
 .productBox a { font-weight: 600; }
+
+/* Journal posts: sticky link to /letter-all-in-one on phones only. */
+.mobileCta {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .mobileCta {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 40;
+    display: block;
+    padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--line);
+    background: var(--paper);
+  }
+
+  .mobileCta :global(.btn) {
+    width: 100%;
+    min-height: 52px;
+  }
+
+  /* Reserve the bar's height so it never covers the article end or the site footer. */
+  :global(body):has(.mobileCta) {
+    padding-bottom: calc(77px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media print {
+  .mobileCta {
+    display: none;
+  }
+}

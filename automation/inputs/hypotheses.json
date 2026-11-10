@@ -1,0 +1,66 @@
+{
+  "source": "모듈 5 광고 가설·기획 — 2단계 MVP 초안. 가설 추가·변경은 사용자 승인 사항.",
+  "measurement": "오가닉(모듈 8 §1): 3초 시청 유지율, 평균 시청 지속, 저장·공유 수, 프로필 클릭, 팔로우 전환. 오가닉 데이터는 가설 후보 발굴용이며 통계적 검증이 아니다.",
+  "hypotheses": [
+    {
+      "id": "H1",
+      "status": "active",
+      "audience": "buyer",
+      "hook": "gift_occasion",
+      "tone": "emotional",
+      "title": "매일 쓰이는 선물 — 딸의 한 줄 편지",
+      "premise": "아빠에게 선물을 고르는 딸에게 '받는 날 한 번이 아니라 매일 쓰이는 선물 + 편지'라는 의미를 제시하면 선물 동기가 생긴다.",
+      "verification": "이 가설이 맞다면, 구매자층(딸) 시청자의 저장·공유와 프로필 클릭이 다른 가설보다 높을 것이다.",
+      "primaryMetric": "저장+공유 수 / 도달",
+      "plan": "plans/H1.json"
+    },
+    {
+      "id": "H2",
+      "status": "active",
+      "audience": "buyer",
+      "hook": "problem",
+      "tone": "practical",
+      "title": "작년 선물, 아직 쓰세요? — 선물 기준 바꾸기",
+      "premise": "아빠 선물이 서랍에 남는다는 공감 문제를 먼저 꺼내면, '매일 쓰이는가'라는 새 기준에 반응한다.",
+      "verification": "이 가설이 맞다면, 첫 3초 시청 유지율이 H1보다 높고 댓글(공감 반응)이 많을 것이다.",
+      "primaryMetric": "3초 시청 유지율",
+      "plan": "plans/H2.json"
+    },
+    {
+      "id": "H3",
+      "status": "active",
+      "audience": "user",
+      "hook": "problem",
+      "tone": "practical",
+      "title": "씻고, 덜고, 바르고 — 아빠의 세 단계 아침",
+      "premise": "여러 단계 스킨케어가 번거로운 4060 남성에게 세 단계 아침 루틴을 보여 주면 스스로 관심을 갖는다.",
+      "verification": "이 가설이 맞다면, 남성 시청자 비중과 평균 시청 지속이 구매자형 가설보다 높을 것이다.",
+      "primaryMetric": "평균 시청 지속(초)",
+      "plan": "plans/H3.json"
+    },
+    {
+      "id": "H4",
+      "status": "on_hold",
+      "audience": "user",
+      "hook": "ingredient_trust",
+      "tone": "informative",
+      "title": "성분 신뢰형 — 이중 기능성",
+      "premise": "미백·주름 이중 기능성 근거를 제시하면 신뢰가 생긴다.",
+      "verification": "이 가설이 맞다면, 프로필 클릭 대비 사이트 방문이 높을 것이다.",
+      "holdReason": "기능성 보고·심사 완료 전에는 효능 표현 불가(모듈 2 1-B). 완료 확인 후 재개.",
+      "plan": null
+    },
+    {
+      "id": "H5",
+      "status": "on_hold",
+      "audience": "buyer",
+      "hook": "social_proof",
+      "tone": "emotional",
+      "title": "사회적 증거형 — 선물 받은 아빠들의 반응",
+      "premise": "실제 사용 후기를 보여 주면 구매 불안이 줄어든다.",
+      "verification": "이 가설이 맞다면, 출시 후 유료 실험에서 CTR과 전환율이 높을 것이다.",
+      "holdReason": "출시 전이라 실제 후기가 없음. 출시 후 후기 확보 시 재개(가짜 후기 금지).",
+      "plan": null
+    }
+  ]
+}

@@ -1,11 +1,5 @@
 # DEAR PAPA 리뉴얼 보존 규칙
 
-### 2026-11-11 옥션 판매자 스토어 dearpapa 구분 문장 추가
-
-같은 주소에서 기존 구분 문단 끝에 한 문장만 더합니다(새 FAQ·섹션·주소 없음, 링크 없음). 국문 구분 문단 끝에 「옥션 판매자 스토어 dearpapa(소중papa, stores.auction.co.kr/dearpapa)는 주소에 dearpapa가 들어갈 뿐, 디어파파(DEAR PAPA)와 공식 사이트 dearpapa.kr과는 관련이 없습니다.」를, 영문 문단이 있는 곳에는 끝에 「The Auction seller store dearpapa (소중papa, stores.auction.co.kr/dearpapa) only shares the word "dearpapa" in its address and is not related to DEAR PAPA or its official site, dearpapa.kr.」를 더합니다.
-적용 위치: `/about/facts` 본문(`factsBodyHtml`, facts 본문 문단), `/about/facts` JSON-LD `disambiguatingDescription`, `lib/facts.ts`의 `NOT_AFFILIATED`, `llms.txt`, `llm.md`, `facts.json`, `answer.json`, `schema.jsonld`. 홈 Organization JSON-LD는 그대로 둡니다.
-이에 따라 해당 루트 파일 해시를 갱신합니다. `/about/facts` lastmod는 이미 2026-11-11이라 `sitemap.xml`은 바뀌지 않습니다. 정보 기준일과 가격·출시일 상태는 바꾸지 않습니다.
-
 ### 2026-11-11 출시 전·판매처 없음과 다른 나라 dearpapa 구분 보강
 
 같은 주소에서 기존 문장을 보강합니다(새 페이지·주소 없음). `/about/facts`와 `llms.txt`의 판매처 Q를 「스마트스토어·쿠팡·올리브영에서 파나요?」로 바꾸고, 답변 첫 문장 뒤에 「스마트스토어, 쿠팡, 올리브영을 포함해 어느 판매처에도 등록된 상품 페이지나 판매 페이지가 없습니다.」를 더합니다.

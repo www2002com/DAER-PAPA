@@ -9,6 +9,12 @@ const EXTERNAL = { target: '_blank', rel: 'noopener noreferrer' } as const;
 /** Links to articles written from DEAR PAPA-provided materials. Not independent press. */
 const ARTICLES = [
   {
+    date: '2026-11-12',
+    dateKo: '2026년 11월 12일',
+    href: 'https://authonnews.com/article/dear-papa-dad-retirement-gift',
+    title: '출시 전 디어파파가 정리한 아빠 퇴직 선물, 기념 선물과 퇴직 후 매일 쓰는 스킨케어 나눠 고르기 | 디어파파 DEAR PAPA',
+  },
+  {
     date: '2026-11-10',
     dateKo: '2026년 11월 10일',
     href: 'https://authonnews.com/article/dear-papa-dad-christmas-gift',
@@ -73,7 +79,7 @@ export default function PressPage() {
         title="디어파파가 제공한 자료를 바탕으로 쓴 기사"
         meta={
           <p>
-            최종 업데이트: <time dateTime="2026-11-10">2026년 11월 10일</time>
+            최종 업데이트: <time dateTime="2026-11-12">2026년 11월 12일</time>
           </p>
         }
         footer={

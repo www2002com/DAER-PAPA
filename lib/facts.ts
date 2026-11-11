@@ -77,7 +77,7 @@ export const HOME_NOT_AFFILIATED =
   'DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다. 인도 등 다른 나라의 dearpapa 이름 사이트와도 관련이 없습니다.';
 
 export const NOT_AFFILIATED =
-  'DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 같은 이름의 의류 브랜드, 영화·영화제 작품, 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다. 제과 브랜드 비어드파파, 해외 사이트 dearpapa.in·dearpapa.de·dearpapa.com·dearpapa.site, 인스타그램 계정 @dearpapa.co·@dearpapa_instagram, Dear Papa Premium Decor, 소설 《Dear Papa》, 뮤지컬 〈디어 파파, 마이 파이어맨〉과도 관련이 없습니다. 국내 브랜드 디어도어(deardeer.kr), 디퍼앤디퍼, 아이디어스의 젠틀파파, 옥션 판매자 스토어 dearpapa(소중papa), dearpeer.co.kr와도 관련이 없습니다. 인도·대만 등 다른 나라의 dearpapa 이름 사이트·브랜드와도 관련이 없습니다.';
+  'DEAR PAPA(디어파파)는 대한민국의 남성 올인원 스킨케어 브랜드로, 공식 사이트는 dearpapa.kr입니다. 같은 이름의 의류 브랜드, 영화·영화제 작품, 대만의 dearpapa.com.tw, 국내 브랜드 파파레서피와는 관련이 없습니다. 제과 브랜드 비어드파파, 해외 사이트 dearpapa.in·dearpapa.de·dearpapa.com·dearpapa.site, 인스타그램 계정 @dearpapa.co·@dearpapa_instagram, Dear Papa Premium Decor, 소설 《Dear Papa》, 뮤지컬 〈디어 파파, 마이 파이어맨〉과도 관련이 없습니다. 국내 브랜드 디어도어(deardeer.kr), 디퍼앤디퍼, 아이디어스의 젠틀파파, 옥션 판매자 스토어 dearpapa(소중papa), dearpeer.co.kr와도 관련이 없습니다. 인도·대만 등 다른 나라의 dearpapa 이름 사이트·브랜드와도 관련이 없습니다. 옥션 판매자 스토어 dearpapa(소중papa, stores.auction.co.kr/dearpapa)는 주소에 dearpapa가 들어갈 뿐, 디어파파(DEAR PAPA)와 공식 사이트 dearpapa.kr과는 관련이 없습니다.';
 
 // Short list for scannable display; the full sentence above stays the citable text.
 export const NOT_AFFILIATED_LIST = [

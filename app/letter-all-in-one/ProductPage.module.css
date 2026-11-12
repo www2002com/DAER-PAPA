@@ -10,3 +10,12 @@
 .sources a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); font-size: .9rem; line-height: 1.5; text-decoration: underline; text-underline-offset: 3px; }
 .sources a:focus-visible, .contents a:focus-visible { outline: 3px solid var(--accent, #52615a); outline-offset: 3px; }
 @media (max-width: 560px) { .sources { padding: 18px; } .sources a { width: 100%; } }
+.steps { margin: 28px 0 0; scroll-margin-block-start: calc(var(--header-h) + 24px); }
+.steps h2[id] { margin: 0 0 12px; padding: 0; border: 0; font-size: 1.05rem; }
+.steps ol { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; counter-reset: step; }
+.steps li { counter-increment: step; position: relative; min-width: 0; padding: 14px 16px 14px 48px; border: 1px solid var(--line); border-radius: var(--radius-s); }
+.steps li::before { content: counter(step); position: absolute; top: 14px; left: 16px; width: 22px; height: 22px; border: 1px solid var(--line-strong); border-radius: 50%; color: var(--ink-2); font-size: .75rem; line-height: 20px; text-align: center; }
+.steps li p { margin: 0; color: var(--ink-2); font-size: .9rem; line-height: 1.7; word-break: keep-all; overflow-wrap: anywhere; }
+.steps .stepHead { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-bottom: 4px; color: var(--ink); }
+.badge { display: inline-block; padding: 1px 8px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--ink-2); font-size: .75rem; line-height: 1.6; white-space: nowrap; }
+.badge[data-status='예정'] { border-style: dashed; }

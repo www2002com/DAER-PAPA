@@ -13,6 +13,13 @@ import {
 
 export const metadata = preservedMetadata('/letter-all-in-one');
 
+// Only two statuses exist. Each sentence is an existing official sentence from this page, kept verbatim.
+const PREP_STEPS = [
+  { label: '제형 기획', status: '준비 중', text: '디어파파는 면도 후에 바르는 올인원을, 빠른 흡수의 워터리 제형으로 기획하고 만들고 있습니다.' },
+  { label: '기능성 심사 준비', status: '준비 중', text: '미백·주름 개선 2중 기능성화장품 심사를 준비하고 있습니다.' },
+  { label: '전성분 공개', status: '예정', text: '정확한 전성분은 제조사 샘플이 나온 뒤 공개합니다.' },
+  { label: '출시', status: '예정', text: '현재 출시 준비 중이며, 결제·주문은 아직 연결되어 있지 않습니다.' },
+] as const;
 
 export default function LetterAllInOnePage() {
   return (
@@ -53,6 +60,20 @@ export default function LetterAllInOnePage() {
             style={{ aspectRatio: '1672 / 941' }} />
           <figcaption>연출 시안이며 용기 디자인은 아직 정하지 않았습니다. 최종 제품과 판매 구성은 아직 미정입니다.</figcaption>
         </figure>
+        <section id="prep-steps" className={styles.steps} aria-labelledby="prep-steps-title">
+          <h2 id="prep-steps-title">준비 순서</h2>
+          <ol>
+            {PREP_STEPS.map(({ label, status, text }) => (
+              <li key={label}>
+                <p className={styles.stepHead}>
+                  <strong>{label}</strong>
+                  <span className={styles.badge} data-status={status}>{status}</span>
+                </p>
+                <p>{text}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
         <section id="official-sources" className={styles.sources} aria-labelledby="official-sources-title">
           <h2 id="official-sources-title">제품 정보와 공식 출처</h2>
           <p>제품 기획과 아직 정해지지 않은 정보를 구분해 확인할 수 있습니다.</p>
